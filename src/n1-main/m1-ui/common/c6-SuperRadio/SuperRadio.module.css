@@ -1,0 +1,40 @@
+.radio {
+  appearance: none;
+  padding: 5px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000000;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.radio::before {
+}
+
+.radio:checked {
+  background-image: radial-gradient(circle closest-side, #000 12px, #FFFFFF);
+  background-size: 12px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.radio:checked::before {
+}
+
+.label {
+  display: flex;
+  gap: 11px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+  cursor: pointer;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}

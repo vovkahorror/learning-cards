@@ -1,0 +1,25 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 36px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.select {
+  padding: 6px 4px;
+  min-width: 45px;
+  width: 39px;
+}
+
+.text1 {
+
+}
+
+.text2 {
+
+}
