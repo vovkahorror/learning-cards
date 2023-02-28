@@ -1,0 +1,18 @@
+.options {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+
+  .radio {
+    position: relative;
+    height: 20px;
+    width: 20px;
+  }
+
+  .label {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    font-size: 16px;
+  }
+}

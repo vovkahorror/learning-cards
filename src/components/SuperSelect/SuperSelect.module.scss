@@ -1,0 +1,17 @@
+.select {
+    font-size: 14px;
+    font-weight: 400;
+    width: 180px;
+    height: 24px;
+    border: 1px solid #C2C2C2;
+    padding: 0 10px;
+
+    &:focus {
+        color: black;
+    }
+}
+
+.option {
+    background-color: white;
+}
+
