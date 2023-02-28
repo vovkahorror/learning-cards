@@ -13,6 +13,8 @@ import {NewPassword} from "features/auth/NewPassword/NewPassword";
 export const Pages = () => {
     return (
         <Routes>
+            <Route path={'/'} element={<ViewComponents/>}/>
+
             <Route path={PATH.PROFILE} element={<Profile/>}/>
             <Route path={PATH.LOGIN} element={<Login/>}/>
             <Route path={PATH.REGISTRATION} element={<Registration/>}/>
