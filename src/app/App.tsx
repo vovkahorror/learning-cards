@@ -1,15 +1,18 @@
 import React from 'react'
 
+import { ThemeProvider } from 'styled-components'
+
 import { Header } from 'features/Header/Header'
 import { Pages } from 'pages/Pages'
-import './App.css'
+import { GlobalStyle, theme } from 'styles/theme'
 
 function App() {
   return (
-    <div className="App">
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <Header />
       <Pages />
-    </div>
+    </ThemeProvider>
   )
 }
 

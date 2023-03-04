@@ -30,7 +30,7 @@ const sizes = {
   `,
 }
 
-export const SuperButton = styled.button<SuperButtonPropsType>`
+export const Button = styled.button<SuperButtonPropsType>`
   background-color: ${p => variants[p.variant || 'primary']};
 
   //sizes
