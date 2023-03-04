@@ -1,3 +1,3 @@
 export const CheckEmail = () => {
-  return <div>Email</div>
+  return <div>Email Kim Testing </div>
 }
