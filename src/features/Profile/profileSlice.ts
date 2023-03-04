@@ -1,9 +1,9 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
 const profileSlice = createSlice({
-    name: 'profile',
-    initialState: {},
-    reducers: {}
+  name: 'profile',
+  initialState: {},
+  reducers: {},
 })
 
 export const profileReducer = profileSlice.reducer
