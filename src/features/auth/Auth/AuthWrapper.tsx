@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 import { AuthContainer, AuthContainerCard } from 'features/auth/Auth/auth.styled'
 
-export const Auth = () => {
+export const AuthWrapper = () => {
   return (
     <AuthContainer>
       <AuthContainerCard>
