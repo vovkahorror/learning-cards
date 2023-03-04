@@ -1,6 +1,10 @@
+type ac = {
+  sadasd: string
+}
 import { instance } from 'common/instance/instance'
 
 export const authAPI = {
+  getTask: () => 1,
   register(email: string, password: string) {
     return instance.post('/auth/register', { email, password })
   },
