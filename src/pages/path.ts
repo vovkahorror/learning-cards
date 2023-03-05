@@ -3,7 +3,7 @@ export const PATH = {
   REGISTRATION: '/registration',
   FORGOT_PASSWORD: '/forgot_password',
   CHECK_EMAIL: '/check_email',
-  NEW_PASSWORD: '/new_password',
+  SET_NEW_PASSWORD: '/set-new-password/:token',
   PROFILE: '/profile',
   NOT_FOUND: '/404',
 }

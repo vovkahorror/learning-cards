@@ -3,10 +3,10 @@ import React from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
 
 import { AuthWrapper } from 'features/auth/Auth/AuthWrapper'
-import { CheckEmail } from 'features/auth/ForgotPassword/CheckEmail'
-import { ForgotPassword } from 'features/auth/ForgotPassword/ForgotPassword'
-import { NewPassword } from 'features/auth/ForgotPassword/NewPassword'
 import { Login } from 'features/auth/Login/Login'
+import { CheckEmail } from 'features/auth/RecoveryPassword/CheckEmail'
+import { NewPassword } from 'features/auth/RecoveryPassword/NewPassword'
+import { RecoveryPassword } from 'features/auth/RecoveryPassword/RecoveryPassword'
 import { Registration } from 'features/auth/Registration/Registration'
 import { NotFound } from 'features/NotFound/NotFound'
 import { Profile } from 'features/Profile/Profile'
@@ -20,9 +20,9 @@ export const Pages = () => {
       <Route element={<AuthWrapper />}>
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.REGISTRATION} element={<Registration />} />
-        <Route path={PATH.FORGOT_PASSWORD} element={<ForgotPassword />} />
+        <Route path={PATH.FORGOT_PASSWORD} element={<RecoveryPassword />} />
         <Route path={PATH.CHECK_EMAIL} element={<CheckEmail />} />
-        <Route path={PATH.NEW_PASSWORD} element={<NewPassword />} />
+        <Route path={PATH.SET_NEW_PASSWORD} element={<NewPassword />} />
         <Route path={PATH.PROFILE} element={<Profile />} />
       </Route>
 

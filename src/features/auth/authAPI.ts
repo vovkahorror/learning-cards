@@ -1,15 +1,20 @@
-type ac = {
-  sadasd: string
-}
-import { instance } from 'common/instance/instance'
+import { AxiosResponse } from 'axios'
+
+import { instance, instanceRecovery } from 'common/instance/instance'
 
 export const authAPI = {
-  getTask: () => 1,
   register(email: string, password: string) {
     return instance.post('/auth/register', { email, password })
   },
+  recoveryPassword(payload: RequestRecoveryType) {
+    return instanceRecovery.post<RequestRecoveryType, AxiosResponse<{ info: string }>>(
+      'auth/forgot',
+      payload
+    )
+  },
 }
 
+// types
 export type UserType = {
   _id: string
   email: string
@@ -22,4 +27,10 @@ export type UserType = {
   verified: boolean
   rememberMe: boolean
   error?: string
+}
+
+export type RequestRecoveryType = {
+  email: string
+  from: string
+  message: string
 }
