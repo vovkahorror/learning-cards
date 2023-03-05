@@ -33,7 +33,7 @@ export const RecoveryPassword = () => {
   }
 
   const onSubmit = (data: FormData) => {
-    dispatch(recoveryPasswordTC(data.email))
+    dispatch(recoveryPasswordTC(data.email.trim()))
     reset()
   }
 
@@ -52,7 +52,7 @@ export const RecoveryPassword = () => {
         </ForgotDescription>
         <ForgotButton type={'submit'}>submit</ForgotButton>
         <QuestionText>Did you remember your password?</QuestionText>
-        <Link to={PATH.LOGIN}>Try logging in</Link>
+        <StyledLink to={PATH.LOGIN}>Try logging in</StyledLink>
       </form>
     </ForgotPasswordWrapper>
   )
@@ -60,18 +60,16 @@ export const RecoveryPassword = () => {
 
 //style
 const ForgotPasswordWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 0 auto;
   max-width: 347px;
 `
 
 const ForgotTitle = styled.p`
-  display: inline-block;
+  width: fit-content;
   font-size: 26px;
   color: black;
   font-weight: 700;
-  margin-bottom: 36px;
+  margin: 0 auto 36px;
 `
 
 const ForgotInput = styled.input`
@@ -94,8 +92,16 @@ const ForgotButton = styled.button`
 `
 
 const QuestionText = styled.p`
+  display: block;
+  text-align: center;
   font-weight: 600;
   font-size: 14px;
   line-height: 24px;
-  margin-bottom: 7px;
+  margin: 0 auto 7px;
+`
+
+const StyledLink = styled(Link)`
+  display: block;
+  text-align: center;
+  margin: 0 auto;
 `

@@ -4,7 +4,7 @@ import { Route, Routes, Navigate } from 'react-router-dom'
 
 import { AuthWrapper } from 'features/auth/Auth/AuthWrapper'
 import { Login } from 'features/auth/Login/Login'
-import { CheckEmail } from 'features/auth/RecoveryPassword/CheckEmail'
+import { InfoMessage } from 'features/auth/RecoveryPassword/InfoMessage'
 import { NewPassword } from 'features/auth/RecoveryPassword/NewPassword'
 import { RecoveryPassword } from 'features/auth/RecoveryPassword/RecoveryPassword'
 import { Registration } from 'features/auth/Registration/Registration'
@@ -21,7 +21,7 @@ export const Pages = () => {
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.REGISTRATION} element={<Registration />} />
         <Route path={PATH.FORGOT_PASSWORD} element={<RecoveryPassword />} />
-        <Route path={PATH.CHECK_EMAIL} element={<CheckEmail />} />
+        <Route path={PATH.CHECK_EMAIL} element={<InfoMessage />} />
         <Route path={PATH.SET_NEW_PASSWORD} element={<NewPassword />} />
         <Route path={PATH.PROFILE} element={<Profile />} />
       </Route>
