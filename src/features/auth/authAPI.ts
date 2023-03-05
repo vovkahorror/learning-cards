@@ -8,6 +8,9 @@ export const authAPI = {
   register(email: string, password: string) {
     return instance.post('/auth/register', { email, password })
   },
+  login(email: string, password: string, rememberMe: boolean) {
+    return instance.post<UserType>('/auth/login', { email, password, rememberMe })
+  },
 }
 
 export type UserType = {
