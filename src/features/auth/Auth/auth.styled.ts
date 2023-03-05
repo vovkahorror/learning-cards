@@ -10,8 +10,8 @@ export const AuthContainer = styled.div`
 
 export const AuthContainerCard = styled.div`
   background-color: ${props => props.theme.colors.light};
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
   padding: 30px;
   border-radius: 5px;
-  min-width: 320px;
+  min-width: 413px;
 `

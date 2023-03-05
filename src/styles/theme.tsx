@@ -2,13 +2,13 @@ import baseStyled, { createGlobalStyle, ThemedStyledInterface } from 'styled-com
 
 export const theme = {
   colors: {
-    primary: '#796EFF',
+    primary: '#366EFF',
     secondary: '#14AAF5',
     success: '#2FBA20',
     warning: '#FF9C02',
     danger: '#FF3F21',
 
-    bgPrimary: '#E2E8F0',
+    bgPrimary: '#F9F9FA',
     bgSecondary: '#F6F8F9',
 
     dark: '#282A37',
@@ -17,6 +17,17 @@ export const theme = {
     fontPrimary: '#000',
     fontSecondary: '#6F7782',
     fontWhite: '#fff',
+
+    inputBorderColor: '#cccccc',
+  },
+  btn: {
+    primary: {
+      bg: '#366EFF',
+      borderColor: '#366EFF',
+      color: '#ffffff',
+      boxShadow:
+        '0px 4px 18px rgba(54, 110, 255, 0.35), inset 0px 1px 0px rgba(255, 255, 255, 0.3)',
+    },
   },
 }
 
@@ -30,7 +41,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     body {
         background-color: ${theme.colors.bgPrimary};
-        color: #bfc9d9;
+        color: ${theme.colors.dark};
         margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
         'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
