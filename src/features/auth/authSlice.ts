@@ -7,6 +7,7 @@ type InitialStateType = {
   isSetRecovery: boolean
   userEmail: string
   isSetNewPassword: boolean
+  user: UserType
 }
 
 export const RegisterTC = createAsyncThunk(
@@ -68,6 +69,7 @@ export const setNewPasswordTC = createAsyncThunk(
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
+    user: {},
     isSetRecovery: false,
     userEmail: '',
     isSetNewPassword: false,
@@ -82,8 +84,22 @@ const authSlice = createSlice({
     setNewPassword: (state, action: PayloadAction<boolean>) => {
       state.isSetNewPassword = action.payload
     },
+    setUserData(state, action: PayloadAction<UserType>) {
+      state.user = action.payload
+    },
   },
 })
 
 export const { setRecovery, setUserEmail, setNewPassword } = authSlice.actions
 export const authReducer = authSlice.reducer
+
+export const getUserData =
+  (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch) => {
+    try {
+      const res = await authAPI.login(email, password, rememberMe)
+
+      dispatch(authSlice.actions.setUserData(res.data))
+    } catch (e) {
+      //in progress...
+    }
+  }

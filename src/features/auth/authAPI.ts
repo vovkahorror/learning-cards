@@ -20,6 +20,9 @@ export const authAPI = {
       data
     )
   },
+  login(email: string, password: string, rememberMe: boolean) {
+    return instance.post<UserType>('/auth/login', { email, password, rememberMe })
+  },
 }
 
 // types
