@@ -1,7 +1,12 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-import { authAPI, RequestNewPasswordType, RequestRecoveryType } from 'features/auth/authAPI'
+import {
+  authAPI,
+  RequestNewPasswordType,
+  RequestRecoveryType,
+  UserType,
+} from 'features/auth/authAPI'
 
 type InitialStateType = {
   isSetRecovery: boolean
