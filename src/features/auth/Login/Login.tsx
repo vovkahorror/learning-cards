@@ -12,8 +12,6 @@ export const Login = () => {
         justifyContent={'center'}
         alignItems={'center'}
         mb={'5'}
-        px={'5'}
-        py={'5'}
       >
         <h1>Sign in</h1>
       </Box>
