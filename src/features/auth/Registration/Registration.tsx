@@ -64,6 +64,10 @@ const Eye = styled.span`
   cursor: pointer;
 `
 
+const Error = styled.div`
+  color: red;
+`
+
 export const Registration = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const navigate = useNavigate()
@@ -100,7 +104,7 @@ export const Registration = () => {
             })}
           />
         </TextFiled>
-        {errors.email && <div>{errors.email.message}</div>}
+        {errors.email && <Error>{errors.email.message}</Error>}
 
         {/*Password*/}
         <TextFiled>
@@ -119,7 +123,7 @@ export const Registration = () => {
             {showPassword ? <IoEyeOff /> : <IoEyeSharp />}
           </Eye>
         </TextFiled>
-        {errors.password && <div>{errors.password.message}</div>}
+        {errors.password && <Error>{errors.password.message}</Error>}
 
         {/*Confirm password*/}
         <TextFiled>
@@ -135,7 +139,7 @@ export const Registration = () => {
             {showPassword ? <IoEyeOff /> : <IoEyeSharp />}
           </Eye>
         </TextFiled>
-        {errors.confirm && <div>{errors.confirm.message}</div>}
+        {errors.confirm && <Error>{errors.confirm.message}</Error>}
         <button type="submit">Sign Up</button>
       </form>
 
