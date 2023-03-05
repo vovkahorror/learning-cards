@@ -7,12 +7,7 @@ import { Box } from 'common/components/Layout/Box'
 export const Login = () => {
   return (
     <>
-      <Box
-        display={'flex'}
-        justifyContent={'center'}
-        alignItems={'center'}
-        mb={'5'}
-      >
+      <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
         <h1>Sign in</h1>
       </Box>
       <Input type={'text'} label={'Email'} />
