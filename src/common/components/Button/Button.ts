@@ -5,10 +5,16 @@ import { theme } from 'styles/theme'
 type SuperButtonPropsType = {
   variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning'
   size?: 'small' | 'medium' | 'large'
+  fullWidth?: boolean
 }
 
 const variants = {
-  ['primary']: theme.colors.primary,
+  ['primary']: css`
+    background-color: ${theme.btn.primary.bg};
+    border-color: ${theme.btn.primary.borderColor};
+    color: ${theme.btn.primary.color};
+    box-shadow: ${theme.btn.primary.boxShadow};
+  `,
   ['secondary']: theme.colors.secondary,
   ['success']: theme.colors.success,
   ['danger']: theme.colors.danger,
@@ -30,17 +36,24 @@ const sizes = {
   `,
 }
 
-export const Button = styled.button<SuperButtonPropsType>`
-  background-color: ${p => variants[p.variant || 'primary']};
+// export const ButtonStyled = (props: any) => {
+//     props.type === 'link' && return <Link />
+// }
 
+export const Button = styled.button<SuperButtonPropsType>`
+  ${p => variants[p.variant || 'primary']};
+  border-width: 1px;
+  border-style: solid;
   //sizes
   ${p => sizes[p.size || 'medium']}
   font-weight: 500;
   margin: 0;
 
+  width: ${props => (props.fullWidth ? '100%' : 'auto')};
+
   color: white;
-  border-radius: 4px;
+  border-radius: 30px;
   cursor: pointer;
-  border: none;
   outline: none;
+  text-decoration: none;
 `
