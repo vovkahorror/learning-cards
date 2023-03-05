@@ -27,14 +27,11 @@ export type UserType = {
   _id: string
   email: string
   name: string
-  avatar?: string
-  publicCardPacksCount: number
-  created: Date
-  updated: Date
-  isAdmin: boolean
   verified: boolean
   rememberMe: boolean
-  error?: string
+  isAdmin: boolean
+  updated: string
+  publicCardPacksCount: number
 }
 
 export type RequestRecoveryType = {
