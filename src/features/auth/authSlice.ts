@@ -1,4 +1,5 @@
-import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { AxiosError } from 'axios'
 
 import { setInfoMessage, setStatusLoading } from 'app/appSlice'
 import { errorUtils } from 'common/utils/error-utils'
@@ -31,6 +32,22 @@ export const RegisterTC = createAsyncThunk(
       return thunkAPI.rejectWithValue({})
     } finally {
       // thunkAPI.dispatch(setLoadingAC({isLoading: false}))
+    }
+  }
+)
+
+export const loginTC = createAsyncThunk(
+  'auth/login',
+  async (arg: { email: string; password: string; rememberMe: boolean }, { dispatch }) => {
+    dispatch(setStatusLoading(true))
+    try {
+      const res = await authAPI.login(arg.email, arg.password, arg.rememberMe)
+
+      dispatch(setUserData(res.data))
+    } catch (e: any) {
+      errorUtils(e, dispatch)
+    } finally {
+      dispatch(setStatusLoading(false))
     }
   }
 )
@@ -101,16 +118,5 @@ const authSlice = createSlice({
   },
 })
 
-export const { setRecovery, setUserEmail, setNewPassword } = authSlice.actions
+export const { setRecovery, setUserEmail, setNewPassword, setUserData } = authSlice.actions
 export const authReducer = authSlice.reducer
-
-export const getUserData =
-  (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch) => {
-    try {
-      const res = await authAPI.login(email, password, rememberMe)
-
-      dispatch(authSlice.actions.setUserData(res.data))
-    } catch (e) {
-      //in progress...
-    }
-  }
