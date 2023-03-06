@@ -5,15 +5,11 @@ import { IoEyeSharp, IoEyeOff } from 'react-icons/io5'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { Button } from '../../../common/components/Button/Button'
+import { Box } from '../../../common/components/Layout/Box'
+
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { RegisterTC } from 'features/auth/authSlice'
-
-const Title = styled.h2`
-  margin-bottom: 20px;
-  font-weight: 600;
-  font-size: 26px;
-  line-height: 32px;
-`
 
 const Note = styled.span`
   margin-top: 30px;
@@ -89,7 +85,9 @@ export const Registration = () => {
 
   return (
     <>
-      <Title>Sign Up</Title>
+      <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
+        <h1>Sign Up</h1>
+      </Box>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/*Email*/}
         <TextFiled>
@@ -140,7 +138,9 @@ export const Registration = () => {
           </Eye>
         </TextFiled>
         {errors.confirm && <Error>{errors.confirm.message}</Error>}
-        <button type="submit">Sign Up</button>
+        <Button type={'submit'} fullWidth={true}>
+          Sign Up
+        </Button>
       </form>
 
       <Note>Already have an account?</Note>
