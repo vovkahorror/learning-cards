@@ -14,6 +14,10 @@ export const authAPI = {
     )
   },
 
+  me() {
+    return instance.post<UserType>('/auth/me')
+  },
+
   setNewPassword(data: RequestNewPasswordType) {
     return instanceRecovery.post<RequestNewPasswordType, AxiosResponse<{ info: string }>>(
       '/auth/set-new-password',
@@ -29,12 +33,17 @@ export const authAPI = {
 export type UserType = {
   _id: string
   email: string
-  name: string
-  verified: boolean
   rememberMe: boolean
   isAdmin: boolean
-  updated: string
+  name: string
+  verified: boolean
   publicCardPacksCount: number
+  created: string
+  updated: string
+  __v: number
+  token: string
+  tokenDeathTime: number
+  avatar: string
 }
 
 export type RequestRecoveryType = {
@@ -46,4 +55,11 @@ export type RequestRecoveryType = {
 export type RequestNewPasswordType = {
   password: string
   resetPasswordToken: string | undefined
+}
+
+export type FormDataType = {
+  email: string
+  password: string
+  confirm: string
+  rememberMe: boolean
 }
