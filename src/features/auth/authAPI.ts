@@ -14,6 +14,10 @@ export const authAPI = {
     )
   },
 
+  me() {
+    return instance.post<UserType>('/auth/me')
+  },
+
   setNewPassword(data: RequestNewPasswordType) {
     return instanceRecovery.post<RequestNewPasswordType, AxiosResponse<{ info: string }>>(
       '/auth/set-new-password',
