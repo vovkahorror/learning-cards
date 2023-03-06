@@ -7,6 +7,7 @@ import styled from 'styled-components'
 
 import { Button } from '../../../common/components/Button/Button'
 import { Box } from '../../../common/components/Layout/Box'
+import { FormDataType } from '../authAPI'
 
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { RegisterTC } from 'features/auth/authSlice'
@@ -73,9 +74,9 @@ export const Registration = () => {
     formState: { errors },
     handleSubmit,
     watch,
-  } = useForm<RegisterParamsType>({ mode: 'onBlur' || 'onSubmit' || 'onTouched' })
+  } = useForm<FormDataType>({ mode: 'onBlur' || 'onSubmit' || 'onTouched' })
 
-  const onSubmit = (data: RegisterParamsType) => {
+  const onSubmit = (data: FormDataType) => {
     console.log({ email: data.email, password: data.password })
     dispatch(RegisterTC({ email: data.email, password: data.password }))
     navigate('/login')
@@ -147,11 +148,4 @@ export const Registration = () => {
       <Reference to="/login">Sign In</Reference>
     </>
   )
-}
-
-type RegisterParamsType = {
-  email: string
-  password: string
-  confirm?: string
-  rememberMe: boolean
 }

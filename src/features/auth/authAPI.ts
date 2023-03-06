@@ -56,3 +56,10 @@ export type RequestNewPasswordType = {
   password: string
   resetPasswordToken: string | undefined
 }
+
+export type FormDataType = {
+  email: string
+  password: string
+  confirm: string
+  rememberMe: boolean
+}
