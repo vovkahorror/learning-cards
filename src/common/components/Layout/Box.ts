@@ -29,7 +29,16 @@ type DisplayType =
 type BoxPropsType = {
   display?: DisplayType
   alignItems?: 'center' | 'start' | 'end' | 'flex-start' | 'flex-end' | 'self-start' | 'self-end'
-  justifyContent?: 'center' | 'start' | 'end' | 'flex-start' | 'flex-end' | 'left' | 'right'
+  justifyContent?:
+    | 'center'
+    | 'start'
+    | 'end'
+    | 'flex-start'
+    | 'flex-end'
+    | 'left'
+    | 'right'
+    | 'space-between'
+    | 'space-arround'
 } & MarginType &
   PaddingType
 
@@ -119,5 +128,11 @@ export const Box = styled.div<BoxPropsType>`
     css`
       margin-left: ${sizes[props.mx]};
       margin-right: ${sizes[props.mx]};
+    `}
+  ${props =>
+    props.my &&
+    css`
+      margin-top: ${sizes[props.my]};
+      margin-bottom: ${sizes[props.my]};
     `}
 `
