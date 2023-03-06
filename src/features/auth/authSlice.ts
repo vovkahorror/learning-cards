@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
 
-import { setInfoMessage, setStatusLoading } from 'app/appSlice'
+import { setInfoSnackbar, setStatusLoading } from 'app/appSlice'
 import { errorUtils } from 'common/utils/error-utils'
 import {
   authAPI,
@@ -48,11 +48,9 @@ export const recoveryPasswordTC = createAsyncThunk(
     try {
       const res = await authAPI.recoveryPassword(payload)
 
-      console.log(res)
-
       dispatch(setUserEmail(email))
       dispatch(setRecovery(true))
-      dispatch(setInfoMessage(res.data.info))
+      dispatch(setInfoSnackbar({ message: res.data.info, variant: 'success' }))
     } catch (e: any) {
       errorUtils(e, dispatch)
     } finally {
@@ -69,6 +67,7 @@ export const setNewPasswordTC = createAsyncThunk(
       const res = await authAPI.setNewPassword(data)
 
       dispatch(setNewPassword(true))
+      dispatch(setInfoSnackbar({ message: res.data.info, variant: 'success' }))
     } catch (e: any) {
       errorUtils(e, dispatch)
     } finally {
