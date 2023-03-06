@@ -149,7 +149,7 @@ export const Registration = () => {
   )
 }
 
-interface RegisterParamsType {
+type RegisterParamsType = {
   email: string
   password: string
   confirm?: string
