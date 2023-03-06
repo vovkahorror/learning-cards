@@ -31,11 +31,13 @@ const InputSelector = styled.input`
   border-bottom: 1px solid ${props => props.theme.colors.inputBorderColor};
   border-radius: 0;
   transition: border-color 0.2s, color 0.2s;
+
   &:focus,
   &:active {
     border-color: ${props => props.theme.colors.primary};
     outline: 0;
   }
+
   &:focus + label,
   &:not(:placeholder-shown) + label {
     top: -8px;
@@ -64,6 +66,7 @@ const ButtonTogglePass = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
   &:focus,
   &:active {
     outline: 0;

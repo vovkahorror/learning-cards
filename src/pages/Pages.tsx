@@ -4,7 +4,7 @@ import { Route, Routes, Navigate } from 'react-router-dom'
 
 import { AuthWrapper } from 'features/auth/Auth/AuthWrapper'
 import { Login } from 'features/auth/Login/Login'
-import { InfoMessage } from 'features/auth/RecoveryPassword/InfoMessage'
+import { InfoMessage } from 'features/auth/RecoveryPassword/InfoMessage/InfoMessage'
 import { NewPassword } from 'features/auth/RecoveryPassword/NewPassword'
 import { RecoveryPassword } from 'features/auth/RecoveryPassword/RecoveryPassword'
 import { Registration } from 'features/auth/Registration/Registration'

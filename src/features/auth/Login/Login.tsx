@@ -19,18 +19,20 @@ export const Login = () => {
   const { register, handleSubmit } = useForm<LoginFields>()
   const onSubmit: SubmitHandler<LoginFields> = data =>
     dispatch(getUserData(data.email, data.password, data.rememberMe))
+
   return (
     <>
       <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
         <h1>Sign in</h1>
       </Box>
-    
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input {...register('email', { required: true })} type={'text'} label={'Email'} />
         <Input {...register('password', { required: true })} type={'password'} label={'Password'} />
         <Input type={'checkbox'} {...register('rememberMe')} label={'rememberMe'} />
-        <Button type={'submit'} fullWidth={true}>Sign In</Button>
-        
+        <Button type={'submit'} fullWidth={true}>
+          Sign In
+        </Button>
       </form>
     </>
   )

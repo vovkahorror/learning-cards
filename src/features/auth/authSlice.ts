@@ -1,12 +1,14 @@
 import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
-import axios from 'axios'
 
+import { setInfoMessage, setStatusLoading } from 'app/appSlice'
+import { errorUtils } from 'common/utils/error-utils'
 import {
   authAPI,
   RequestNewPasswordType,
   RequestRecoveryType,
   UserType,
 } from 'features/auth/authAPI'
+import { emailMassage } from 'features/auth/RecoveryPassword/InfoMessage/EmailMassage'
 
 type InitialStateType = {
   isSetRecovery: boolean
@@ -39,19 +41,22 @@ export const recoveryPasswordTC = createAsyncThunk(
     const payload: RequestRecoveryType = {
       email,
       from: 'test-front-admin <ai73a@yandex.by>',
-      message: `<div style="background-color: #82ddfc; padding: 15px">password recovery link: 
-                <a href='http://localhost:3000/#/set-new-password/$token$'>link</a></div>`,
+      message: emailMassage,
     }
 
+    dispatch(setStatusLoading(true))
     try {
       const res = await authAPI.recoveryPassword(payload)
 
+      console.log(res)
+
       dispatch(setUserEmail(email))
       dispatch(setRecovery(true))
-    } catch (e) {
-      if (axios.isAxiosError<{ error: string }>(e)) {
-        const error = e.response?.data ? e.response.data.error : e.message
-      }
+      dispatch(setInfoMessage(res.data.info))
+    } catch (e: any) {
+      errorUtils(e, dispatch)
+    } finally {
+      dispatch(setStatusLoading(false))
     }
   }
 )
@@ -59,14 +64,15 @@ export const recoveryPasswordTC = createAsyncThunk(
 export const setNewPasswordTC = createAsyncThunk(
   'auth/setNewPasswordTC',
   async (data: RequestNewPasswordType, { dispatch }) => {
+    dispatch(setStatusLoading(true))
     try {
       const res = await authAPI.setNewPassword(data)
 
       dispatch(setNewPassword(true))
-    } catch (e) {
-      if (axios.isAxiosError<{ error: string }>(e)) {
-        const error = e.response?.data ? e.response.data.error : e.message
-      }
+    } catch (e: any) {
+      errorUtils(e, dispatch)
+    } finally {
+      dispatch(setStatusLoading(false))
     }
   }
 )
