@@ -29,12 +29,17 @@ export const authAPI = {
 export type UserType = {
   _id: string
   email: string
-  name: string
-  verified: boolean
   rememberMe: boolean
   isAdmin: boolean
-  updated: string
+  name: string
+  verified: boolean
   publicCardPacksCount: number
+  created: string
+  updated: string
+  __v: number
+  token: string
+  tokenDeathTime: number
+  avatar: string
 }
 
 export type RequestRecoveryType = {
