@@ -1,4 +1,4 @@
-import { styled } from '../../../styles/theme'
+import { styled } from 'styles/theme'
 
 export const Container = styled.div`
   max-width: 1048px;
