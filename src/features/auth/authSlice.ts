@@ -50,7 +50,7 @@ export const recoveryPasswordTC = createAsyncThunk(
 
       dispatch(setUserEmail(email))
       dispatch(setRecovery(true))
-      dispatch(setInfoSnackbar({ message: res.data.info, variant: 'success' }))
+      dispatch(setInfoSnackbar({ text: res.data.info, variant: 'success' }))
     } catch (e: any) {
       errorUtils(e, dispatch)
     } finally {
@@ -67,8 +67,9 @@ export const setNewPasswordTC = createAsyncThunk(
       const res = await authAPI.setNewPassword(data)
 
       dispatch(setNewPassword(true))
-      dispatch(setInfoSnackbar({ message: res.data.info, variant: 'success' }))
+      dispatch(setInfoSnackbar({ text: res.data.info, variant: 'success' }))
     } catch (e: any) {
+      console.log(e)
       errorUtils(e, dispatch)
     } finally {
       dispatch(setStatusLoading(false))

@@ -45,8 +45,10 @@ export const RecoveryPassword = () => {
   }
 
   return (
-    <Box style={{ width: '347px' }}>
-      <ForgotTitle>Forgot your password?</ForgotTitle>
+    <Box style={{ width: '413px' }}>
+      <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
+        <ForgotTitle>Forgot your password?</ForgotTitle>
+      </Box>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input {...register('email', validate)} type={'email'} label={'Email'} />
         <p>{errors?.email?.message}</p>
@@ -66,31 +68,36 @@ export const RecoveryPassword = () => {
 //style
 
 const ForgotTitle = styled.p`
-  width: fit-content;
   font-size: 26px;
   color: black;
   font-weight: 700;
-  margin: 0 auto 36px;
 `
 
 const ForgotDescription = styled.p`
+  margin-bottom: 65px;
+
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
-  margin-bottom: 65px;
 `
 
 const QuestionText = styled.p`
+  margin: 31px 0 21px;
   display: block;
   text-align: center;
+
   font-weight: 600;
   font-size: 14px;
   line-height: 24px;
-  margin: 0 auto 7px;
 `
 
 const StyledLink = styled(Link)`
+  margin: 0 auto;
   display: block;
   text-align: center;
-  margin: 0 auto;
+
+  text-decoration: underline;
+  font-weight: 600;
+  font-size: 16px;
+  color: #366eff;
 `

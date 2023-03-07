@@ -2,18 +2,27 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { ReactComponent as CheckEmailIcon } from 'assets/image/checkEmail.svg'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
+import { setNewPassword, setRecovery } from 'features/auth/authSlice'
 import { PATH } from 'pages/path'
 
 export const InfoMessage = () => {
   const userEmail = useAppSelector<string>(state => state.auth.userEmail)
+  const dispatch = useAppDispatch()
+
+  const onClickHandler = () => {
+    dispatch(setRecovery(false))
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '347px' }}>
       <p style={{ fontSize: '30px' }}>Check Email</p>
       <CheckEmailIconComp />
       <p>We’ve sent an Email with instructions to {userEmail}</p>
-      <StyledLink to={PATH.LOGIN}>Back to login</StyledLink>
+      <StyledLink to={PATH.LOGIN} onClick={onClickHandler}>
+        Back to login
+      </StyledLink>
     </div>
   )
 }

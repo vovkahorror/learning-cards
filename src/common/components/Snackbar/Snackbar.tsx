@@ -8,27 +8,29 @@ import { useAppSelector } from 'common/hooks/useAppSelector'
 
 export const Snackbar = () => {
   const dispatch = useAppDispatch()
-  const infoMessage = useAppSelector<string | null>(state => state.app.infoSnackbar.message)
+  const infoText = useAppSelector<string | null>(state => state.app.infoSnackbar.text)
   const infoVariant = useAppSelector<VariantsSnackbarType | undefined>(
     state => state.app.infoSnackbar.variant
   )
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    if (infoMessage) {
+    if (infoText) {
       setOpen(true)
+      // delay before closing
       setTimeout(() => handleClose(), 3000)
     }
-  }, [infoMessage])
+  }, [infoText])
 
   const handleClose = () => {
     setOpen(false)
-    setTimeout(() => dispatch(setInfoSnackbar({ message: null })), 300)
+    //delay time when clicking on the close icon (for smooth animation)
+    setTimeout(() => dispatch(setInfoSnackbar({ text: null })), 300)
   }
 
   return (
     <SnackbarWrapper isActive={open} variant={infoVariant}>
-      <InfoText>{infoMessage}</InfoText>
+      <InfoText>{infoText}</InfoText>
       <CloseIcon variant={infoVariant} onClick={handleClose}></CloseIcon>
     </SnackbarWrapper>
   )

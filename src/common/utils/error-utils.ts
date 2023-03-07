@@ -7,8 +7,8 @@ export const errorUtils = (e: Error | AxiosError<{ error: string }>, dispatch: D
   if (axios.isAxiosError(e)) {
     const error: string = e.response?.data ? e.response.data.error : e.message
 
-    dispatch(setInfoSnackbar({ message: error, variant: 'error' }))
+    dispatch(setInfoSnackbar({ text: error, variant: 'error' }))
   } else {
-    dispatch(setInfoSnackbar({ message: e.message, variant: 'error' }))
+    dispatch(setInfoSnackbar({ text: e.message, variant: 'error' }))
   }
 }
