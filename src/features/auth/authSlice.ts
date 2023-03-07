@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
+import { AxiosError } from 'axios'
 
-import { setInfoMessage, setStatusLoading, setColorMessage } from 'app/appSlice'
+import { setInfoMessage, setStatusLoading } from 'app/appSlice'
 import { errorUtils } from 'common/utils/error-utils'
 import {
   authAPI,
@@ -15,22 +16,22 @@ type InitialStateType = {
   userEmail: string
   isSetNewPassword: boolean
   user: UserType
+  registerSuccess: boolean
 }
 
 export const RegisterTC = createAsyncThunk(
   'auth/register',
-  async (arg: { email: string; password: string }, thunkAPI) => {
-    // thunkAPI.dispatch(setLoadingAC({isLoading: true}))
+  async (arg: { email: string; password: string }, { dispatch }) => {
+    dispatch(setStatusLoading(true))
     try {
-      await authAPI.register(arg.email, arg.password)
+      const res = await authAPI.register(arg.email, arg.password)
 
-      return
-    } catch (error) {
-      // errorUtils(error as AxiosError, thunkAPI.dispatch)
-
-      return thunkAPI.rejectWithValue({})
+      dispatch(setRegisterSuccess(true))
+      dispatch(setInfoMessage(res.data.info))
+    } catch (e) {
+      errorUtils(e as AxiosError, dispatch)
     } finally {
-      // thunkAPI.dispatch(setLoadingAC({isLoading: false}))
+      dispatch(setStatusLoading(false))
     }
   }
 )
@@ -53,7 +54,6 @@ export const recoveryPasswordTC = createAsyncThunk(
       dispatch(setUserEmail(email))
       dispatch(setRecovery(true))
       dispatch(setInfoMessage(res.data.info))
-      dispatch(setColorMessage('green'))
     } catch (e: any) {
       errorUtils(e, dispatch)
     } finally {
@@ -85,6 +85,7 @@ const authSlice = createSlice({
     isSetRecovery: false,
     userEmail: '',
     isSetNewPassword: false,
+    registerSuccess: false,
   } as InitialStateType,
   reducers: {
     setRecovery: (state, action: PayloadAction<boolean>) => {
@@ -99,10 +100,13 @@ const authSlice = createSlice({
     setUserData(state, action: PayloadAction<UserType>) {
       state.user = action.payload
     },
+    setRegisterSuccess(state, action: PayloadAction<boolean>) {
+      state.registerSuccess = action.payload
+    },
   },
 })
 
-export const { setRecovery, setUserEmail, setNewPassword } = authSlice.actions
+export const { setRecovery, setUserEmail, setNewPassword, setRegisterSuccess } = authSlice.actions
 export const authReducer = authSlice.reducer
 
 export const getUserData =

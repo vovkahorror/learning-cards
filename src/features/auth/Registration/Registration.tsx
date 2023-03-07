@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { FormDataType } from '../authAPI'
@@ -10,7 +10,9 @@ import { Button } from 'common/components/Button/Button'
 import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { useAppSelector } from 'common/hooks/useAppSelector'
 import { RegisterTC } from 'features/auth/authSlice'
+import { PATH } from 'pages/path'
 
 const Note = styled.span`
   margin-top: 30px;
@@ -36,8 +38,8 @@ const Error = styled.div`
 `
 
 export const Registration = () => {
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const registerSuccess = useAppSelector<boolean>(state => state.auth.registerSuccess)
   const {
     register,
     formState: { errors },
@@ -46,9 +48,11 @@ export const Registration = () => {
   } = useForm<FormDataType>({ mode: 'onBlur' || 'onSubmit' || 'onTouched' })
 
   const onSubmit = (data: FormDataType) => {
-    console.log({ email: data.email, password: data.password })
     dispatch(RegisterTC({ email: data.email, password: data.password }))
-    navigate('/login')
+  }
+
+  if (registerSuccess) {
+    return <Navigate to={PATH.LOGIN} />
   }
 
   return (
