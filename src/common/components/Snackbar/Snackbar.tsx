@@ -8,6 +8,7 @@ import { useAppSelector } from 'common/hooks/useAppSelector'
 
 export const Snackbar = () => {
   const infoMessage = useAppSelector<string | null>(state => state.app.infoMessage)
+  const colorMessage = useAppSelector<string>(state => state.app.colorMessage)
   const dispatch = useAppDispatch()
   const [open, setOpen] = useState(false)
 
@@ -32,21 +33,26 @@ export const Snackbar = () => {
   }
 
   return (
-    <SnackbarWrapper isActive={open}>
+    <SnackbarWrapper isActive={open} color={colorMessage}>
       {infoMessage}
       <button onClick={handleClose}>x</button>
     </SnackbarWrapper>
   )
 }
 
-const SnackbarWrapper = styled.div<{ isActive: boolean }>`
+const SnackbarWrapper = styled.div<SnackbarProps>`
   position: fixed;
   left: 10px;
   bottom: 10px;
 
   width: fit-content;
   padding: 20px;
-  background-color: green;
+  background-color: ${({ color }) => color};
   transform: ${p => (p.isActive ? 'scale(1)' : 'scale(0)')};
   transition: 0.3s;
 `
+
+type SnackbarProps = {
+  isActive: boolean
+  color: string
+}

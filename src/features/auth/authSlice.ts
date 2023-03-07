@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
 
-import { setInfoMessage, setStatusLoading } from 'app/appSlice'
+import { setInfoMessage, setStatusLoading, setColorMessage } from 'app/appSlice'
 import { errorUtils } from 'common/utils/error-utils'
 import {
   authAPI,
@@ -53,6 +53,7 @@ export const recoveryPasswordTC = createAsyncThunk(
       dispatch(setUserEmail(email))
       dispatch(setRecovery(true))
       dispatch(setInfoMessage(res.data.info))
+      dispatch(setColorMessage('green'))
     } catch (e: any) {
       errorUtils(e, dispatch)
     } finally {
@@ -66,7 +67,7 @@ export const setNewPasswordTC = createAsyncThunk(
   async (data: RequestNewPasswordType, { dispatch }) => {
     dispatch(setStatusLoading(true))
     try {
-      const res = await authAPI.setNewPassword(data)
+      // const res = await authAPI.setNewPassword(data)
 
       dispatch(setNewPassword(true))
     } catch (e: any) {
