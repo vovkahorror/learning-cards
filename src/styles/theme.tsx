@@ -49,6 +49,12 @@ export const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
+    a {
+      text-decoration: none;
+      color: ${theme.colors.dark};
+      font-weight: 500;
+      font-size: 14px;
+    }
 	#root {
 	  	min-height: 100vh;
 	}
