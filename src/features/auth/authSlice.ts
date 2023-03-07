@@ -121,16 +121,6 @@ const authSlice = createSlice({
   },
 })
 
-export const { setRecovery, setUserEmail, setNewPassword, setRegisterSuccess, setUserData } = authSlice.actions
+export const { setRecovery, setUserEmail, setNewPassword, setRegisterSuccess, setUserData } =
+  authSlice.actions
 export const authReducer = authSlice.reducer
-
-export const getUserData =
-  (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch) => {
-    try {
-      const res = await authAPI.login(email, password, rememberMe)
-
-      dispatch(authSlice.actions.setUserData(res.data))
-    } catch (e) {
-      //in progress...
-    }
-  }
