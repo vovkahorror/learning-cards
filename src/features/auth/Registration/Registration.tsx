@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { useForm } from 'react-hook-form'
-import { IoEyeSharp, IoEyeOff } from 'react-icons/io5'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { Button } from '../../../common/components/Button/Button'
-import { Box } from '../../../common/components/Layout/Box'
 import { FormDataType } from '../authAPI'
 
+import { Button } from 'common/components/Button/Button'
+import { Input } from 'common/components/Input/Input'
+import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { RegisterTC } from 'features/auth/authSlice'
 
@@ -31,42 +31,11 @@ const Reference = styled(Link)`
   color: #366eff;
 `
 
-const TextFiled = styled.div`
-  margin-bottom: 5px;
-  width: 300px;
-  position: relative;
-`
-
-const Input = styled.input`
-  width: 100%;
-  padding: 5px 0;
-  height: 30px;
-  line-height: 40px;
-  text-indent: 10px;
-  //margin: 0 0 15px 0;
-  border-radius: 5px;
-  border: 1px solid #999;
-  font-size: 18px;
-`
-
-const Eye = styled.span`
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  font-size: 20px;
-  color: #000000;
-  cursor: pointer;
-`
-
 const Error = styled.div`
   color: red;
 `
 
 export const Registration = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const {
@@ -82,8 +51,6 @@ export const Registration = () => {
     navigate('/login')
   }
 
-  const handleClickShowPassword = () => setShowPassword(show => !show)
-
   return (
     <>
       <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
@@ -91,53 +58,42 @@ export const Registration = () => {
       </Box>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/*Email*/}
-        <TextFiled>
-          <Input
-            placeholder="Email"
-            {...register('email', {
-              required: 'This field is required',
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: 'Invalid email address',
-              },
-            })}
-          />
-        </TextFiled>
+        <Input
+          type="email"
+          label="Email"
+          {...register('email', {
+            required: 'This field is required',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+              message: 'Invalid email address',
+            },
+          })}
+        />
         {errors.email && <Error>{errors.email.message}</Error>}
 
         {/*Password*/}
-        <TextFiled>
-          <Input
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Password"
-            {...register('password', {
-              required: 'This field is required',
-              minLength: {
-                value: 3,
-                message: 'Password not long enough',
-              },
-            })}
-          />
-          <Eye onClick={handleClickShowPassword}>
-            {showPassword ? <IoEyeOff /> : <IoEyeSharp />}
-          </Eye>
-        </TextFiled>
+        <Input
+          type="password"
+          label="Password"
+          {...register('password', {
+            required: 'This field is required',
+            minLength: {
+              value: 3,
+              message: 'Password not long enough',
+            },
+          })}
+        />
         {errors.password && <Error>{errors.password.message}</Error>}
 
         {/*Confirm password*/}
-        <TextFiled>
-          <Input
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Confirm password"
-            {...register('confirm', {
-              required: 'This field is required',
-              validate: value => value === watch('password') || 'Your passwords do no match',
-            })}
-          />
-          <Eye onClick={handleClickShowPassword}>
-            {showPassword ? <IoEyeOff /> : <IoEyeSharp />}
-          </Eye>
-        </TextFiled>
+        <Input
+          type="password"
+          label="Confirm password"
+          {...register('confirm', {
+            required: 'This field is required',
+            validate: value => value === watch('password') || 'Your passwords do no match',
+          })}
+        />
         {errors.confirm && <Error>{errors.confirm.message}</Error>}
         <Button type={'submit'} fullWidth={true}>
           Sign Up
