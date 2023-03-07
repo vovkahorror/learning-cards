@@ -27,7 +27,7 @@ export const RegisterTC = createAsyncThunk(
       const res = await authAPI.register(arg.email, arg.password)
 
       dispatch(setRegisterSuccess(true))
-      dispatch(setInfoSnackbar({ text: res.data.info, variant: 'success' }))
+      dispatch(setInfoSnackbar({ text: 'Registration is success', variant: 'success' }))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {

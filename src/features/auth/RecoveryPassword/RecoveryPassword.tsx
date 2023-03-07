@@ -1,8 +1,9 @@
 import { useForm } from 'react-hook-form'
-import { Link, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Button } from 'common/components/Button/Button'
+import { CustomLink } from 'common/components/CustomLink/CustomLink'
 import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
@@ -55,11 +56,11 @@ export const RecoveryPassword = () => {
         <ForgotDescription>
           Enter your email address and we will send you further instructions
         </ForgotDescription>
-        <Button fullWidth type={'submit'}>
-          submit
-        </Button>
+        <Button type={'submit'}>submit</Button>
         <QuestionText>Did you remember your password?</QuestionText>
-        <StyledLink to={PATH.LOGIN}>Try logging in</StyledLink>
+        <CustomLink variant={'text'} to={PATH.LOGIN}>
+          Try logging in
+        </CustomLink>
       </form>
     </Box>
   )
@@ -89,15 +90,4 @@ const QuestionText = styled.p`
   font-weight: 600;
   font-size: 14px;
   line-height: 24px;
-`
-
-const StyledLink = styled(Link)`
-  margin: 0 auto;
-  display: block;
-  text-align: center;
-
-  text-decoration: underline;
-  font-weight: 600;
-  font-size: 16px;
-  color: #366eff;
 `
