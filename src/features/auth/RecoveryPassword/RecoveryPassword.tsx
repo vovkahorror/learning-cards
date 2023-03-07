@@ -2,6 +2,9 @@ import { useForm } from 'react-hook-form'
 import { Link, Navigate } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { Button } from 'common/components/Button/Button'
+import { Input } from 'common/components/Input/Input'
+import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { recoveryPasswordTC } from 'features/auth/authSlice'
@@ -42,66 +45,59 @@ export const RecoveryPassword = () => {
   }
 
   return (
-    <ForgotPasswordWrapper>
-      <ForgotTitle>Forgot your password?</ForgotTitle>
+    <Box style={{ width: '413px' }}>
+      <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
+        <ForgotTitle>Forgot your password?</ForgotTitle>
+      </Box>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <ForgotInput {...register('email', validate)} placeholder={'Email'} />
+        <Input {...register('email', validate)} type={'email'} label={'Email'} />
         <p>{errors?.email?.message}</p>
         <ForgotDescription>
           Enter your email address and we will send you further instructions
         </ForgotDescription>
-        <ForgotButton type={'submit'}>submit</ForgotButton>
+        <Button fullWidth type={'submit'}>
+          submit
+        </Button>
         <QuestionText>Did you remember your password?</QuestionText>
         <StyledLink to={PATH.LOGIN}>Try logging in</StyledLink>
       </form>
-    </ForgotPasswordWrapper>
+    </Box>
   )
 }
 
 //style
-const ForgotPasswordWrapper = styled.div`
-  margin: 0 auto;
-  max-width: 347px;
-`
 
 const ForgotTitle = styled.p`
-  width: fit-content;
   font-size: 26px;
   color: black;
   font-weight: 700;
-  margin: 0 auto 36px;
-`
-
-const ForgotInput = styled.input`
-  width: 100%;
-  height: 48px;
-  margin-bottom: 25px;
 `
 
 const ForgotDescription = styled.p`
+  margin-bottom: 65px;
+
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
-  margin-bottom: 65px;
-`
-
-const ForgotButton = styled.button`
-  width: 100%;
-  height: 36px;
-  margin-bottom: 31px;
 `
 
 const QuestionText = styled.p`
+  margin: 31px 0 21px;
   display: block;
   text-align: center;
+
   font-weight: 600;
   font-size: 14px;
   line-height: 24px;
-  margin: 0 auto 7px;
 `
 
 const StyledLink = styled(Link)`
+  margin: 0 auto;
   display: block;
   text-align: center;
-  margin: 0 auto;
+
+  text-decoration: underline;
+  font-weight: 600;
+  font-size: 16px;
+  color: #366eff;
 `

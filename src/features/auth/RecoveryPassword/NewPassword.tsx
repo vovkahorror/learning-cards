@@ -1,13 +1,18 @@
 import { useForm } from 'react-hook-form'
 import { Navigate, useParams } from 'react-router-dom'
+import styled from 'styled-components'
 
+import { Button } from 'common/components/Button/Button'
+import { Input } from 'common/components/Input/Input'
+import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
+import { validatePassword } from 'common/validate/validatePassword'
 import { RequestNewPasswordType } from 'features/auth/authAPI'
 import { setNewPasswordTC } from 'features/auth/authSlice'
 import { PATH } from 'pages/path'
 
-type FormData = {
+export type FormData = {
   password: string
 }
 
@@ -25,15 +30,6 @@ export const NewPassword = () => {
     mode: 'onBlur',
   })
 
-  const validate = {
-    required: 'Required',
-    pattern: {
-      value: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/,
-      message:
-        'Your password must be at least 8 characters, contain at least one lower case, letter one uppercase letter, one digit, one special char (! @ # $ % ^ & * _ ) and must not contain Whitespaces',
-    },
-  }
-
   const onSubmit = (data: FormData) => {
     const payload: RequestNewPasswordType = {
       password: data.password.trim(),
@@ -49,14 +45,44 @@ export const NewPassword = () => {
   }
 
   return (
-    <div>
-      <p>Create new password</p>
+    <Box style={{ width: '413px' }}>
+      <NewPasswordTitle>Create new password</NewPasswordTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register('password', validate)} placeholder={'Password'} />
+        <Input
+          {...register('password', {
+            validate: (value): string => validatePassword(value),
+          })}
+          type={'password'}
+          label={'Password'}
+        />
         <p>{errors?.password?.message}</p>
-        <p>Create new password and we will send you further instructions to email</p>
-        <button type={'submit'}>Create new password</button>
+        <NewPasswordDescription>
+          Create new password and we will send you further instructions to email
+        </NewPasswordDescription>
+        <Button type={'submit'} fullWidth>
+          Create new password
+        </Button>
       </form>
-    </div>
+    </Box>
   )
 }
+
+//styled
+
+const NewPasswordTitle = styled.p`
+  margin-bottom: 80px;
+  text-align: center;
+
+  font-size: 26px;
+  color: black;
+  font-weight: 700;
+`
+const NewPasswordDescription = styled.p`
+  margin-bottom: 42px;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000000;
+  opacity: 0.5;
+`
