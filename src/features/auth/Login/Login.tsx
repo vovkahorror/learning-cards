@@ -33,12 +33,12 @@ export const Login = () => {
   }
 
   return (
-    <>
+    <LoginFormWrapper>
       <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
         <h1>Sign in</h1>
       </Box>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <LoginForm onSubmit={handleSubmit(onSubmit)}>
         <Input
           {...register('email', {
             required: true,
@@ -52,18 +52,30 @@ export const Login = () => {
         />
         {errors.email && <Error>{errors.email.message}</Error>}
 
-        <Input {...register('password', { required: true })} type={'password'} label={'Password'} />
-        <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'} my={'4'}>
+        <Input
+          {...register('password', {
+            required: true,
+            minLength: {
+              value: 7,
+              message: 'Password not long enough',
+            },
+          })}
+          type={'password'}
+          label={'Password'}
+        />
+        {errors.password && <Error>{errors.password.message}</Error>}
+
+        <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'} my={'auto'}>
           <Input type={'checkbox'} {...register('rememberMe')} label={'rememberMe'} />
           <Link to={PATH.FORGOT_PASSWORD}>Forgot Password</Link>
         </Box>
         <Button type={'submit'} fullWidth={true}>
           Sign In
         </Button>
-        <div>Already have an account?</div>
-        <Link to={PATH.REGISTRATION}>Sign Up</Link>
-      </form>
-    </>
+      </LoginForm>
+      <div>Already have an account?</div>
+      <SignUpLink to={PATH.REGISTRATION}>Sign Up</SignUpLink>
+    </LoginFormWrapper>
   )
 }
 
@@ -72,3 +84,25 @@ type LoginFieldsType = {
   password: string
   rememberMe: boolean
 }
+
+const LoginFormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+`
+
+const LoginForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`
+
+const SignUpLink = styled(Link)`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  text-decoration-line: underline;
+  color: #366eff;
+`
