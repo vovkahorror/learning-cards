@@ -27,7 +27,7 @@ export const RegisterTC = createAsyncThunk(
       const res = await authAPI.register(arg.email, arg.password)
 
       dispatch(setRegisterSuccess(true))
-      dispatch(setInfoMessage(res.data.info))
+      dispatch(setInfoSnackbar({ text: res.data.info, variant: 'success' }))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
@@ -52,8 +52,8 @@ export const recoveryPasswordTC = createAsyncThunk(
       dispatch(setUserEmail(email))
       dispatch(setRecovery(true))
       dispatch(setInfoSnackbar({ text: res.data.info, variant: 'success' }))
-    } catch (e: any) {
-      errorUtils(e, dispatch)
+    } catch (e) {
+      errorUtils(e as AxiosError, dispatch)
     } finally {
       dispatch(setStatusLoading(false))
     }
@@ -65,7 +65,7 @@ export const setNewPasswordTC = createAsyncThunk(
   async (data: RequestNewPasswordType, { dispatch }) => {
     dispatch(setStatusLoading(true))
     try {
-      // const res = await authAPI.setNewPassword(data)
+      const res = await authAPI.setNewPassword(data)
 
       dispatch(setNewPassword(true))
       dispatch(setInfoSnackbar({ text: res.data.info, variant: 'success' }))
