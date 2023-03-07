@@ -12,10 +12,6 @@ import { useAppSelector } from 'common/hooks/useAppSelector'
 import { loginTC } from 'features/auth/authSlice'
 import { PATH } from 'pages/path'
 
-const Error = styled.div`
-  color: red;
-`
-
 export const Login = () => {
   const dispatch = useAppDispatch()
   const user = useAppSelector(state => state.auth.user)
@@ -65,16 +61,20 @@ export const Login = () => {
         />
         {errors.password && <Error>{errors.password.message}</Error>}
 
-        <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'} my={'auto'}>
-          <Input type={'checkbox'} {...register('rememberMe')} label={'rememberMe'} />
-          <Link to={PATH.FORGOT_PASSWORD}>Forgot Password</Link>
-        </Box>
+        <RememberForgotBlock>
+          <Input type={'checkbox'} {...register('rememberMe')} label={'Remember me'} />
+          <ForgotPasswordLink to={PATH.FORGOT_PASSWORD}>Forgot Password?</ForgotPasswordLink>
+        </RememberForgotBlock>
+
         <Button type={'submit'} fullWidth={true}>
           Sign In
         </Button>
       </LoginForm>
-      <div>Already have an account?</div>
-      <SignUpLink to={PATH.REGISTRATION}>Sign Up</SignUpLink>
+
+      <SignUpBlock>
+        <Question>Already have an account?</Question>
+        <SignUpLink to={PATH.REGISTRATION}>Sign Up</SignUpLink>
+      </SignUpBlock>
     </LoginFormWrapper>
   )
 }
@@ -95,7 +95,43 @@ const LoginFormWrapper = styled.div`
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 4px;
+`
+
+const Error = styled.div`
+  color: red;
+`
+
+const RememberForgotBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+  margin-bottom: 65px;
+`
+
+const ForgotPasswordLink = styled(Link)`
+  align-self: flex-end;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #000000;
+`
+
+const SignUpBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-top: 31px;
+`
+
+const Question = styled.div`
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: #000000;
+  opacity: 0.5;
 `
 
 const SignUpLink = styled(Link)`
