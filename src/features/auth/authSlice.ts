@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
 
 import { setInfoSnackbar, setStatusLoading } from 'app/appSlice'
@@ -30,6 +30,22 @@ export const RegisterTC = createAsyncThunk(
       dispatch(setInfoSnackbar({ text: res.data.info, variant: 'success' }))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
+    } finally {
+      dispatch(setStatusLoading(false))
+    }
+  }
+)
+
+export const loginTC = createAsyncThunk(
+  'auth/login',
+  async (arg: { email: string; password: string; rememberMe: boolean }, { dispatch }) => {
+    dispatch(setStatusLoading(true))
+    try {
+      const res = await authAPI.login(arg.email, arg.password, arg.rememberMe)
+
+      dispatch(setUserData(res.data))
+    } catch (e: any) {
+      errorUtils(e, dispatch)
     } finally {
       dispatch(setStatusLoading(false))
     }
@@ -70,7 +86,6 @@ export const setNewPasswordTC = createAsyncThunk(
       dispatch(setNewPassword(true))
       dispatch(setInfoSnackbar({ text: res.data.info, variant: 'success' }))
     } catch (e: any) {
-      console.log(e)
       errorUtils(e, dispatch)
     } finally {
       dispatch(setStatusLoading(false))
@@ -106,7 +121,7 @@ const authSlice = createSlice({
   },
 })
 
-export const { setRecovery, setUserEmail, setNewPassword, setRegisterSuccess } = authSlice.actions
+export const { setRecovery, setUserEmail, setNewPassword, setRegisterSuccess, setUserData } = authSlice.actions
 export const authReducer = authSlice.reducer
 
 export const getUserData =

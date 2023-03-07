@@ -1,4 +1,4 @@
-import React, { ForwardedRef, useState, memo, forwardRef } from 'react'
+import React, { ForwardedRef, useState, memo, forwardRef, MouseEvent } from 'react'
 
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
@@ -20,7 +20,8 @@ export const Input = memo(
   forwardRef((props: InputPropsType, ref: ForwardedRef<HTMLInputElement>) => {
     const [type, setType] = useState(props.type)
     const { label, ...rest } = props
-    const passViewHandler = () => {
+    const passViewHandler = (e: MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault()
       const newType = type === 'password' ? 'text' : 'password'
 
       setType(newType)
