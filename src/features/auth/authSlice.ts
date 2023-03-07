@@ -44,8 +44,8 @@ export const loginTC = createAsyncThunk(
       const res = await authAPI.login(arg.email, arg.password, arg.rememberMe)
 
       dispatch(setUserData(res.data))
-    } catch (e: any) {
-      errorUtils(e, dispatch)
+    } catch (e) {
+      errorUtils(e as AxiosError, dispatch)
     } finally {
       dispatch(setStatusLoading(false))
     }

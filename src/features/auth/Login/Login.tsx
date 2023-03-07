@@ -5,6 +5,7 @@ import { Link, Navigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Button } from 'common/components/Button/Button'
+import { CustomLink } from 'common/components/CustomLink/CustomLink'
 import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
@@ -73,7 +74,7 @@ export const Login = () => {
 
       <SignUpBlock>
         <Question>Already have an account?</Question>
-        <SignUpLink to={PATH.REGISTRATION}>Sign Up</SignUpLink>
+        <CustomLink to={PATH.REGISTRATION}>Sign Up</CustomLink>
       </SignUpBlock>
     </LoginFormWrapper>
   )
@@ -132,13 +133,4 @@ const Question = styled.div`
   text-align: center;
   color: #000000;
   opacity: 0.5;
-`
-
-const SignUpLink = styled(Link)`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
-  text-align: center;
-  text-decoration-line: underline;
-  color: #366eff;
 `
