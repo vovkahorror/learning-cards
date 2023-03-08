@@ -9,13 +9,14 @@ import { HeaderContainer } from './header.styled'
 import { Container } from 'common/components/Layout/Container'
 import { Row } from 'common/components/Layout/Row'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { logoutTC } from 'features/auth/authSlice'
+import { logoutTC, setRegisterSuccess } from 'features/auth/authSlice'
 import { PATH } from 'pages/path'
 
 export const Header = () => {
   const dispatch = useAppDispatch()
   const onLogout = () => {
     dispatch(logoutTC())
+    dispatch(setRegisterSuccess(false))
   }
 
   return (
