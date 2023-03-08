@@ -16,7 +16,7 @@ type FormData = {
   email: string
 }
 
-export const RecoveryPassword = () => {
+export const Recovery = () => {
   const dispatch = useAppDispatch()
   const isSetRecovery = useAppSelector<boolean>(state => state.auth.isSetRecovery)
   const {
@@ -47,16 +47,19 @@ export const RecoveryPassword = () => {
           {...register('email', {
             validate: value => validatePassword(value),
           })}
-          type={'email'}
+          type={'text'}
           label={'Email'}
         />
         <p>{errors?.email?.message}</p>
+
         <ForgotDescription>
           Enter your email address and we will send you further instructions
         </ForgotDescription>
+
         <Button fullWidth type={'submit'}>
-          submit
+          Send Instructions
         </Button>
+
         <QuestionText>Did you remember your password?</QuestionText>
         <CustomLink to={PATH.LOGIN}>Try logging in</CustomLink>
       </form>
