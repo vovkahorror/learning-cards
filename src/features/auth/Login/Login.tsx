@@ -8,6 +8,7 @@ import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
+import { validateEmail } from 'common/validate/validateEmail'
 import { loginTC } from 'features/auth/authSlice'
 import {
   Error,
@@ -22,7 +23,8 @@ import { PATH } from 'pages/path'
 
 export const Login = () => {
   const dispatch = useAppDispatch()
-  const user = useAppSelector(state => state.auth.user)
+  const isLoggedIn = useAppSelector<boolean>(state => state.auth.isLoggedIn)
+
   const {
     register,
     formState: { errors },
@@ -32,7 +34,7 @@ export const Login = () => {
     dispatch(loginTC({ email: data.email, password: data.password, rememberMe: data.rememberMe }))
   }
 
-  if (user._id) {
+  if (isLoggedIn) {
     return <Navigate to={PATH.PROFILE} />
   }
 
@@ -45,11 +47,7 @@ export const Login = () => {
       <LoginForm onSubmit={handleSubmit(onSubmit)}>
         <Input
           {...register('email', {
-            required: true,
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: 'Invalid email address',
-            },
+            validate: value => validateEmail(value),
           })}
           type={'text'}
           label={'Email'}
