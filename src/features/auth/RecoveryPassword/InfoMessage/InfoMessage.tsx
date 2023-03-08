@@ -1,12 +1,10 @@
+import { EmailIcon, InfoDescription } from './infoMessage.styled'
+
 import { CustomLink } from 'common/components/CustomLink/CustomLink'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { setRecovery } from 'features/auth/authSlice'
-import {
-  EmailIcon,
-  InfoDescription,
-} from 'features/auth/RecoveryPassword/InfoMessage/infoMessage.styled'
 import { PATH } from 'pages/path'
 
 export const InfoMessage = () => {
@@ -22,7 +20,7 @@ export const InfoMessage = () => {
       <InfoDescription style={{ fontSize: '30px' }}>Check Email</InfoDescription>
       <EmailIcon />
       <InfoDescription>We’ve sent an Email with instructions to {userEmail}</InfoDescription>
-      <CustomLink width={'100%'} variant={'contained'} onClick={onClickHandler} to={PATH.LOGIN}>
+      <CustomLink variant={'contained'} to={PATH.LOGIN}>
         Back to login
       </CustomLink>
     </Box>
