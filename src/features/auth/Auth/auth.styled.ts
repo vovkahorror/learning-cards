@@ -1,7 +1,7 @@
 import { styled } from 'styles/theme'
 
 export const AuthContainer = styled.div`
-  min-height: 100vh;
+  min-height: calc(100vh - 108px);
   position: relative;
   display: flex;
   align-items: center;
