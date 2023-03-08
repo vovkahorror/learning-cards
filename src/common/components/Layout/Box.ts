@@ -30,6 +30,7 @@ type DisplayType =
 type BoxPropsType = {
   display?: DisplayType
   gap?: string
+  width?: string
   alignItems?:
     | 'center'
     | 'start'

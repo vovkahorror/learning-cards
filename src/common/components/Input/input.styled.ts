@@ -2,8 +2,6 @@ import { styled, theme } from 'styles/theme'
 
 export const InputContainer = styled.div`
   position: relative;
-  margin-top: 20px;
-  margin-bottom: 20px;
 `
 export const InputSelector = styled.input`
   box-sizing: border-box;
