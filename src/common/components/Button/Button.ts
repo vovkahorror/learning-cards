@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 import { theme } from 'styles/theme'
