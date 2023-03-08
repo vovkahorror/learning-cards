@@ -13,6 +13,7 @@ export const theme = {
 
     dark: '#282A37',
     light: '#ffffff',
+    gray: '#808080',
 
     fontPrimary: '#000',
     fontSecondary: '#6F7782',
@@ -54,6 +55,11 @@ export const GlobalStyle = createGlobalStyle`
       color: ${theme.colors.dark};
       font-weight: 500;
       font-size: 14px;
+    }
+    h1 {
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 27px;
     }
 	#root {
 	  	min-height: 100vh;

@@ -8,6 +8,7 @@ import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
+import { validatePassword } from 'common/validate/validateEmail'
 import { recoveryPasswordTC } from 'features/auth/authSlice'
 import { PATH } from 'pages/path'
 
@@ -27,15 +28,6 @@ export const RecoveryPassword = () => {
     mode: 'onBlur',
   })
 
-  const validate = {
-    required: 'Required',
-    pattern: {
-      value:
-        /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
-      message: 'Not Valid Email',
-    },
-  }
-
   const onSubmit = (data: FormData) => {
     dispatch(recoveryPasswordTC(data.email.trim()))
     reset()
@@ -51,16 +43,22 @@ export const RecoveryPassword = () => {
         <ForgotTitle>Forgot your password?</ForgotTitle>
       </Box>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Input {...register('email', validate)} type={'email'} label={'Email'} />
+        <Input
+          {...register('email', {
+            validate: value => validatePassword(value),
+          })}
+          type={'email'}
+          label={'Email'}
+        />
         <p>{errors?.email?.message}</p>
         <ForgotDescription>
           Enter your email address and we will send you further instructions
         </ForgotDescription>
-        <Button type={'submit'}>submit</Button>
+        <Button fullWidth type={'submit'}>
+          submit
+        </Button>
         <QuestionText>Did you remember your password?</QuestionText>
-        <CustomLink variant={'text'} to={PATH.LOGIN}>
-          Try logging in
-        </CustomLink>
+        <CustomLink to={PATH.LOGIN}>Try logging in</CustomLink>
       </form>
     </Box>
   )

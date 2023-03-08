@@ -9,7 +9,7 @@ import {
   RequestRecoveryType,
   UserType,
 } from 'features/auth/authAPI'
-import { emailMassage } from 'features/auth/RecoveryPassword/InfoMessage/EmailMassage'
+import { emailMassage } from 'features/auth/RecoveryPassword/InfoMessage/emailMassage'
 
 type InitialStateType = {
   isSetRecovery: boolean

@@ -1,6 +1,6 @@
 export const validatePassword = (value: string): any => {
   if (!value) {
-    return null
+    return 'Required'
   }
 
   const isNonWhiteSpace = /^\S*$/
