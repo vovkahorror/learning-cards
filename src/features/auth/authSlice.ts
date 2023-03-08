@@ -9,23 +9,37 @@ import {
   RequestRecoveryType,
   UserType,
 } from 'features/auth/authAPI'
-import { emailMassage } from 'features/auth/RecoveryPassword/InfoMessage/EmailMassage'
+import { emailMassage } from 'features/auth/RecoveryPassword/InfoMessage/emailMassage'
 
 type InitialStateType = {
   isSetRecovery: boolean
   userEmail: string
   isSetNewPassword: boolean
   user: UserType
+  isLoggedIn: boolean
   registerSuccess: boolean
 }
+
+export const authMeTC = createAsyncThunk('auth/authMe', async (_, { dispatch }) => {
+  dispatch(setStatusLoading(true))
+  try {
+    const res = await authAPI.me()
+
+    dispatch(setIsLoggedIn(true))
+    console.log(res)
+    dispatch(setUserData(res.data))
+  } catch (e) {
+    errorUtils(e as AxiosError, dispatch)
+  } finally {
+    dispatch(setStatusLoading(false))
+  }
+})
 
 export const RegisterTC = createAsyncThunk(
   'auth/register',
   async (arg: { email: string; password: string }, { dispatch }) => {
     dispatch(setStatusLoading(true))
     try {
-      const res = await authAPI.register(arg.email, arg.password)
-
       dispatch(setRegisterSuccess(true))
       dispatch(setInfoSnackbar({ text: 'Registration is success', variant: 'success' }))
     } catch (e) {
@@ -43,6 +57,7 @@ export const loginTC = createAsyncThunk(
     try {
       const res = await authAPI.login(arg.email, arg.password, arg.rememberMe)
 
+      dispatch(setIsLoggedIn(true))
       dispatch(setUserData(res.data))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
@@ -52,8 +67,21 @@ export const loginTC = createAsyncThunk(
   }
 )
 
+export const logoutTC = createAsyncThunk('auth/logout', async (_, { dispatch }) => {
+  dispatch(setStatusLoading(true))
+  try {
+    const res = await authAPI.logout()
+
+    dispatch(setIsLoggedIn(false))
+  } catch (e) {
+    errorUtils(e as AxiosError, dispatch)
+  } finally {
+    dispatch(setStatusLoading(false))
+  }
+})
+
 export const recoveryPasswordTC = createAsyncThunk(
-  'auth/recoveryPasswordTC',
+  'auth/recoveryPassword',
   async (email: string, { dispatch }) => {
     const payload: RequestRecoveryType = {
       email,
@@ -77,7 +105,7 @@ export const recoveryPasswordTC = createAsyncThunk(
 )
 
 export const setNewPasswordTC = createAsyncThunk(
-  'auth/setNewPasswordTC',
+  'auth/setNewPassword',
   async (data: RequestNewPasswordType, { dispatch }) => {
     dispatch(setStatusLoading(true))
     try {
@@ -115,12 +143,21 @@ const authSlice = createSlice({
     setUserData(state, action: PayloadAction<UserType>) {
       state.user = action.payload
     },
+    setIsLoggedIn: (state, action: PayloadAction<boolean>) => {
+      state.isLoggedIn = action.payload
+    },
     setRegisterSuccess(state, action: PayloadAction<boolean>) {
       state.registerSuccess = action.payload
     },
   },
 })
 
-export const { setRecovery, setUserEmail, setNewPassword, setRegisterSuccess, setUserData } =
-  authSlice.actions
+export const {
+  setRecovery,
+  setUserEmail,
+  setNewPassword,
+  setRegisterSuccess,
+  setUserData,
+  setIsLoggedIn,
+} = authSlice.actions
 export const authReducer = authSlice.reducer

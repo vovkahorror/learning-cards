@@ -1,21 +1,30 @@
 import React from 'react'
 
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Link, Navigate } from 'react-router-dom'
-import styled from 'styled-components'
+import { Navigate } from 'react-router-dom'
 
 import { Button } from 'common/components/Button/Button'
-import { CustomLink } from 'common/components/CustomLink/CustomLink'
 import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
+import { validateEmail } from 'common/validate/validateEmail'
 import { loginTC } from 'features/auth/authSlice'
+import {
+  Error,
+  ForgotPasswordLink,
+  LoginForm,
+  Question,
+  RememberForgotBlock,
+  SignUpBlock,
+  SignUpLink,
+} from 'features/auth/Login/login.styled'
 import { PATH } from 'pages/path'
 
 export const Login = () => {
   const dispatch = useAppDispatch()
-  const user = useAppSelector(state => state.auth.user)
+  const isLoggedIn = useAppSelector<boolean>(state => state.auth.isLoggedIn)
+
   const {
     register,
     formState: { errors },
@@ -25,12 +34,12 @@ export const Login = () => {
     dispatch(loginTC({ email: data.email, password: data.password, rememberMe: data.rememberMe }))
   }
 
-  if (user._id) {
+  if (isLoggedIn) {
     return <Navigate to={PATH.PROFILE} />
   }
 
   return (
-    <LoginFormWrapper>
+    <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'stretch'}>
       <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
         <h1>Sign in</h1>
       </Box>
@@ -38,11 +47,7 @@ export const Login = () => {
       <LoginForm onSubmit={handleSubmit(onSubmit)}>
         <Input
           {...register('email', {
-            required: true,
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: 'Invalid email address',
-            },
+            validate: value => validateEmail(value),
           })}
           type={'text'}
           label={'Email'}
@@ -74,9 +79,9 @@ export const Login = () => {
 
       <SignUpBlock>
         <Question>Already have an account?</Question>
-        <CustomLink to={PATH.REGISTRATION}>Sign Up</CustomLink>
+        <SignUpLink to={PATH.REGISTRATION}>Sign Up</SignUpLink>
       </SignUpBlock>
-    </LoginFormWrapper>
+    </Box>
   )
 }
 
@@ -85,52 +90,3 @@ type LoginFieldsType = {
   password: string
   rememberMe: boolean
 }
-
-const LoginFormWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-`
-
-const LoginForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`
-
-const Error = styled.div`
-  color: red;
-`
-
-const RememberForgotBlock = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 29px;
-  margin-bottom: 65px;
-`
-
-const ForgotPasswordLink = styled(Link)`
-  align-self: flex-end;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  text-align: center;
-  color: #000000;
-`
-
-const SignUpBlock = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-  margin-top: 31px;
-`
-
-const Question = styled.div`
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 24px;
-  text-align: center;
-  color: #000000;
-  opacity: 0.5;
-`

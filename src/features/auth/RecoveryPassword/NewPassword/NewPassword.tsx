@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Navigate, useParams } from 'react-router-dom'
-import styled from 'styled-components'
+
+import { NewPasswordDescription, NewPasswordTitle } from './newPassword.styled'
 
 import { Button } from 'common/components/Button/Button'
 import { Input } from 'common/components/Input/Input'
@@ -48,13 +49,15 @@ export const NewPassword = () => {
     <Box style={{ width: '413px' }}>
       <NewPasswordTitle>Create new password</NewPasswordTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          {...register('password', {
-            validate: (value): string => validatePassword(value),
-          })}
-          type={'password'}
-          label={'Password'}
-        />
+        <Box mb={'3'}>
+          <Input
+            {...register('password', {
+              validate: (value): string => validatePassword(value),
+            })}
+            type={'password'}
+            label={'Password'}
+          />
+        </Box>
         <p>{errors?.password?.message}</p>
         <NewPasswordDescription>
           Create new password and we will send you further instructions to email
@@ -66,23 +69,3 @@ export const NewPassword = () => {
     </Box>
   )
 }
-
-//styled
-
-const NewPasswordTitle = styled.p`
-  margin-bottom: 80px;
-  text-align: center;
-
-  font-size: 26px;
-  color: black;
-  font-weight: 700;
-`
-const NewPasswordDescription = styled.p`
-  margin-bottom: 42px;
-
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px;
-  color: #000000;
-  opacity: 0.5;
-`

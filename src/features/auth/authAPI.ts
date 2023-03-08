@@ -15,7 +15,7 @@ export const authAPI = {
   },
 
   me() {
-    return instance.post<UserType>('auth/me')
+    return instance.post<{}, AxiosResponse<UserType>>('auth/me')
   },
 
   setNewPassword(data: RequestNewPasswordType) {
@@ -26,6 +26,9 @@ export const authAPI = {
   },
   login(email: string, password: string, rememberMe: boolean) {
     return instance.post<UserType>('auth/login', { email, password, rememberMe })
+  },
+  logout() {
+    return instance.delete<{ info: string }>('auth/me')
   },
 }
 

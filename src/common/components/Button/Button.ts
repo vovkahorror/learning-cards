@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 import { theme } from 'styles/theme'
@@ -24,8 +23,10 @@ const variants = {
 
 const sizes = {
   small: css`
-    font-size: 13px;
+    border-radius: 2px;
+    font-size: 12px;
     padding: 4px 10px;
+    box-shadow: none;
   `,
   medium: css`
     font-size: 14px;
@@ -37,11 +38,8 @@ const sizes = {
   `,
 }
 
-// export const ButtonStyled = (props: any) => {
-//     props.type === 'link' && return <Link />
-// }
-
 export const Button = styled.button<SuperButtonPropsType>`
+  border-radius: 30px;
   ${p => variants[p.variant || 'primary']};
   border-width: 1px;
   border-style: solid;
@@ -53,7 +51,7 @@ export const Button = styled.button<SuperButtonPropsType>`
   width: ${props => (props.fullWidth ? '100%' : 'auto')};
 
   color: white;
-  border-radius: 30px;
+
   cursor: pointer;
   outline: none;
   text-decoration: none;

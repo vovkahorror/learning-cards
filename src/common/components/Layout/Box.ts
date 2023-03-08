@@ -1,6 +1,7 @@
 import { css } from 'styled-components'
 
 import { styled } from 'styles/theme'
+
 type MarginPaddingSizeType = 'auto' | '1' | '2' | '3' | '4' | '5'
 type MarginType = {
   mt?: MarginPaddingSizeType
@@ -28,7 +29,18 @@ type DisplayType =
   | 'flow-root'
 type BoxPropsType = {
   display?: DisplayType
-  alignItems?: 'center' | 'start' | 'end' | 'flex-start' | 'flex-end' | 'self-start' | 'self-end'
+  gap?: string
+  width?: string
+  alignItems?:
+    | 'center'
+    | 'start'
+    | 'end'
+    | 'flex-start'
+    | 'flex-end'
+    | 'self-start'
+    | 'self-end'
+    | 'stretch'
+  flexDirection?: 'row' | 'column'
   justifyContent?:
     | 'center'
     | 'start'
@@ -102,7 +114,7 @@ export const Box = styled.div<BoxPropsType>`
       padding-top: ${sizes[props.py]};
       padding-bottom: ${sizes[props.py]};
     `}
-  
+
   ${props =>
     props.mt &&
     css`
@@ -134,5 +146,15 @@ export const Box = styled.div<BoxPropsType>`
     css`
       margin-top: ${sizes[props.my]};
       margin-bottom: ${sizes[props.my]};
+    `}
+  ${props =>
+    props.flexDirection &&
+    css`
+      flex-direction: ${props.flexDirection};
+    `}
+  ${props =>
+    props.gap &&
+    css`
+      gap: ${props.gap};
     `}
 `
