@@ -17,6 +17,8 @@ export const InfoMessage = () => {
     dispatch(setRecovery(false))
   }
 
+  console.log('hello world')
+
   return (
     <Box style={{ width: '413px' }}>
       <InfoDescription style={{ fontSize: '30px' }}>Check Email</InfoDescription>
