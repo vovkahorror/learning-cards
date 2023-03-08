@@ -22,7 +22,8 @@ import { PATH } from 'pages/path'
 
 export const Login = () => {
   const dispatch = useAppDispatch()
-  const user = useAppSelector(state => state.auth.user)
+  const isLoggedIn = useAppSelector<boolean>(state => state.auth.isLoggedIn)
+
   const {
     register,
     formState: { errors },
@@ -32,7 +33,7 @@ export const Login = () => {
     dispatch(loginTC({ email: data.email, password: data.password, rememberMe: data.rememberMe }))
   }
 
-  if (user._id) {
+  if (isLoggedIn) {
     return <Navigate to={PATH.PROFILE} />
   }
 
