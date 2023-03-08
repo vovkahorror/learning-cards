@@ -1,4 +1,4 @@
-export const validatePassword = (value: string): any => {
+export const validateEmail = (value: string): any => {
   if (!value) {
     return 'Required'
   }
