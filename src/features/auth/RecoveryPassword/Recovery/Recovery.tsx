@@ -62,7 +62,9 @@ export const Recovery = () => {
         </Button>
 
         <QuestionText>Did you remember your password?</QuestionText>
-        <CustomLink to={PATH.LOGIN}>Try logging in</CustomLink>
+        <CustomLink variant={'contained'} to={PATH.LOGIN}>
+          Try logging in
+        </CustomLink>
       </form>
     </Box>
   )
