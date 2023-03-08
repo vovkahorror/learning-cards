@@ -56,11 +56,11 @@ export const RecoveryPassword = () => {
         <ForgotDescription>
           Enter your email address and we will send you further instructions
         </ForgotDescription>
-        <Button type={'submit'}>submit</Button>
+        <Button fullWidth type={'submit'}>
+          submit
+        </Button>
         <QuestionText>Did you remember your password?</QuestionText>
-        <CustomLink variant={'text'} to={PATH.LOGIN}>
-          Try logging in
-        </CustomLink>
+        <CustomLink to={PATH.LOGIN}>Try logging in</CustomLink>
       </form>
     </Box>
   )

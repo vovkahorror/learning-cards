@@ -1,33 +1,39 @@
+import React from 'react'
+
 import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 type CustomLinkPropsType = {
+  to: string
   variant?: 'text' | 'contained'
-  fullWidth?: boolean
+  width?: string
 }
 
 const variantCustomLink = {
   ['text']: css`
     display: block;
-    text-align: center;
     text-decoration: underline;
     color: #366eff;
     line-height: 20px;
     font-weight: 600;
   `,
   ['contained']: css`
+    display: inline-block;
+    padding: 8px 16px;
+
+    background: #366eff;
+    box-shadow: 0 4px 18px rgba(54, 110, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+
     line-height: 24px;
     font-weight: 500;
     color: #fff;
-    background-color: #366eff;
-    font-size: 14px;
-    padding: 8px 16px;
-    border-radius: 30px;
   `,
 }
 
 export const CustomLink = styled(Link)<CustomLinkPropsType>`
+  text-align: center;
   ${p => variantCustomLink[p.variant || 'text']};
   font-size: 16px;
-  width: ${p => (p.fullWidth ? '100%' : 'auto')};
+  width: ${p => p.width || 'auto'};
 `

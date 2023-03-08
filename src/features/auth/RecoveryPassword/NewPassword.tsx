@@ -48,13 +48,15 @@ export const NewPassword = () => {
     <Box style={{ width: '413px' }}>
       <NewPasswordTitle>Create new password</NewPasswordTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          {...register('password', {
-            validate: (value): string => validatePassword(value),
-          })}
-          type={'password'}
-          label={'Password'}
-        />
+        <Box mb={'3'}>
+          <Input
+            {...register('password', {
+              validate: (value): string => validatePassword(value),
+            })}
+            type={'password'}
+            label={'Password'}
+          />
+        </Box>
         <p>{errors?.password?.message}</p>
         <NewPasswordDescription>
           Create new password and we will send you further instructions to email
