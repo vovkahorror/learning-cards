@@ -1,7 +1,9 @@
 import React from 'react'
 
 import { Link } from 'react-router-dom'
-import styled, { css } from 'styled-components'
+import { css } from 'styled-components'
+
+import { styled } from 'styles/theme'
 
 type CustomLinkPropsType = {
   to: string
