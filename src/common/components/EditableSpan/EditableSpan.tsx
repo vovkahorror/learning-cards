@@ -1,10 +1,14 @@
-import React, { ChangeEvent, FunctionComponent, useState } from 'react'
+import React, { memo, useState } from 'react'
 
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import { AiOutlineEdit } from 'react-icons/ai'
 
+import { Button } from '../Button/Button'
 import { Input } from '../Input/Input'
 
-import { loginTC } from 'features/auth/authSlice'
+import { Form } from './editableSpan.styled'
+
+import { Box } from 'common/components/Layout/Box'
 
 type EditableSpanPropsType = {
   value: string
@@ -12,55 +16,51 @@ type EditableSpanPropsType = {
 }
 
 type EditFormType = {
-  value: string
+  value?: string
+  label: string
 }
+type FieldPropsType = {
+  onDoubleClick: () => void
+  children: React.ReactNode
+}
+export const EditableSpan = memo((props: EditFormType) => {
+  const [edit, setEdit] = useState(false)
+  const [value, setValue] = useState(props.value)
 
-export const EditableSpan = () => {
-  return <p>Yo</p>
-}
-// export const EditableSpan = React.memo((props: any) => {
-//   const [editMode, setEditMode] = useState(false)
-//   const [title, setTitle] = useState(props.value)
-//
-//   // const {
-//   //   value,
-//   //   formState: { errors },
-//   //   handleSubmit,
-//   // } = useForm<EditFormType>()
-//
-//   const activateEditMode = () => {
-//     setEditMode(true)
-//     setTitle(props.value)
-//   }
-//   const activateViewMode = () => {
-//     setEditMode(false)
-//     props.onChange(title)
-//   }
-//   const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-//     setTitle(e.currentTarget.value)
-//   }
-//
-//   // const onSubmit: SubmitHandler<LoginFieldsType> = data => {
-//   //   dispatch(meTC({ name: data.name }))
-//   // }
-//
-//   // AiOutlineEdit
-//   return editMode ? (
-//     'dsadas'
-//   ) : (
-//     // <form >
-//     //   <Input
-//     //     {...register('email', {
-//     //       required: true,
-//     //       pattern: {
-//     //         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-//     //         message: 'Invalid email address',
-//     //       },
-//     //     })}
-//     //     type={'text'}
-//     //     label={'Email'}
-//     //   />
-//     // </form>
-//     <span onDoubleClick={activateEditMode}>{props.value}</span>
-//   )
-// })
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm()
+
+  const activateEditMode = () => {
+    setEdit(true)
+    setValue(props.value)
+  }
+  const activateViewMode = () => {
+    setEdit(false)
+    setValue(props.value)
+  }
+
+  const EditForm = () => {
+    return (
+      <Form>
+        <Input type={'text'} label={props.label} />
+        <Button onClick={activateViewMode} size={'small'}>
+          SAVE
+        </Button>
+      </Form>
+    )
+  }
+
+  const Field = (props: FieldPropsType) => {
+    return (
+      <Box display={'flex'} justifyContent={'center'} gap={'10px'}>
+        {props.children}
+        <AiOutlineEdit size={'1.25rem'} />
+      </Box>
+    )
+  }
+
+  return edit ? <EditForm /> : <Field onDoubleClick={activateEditMode}>фывф{props.value}</Field>
+})

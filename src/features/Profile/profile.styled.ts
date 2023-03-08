@@ -2,6 +2,8 @@ import { styled } from 'styles/theme'
 
 export const ProfileAvatar = styled.div`
   position: relative;
+  width: 96px;
+  height: 96px;
   margin: 0 auto;
 `
 export const ProfileAvatarImg = styled.div`

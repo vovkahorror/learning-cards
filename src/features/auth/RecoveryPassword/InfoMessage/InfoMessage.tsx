@@ -24,7 +24,7 @@ export const InfoMessage = () => {
       <InfoDescription style={{ fontSize: '30px' }}>Check Email</InfoDescription>
       <EmailIcon />
       <InfoDescription>We’ve sent an Email with instructions to {userEmail}</InfoDescription>
-      <CustomLink variant={'text'} onClick={onClickHandler} to={PATH.LOGIN}>
+      <CustomLink variant={'contained'} onClick={onClickHandler} to={PATH.LOGIN}>
         Back to login
       </CustomLink>
     </Box>
