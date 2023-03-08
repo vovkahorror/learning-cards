@@ -1,8 +1,7 @@
 import React from 'react'
 
 import { useForm } from 'react-hook-form'
-import { Link, Navigate } from 'react-router-dom'
-import styled from 'styled-components'
+import { Navigate } from 'react-router-dom'
 
 import { FormDataType } from '../authAPI'
 
@@ -11,31 +10,16 @@ import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
+import { validatePassword } from 'common/validate/validatePassword'
 import { RegisterTC } from 'features/auth/authSlice'
+import {
+  Error,
+  LoginForm,
+  Question,
+  SignUpBlock,
+  SignUpLink,
+} from 'features/auth/Login/login.styled'
 import { PATH } from 'pages/path'
-
-const Note = styled.span`
-  margin-top: 30px;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 24px;
-  text-align: center;
-  color: #000000;
-  opacity: 0.5;
-`
-
-const Reference = styled(Link)`
-  margin-top: 10px;
-  font-weight: 600;
-  font-size: 16px;
-  text-align: center;
-  text-decoration-line: underline;
-  color: #366eff;
-`
-
-const Error = styled.div`
-  color: red;
-`
 
 export const Registration = () => {
   const dispatch = useAppDispatch()
@@ -60,7 +44,7 @@ export const Registration = () => {
       <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
         <h1>Sign Up</h1>
       </Box>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <LoginForm onSubmit={handleSubmit(onSubmit)}>
         {/*Email*/}
         <Input
           type="email"
@@ -81,10 +65,7 @@ export const Registration = () => {
           label="Password"
           {...register('password', {
             required: 'This field is required',
-            minLength: {
-              value: 3,
-              message: 'Password not long enough',
-            },
+            validate: value => validatePassword(value),
           })}
         />
         {errors.password && <Error>{errors.password.message}</Error>}
@@ -95,17 +76,22 @@ export const Registration = () => {
           label="Confirm password"
           {...register('confirm', {
             required: 'This field is required',
-            validate: value => value === watch('password') || 'Your passwords do no match',
+            validate: value =>
+              validatePassword(value) ||
+              value === watch('password') ||
+              'Your passwords do no match',
           })}
         />
         {errors.confirm && <Error>{errors.confirm.message}</Error>}
         <Button type={'submit'} fullWidth={true}>
           Sign Up
         </Button>
-      </form>
+      </LoginForm>
 
-      <Note>Already have an account?</Note>
-      <Reference to="/login">Sign In</Reference>
+      <SignUpBlock>
+        <Question>Already have an account?</Question>
+        <SignUpLink to={PATH.LOGIN}>Sign In</SignUpLink>
+      </SignUpBlock>
     </>
   )
 }

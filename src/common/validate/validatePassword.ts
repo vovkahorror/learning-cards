@@ -1,24 +1,24 @@
 export const validatePassword = (value: string): any => {
   if (!value) {
-    return null
+    return 'Required'
   }
 
   const isNonWhiteSpace = /^\S*$/
 
   if (!isNonWhiteSpace.test(value)) {
-    return 'Password must not contain Whitespaces.'
+    return 'Password must not contain Whitespaces'
   }
 
   const isContainsUppercase = /^(?=.*[A-Z]).*$/
 
   if (!isContainsUppercase.test(value)) {
-    return 'Password must have at least one Uppercase Character.'
+    return 'Password must have at least one Uppercase Character'
   }
 
   const isContainsLowercase = /^(?=.*[a-z]).*$/
 
   if (!isContainsLowercase.test(value)) {
-    return 'Password must have at least one Lowercase Character.'
+    return 'Password must have at least one Lowercase Character'
   }
 
   const isContainsNumber = /^(?=.*[0-9]).*$/
@@ -30,12 +30,12 @@ export const validatePassword = (value: string): any => {
   const isContainsSymbol = /^(?=.*[~`!@#$%^&*()--+={}[\]|\\:;"'<>,.?/_₹]).*$/
 
   if (!isContainsSymbol.test(value)) {
-    return 'Password must contain at least one Special Symbol.'
+    return 'Password must contain at least one Special Symbol'
   }
 
   const isValidLength = /^.{8,}$/
 
   if (!isValidLength.test(value)) {
-    return 'Minimum number of Characters 8.'
+    return 'Minimum number of Characters 8'
   }
 }
