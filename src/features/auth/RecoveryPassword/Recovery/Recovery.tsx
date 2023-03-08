@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
-import styled from 'styled-components'
+
+import { ForgotDescription, ForgotTitle, QuestionText } from './recovery.styled'
 
 import { Button } from 'common/components/Button/Button'
 import { CustomLink } from 'common/components/CustomLink/CustomLink'
@@ -8,7 +9,7 @@ import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
-import { validatePassword } from 'common/validate/validateEmail'
+import { validateEmail } from 'common/validate/validateEmail'
 import { recoveryPasswordTC } from 'features/auth/authSlice'
 import { PATH } from 'pages/path'
 
@@ -45,7 +46,7 @@ export const Recovery = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           {...register('email', {
-            validate: value => validatePassword(value),
+            validate: value => validateEmail(value),
           })}
           type={'text'}
           label={'Email'}
@@ -66,29 +67,3 @@ export const Recovery = () => {
     </Box>
   )
 }
-
-//style
-
-const ForgotTitle = styled.p`
-  font-size: 26px;
-  color: black;
-  font-weight: 700;
-`
-
-const ForgotDescription = styled.p`
-  margin-bottom: 65px;
-
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px;
-`
-
-const QuestionText = styled.p`
-  margin: 31px 0 21px;
-  display: block;
-  text-align: center;
-
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 24px;
-`
