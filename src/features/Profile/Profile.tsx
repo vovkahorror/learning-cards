@@ -19,8 +19,9 @@ export const Profile = () => {
   return (
     <>
       <Box display={'flex'} justifyContent={'center'}>
-        <h1>Personal Information</h1>
+        <h2>Personal Information</h2>
       </Box>
+
       <Box my={'4'}>
         <ProfileAvatar>
           <ProfileAvatarImg>
@@ -31,6 +32,7 @@ export const Profile = () => {
           </ProfileUpload>
         </ProfileAvatar>
       </Box>
+
       <EditableSpan label={'Nickname'} />
       <Box display={'flex'} flexDirection={'column'} gap={'24px'} mt={'4'} alignItems={'center'}>
         {/*<TextField type={'text'}>j&johnson@gmail.com</TextField>*/}

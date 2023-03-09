@@ -1,7 +1,9 @@
+import React from 'react'
+
 import { useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
 
-import { ForgotDescription, ForgotTitle, QuestionText } from './recovery.styled'
+import { Error, ForgotDescription, QuestionText } from './recovery.styled'
 
 import { Button } from 'common/components/Button/Button'
 import { CustomLink } from 'common/components/CustomLink/CustomLink'
@@ -39,8 +41,11 @@ export const Recovery = () => {
   }
 
   return (
-    <Box style={{ width: '347px' }}>
-      <ForgotTitle>Forgot your password?</ForgotTitle>
+    <>
+      <Box display={'flex'} justifyContent={'center'} mb={'5'}>
+        <h1>Forgot your password?</h1>
+      </Box>
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           {...register('email', {
@@ -49,7 +54,7 @@ export const Recovery = () => {
           type={'text'}
           label={'Email'}
         />
-        <p>{errors?.email?.message}</p>
+        {errors.email && <Error>{errors.email.message}</Error>}
 
         <ForgotDescription>
           Enter your email address and we will send you further instructions
@@ -62,6 +67,6 @@ export const Recovery = () => {
         <QuestionText>Did you remember your password?</QuestionText>
         <CustomLink to={PATH.LOGIN}>Try logging in</CustomLink>
       </form>
-    </Box>
+    </>
   )
 }
