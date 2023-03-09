@@ -1,4 +1,4 @@
-import { styled, theme } from 'styles/theme'
+import { styled } from 'styles/theme'
 
 export const InputContainer = styled.div`
   position: relative;
@@ -24,10 +24,6 @@ export const InputSelector = styled.input`
   z-index: 1;
 
   &:-webkit-autofill,
-  &:-internal-autofill-selected {
-    background-color: transparent !important;
-  }
-
   &:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 50px white inset;
     -webkit-text-fill-color: #333;
