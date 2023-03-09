@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
 
@@ -11,7 +13,6 @@ import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { validateEmail } from 'common/validate/validateEmail'
 import { recoveryPasswordTC } from 'features/auth/authSlice'
-import { Title } from 'features/auth/Login/login.styled'
 import { PATH } from 'pages/path'
 
 type FormData = {
@@ -41,7 +42,9 @@ export const Recovery = () => {
 
   return (
     <Box style={{ width: '347px' }}>
-      <Title>Forgot your password?</Title>
+      <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
+        <h1>Forgot your password?</h1>
+      </Box>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           {...register('email', {

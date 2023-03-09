@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { useForm } from 'react-hook-form'
 import { Navigate, useParams } from 'react-router-dom'
 
@@ -11,7 +13,6 @@ import { useAppSelector } from 'common/hooks/useAppSelector'
 import { validatePassword } from 'common/validate/validatePassword'
 import { RequestNewPasswordType } from 'features/auth/authAPI'
 import { setNewPasswordTC } from 'features/auth/authSlice'
-import { Title } from 'features/auth/Login/login.styled'
 import { PATH } from 'pages/path'
 
 export type FormData = {
@@ -48,7 +49,9 @@ export const NewPassword = () => {
 
   return (
     <Box style={{ width: '347px' }}>
-      <Title>Create new password</Title>
+      <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
+        <h1>Create new password</h1>
+      </Box>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box mb={'4'}>
           <Input

@@ -7,7 +7,6 @@ import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { setRecovery } from 'features/auth/authSlice'
-import { Title } from 'features/auth/Login/login.styled'
 import {
   EmailIcon,
   InfoDescription,
@@ -27,7 +26,7 @@ export const InfoMessage = () => {
   return (
     <Box style={{ width: '347px' }}>
       <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
-        <Title>Check Email</Title>
+        <h1>Check Email</h1>
       </Box>
       <EmailIcon />
       <InfoDescription>We’ve sent an Email with instructions to {userEmail}</InfoDescription>

@@ -63,7 +63,7 @@ export const GlobalStyle = createGlobalStyle`
 
   h1 {
     font-weight: 600;
-    font-size: 22px;
+    font-size: 29px;
     line-height: 27px;
     color: ${theme.colors.fontTest};
   }

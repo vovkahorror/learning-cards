@@ -54,7 +54,3 @@ export const SignUpLink = styled(Link)`
   text-decoration-line: underline;
   color: ${theme.colors.fontTest};
 `
-
-export const Title = styled.h1`
-  font-size: 29px;
-`
