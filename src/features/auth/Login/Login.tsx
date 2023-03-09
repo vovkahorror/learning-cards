@@ -19,6 +19,7 @@ import {
   RememberForgotBlock,
   SignUpBlock,
   SignUpLink,
+  Title,
 } from 'features/auth/Login/login.styled'
 import { PATH } from 'pages/path'
 
@@ -42,7 +43,7 @@ export const Login = () => {
   return (
     <>
       <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
-        <h1>Sign in</h1>
+        <Title>Sign in</Title>
       </Box>
 
       <LoginForm onSubmit={handleSubmit(onSubmit)}>

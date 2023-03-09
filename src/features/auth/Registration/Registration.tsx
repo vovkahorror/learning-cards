@@ -19,6 +19,7 @@ import {
   Question,
   SignUpBlock,
   SignUpLink,
+  Title,
 } from 'features/auth/Login/login.styled'
 import { PATH } from 'pages/path'
 
@@ -43,7 +44,7 @@ export const Registration = () => {
   return (
     <>
       <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
-        <h1>Sign Up</h1>
+        <Title>Sign Up</Title>
       </Box>
       <LoginForm onSubmit={handleSubmit(onSubmit)}>
         {/*Email*/}

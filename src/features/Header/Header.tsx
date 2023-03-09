@@ -6,6 +6,7 @@ import { ReactComponent as Logo } from '../../assets/img/logo.svg'
 
 import { HeaderContainer } from './header.styled'
 
+import { Button } from 'common/components/Button/Button'
 import { Container } from 'common/components/Layout/Container'
 import { Row } from 'common/components/Layout/Row'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
@@ -31,7 +32,7 @@ export const Header = () => {
           <Link to={PATH.SET_NEW_PASSWORD}>New Password</Link>
           <Link to={PATH.PROFILE}>PROFILE</Link>
           <Link to={PATH.NOT_FOUND}>NOT_FOUND</Link>
-          <button onClick={onLogout}>Log out</button>
+          <Button onClick={onLogout}>Log out</Button>
         </Row>
       </Container>
     </HeaderContainer>

@@ -11,6 +11,7 @@ import { useAppSelector } from 'common/hooks/useAppSelector'
 import { validatePassword } from 'common/validate/validatePassword'
 import { RequestNewPasswordType } from 'features/auth/authAPI'
 import { setNewPasswordTC } from 'features/auth/authSlice'
+import { Title } from 'features/auth/Login/login.styled'
 import { PATH } from 'pages/path'
 
 export type FormData = {
@@ -47,7 +48,7 @@ export const NewPassword = () => {
 
   return (
     <Box style={{ width: '347px' }}>
-      <NewPasswordTitle>Create new password</NewPasswordTitle>
+      <Title>Create new password</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box mb={'4'}>
           <Input

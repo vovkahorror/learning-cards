@@ -18,7 +18,7 @@ export const InputSelector = styled.input`
   background-color: transparent;
   background-image: none;
   border: 0;
-  border-bottom: 1px solid ${props => props.theme.colors.inputBorderColor};
+  border-bottom: 2px solid ${props => props.theme.colors.fontTest};
   border-radius: 0;
   transition: border-color 0.2s, color 0.2s;
   z-index: 1;
@@ -80,8 +80,8 @@ export const ButtonTogglePass = styled.button`
 `
 
 export const CheckIcon = styled.div`
-  background-color: ${props => props.theme.colors.light};
-  border: 1px solid ${props => props.theme.colors.primary};
+  background-color: ${props => props.theme.colors.invisible};
+  border: 1px solid ${props => props.theme.colors.fontTest};
   border-radius: 5px;
   width: 18px;
   height: 18px;
@@ -122,7 +122,7 @@ export const Checkbox = styled.label`
   }
 
   input:checked + ${CheckIcon} {
-    background: ${props => props.theme.colors.primary};
+    background: ${props => props.theme.colors.fontTest};
 
     &:after {
       opacity: 1;

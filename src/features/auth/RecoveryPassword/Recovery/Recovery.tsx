@@ -11,6 +11,7 @@ import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { validateEmail } from 'common/validate/validateEmail'
 import { recoveryPasswordTC } from 'features/auth/authSlice'
+import { Title } from 'features/auth/Login/login.styled'
 import { PATH } from 'pages/path'
 
 type FormData = {
@@ -40,7 +41,7 @@ export const Recovery = () => {
 
   return (
     <Box style={{ width: '347px' }}>
-      <ForgotTitle>Forgot your password?</ForgotTitle>
+      <Title>Forgot your password?</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           {...register('email', {
