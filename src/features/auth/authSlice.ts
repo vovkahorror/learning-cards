@@ -72,9 +72,8 @@ export const loginTC = createAsyncThunk(
 export const logoutTC = createAsyncThunk('auth/logout', async (_, { dispatch }) => {
   dispatch(setStatusLoading(true))
   try {
-    // const res = await authAPI.logout()
+    await authAPI.logout()
 
-    console.log(res)
     dispatch(setUserData({} as UserType))
     dispatch(setIsLoggedIn(false))
   } catch (e) {
