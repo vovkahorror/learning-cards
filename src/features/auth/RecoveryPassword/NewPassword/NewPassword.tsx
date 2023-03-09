@@ -46,10 +46,10 @@ export const NewPassword = () => {
   }
 
   return (
-    <Box style={{ width: '413px' }}>
+    <Box style={{ width: '347px' }}>
       <NewPasswordTitle>Create new password</NewPasswordTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Box mb={'3'}>
+        <Box mb={'4'}>
           <Input
             {...register('password', {
               validate: (value): string => validatePassword(value),
