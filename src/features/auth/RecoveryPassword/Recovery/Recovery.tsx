@@ -39,10 +39,8 @@ export const Recovery = () => {
   }
 
   return (
-    <Box style={{ width: '413px' }}>
-      <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
-        <ForgotTitle>Forgot your password?</ForgotTitle>
-      </Box>
+    <Box style={{ width: '347px' }}>
+      <ForgotTitle>Forgot your password?</ForgotTitle>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           {...register('email', {
@@ -62,9 +60,7 @@ export const Recovery = () => {
         </Button>
 
         <QuestionText>Did you remember your password?</QuestionText>
-        <CustomLink variant={'contained'} to={PATH.LOGIN}>
-          Try logging in
-        </CustomLink>
+        <CustomLink to={PATH.LOGIN}>Try logging in</CustomLink>
       </form>
     </Box>
   )
