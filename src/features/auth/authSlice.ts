@@ -30,7 +30,7 @@ export const authMeTC = createAsyncThunk('auth/authMe', async (_, { dispatch }) 
     dispatch(setUserData(res.data))
     dispatch(setUserName(res.data.name))
   } catch (e) {
-    errorUtils(e as AxiosError, dispatch)
+    // errorUtils(e as AxiosError, dispatch)
   } finally {
     dispatch(setStatusLoading(false))
   }
@@ -72,9 +72,8 @@ export const loginTC = createAsyncThunk(
 export const logoutTC = createAsyncThunk('auth/logout', async (_, { dispatch }) => {
   dispatch(setStatusLoading(true))
   try {
-    // const res = await authAPI.logout()
+    await authAPI.logout()
 
-    console.log(res)
     dispatch(setUserData({} as UserType))
     dispatch(setIsLoggedIn(false))
   } catch (e) {
