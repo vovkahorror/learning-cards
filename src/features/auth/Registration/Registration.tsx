@@ -46,43 +46,49 @@ export const Registration = () => {
       </Box>
       <LoginForm onSubmit={handleSubmit(onSubmit)}>
         {/*Email*/}
-        <Input
-          type="email"
-          label="Email"
-          {...register('email', {
-            required: 'This field is required',
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: 'Invalid email address',
-            },
-          })}
-        />
-        {errors.email && <Error>{errors.email.message}</Error>}
+        <Box mb="4">
+          <Input
+            type="email"
+            label="Email"
+            {...register('email', {
+              required: 'This field is required',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: 'Invalid email address',
+              },
+            })}
+          />
+          {errors.email && <Error>{errors.email.message}</Error>}
+        </Box>
 
         {/*Password*/}
-        <Input
-          type="password"
-          label="Password"
-          {...register('password', {
-            required: 'This field is required',
-            validate: value => validatePassword(value),
-          })}
-        />
-        {errors.password && <Error>{errors.password.message}</Error>}
+        <Box mb="4">
+          <Input
+            type="password"
+            label="Password"
+            {...register('password', {
+              required: 'This field is required',
+              validate: value => validatePassword(value),
+            })}
+          />
+          {errors.password && <Error>{errors.password.message}</Error>}
+        </Box>
 
         {/*Confirm password*/}
-        <Input
-          type="password"
-          label="Confirm password"
-          {...register('confirm', {
-            required: 'This field is required',
-            validate: value =>
-              validatePassword(value) ||
-              value === watch('password') ||
-              'Your passwords do no match',
-          })}
-        />
-        {errors.confirm && <Error>{errors.confirm.message}</Error>}
+        <Box mb="5">
+          <Input
+            type="password"
+            label="Confirm password"
+            {...register('confirm', {
+              required: 'This field is required',
+              validate: value =>
+                validatePassword(value) ||
+                value === watch('password') ||
+                'Your passwords do no match',
+            })}
+          />
+          {errors.confirm && <Error>{errors.confirm.message}</Error>}
+        </Box>
         <Button type={'submit'} fullWidth={true}>
           Sign Up
         </Button>
