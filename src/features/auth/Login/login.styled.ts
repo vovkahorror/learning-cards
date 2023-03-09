@@ -11,6 +11,7 @@ export const LoginForm = styled.form`
 export const Error = styled.div`
   color: red;
   font-size: 13px;
+  margin-top: 5px;
 `
 
 export const RememberForgotBlock = styled.div`
