@@ -30,6 +30,9 @@ export const authAPI = {
   logout() {
     return instance.delete<{ info: string }>('auth/me')
   },
+  updateName(name: string) {
+    return instance.put<UserType>('auth/me', { name })
+  },
 }
 
 // types

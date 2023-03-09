@@ -14,6 +14,7 @@ import { emailMassage } from 'features/auth/RecoveryPassword/InfoMessage/emailMa
 type InitialStateType = {
   isSetRecovery: boolean
   userEmail: string
+  userName: string
   isSetNewPassword: boolean
   user: UserType
   isLoggedIn: boolean
@@ -26,8 +27,8 @@ export const authMeTC = createAsyncThunk('auth/authMe', async (_, { dispatch }) 
     const res = await authAPI.me()
 
     dispatch(setIsLoggedIn(true))
-    console.log(res)
     dispatch(setUserData(res.data))
+    dispatch(setUserName(res.data.name))
   } catch (e) {
     errorUtils(e as AxiosError, dispatch)
   } finally {
@@ -59,6 +60,7 @@ export const loginTC = createAsyncThunk(
 
       dispatch(setIsLoggedIn(true))
       dispatch(setUserData(res.data))
+      dispatch(setUserName(res.data.name))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
@@ -70,8 +72,9 @@ export const loginTC = createAsyncThunk(
 export const logoutTC = createAsyncThunk('auth/logout', async (_, { dispatch }) => {
   dispatch(setStatusLoading(true))
   try {
-    const res = await authAPI.logout()
+    await authAPI.logout()
 
+    dispatch(setUserData({} as UserType))
     dispatch(setIsLoggedIn(false))
   } catch (e) {
     errorUtils(e as AxiosError, dispatch)
@@ -113,8 +116,24 @@ export const setNewPasswordTC = createAsyncThunk(
 
       dispatch(setNewPassword(true))
       dispatch(setInfoSnackbar({ text: res.data.info, variant: 'success' }))
-    } catch (e: any) {
-      errorUtils(e, dispatch)
+    } catch (e) {
+      errorUtils(e as AxiosError, dispatch)
+    } finally {
+      dispatch(setStatusLoading(false))
+    }
+  }
+)
+
+export const updateUserName = createAsyncThunk(
+  'auth/updateUserName',
+  async (arg: { name: string }, { dispatch }) => {
+    dispatch(setStatusLoading(true))
+    try {
+      const res = await authAPI.updateName(arg.name)
+
+      dispatch(setUserName(res.data.name))
+    } catch (e) {
+      errorUtils(e as AxiosError, dispatch)
     } finally {
       dispatch(setStatusLoading(false))
     }
@@ -127,6 +146,7 @@ const authSlice = createSlice({
     user: {},
     isSetRecovery: false,
     userEmail: '',
+    userName: '',
     isSetNewPassword: false,
     registerSuccess: false,
   } as InitialStateType,
@@ -136,6 +156,9 @@ const authSlice = createSlice({
     },
     setUserEmail: (state, action: PayloadAction<string>) => {
       state.userEmail = action.payload
+    },
+    setUserName: (state, action: PayloadAction<string>) => {
+      state.userName = action.payload
     },
     setNewPassword: (state, action: PayloadAction<boolean>) => {
       state.isSetNewPassword = action.payload
@@ -159,5 +182,6 @@ export const {
   setRegisterSuccess,
   setUserData,
   setIsLoggedIn,
+  setUserName,
 } = authSlice.actions
 export const authReducer = authSlice.reducer
