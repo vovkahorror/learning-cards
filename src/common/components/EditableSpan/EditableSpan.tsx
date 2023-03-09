@@ -2,11 +2,10 @@ import React, { memo, useState } from 'react'
 
 import { useForm } from 'react-hook-form'
 import { AiOutlineEdit } from 'react-icons/ai'
+import { Form } from 'react-router-dom'
 
 import { Button } from '../Button/Button'
 import { Input } from '../Input/Input'
-
-import { Form } from './editableSpan.styled'
 
 import { Box } from 'common/components/Layout/Box'
 

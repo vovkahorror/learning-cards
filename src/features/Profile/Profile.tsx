@@ -1,5 +1,6 @@
 import React from 'react'
 
+// import { TextField } from 'common/components/TextField/TextField'
 import { AiOutlineCamera } from 'react-icons/ai'
 
 import profileImg from '../../assets/img/profile.png'
@@ -7,7 +8,6 @@ import profileImg from '../../assets/img/profile.png'
 import { Button } from 'common/components/Button/Button'
 import { EditableSpan } from 'common/components/EditableSpan/EditableSpan'
 import { Box } from 'common/components/Layout/Box'
-import { TextField } from 'common/components/TextField/TextField'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { ProfileAvatar, ProfileAvatarImg, ProfileUpload } from 'features/Profile/profile.styled'
 
@@ -33,7 +33,7 @@ export const Profile = () => {
       </Box>
       <EditableSpan label={'Nickname'} />
       <Box display={'flex'} flexDirection={'column'} gap={'24px'} mt={'4'} alignItems={'center'}>
-        <TextField type={'text'}>j&johnson@gmail.com</TextField>
+        {/*<TextField type={'text'}>j&johnson@gmail.com</TextField>*/}
         <Button>Log out</Button>
       </Box>
     </>
