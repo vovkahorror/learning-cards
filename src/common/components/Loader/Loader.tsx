@@ -40,6 +40,5 @@ const LoaderWrapper = styled.div`
 
   font-weight: 600;
   font-size: 70px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.23);
+  background-color: #fff;
 `
