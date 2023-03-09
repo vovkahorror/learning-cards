@@ -58,6 +58,11 @@ export const GlobalStyle = createGlobalStyle`
     }
     h1 {
       font-weight: 600;
+      font-size: 26px;
+      line-height: 32px;
+    }
+    h2 {
+      font-weight: 600;
       font-size: 22px;
       line-height: 27px;
     }

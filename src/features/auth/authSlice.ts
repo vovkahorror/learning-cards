@@ -30,7 +30,7 @@ export const authMeTC = createAsyncThunk('auth/authMe', async (_, { dispatch }) 
     dispatch(setUserData(res.data))
     dispatch(setUserName(res.data.name))
   } catch (e) {
-    errorUtils(e as AxiosError, dispatch)
+    // errorUtils(e as AxiosError, dispatch)
   } finally {
     dispatch(setStatusLoading(false))
   }
