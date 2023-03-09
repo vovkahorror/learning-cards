@@ -45,27 +45,31 @@ export const Login = () => {
       </Box>
 
       <LoginForm onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          {...register('email', {
-            validate: value => validateEmail(value),
-          })}
-          type={'text'}
-          label={'Email'}
-        />
-        {errors.email && <Error>{errors.email.message}</Error>}
+        <Box>
+          <Input
+            {...register('email', {
+              validate: value => validateEmail(value),
+            })}
+            type={'text'}
+            label={'Email'}
+          />
+          {errors.email && <Error>{errors.email.message}</Error>}
+        </Box>
 
-        <Input
-          {...register('password', {
-            required: true,
-            minLength: {
-              value: 7,
-              message: 'Password not long enough',
-            },
-          })}
-          type={'password'}
-          label={'Password'}
-        />
-        {errors.password && <Error>{errors.password.message}</Error>}
+        <Box>
+          <Input
+            {...register('password', {
+              required: true,
+              minLength: {
+                value: 7,
+                message: 'Password not long enough',
+              },
+            })}
+            type={'password'}
+            label={'Password'}
+          />
+          {errors.password && <Error>{errors.password.message}</Error>}
+        </Box>
 
         <RememberForgotBlock>
           <Input type={'checkbox'} {...register('rememberMe')} label={'Remember me'} />

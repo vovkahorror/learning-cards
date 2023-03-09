@@ -5,7 +5,7 @@ import { styled } from 'styles/theme'
 export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 24px;
 `
 
 export const Error = styled.div`
@@ -17,7 +17,7 @@ export const RememberForgotBlock = styled.div`
   display: flex;
   flex-direction: column;
   gap: 29px;
-  margin-bottom: 65px;
+  margin-bottom: 45px;
 `
 
 export const ForgotPasswordLink = styled(Link)`
