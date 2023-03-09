@@ -40,7 +40,7 @@ export const InputSelector = styled.input`
 
   &:focus,
   &:active {
-    border-color: ${props => props.theme.colors.primary};
+    border-color: ${props => props.theme.colors.secondary};
     outline: 0;
   }
 
