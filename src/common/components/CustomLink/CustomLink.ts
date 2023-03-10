@@ -32,6 +32,6 @@ const variantCustomLink = {
 export const CustomLink = styled(Link)<CustomLinkPropsType>`
   text-align: center;
   ${p => variantCustomLink[p.variant || 'text']};
-  font-size: 16px;
+  font-size: 14px;
   width: ${p => p.width || 'auto'};
 `

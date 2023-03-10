@@ -31,7 +31,7 @@ export const authAPI = {
     return instance.delete<{ info: string }>('auth/me')
   },
   updateName(name: string) {
-    return instance.put<UserType>('auth/me', { name })
+    return instance.put<{ name: string }, AxiosResponse<UpdateUserType>>('auth/me', { name })
   },
 }
 
@@ -68,4 +68,10 @@ export type FormDataType = {
   password: string
   confirm: string
   rememberMe: boolean
+}
+
+export type UpdateUserType = {
+  token: string
+  tokenDeathTime: number
+  updatedUser: UserType
 }
