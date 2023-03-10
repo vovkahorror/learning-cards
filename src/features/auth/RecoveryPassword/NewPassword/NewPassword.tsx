@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Navigate, useParams } from 'react-router-dom'
 
-import { NewPasswordDescription, NewPasswordTitle } from './newPassword.styled'
+import { NewPasswordDescription } from './newPassword.styled'
 
 import { Button } from 'common/components/Button/Button'
 import { Input } from 'common/components/Input/Input'
@@ -46,8 +46,11 @@ export const NewPassword = () => {
   }
 
   return (
-    <Box style={{ width: '347px' }}>
-      <NewPasswordTitle>Create new password</NewPasswordTitle>
+    <>
+      <Box display={'flex'} justifyContent={'center'} mb={'5'}>
+        <h1>Create new password</h1>
+      </Box>
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box mb={'4'}>
           <Input
@@ -59,13 +62,15 @@ export const NewPassword = () => {
           />
         </Box>
         <p>{errors?.password?.message}</p>
+
         <NewPasswordDescription>
           Create new password and we will send you further instructions to email
         </NewPasswordDescription>
+
         <Button type={'submit'} fullWidth>
           Create new password
         </Button>
       </form>
-    </Box>
+    </>
   )
 }

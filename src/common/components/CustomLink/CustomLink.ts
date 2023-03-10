@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
@@ -27,13 +25,13 @@ const variantCustomLink = {
 
     line-height: 24px;
     font-weight: 500;
-    color: #fff;
+    color: #fff !important;
   `,
 }
 
 export const CustomLink = styled(Link)<CustomLinkPropsType>`
   text-align: center;
   ${p => variantCustomLink[p.variant || 'text']};
-  font-size: 16px;
+  font-size: 14px;
   width: ${p => p.width || 'auto'};
 `

@@ -13,5 +13,6 @@ export const AuthContainerCard = styled.div`
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
   padding: 30px;
   border-radius: 5px;
+  max-width: 413px;
   min-width: 413px;
 `

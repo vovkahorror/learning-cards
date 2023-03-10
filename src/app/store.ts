@@ -3,12 +3,10 @@ import thunk from 'redux-thunk'
 
 import { appReducer } from 'app/appSlice'
 import { authReducer } from 'features/auth/authSlice'
-import { profileReducer } from 'features/Profile/profileSlice'
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    profile: profileReducer,
     app: appReducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunk),

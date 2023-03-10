@@ -30,7 +30,7 @@ export const authMeTC = createAsyncThunk('auth/authMe', async (_, { dispatch }) 
     dispatch(setUserData(res.data))
     dispatch(setUserName(res.data.name))
   } catch (e) {
-    errorUtils(e as AxiosError, dispatch)
+    // errorUtils(e as AxiosError, dispatch)
   } finally {
     dispatch(setStatusLoading(false))
   }
@@ -41,6 +41,7 @@ export const RegisterTC = createAsyncThunk(
   async (arg: { email: string; password: string }, { dispatch }) => {
     dispatch(setStatusLoading(true))
     try {
+      await authAPI.register(arg.email, arg.password)
       dispatch(setRegisterSuccess(true))
       dispatch(setInfoSnackbar({ text: 'Registration is success', variant: 'success' }))
     } catch (e) {
@@ -131,7 +132,7 @@ export const updateUserName = createAsyncThunk(
     try {
       const res = await authAPI.updateName(arg.name)
 
-      dispatch(setUserName(res.data.name))
+      dispatch(setUserData(res.data.updatedUser))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {

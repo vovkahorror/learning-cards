@@ -1,65 +1,32 @@
 import React, { memo, useState } from 'react'
 
-import { useForm } from 'react-hook-form'
-import { AiOutlineEdit } from 'react-icons/ai'
-import { Form } from 'react-router-dom'
-
-import { Button } from '../Button/Button'
-import { Input } from '../Input/Input'
-
-import { Box } from 'common/components/Layout/Box'
+import { EditForm } from 'common/components/EditableSpan/EditForm'
+import { Field } from 'common/components/EditableSpan/Field'
 
 type EditableSpanPropsType = {
   value: string
+  label: string
   onChange: (newValue: string) => void
 }
 
-type EditFormType = {
-  value?: string
-  label: string
-}
-type FieldPropsType = {
-  onDoubleClick: () => void
-  children: React.ReactNode
-}
-export const EditableSpan = memo((props: EditFormType) => {
-  const [edit, setEdit] = useState(false)
-  const [value, setValue] = useState(props.value)
+export const EditableSpan = memo(({ value, onChange, label }: EditableSpanPropsType) => {
+  const [editMode, setEditMode] = useState(false)
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm()
-
-  const activateEditMode = () => {
-    setEdit(true)
-    setValue(props.value)
+  const onEditMode = () => {
+    setEditMode(true)
   }
-  const activateViewMode = () => {
-    setEdit(false)
-    setValue(props.value)
+  const onViewMode = () => {
+    setEditMode(false)
   }
 
-  const EditForm = () => {
-    return (
-      <Form>
-        <Input type={'text'} label={props.label} />
-        <Button onClick={activateViewMode} size={'small'}>
-          SAVE
-        </Button>
-      </Form>
-    )
+  const onSetNewValue = (newValue: string) => {
+    onChange(newValue)
+    onViewMode()
   }
 
-  const Field = (props: FieldPropsType) => {
-    return (
-      <Box display={'flex'} justifyContent={'center'} gap={'10px'}>
-        {props.children}
-        <AiOutlineEdit size={'1.25rem'} />
-      </Box>
-    )
-  }
-
-  return edit ? <EditForm /> : <Field onDoubleClick={activateEditMode}>фывф{props.value}</Field>
+  return editMode ? (
+    <EditForm value={value} setValue={onSetNewValue} label={label} />
+  ) : (
+    <Field onEditMode={onEditMode}>{value}</Field>
+  )
 })
