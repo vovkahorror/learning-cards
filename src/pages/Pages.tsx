@@ -21,7 +21,10 @@ export const Pages = () => {
         <Route path={PATH.REGISTRATION} element={<Registration />} />
         <Route path={PATH.FORGOT_PASSWORD} element={<Recovery />} />
         <Route path={PATH.CHECK_EMAIL} element={<InfoMessage />} />
-        <Route path={PATH.SET_NEW_PASSWORD} element={<NewPassword />} />
+        <Route path={PATH.SET_NEW_PASSWORD} element={<NewPassword />}>
+          <Route path="*" element={<Navigate to={PATH.SET_NEW_PASSWORD} />} />
+          <Route path=":resetPasswordToken" element={<NewPassword />} />
+        </Route>
       </Route>
 
       <Route element={<RequireAuth />}>
