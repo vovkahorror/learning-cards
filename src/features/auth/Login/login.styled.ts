@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { styled } from 'styles/theme'
+import { styled, theme } from 'styles/theme'
 
 export const LoginForm = styled.form`
   display: flex;
@@ -11,6 +11,7 @@ export const LoginForm = styled.form`
 export const Error = styled.div`
   color: red;
   font-size: 13px;
+  margin-top: 5px;
 `
 
 export const RememberForgotBlock = styled.div`
@@ -51,5 +52,5 @@ export const SignUpLink = styled(Link)`
   line-height: 24px;
   text-align: center;
   text-decoration-line: underline;
-  color: #366eff;
+  color: ${theme.colors.fontTest};
 `
