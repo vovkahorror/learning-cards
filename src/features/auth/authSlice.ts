@@ -28,7 +28,6 @@ export const authMeTC = createAsyncThunk('auth/authMe', async (_, { dispatch }) 
 
     dispatch(setIsLoggedIn(true))
     dispatch(setUserData(res.data))
-    dispatch(setUserName(res.data.name))
   } catch (e) {
     // errorUtils(e as AxiosError, dispatch)
   } finally {
@@ -61,7 +60,6 @@ export const loginTC = createAsyncThunk(
 
       dispatch(setIsLoggedIn(true))
       dispatch(setUserData(res.data))
-      dispatch(setUserName(res.data.name))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
@@ -158,9 +156,6 @@ const authSlice = createSlice({
     setUserEmail: (state, action: PayloadAction<string>) => {
       state.userEmail = action.payload
     },
-    setUserName: (state, action: PayloadAction<string>) => {
-      state.userName = action.payload
-    },
     setNewPassword: (state, action: PayloadAction<boolean>) => {
       state.isSetNewPassword = action.payload
     },
@@ -183,6 +178,5 @@ export const {
   setRegisterSuccess,
   setUserData,
   setIsLoggedIn,
-  setUserName,
 } = authSlice.actions
 export const authReducer = authSlice.reducer
