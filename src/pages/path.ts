@@ -3,7 +3,8 @@ export const PATH = {
   REGISTRATION: '/registration',
   FORGOT_PASSWORD: '/forgot_password',
   CHECK_EMAIL: '/check_email',
-  SET_NEW_PASSWORD: '/set-new-password/:resetPasswordToken',
+  SET_NEW_PASSWORD: '/set-new-password',
   PROFILE: '/profile',
   NOT_FOUND: '/404',
+  CURRENT_URL: window.location.href.split('#')[0],
 }

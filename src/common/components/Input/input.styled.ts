@@ -1,4 +1,4 @@
-import { styled, theme } from 'styles/theme'
+import { styled } from 'styles/theme'
 
 export const InputContainer = styled.div`
   position: relative;
@@ -18,16 +18,12 @@ export const InputSelector = styled.input`
   background-color: transparent;
   background-image: none;
   border: 0;
-  border-bottom: 1px solid ${props => props.theme.colors.inputBorderColor};
+  border-bottom: 2px solid ${props => props.theme.colors.fontTest};
   border-radius: 0;
   transition: border-color 0.2s, color 0.2s;
   z-index: 1;
 
   &:-webkit-autofill,
-  &:-internal-autofill-selected {
-    background-color: transparent !important;
-  }
-
   &:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 50px white inset;
     -webkit-text-fill-color: #333;
@@ -40,7 +36,7 @@ export const InputSelector = styled.input`
 
   &:focus,
   &:active {
-    border-color: ${props => props.theme.colors.primary};
+    border-color: ${props => props.theme.colors.secondary};
     outline: 0;
   }
 
@@ -80,8 +76,8 @@ export const ButtonTogglePass = styled.button`
 `
 
 export const CheckIcon = styled.div`
-  background-color: ${props => props.theme.colors.light};
-  border: 1px solid ${props => props.theme.colors.primary};
+  background-color: ${props => props.theme.colors.invisible};
+  border: 1px solid ${props => props.theme.colors.fontTest};
   border-radius: 5px;
   width: 18px;
   height: 18px;
@@ -122,7 +118,7 @@ export const Checkbox = styled.label`
   }
 
   input:checked + ${CheckIcon} {
-    background: ${props => props.theme.colors.primary};
+    background: ${props => props.theme.colors.fontTest};
 
     &:after {
       opacity: 1;

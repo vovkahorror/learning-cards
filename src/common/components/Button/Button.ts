@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 import { theme } from 'styles/theme'
@@ -11,9 +12,12 @@ type SuperButtonPropsType = {
 const variants = {
   ['primary']: css`
     background-color: ${theme.btn.primary.bg};
-    border-color: ${theme.btn.primary.borderColor};
     color: ${theme.btn.primary.color};
     box-shadow: ${theme.btn.primary.boxShadow};
+    &:hover {
+      background: ${theme.btn.primary.bgHover};
+    }
+    transition: all 0.3s ease;
   `,
   ['secondary']: theme.colors.secondary,
   ['success']: theme.colors.success,
@@ -39,11 +43,9 @@ const sizes = {
 }
 
 export const Button = styled.button<SuperButtonPropsType>`
-  border-radius: 30px;
+  border-radius: 6px;
   ${p => variants[p.variant || 'primary']};
-  border-width: 1px;
-  border-style: solid;
-  //sizes
+  border: none;
   ${p => sizes[p.size || 'medium']}
   font-weight: 500;
   margin: 0;
@@ -55,4 +57,14 @@ export const Button = styled.button<SuperButtonPropsType>`
   cursor: pointer;
   outline: none;
   text-decoration: none;
+`
+
+export const LinkText = styled(Link)`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  text-decoration-line: underline;
+  color: #366eff;
+  cursor: pointer;
 `

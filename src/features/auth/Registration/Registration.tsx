@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom'
 
 import { FormDataType } from '../authAPI'
 
-import { Button } from 'common/components/Button/Button'
+import { Button, LinkText } from 'common/components/Button/Button'
 import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
@@ -13,13 +13,7 @@ import { useAppSelector } from 'common/hooks/useAppSelector'
 import { validateEmail } from 'common/validate/validateEmail'
 import { validatePassword } from 'common/validate/validatePassword'
 import { RegisterTC } from 'features/auth/authSlice'
-import {
-  Error,
-  LoginForm,
-  Question,
-  SignUpBlock,
-  SignUpLink,
-} from 'features/auth/Login/login.styled'
+import { Error, LoginForm, Question, SignUpBlock } from 'features/auth/Login/login.styled'
 import { PATH } from 'pages/path'
 
 export const Registration = () => {
@@ -95,7 +89,7 @@ export const Registration = () => {
 
       <SignUpBlock>
         <Question>Already have an account?</Question>
-        <SignUpLink to={PATH.LOGIN}>Sign In</SignUpLink>
+        <LinkText to={PATH.LOGIN}>Sign In</LinkText>
       </SignUpBlock>
     </>
   )

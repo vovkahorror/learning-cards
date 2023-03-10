@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { useForm } from 'react-hook-form'
 import { Navigate, useParams } from 'react-router-dom'
 
@@ -11,6 +13,7 @@ import { useAppSelector } from 'common/hooks/useAppSelector'
 import { validatePassword } from 'common/validate/validatePassword'
 import { RequestNewPasswordType } from 'features/auth/authAPI'
 import { setNewPasswordTC } from 'features/auth/authSlice'
+import { Error } from 'features/auth/RecoveryPassword/Recovery/recovery.styled'
 import { PATH } from 'pages/path'
 
 export type FormData = {
@@ -60,8 +63,8 @@ export const NewPassword = () => {
             type={'password'}
             label={'Password'}
           />
+          {errors.password && <Error>{errors.password.message}</Error>}
         </Box>
-        <p>{errors?.password?.message}</p>
 
         <NewPasswordDescription>
           Create new password and we will send you further instructions to email

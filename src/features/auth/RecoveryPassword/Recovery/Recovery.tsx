@@ -5,8 +5,7 @@ import { Navigate } from 'react-router-dom'
 
 import { Error, ForgotDescription, QuestionText } from './recovery.styled'
 
-import { Button } from 'common/components/Button/Button'
-import { CustomLink } from 'common/components/CustomLink/CustomLink'
+import { Button, LinkText } from 'common/components/Button/Button'
 import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
@@ -64,8 +63,10 @@ export const Recovery = () => {
           Send Instructions
         </Button>
 
-        <QuestionText>Did you remember your password?</QuestionText>
-        <CustomLink to={PATH.LOGIN}>Try logging in</CustomLink>
+        <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
+          <QuestionText>Did you remember your password?</QuestionText>
+          <LinkText to={PATH.LOGIN}>Try logging in</LinkText>
+        </Box>
       </form>
     </>
   )

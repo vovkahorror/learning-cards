@@ -3,7 +3,7 @@ import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
 
-import { Button } from 'common/components/Button/Button'
+import { Button, LinkText } from 'common/components/Button/Button'
 import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
@@ -18,7 +18,6 @@ import {
   Question,
   RememberForgotBlock,
   SignUpBlock,
-  SignUpLink,
 } from 'features/auth/Login/login.styled'
 import { PATH } from 'pages/path'
 
@@ -82,7 +81,7 @@ export const Login = () => {
 
       <SignUpBlock>
         <Question>Already have an account?</Question>
-        <SignUpLink to={PATH.REGISTRATION}>Sign Up</SignUpLink>
+        <LinkText to={PATH.REGISTRATION}>Sign Up</LinkText>
       </SignUpBlock>
     </>
   )
