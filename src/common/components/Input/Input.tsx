@@ -1,4 +1,11 @@
-import React, { ForwardedRef, useState, memo, forwardRef, MouseEvent } from 'react'
+import React, {
+  ForwardedRef,
+  useState,
+  memo,
+  forwardRef,
+  MouseEvent,
+  InputHTMLAttributes,
+} from 'react'
 
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
@@ -11,7 +18,9 @@ import {
   Label,
 } from './input.styled'
 
-type InputPropsType = {
+type DefaultInputPropsType = InputHTMLAttributes<HTMLInputElement>
+
+type InputPropsType = DefaultInputPropsType & {
   type: string
   label: string
 }
