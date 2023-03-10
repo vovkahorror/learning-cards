@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 import { theme } from 'styles/theme'
@@ -55,4 +56,14 @@ export const Button = styled.button<SuperButtonPropsType>`
   cursor: pointer;
   outline: none;
   text-decoration: none;
+`
+
+export const LinkText = styled(Link)`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  text-decoration-line: underline;
+  color: #366eff;
+  cursor: pointer;
 `

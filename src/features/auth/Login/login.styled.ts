@@ -44,12 +44,3 @@ export const Question = styled.div`
   color: #000000;
   opacity: 0.5;
 `
-
-export const SignUpLink = styled(Link)`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
-  text-align: center;
-  text-decoration-line: underline;
-  color: #366eff;
-`
