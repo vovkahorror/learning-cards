@@ -25,7 +25,7 @@ const variantCustomLink = {
 
     line-height: 24px;
     font-weight: 500;
-    color: #fff;
+    color: #fff !important;
   `,
 }
 
