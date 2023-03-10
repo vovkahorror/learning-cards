@@ -6,5 +6,4 @@ export const PATH = {
   SET_NEW_PASSWORD: '/set-new-password/:resetPasswordToken',
   PROFILE: '/profile',
   NOT_FOUND: '/404',
-  CURRENT_URL: window.location.href.split('#')[0],
 }

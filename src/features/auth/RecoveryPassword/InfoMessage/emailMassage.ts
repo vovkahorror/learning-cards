@@ -1,5 +1,3 @@
-import { PATH } from 'pages/path'
-
 export const emailMassage = `
 <div style="background-color: #fff; padding: 15px;">
     <p style="font-size: 22px; 
@@ -18,7 +16,7 @@ export const emailMassage = `
             That's okay, it happens! Click on the button bellow to reset your password
     </p><br/>
                     
-    <a href='${PATH.CURRENT_URL}#${PATH.SET_NEW_PASSWORD}$token$''
+    <a href='http://localhost:3000/#/set-new-password/$token$'
        style=" display: block;
                width: fit-content;
                margin: 0 auto;
