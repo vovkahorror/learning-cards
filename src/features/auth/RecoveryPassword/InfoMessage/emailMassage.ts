@@ -16,7 +16,7 @@ export const emailMassage = `
             That's okay, it happens! Click on the button bellow to reset your password
     </p><br/>
                     
-    <a href='https://neko-back.herokuapp.com/2.0/#/set-new-password/$token$'
+    <a href='http://localhost:3000/2.0/#/set-new-password/$token$'
        style=" display: block;
                width: fit-content;
                margin: 0 auto;
