@@ -9,6 +9,7 @@ import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { validateEmail } from 'common/validate/validateEmail'
+import { validatePassword } from 'common/validate/validatePassword'
 import { loginTC } from 'features/auth/authSlice'
 import {
   Error,
@@ -28,7 +29,7 @@ export const Login = () => {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<LoginFieldsType>()
+  } = useForm<LoginFieldsType>({ mode: 'onBlur' || 'onSubmit' || 'onTouched' })
   const onSubmit: SubmitHandler<LoginFieldsType> = data => {
     dispatch(loginTC({ email: data.email, password: data.password, rememberMe: data.rememberMe }))
   }
@@ -38,34 +39,32 @@ export const Login = () => {
   }
 
   return (
-    <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'stretch'}>
+    <>
       <Box display={'flex'} justifyContent={'center'} alignItems={'center'} mb={'5'}>
         <h1>Sign in</h1>
       </Box>
 
       <LoginForm onSubmit={handleSubmit(onSubmit)}>
-        <Box>
+        <Box mb="4">
           <Input
+            type="email"
+            label="Email"
             {...register('email', {
+              required: 'This field is required',
               validate: value => validateEmail(value),
             })}
-            type={'text'}
-            label={'Email'}
           />
           {errors.email && <Error>{errors.email.message}</Error>}
         </Box>
 
-        <Box>
+        <Box mb="4">
           <Input
+            type="password"
+            label="Password"
             {...register('password', {
-              required: true,
-              minLength: {
-                value: 7,
-                message: 'Password not long enough',
-              },
+              required: 'This field is required',
+              validate: value => validatePassword(value),
             })}
-            type={'password'}
-            label={'Password'}
           />
           {errors.password && <Error>{errors.password.message}</Error>}
         </Box>
@@ -84,7 +83,7 @@ export const Login = () => {
         <Question>Already have an account?</Question>
         <LinkText to={PATH.REGISTRATION}>Sign Up</LinkText>
       </SignUpBlock>
-    </Box>
+    </>
   )
 }
 

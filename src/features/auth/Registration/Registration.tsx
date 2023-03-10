@@ -10,6 +10,7 @@ import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
+import { validateEmail } from 'common/validate/validateEmail'
 import { validatePassword } from 'common/validate/validatePassword'
 import { RegisterTC } from 'features/auth/authSlice'
 import { Error, LoginForm, Question, SignUpBlock } from 'features/auth/Login/login.styled'
@@ -46,10 +47,7 @@ export const Registration = () => {
             label="Email"
             {...register('email', {
               required: 'This field is required',
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: 'Invalid email address',
-              },
+              validate: value => validateEmail(value),
             })}
           />
           {errors.email && <Error>{errors.email.message}</Error>}
@@ -83,6 +81,7 @@ export const Registration = () => {
           />
           {errors.confirm && <Error>{errors.confirm.message}</Error>}
         </Box>
+
         <Button type={'submit'} fullWidth={true}>
           Sign Up
         </Button>

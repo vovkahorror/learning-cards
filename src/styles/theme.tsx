@@ -18,16 +18,18 @@ export const theme = {
     fontPrimary: '#000',
     fontSecondary: '#6F7782',
     fontWhite: '#fff',
+    fontTest: '#162938',
+    invisible: 'transparent',
 
     inputBorderColor: '#cccccc',
   },
   btn: {
     primary: {
-      bg: '#366EFF',
-      borderColor: '#366EFF',
+      bg: '#162938',
+      bgHover: '#144160',
+      borderColor: '#162938',
       color: '#ffffff',
-      boxShadow:
-        '0px 4px 18px rgba(54, 110, 255, 0.35), inset 0px 1px 0px rgba(255, 255, 255, 0.3)',
+      boxShadow: '1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1)',
     },
   },
 }
@@ -60,6 +62,7 @@ export const GlobalStyle = createGlobalStyle`
       font-weight: 600;
       font-size: 26px;
       line-height: 32px;
+      color: ${theme.colors.fontTest};
     }
     h2 {
       font-weight: 600;
