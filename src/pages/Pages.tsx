@@ -10,6 +10,8 @@ import { InfoMessage } from 'features/auth/RecoveryPassword/InfoMessage/InfoMess
 import { NewPassword } from 'features/auth/RecoveryPassword/NewPassword/NewPassword'
 import { Recovery } from 'features/auth/RecoveryPassword/Recovery/Recovery'
 import { Registration } from 'features/auth/Registration/Registration'
+import { Cards } from 'features/cards/Cards'
+import { Packs } from 'features/packs/Packs'
 import { Profile } from 'features/Profile/Profile'
 import { PATH } from 'pages/path'
 
@@ -22,7 +24,6 @@ export const Pages = () => {
         <Route path={PATH.FORGOT_PASSWORD} element={<Recovery />} />
         <Route path={PATH.CHECK_EMAIL} element={<InfoMessage />} />
         <Route path={PATH.SET_NEW_PASSWORD} element={<NewPassword />}>
-          <Route path="*" element={<Navigate to={PATH.SET_NEW_PASSWORD} />} />
           <Route path=":resetPasswordToken" element={<NewPassword />} />
         </Route>
       </Route>
@@ -30,6 +31,8 @@ export const Pages = () => {
       <Route element={<RequireAuth />}>
         <Route path={'/'} element={<Navigate to={PATH.PROFILE} />} />
         <Route path={PATH.PROFILE} element={<Profile />} />
+        <Route path={PATH.PACKS} element={<Packs />} />
+        <Route path={PATH.CARDS} element={<Cards />} />
       </Route>
 
       <Route path={PATH.NOT_FOUND} element={<NotFound />} />
