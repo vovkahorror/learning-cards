@@ -2,14 +2,14 @@ import React from 'react'
 
 import { Route, Routes, Navigate } from 'react-router-dom'
 
+import { AuthWrapper } from 'common/components/Auth/AuthWrapper'
+import { NotFound } from 'common/components/NotFound/NotFound'
 import { RequireAuth } from 'common/hoc/RequireAuth'
-import { AuthWrapper } from 'features/auth/Auth/AuthWrapper'
 import { Login } from 'features/auth/Login/Login'
 import { InfoMessage } from 'features/auth/RecoveryPassword/InfoMessage/InfoMessage'
 import { NewPassword } from 'features/auth/RecoveryPassword/NewPassword/NewPassword'
 import { Recovery } from 'features/auth/RecoveryPassword/Recovery/Recovery'
 import { Registration } from 'features/auth/Registration/Registration'
-import { NotFound } from 'features/NotFound/NotFound'
 import { Profile } from 'features/Profile/Profile'
 import { PATH } from 'pages/path'
 

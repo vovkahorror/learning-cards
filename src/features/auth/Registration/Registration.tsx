@@ -10,7 +10,6 @@ import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
-import { validateEmail } from 'common/validate/validateEmail'
 import { validatePassword } from 'common/validate/validatePassword'
 import { RegisterTC } from 'features/auth/authSlice'
 import { Error, LoginForm, Question, SignUpBlock } from 'features/auth/Login/login.styled'
@@ -47,7 +46,6 @@ export const Registration = () => {
             label="Email"
             {...register('email', {
               required: 'This field is required',
-              validate: value => validateEmail(value),
             })}
           />
           {errors.email && <Error>{errors.email.message}</Error>}

@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 
 import { ThemeProvider } from 'styled-components'
 
+import { Header } from 'common/components/Header/Header'
 import { Loader } from 'common/components/Loader/Loader'
 import { Snackbar } from 'common/components/Snackbar/Snackbar'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { authMeTC } from 'features/auth/authSlice'
-import { Header } from 'features/Header/Header'
 import { Pages } from 'pages/Pages'
 import { GlobalStyle, theme } from 'styles/theme'
 

@@ -4,12 +4,12 @@ import { AiOutlineCamera } from 'react-icons/ai'
 
 import profileImg from '../../assets/img/profile.png'
 
+import { AuthContainer, AuthContainerCard } from 'common/components/Auth/auth.styled'
 import { Button } from 'common/components/Button/Button'
 import { EditableSpan } from 'common/components/EditableSpan/EditableSpan'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
-import { AuthContainer, AuthContainerCard } from 'features/auth/Auth/auth.styled'
 import { logoutTC, setRegisterSuccess, updateUserName } from 'features/auth/authSlice'
 import { ProfileAvatar, ProfileAvatarImg, ProfileUpload } from 'features/Profile/profile.styled'
 

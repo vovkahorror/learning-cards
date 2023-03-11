@@ -56,6 +56,7 @@ export const loginTC = createAsyncThunk(
   async (arg: { email: string; password: string; rememberMe: boolean }, { dispatch }) => {
     dispatch(setStatusLoading(true))
     try {
+      console.log(arg.email)
       const res = await authAPI.login(arg.email, arg.password, arg.rememberMe)
 
       dispatch(setIsLoggedIn(true))
