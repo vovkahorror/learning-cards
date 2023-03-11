@@ -18,7 +18,7 @@ export const theme = {
     fontPrimary: '#000',
     fontSecondary: '#6F7782',
     fontWhite: '#fff',
-    fontTest: '#162938',
+    fontMain: '#162938',
     invisible: 'transparent',
 
     inputBorderColor: '#cccccc',
@@ -62,7 +62,7 @@ export const GlobalStyle = createGlobalStyle`
       font-weight: 600;
       font-size: 26px;
       line-height: 32px;
-      color: ${theme.colors.fontTest};
+      color: ${theme.colors.fontMain};
     }
     h2 {
       font-weight: 600;

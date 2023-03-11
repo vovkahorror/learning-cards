@@ -9,7 +9,6 @@ import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { validateEmail } from 'common/validate/validateEmail'
-import { validatePassword } from 'common/validate/validatePassword'
 import { loginTC } from 'features/auth/authSlice'
 import {
   Error,

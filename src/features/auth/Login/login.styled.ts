@@ -52,5 +52,5 @@ export const SignUpLink = styled(Link)`
   line-height: 24px;
   text-align: center;
   text-decoration-line: underline;
-  color: ${theme.colors.fontTest};
+  color: ${theme.colors.fontMain};
 `
