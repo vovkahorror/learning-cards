@@ -63,7 +63,6 @@ export const Login = () => {
             label="Password"
             {...register('password', {
               required: 'This field is required',
-              validate: value => validatePassword(value),
             })}
           />
           {errors.password && <Error>{errors.password.message}</Error>}
