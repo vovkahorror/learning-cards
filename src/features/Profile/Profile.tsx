@@ -4,8 +4,8 @@ import { AiOutlineCamera } from 'react-icons/ai'
 
 import profileImg from '../../assets/img/profile.png'
 
-import { AuthContainer, AuthContainerCard } from 'common/components/Auth/auth.styled'
 import { Button } from 'common/components/Button/Button'
+import { Card } from 'common/components/Card/Cards'
 import { EditableSpan } from 'common/components/EditableSpan/EditableSpan'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
@@ -27,40 +27,32 @@ export const Profile = () => {
   }
 
   return (
-    <AuthContainer>
-      <AuthContainerCard>
-        <>
-          <Box display={'flex'} justifyContent={'center'}>
-            <h2>Personal Information</h2>
-          </Box>
+    <Box display={'flex'} justifyContent={'center'}>
+      <Card>
+        <Box display={'flex'} justifyContent={'center'}>
+          <h2>Personal Information</h2>
+        </Box>
 
-          <Box my={'4'}>
-            <ProfileAvatar>
-              <ProfileAvatarImg>
-                <img src={profileImg} alt="" />
-              </ProfileAvatarImg>
-              <ProfileUpload>
-                <AiOutlineCamera />
-              </ProfileUpload>
-            </ProfileAvatar>
-          </Box>
+        <Box my={'4'}>
+          <ProfileAvatar>
+            <ProfileAvatarImg>
+              <img src={profileImg} alt="" />
+            </ProfileAvatarImg>
+            <ProfileUpload>
+              <AiOutlineCamera />
+            </ProfileUpload>
+          </ProfileAvatar>
+        </Box>
 
-          <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={'15px'}>
-            <EditableSpan label={'Nickname'} value={user.name} onChange={setNewName} />
-            <p>{user.email}</p>
-          </Box>
+        <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={'15px'}>
+          <EditableSpan label={'Nickname'} value={user.name} onChange={setNewName} />
+          <p>{user.email}</p>
+        </Box>
 
-          <Box
-            display={'flex'}
-            flexDirection={'column'}
-            gap={'24px'}
-            mt={'4'}
-            alignItems={'center'}
-          >
-            <Button onClick={onLogout}>Log out</Button>
-          </Box>
-        </>
-      </AuthContainerCard>
-    </AuthContainer>
+        <Box display={'flex'} flexDirection={'column'} gap={'24px'} mt={'4'} alignItems={'center'}>
+          <Button onClick={onLogout}>Log out</Button>
+        </Box>
+      </Card>
+    </Box>
   )
 }
