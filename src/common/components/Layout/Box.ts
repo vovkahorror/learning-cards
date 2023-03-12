@@ -71,6 +71,7 @@ const sizes = {
 }
 
 export const Box = styled.div<BoxPropsType>`
+  width: ${p => p.width || 'auto'};
   display: ${props => (props.display ? props.display : 'block')};
   ${props =>
     props.alignItems &&

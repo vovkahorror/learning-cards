@@ -1,70 +1,41 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { Col, Input, InputNumber, RangeSlider, Row } from 'rsuite'
+import { Input } from 'rsuite'
 
+import { CustomRangeSlider } from 'common/components/CustomRangeSlider/CustomRangeSlider'
 import { Box } from 'common/components/Layout/Box'
+import { TogglePacks } from 'common/components/TogglePacks/TogglePacks'
 
 export const SearchPackPanel = () => {
-  const [value, setValue] = useState<[number, number]>([1, 5])
-
   return (
-    <Box style={{ paddingTop: '150px' }} display={'flex'} gap={'20px'} alignItems={'end'}>
+    <Box
+      width={'100%'}
+      display={'flex'}
+      justifyContent={'space-between'}
+      gap={'20px'}
+      alignItems={'end'}
+    >
       <Box width={'413px'}>
-        <p>Search</p>
+        <Box mb={'2'}>
+          <p>Search</p>
+        </Box>
         <Input />
       </Box>
 
       <Box>
-        <p>Show packs cards My All</p>
-        <Row>
-          <Col md={4}>
-            <InputNumber
-              min={0}
-              max={value[1]}
-              value={value[0]}
-              onChange={nextValue => {
-                const [start, end] = value
-
-                if (nextValue > end) {
-                  return
-                }
-                setValue([+nextValue, end])
-              }}
-            />
-          </Col>
-          <Col md={10}>
-            <RangeSlider
-              min={0}
-              max={8}
-              defaultValue={value}
-              progress
-              value={value}
-              onChange={(value: [number, number]) => {
-                setValue(value)
-              }}
-            />
-          </Col>
-          <Col md={4}>
-            <InputNumber
-              min={value[0]}
-              max={8}
-              value={value[1]}
-              onChange={nextValue => {
-                const [start, end] = value
-
-                if (start > nextValue) {
-                  return
-                }
-                setValue([start, +nextValue])
-              }}
-            />
-          </Col>
-        </Row>
+        <Box mb={'2'}>
+          <p>Show packs cards</p>
+        </Box>
+        <TogglePacks />
       </Box>
 
       <Box>
-        <p>Show packs cards Number of cards My All 2 10</p>
+        <Box mb={'2'}>
+          <p>Number of cards</p>
+        </Box>
+        <CustomRangeSlider currentValue={[2, 5]} maxValue={10} />
       </Box>
+
       <p>filter</p>
     </Box>
   )
