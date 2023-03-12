@@ -3,6 +3,7 @@ import React from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
 
 import { AuthWrapper } from 'common/components/Auth/AuthWrapper'
+import { DashboardWrapper } from 'common/components/Dashboard/Dashboard'
 import { NotFound } from 'common/components/NotFound/NotFound'
 import { RequireAuth } from 'common/hoc/RequireAuth'
 import { Login } from 'features/auth/Login/Login'
@@ -28,11 +29,13 @@ export const Pages = () => {
         </Route>
       </Route>
 
-      <Route element={<RequireAuth />}>
-        <Route path={'/'} element={<Navigate to={PATH.PROFILE} />} />
-        <Route path={PATH.PROFILE} element={<Profile />} />
-        <Route path={PATH.PACKS} element={<Packs />} />
-        <Route path={PATH.CARDS} element={<Cards />} />
+      <Route element={<DashboardWrapper />}>
+        <Route element={<RequireAuth />}>
+          <Route path={'/'} element={<Navigate to={PATH.PROFILE} />} />
+          <Route path={PATH.PROFILE} element={<Profile />} />
+          <Route path={PATH.PACKS} element={<Packs />} />
+          <Route path={PATH.CARDS} element={<Cards />} />
+        </Route>
       </Route>
 
       <Route path={PATH.NOT_FOUND} element={<NotFound />} />

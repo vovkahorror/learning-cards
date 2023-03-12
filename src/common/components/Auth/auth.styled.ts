@@ -7,6 +7,7 @@ export const AuthContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 100px 0 30px;
   background: url(${background}) no-repeat center / cover;
 `
 
