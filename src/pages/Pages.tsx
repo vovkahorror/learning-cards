@@ -30,6 +30,7 @@ export const Pages = () => {
       </Route>
 
       <Route element={<DashboardWrapper />}>
+        qawsedaaaaaa
         <Route element={<RequireAuth />}>
           <Route path={'/'} element={<Navigate to={PATH.PACKS} />} />
           <Route path={PATH.PROFILE} element={<Profile />} />
