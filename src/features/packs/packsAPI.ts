@@ -4,8 +4,8 @@ export const packsAPI = {
   getPacks: (params?: PacksParamsType) => {
     return instance.get<PacksResponseType>('cards/pack', { params })
   },
-  addNewPack(cardsPack: NewPackType) {
-    return instance.post('/cards/pack', { cardsPack })
+  addPack(cardsPack: NewPackType) {
+    return instance.post<NewPackResponseType>('/cards/pack', { cardsPack })
   },
   editPack(cardsPack: EditPackType) {
     return instance.put('/cards/pack', { cardsPack })
@@ -25,7 +25,7 @@ type PacksParamsType = {
   user_id: string
 }
 
-type PacksResponseType = {
+export type PacksResponseType = {
   cardPacks: CardPacksType[]
   page: number
   pageCount: number
@@ -35,7 +35,7 @@ type PacksResponseType = {
   token: string
   tokenDeathTime: number
 }
-type CardPacksType = {
+export type CardPacksType = {
   _id: string
   user_id: string
   user_name: string
@@ -54,13 +54,19 @@ type CardPacksType = {
   __v: number
 }
 
-type NewPackType = {
+export type NewPackType = {
   name: string
   private: boolean
   deckCover?: string
 }
 
-type EditPackType = {
+type NewPackResponseType = {
+  newCardsPack: CardPacksType
+  token: string
+  tokenDeathTime: number
+}
+
+export type EditPackType = {
   _id: string
   name: string
 }
