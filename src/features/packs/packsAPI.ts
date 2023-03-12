@@ -1,6 +1,6 @@
 import { instance } from 'common/instance/instance'
 
-type SearchParamsType = {
+export type SearchParamsType = {
   packName: string | null
   min: number
   max: number

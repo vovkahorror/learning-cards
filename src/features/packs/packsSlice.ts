@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { RootState } from 'app/store'
-import { packsAPI } from 'features/packs/packsAPI'
+import { packsAPI, SearchParamsType } from 'features/packs/packsAPI'
 
-type SearchPacksType = {
+export type SearchPacksType = {
   packName?: string
   min?: number
   max?: number
@@ -15,21 +15,12 @@ type SearchPacksType = {
 }
 
 type InitialStateType = {
-  searchParams: {
-    packName: string | null
-    min: number
-    max: number
-    sortPacks: string | null
-    page: number
-    pageCount: number
-    user_id: string | null
-    block: boolean
-  }
+  searchParams: SearchParamsType
 }
 
 export const fetchPacksTC = createAsyncThunk(
   'packs/getPacksTC',
-  async (arg: SearchPacksType, { dispatch, getState }) => {
+  async (_, { dispatch, getState }) => {
     const { packs } = getState() as RootState
 
     const res = await packsAPI.getPacks(packs.searchParams)
