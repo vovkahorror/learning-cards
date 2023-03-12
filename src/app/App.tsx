@@ -9,7 +9,7 @@ import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { authMeTC } from 'features/auth/authSlice'
 import { Pages } from 'pages/Pages'
 import { GlobalStyle, theme } from 'styles/theme'
-
+import 'rsuite/dist/rsuite.min.css'
 function App() {
   const dispatch = useAppDispatch()
 

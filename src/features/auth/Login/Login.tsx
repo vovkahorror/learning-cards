@@ -34,7 +34,7 @@ export const Login = () => {
   }
 
   if (isLoggedIn) {
-    return <Navigate to={PATH.PROFILE} />
+    return <Navigate to={PATH.PACKS} />
   }
 
   return (
@@ -67,10 +67,10 @@ export const Login = () => {
           {errors.password && <Error>{errors.password.message}</Error>}
         </Box>
 
-        <RememberForgotBlock>
+        <Box display={'flex'} justifyContent={'space-between'}>
           <Input type={'checkbox'} {...register('rememberMe')} label={'Remember me'} />
           <ForgotPasswordLink to={PATH.FORGOT_PASSWORD}>Forgot Password?</ForgotPasswordLink>
-        </RememberForgotBlock>
+        </Box>
 
         <Button type={'submit'} fullWidth={true}>
           Sign In

@@ -8,7 +8,7 @@ export const theme = {
     warning: '#FF9C02',
     danger: '#FF3F21',
 
-    bgPrimary: '#F9F9FA',
+    bgPrimary: '#f5f9fa',
     bgSecondary: '#F6F8F9',
 
     dark: '#282A37',
