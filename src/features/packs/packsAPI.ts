@@ -1,7 +1,7 @@
 import { instance } from 'common/instance/instance'
 
 export const packsAPI = {
-  getPacks: (params?: PacksParamsType) => {
+  getPacks: (params: PacksParamsType) => {
     return instance.get<PacksResponseType>('cards/pack', { params })
   },
   addPack(cardsPack: NewPackType) {
@@ -15,7 +15,7 @@ export const packsAPI = {
   },
 }
 
-export type SearchParamsType = {
+export type PacksParamsType = {
   packName: string | null
   min: number
   max: number
@@ -24,16 +24,6 @@ export type SearchParamsType = {
   pageCount: number
   user_id: string | null
   block: boolean
-}
-
-type PacksParamsType = {
-  packName: string
-  min: number
-  max: number
-  sortPacks: string
-  page: number
-  pageCount: number
-  user_id: string
 }
 
 export type PacksResponseType = {
