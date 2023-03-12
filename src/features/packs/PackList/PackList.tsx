@@ -20,39 +20,29 @@ export const PackList = () => {
   return (
     <div>
       <Table height={400} data={data}>
-        <Column width={60} align="center" fixed>
-          <HeaderCell>Id</HeaderCell>
-          <Cell dataKey="id" />
+        <Column width={150} align="center" fixed>
+          <HeaderCell>Name</HeaderCell>
+          <Cell dataKey="name" />
         </Column>
 
         <Column width={150}>
-          <HeaderCell>First Name</HeaderCell>
+          <HeaderCell>Cards</HeaderCell>
+          <Cell dataKey="cardsCount" />
+        </Column>
+
+        <Column width={150}>
+          <HeaderCell>Last Updated</HeaderCell>
+          <Cell dataKey="updated" />
+        </Column>
+
+        <Column width={150}>
+          <HeaderCell>Created by</HeaderCell>
           <Cell dataKey="user_name" />
         </Column>
 
-        <Column width={150}>
-          <HeaderCell>Last Name</HeaderCell>
-          <Cell dataKey="lastName" />
-        </Column>
-
         <Column width={100}>
-          <HeaderCell>Gender</HeaderCell>
-          <Cell dataKey="gender" />
-        </Column>
-
-        <Column width={100}>
-          <HeaderCell>Age</HeaderCell>
-          <Cell dataKey="age" />
-        </Column>
-
-        <Column width={150}>
-          <HeaderCell>Postcode</HeaderCell>
-          <Cell dataKey="postcode" />
-        </Column>
-
-        <Column width={300}>
-          <HeaderCell>Email</HeaderCell>
-          <Cell dataKey="email" />
+          <HeaderCell>Actions</HeaderCell>
+          <Cell dataKey="actions" />
         </Column>
       </Table>
     </div>
