@@ -29,7 +29,7 @@ export const Pages = () => {
       </Route>
 
       <Route element={<RequireAuth />}>
-        <Route path={'/'} element={<Navigate to={PATH.PROFILE} />} />
+        <Route path={'/'} element={<Navigate to={PATH.PACKS} />} />
         <Route path={PATH.PROFILE} element={<Profile />} />
         <Route path={PATH.PACKS} element={<Packs />} />
         <Route path={PATH.CARDS} element={<Cards />} />
