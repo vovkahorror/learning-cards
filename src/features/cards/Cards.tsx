@@ -1,5 +1,12 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-export const Cards = () => {
-  return <div>Cards</div>
+type CardsPropsType = {
+  cardsPack_id: string
+}
+export const Cards: FC<CardsPropsType> = ({ cardsPack_id }) => {
+  return (
+    <div>
+      <table></table>
+    </div>
+  )
 }

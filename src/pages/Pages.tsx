@@ -32,7 +32,7 @@ export const Pages = () => {
         <Route path={'/'} element={<Navigate to={PATH.PROFILE} />} />
         <Route path={PATH.PROFILE} element={<Profile />} />
         <Route path={PATH.PACKS} element={<Packs />} />
-        <Route path={PATH.CARDS} element={<Cards />} />
+        <Route path={PATH.CARDS} element={<Cards cardsPack_id={''} />} />
       </Route>
 
       <Route path={PATH.NOT_FOUND} element={<NotFound />} />
