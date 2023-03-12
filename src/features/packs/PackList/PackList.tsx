@@ -1,21 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { Table } from 'rsuite'
 
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { CardPacksType } from 'features/packs/packsAPI'
-import { fetchPacksTC } from 'features/packs/packsSlice'
 
 const { Column, HeaderCell, Cell } = Table
 
 export const PackList = () => {
-  const dispatch = useAppDispatch()
   const data = useAppSelector<CardPacksType[]>(state => state.packs.cardPacks)
-
-  useEffect(() => {
-    dispatch(fetchPacksTC())
-  }, [])
 
   return (
     <div>
