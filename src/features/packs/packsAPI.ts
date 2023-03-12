@@ -1,5 +1,20 @@
 import { instance } from 'common/instance/instance'
 
+export const packsAPI = {
+  getPacks: (params?: PacksParamsType) => {
+    return instance.get<PacksResponseType>('cards/pack', { params })
+  },
+  addPack(cardsPack: NewPackType) {
+    return instance.post<NewPackResponseType>('/cards/pack', { cardsPack })
+  },
+  editPack(cardsPack: EditPackType) {
+    return instance.put('/cards/pack', { cardsPack })
+  },
+  deletePack(id: string) {
+    return instance.delete(`/cards/pack?id=${id}`)
+  },
+}
+
 export type SearchParamsType = {
   packName: string | null
   min: number
@@ -11,8 +26,18 @@ export type SearchParamsType = {
   block: boolean
 }
 
-type ResponseGetPacks = {
-  cardPacks: PackType[]
+type PacksParamsType = {
+  packName: string
+  min: number
+  max: number
+  sortPacks: string
+  page: number
+  pageCount: number
+  user_id: string
+}
+
+export type PacksResponseType = {
+  cardPacks: CardPacksType[]
   page: number
   pageCount: number
   cardPacksTotalCount: number
@@ -21,8 +46,7 @@ type ResponseGetPacks = {
   token: string
   tokenDeathTime: number
 }
-
-export type PackType = {
+export type CardPacksType = {
   _id: string
   user_id: string
   user_name: string
@@ -41,8 +65,19 @@ export type PackType = {
   __v: number
 }
 
-export const packsAPI = {
-  getPacks: (dataParams: SearchParamsType) => {
-    return instance.get<ResponseGetPacks>('cards/pack', { params: dataParams })
-  },
+export type NewPackType = {
+  name: string
+  private: boolean
+  deckCover?: string
+}
+
+type NewPackResponseType = {
+  newCardsPack: CardPacksType
+  token: string
+  tokenDeathTime: number
+}
+
+export type EditPackType = {
+  _id: string
+  name: string
 }
