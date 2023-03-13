@@ -122,7 +122,12 @@ const packsSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(fetchPacksTC.fulfilled, (state, action) => {
-      if (action.payload) state.cardPacks = action.payload
+      if (action.payload) {
+        state.cardPacks = action.payload.map(elem => ({
+          ...elem,
+          updated: elem.updated.slice(0, 10).split('-').reverse().join('.'),
+        }))
+      }
     })
   },
 })
