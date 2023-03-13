@@ -11,7 +11,7 @@ export const cardsAPI = {
   deleteCard: (cardId: string) => {
     return instance.delete('cards/card', { params: { id: cardId } })
   },
-  updateCard: (card: CardType) => {
+  updateCard: (card: CardModelType) => {
     return instance.put('cards/card', { card })
   },
 }
@@ -49,4 +49,16 @@ type NewCardType = {
   questionImg?: string
   questionVideo?: string
   answerVideo?: string
+}
+
+export type CardModelType = {
+  _id: string
+  answer?: string
+  question?: string
+  cardsPack_id?: string
+  grade?: number
+  shots?: number
+  user_id?: string
+  created?: string
+  updated?: string
 }
