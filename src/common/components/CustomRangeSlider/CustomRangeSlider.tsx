@@ -1,18 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { RangeSlider } from 'rsuite'
 
 import { Box } from '../Layout/Box'
 
 import { Count } from 'common/components/CustomRangeSlider/Count'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { useAppSelector } from 'common/hooks/useAppSelector'
+import { setSearchParams } from 'features/packs/packsSlice'
 
-type CustomRangeSliderType = {
-  currentValue: [number, number]
-  maxValue: number
-}
+export const CustomRangeSlider = () => {
+  const min = useAppSelector(state => state.packs.searchParams.min)
+  const max = useAppSelector(state => state.packs.searchParams.max)
+  const minCardsCount = useAppSelector(state => state.packs.minCardsCount)
+  const maxCardsCount = useAppSelector(state => state.packs.maxCardsCount)
+  const dispatch = useAppDispatch()
 
-export const CustomRangeSlider = ({ currentValue, maxValue }: CustomRangeSliderType) => {
-  const [value, setValue] = useState<[number, number]>(currentValue)
+  const [value, setValue] = useState<[number, number]>([0, 0])
+
+  // minCardsCount и maxCardsCount в initial state равны нулю, после получения ответа с сервера их
+  // сетаем в setValue для значений по умолчанию (нужны для отображения при первой загрузке)
+  useEffect(() => {
+    setValue([minCardsCount, maxCardsCount])
+  }, [maxCardsCount, minCardsCount])
+
+  // min и max нужены для сброса при клике на кнопку (сброс фильтров), это те самые query параметры,
+  // которые мы отправляем на бэк чтоб изменить сортировку слайдера
+  useEffect(() => {
+    setValue([min, max])
+  }, [min, max])
+
+  const handlerChangeValue = (value: [number, number]) => {
+    setValue(value)
+  }
+
+  const handlerChangeCommitted = (value: [number, number]) => {
+    dispatch(setSearchParams({ min: value[0], max: value[1] }))
+  }
 
   return (
     <Box display={'flex'} alignItems={'center'} width={'250px'}>
@@ -22,14 +46,12 @@ export const CustomRangeSlider = ({ currentValue, maxValue }: CustomRangeSliderT
 
       <Box width={'100%'}>
         <RangeSlider
-          min={0}
-          max={maxValue}
-          defaultValue={value}
+          min={minCardsCount}
+          max={maxCardsCount}
           progress
           value={value}
-          onChange={(value: [number, number]) => {
-            setValue(value)
-          }}
+          onChangeCommitted={handlerChangeCommitted}
+          onChange={handlerChangeValue}
         />
       </Box>
 
