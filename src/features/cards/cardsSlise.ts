@@ -2,8 +2,9 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
 
 import { setStatusLoading } from 'app/appSlice'
+import { RootState } from 'app/store'
 import { errorUtils } from 'common/utils/error-utils'
-import { cardsAPI, CardType } from 'features/cards/cardsAPI'
+import { CardModelType, cardsAPI, CardType } from 'features/cards/cardsAPI'
 
 export const getCardsDataTC = createAsyncThunk(
   'cards/getCardsData',
@@ -13,6 +14,25 @@ export const getCardsDataTC = createAsyncThunk(
       const res = await cardsAPI.getCards({ cardsPack_id })
 
       dispatch(setCardsData(res.data))
+    } catch (e) {
+      errorUtils(e as AxiosError, dispatch)
+    } finally {
+      dispatch(setStatusLoading(false))
+    }
+  }
+)
+
+export const updateCardTC = createAsyncThunk(
+  'cards/updateCardTC',
+  async (card: CardModelType, { dispatch, getState }) => {
+    const state = getState() as RootState
+    const currentCard = state.cards.cards.find(c => c._id === card._id)
+
+    dispatch(setStatusLoading(true))
+    try {
+      await cardsAPI.updateCard({ ...currentCard, ...card })
+
+      currentCard && dispatch(getCardsDataTC(currentCard.cardsPack_id))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
