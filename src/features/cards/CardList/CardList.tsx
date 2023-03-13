@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import { Rate, Table } from 'rsuite'
 
@@ -7,10 +7,15 @@ import { useAppSelector } from 'common/hooks/useAppSelector'
 import { CardType } from 'features/cards/cardsAPI'
 import { updateCardTC } from 'features/cards/cardsSlise'
 
+type CardListPropsType = {
+  userId: string
+}
+
 const { Column, HeaderCell, Cell } = Table
 
-export const CardList = () => {
+export const CardList: FC<CardListPropsType> = ({ userId }) => {
   const dispatch = useAppDispatch()
+
   const cards = useAppSelector<CardType[]>(state => state.cards.cards)
 
   const gradeHandler = (_id: string) => (grade: number) => {
@@ -45,6 +50,7 @@ export const CardList = () => {
               style={{ color: '#FFC700' }}
               allowHalf
               onChange={gradeHandler(rowData._id)}
+              readOnly={rowData.user_id !== userId}
             />
           )}
         </Cell>
