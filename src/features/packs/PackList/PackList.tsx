@@ -1,23 +1,15 @@
 import React from 'react'
 
-import { IoTrashOutline, IoPencil, IoSkull } from 'react-icons/io5'
 import { Table } from 'rsuite'
 
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
+import { PacksAction } from 'features/packs/PackList/PacksAction'
 import { CardPacksType } from 'features/packs/packsAPI'
-import { deletePackTC } from 'features/packs/packsSlice'
 
 const { Column, HeaderCell, Cell } = Table
 
 export const PackList = () => {
-  const dispatch = useAppDispatch()
   const data = useAppSelector<CardPacksType[]>(state => state.packs.cardPacks)
-  const userId = useAppSelector(state => state.auth.user._id)
-
-  const removePack = (id: string) => {
-    dispatch(deletePackTC(id))
-  }
 
   return (
     <div>
@@ -44,13 +36,7 @@ export const PackList = () => {
 
         <Column width={200}>
           <HeaderCell>Actions</HeaderCell>
-          <Cell>
-            {rowData =>
-              rowData.user_id !== userId && (
-                <IoTrashOutline onClick={() => removePack(rowData._id)} />
-              )
-            }
-          </Cell>
+          <Cell>{rowData => <PacksAction user_id={rowData.user_id} pack_id={rowData._id} />}</Cell>
         </Column>
       </Table>
     </div>
