@@ -5,13 +5,13 @@ export const packsAPI = {
     return instance.get<PacksResponseType>('cards/pack', { params })
   },
   addPack(cardsPack: NewPackType) {
-    return instance.post<NewPackResponseType>('/cards/pack', { cardsPack })
+    return instance.post<NewPackResponseType>('cards/pack', { cardsPack })
   },
   editPack(cardsPack: EditPackType) {
-    return instance.put('/cards/pack', { cardsPack })
+    return instance.put('cards/pack', { cardsPack })
   },
   deletePack(id: string) {
-    return instance.delete(`/cards/pack?id=${id}`)
+    return instance.delete(`cards/pack?id=${id}`)
   },
 }
 
