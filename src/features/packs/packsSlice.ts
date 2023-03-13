@@ -19,11 +19,9 @@ export type SearchParamsType = {
   sortPacks?: string
   page?: number
   pageCount?: number
-  user_id?: string
+  user_id?: string | null
   block?: boolean
 }
-
-// export type ResponseSearchParams = Omit<PacksResponseType, 'cardPacks'>
 
 export const fetchPacksTC = createAsyncThunk(
   'packs/fetchPacks',
@@ -35,7 +33,7 @@ export const fetchPacksTC = createAsyncThunk(
     try {
       const res = await packsAPI.getPacks(params)
 
-      return res.data.cardPacks
+      return res.data
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
@@ -103,29 +101,42 @@ const packsSlice = createSlice({
   initialState: {
     cardPacks: [] as CardPacksType[],
     searchParams: {
+      packName: '',
       user_id: null,
-      min: 3,
-      max: 9,
-      sortPacks: null,
+      min: 0,
+      max: 0,
+      sortPacks: '0updated',
       page: 1,
-      pageCount: 4,
+      pageCount: 10,
       block: false,
     } as PacksParamsType,
+    cardPacksTotalCount: 10,
+    minCardsCount: 0,
+    maxCardsCount: 0,
   },
   reducers: {
     setSearchParams: (state, action: PayloadAction<SearchParamsType>) => {
       state.searchParams = { ...state.searchParams, ...action.payload }
     },
-    // setResponseSearchParams: (state, action: PayloadAction<SearchParamsType>) => {
-    //   state.searchParams = { ...state.searchParams, ...action.payload }
-    // },
+    clearSearchParams: state => {
+      state.searchParams.packName = ''
+      state.searchParams.min = state.minCardsCount
+      state.searchParams.max = state.maxCardsCount
+    },
   },
   extraReducers: builder => {
     builder.addCase(fetchPacksTC.fulfilled, (state, action) => {
-      if (action.payload) state.cardPacks = action.payload
+      if (action.payload) {
+        state.cardPacks = action.payload.cardPacks
+        state.searchParams.page = action.payload.page
+        state.searchParams.pageCount = action.payload.pageCount
+        state.minCardsCount = action.payload.minCardsCount
+        state.maxCardsCount = action.payload.maxCardsCount
+        state.cardPacksTotalCount = action.payload.cardPacksTotalCount
+      }
     })
   },
 })
 
 export const packsReducer = packsSlice.reducer
-export const { setSearchParams } = packsSlice.actions
+export const { setSearchParams, clearSearchParams } = packsSlice.actions
