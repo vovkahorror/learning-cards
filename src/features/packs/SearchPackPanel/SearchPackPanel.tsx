@@ -1,12 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Input } from 'rsuite'
 
 import { CustomRangeSlider } from 'common/components/CustomRangeSlider/CustomRangeSlider'
 import { Box } from 'common/components/Layout/Box'
 import { TogglePacks } from 'common/components/TogglePacks/TogglePacks'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { useDebounce } from 'common/hooks/useDebounce'
+import { clearSearchParams, setSearchParams } from 'features/packs/packsSlice'
 
 export const SearchPackPanel = () => {
+  const dispatch = useAppDispatch()
+  const [value, setValue] = useState<string>('')
+  const debounceValue = useDebounce(value, 1000)
+
+  useEffect(() => {
+    dispatch(setSearchParams({ packName: debounceValue }))
+  }, [debounceValue])
+
+  const handlerClearFilter = () => {
+    dispatch(clearSearchParams())
+    setValue('')
+  }
+
+  const handlerChangeInput = (value: string) => {
+    setValue(value)
+  }
+
   return (
     <Box
       width={'100%'}
@@ -19,7 +39,7 @@ export const SearchPackPanel = () => {
         <Box mb={'2'}>
           <p>Search</p>
         </Box>
-        <Input />
+        <Input value={value} onChange={handlerChangeInput} />
       </Box>
 
       <Box>
@@ -33,10 +53,10 @@ export const SearchPackPanel = () => {
         <Box mb={'2'}>
           <p>Number of cards</p>
         </Box>
-        <CustomRangeSlider currentValue={[2, 5]} maxValue={10} />
+        <CustomRangeSlider />
       </Box>
 
-      <p>filter</p>
+      <p onClick={handlerClearFilter}>filter</p>
     </Box>
   )
 }
