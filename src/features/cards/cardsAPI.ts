@@ -5,7 +5,7 @@ export const cardsAPI = {
   getCards: (params: GetCardsParamsType) => {
     return instance.get<CardsStateType>('cards/card', { params })
   },
-  addCard: (card: CardModelType) => {
+  addCard: (card: NewCardType) => {
     return instance.post('cards/card', { card })
   },
   deleteCard: (cardId: string) => {
@@ -39,7 +39,7 @@ export type CardType = {
   _id: string
 }
 
-type CardModelType = {
+type NewCardType = {
   cardsPack_id: string
   question?: string
   answer?: string

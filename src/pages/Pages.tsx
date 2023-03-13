@@ -34,7 +34,9 @@ export const Pages = () => {
           <Route path={'/'} element={<Navigate to={PATH.PACKS} />} />
           <Route path={PATH.PROFILE} element={<Profile />} />
           <Route path={PATH.PACKS} element={<Packs />} />
-          <Route path={PATH.CARDS} element={<Cards cardsPack_id={''} />} />
+          <Route path={PATH.CARDS}>
+            <Route path={':cardsPack_id'} element={<Cards />} />
+          </Route>
         </Route>
       </Route>
 
