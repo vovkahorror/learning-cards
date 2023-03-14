@@ -15,7 +15,6 @@ import {
   ForgotPasswordLink,
   LoginForm,
   Question,
-  RememberForgotBlock,
   SignUpBlock,
 } from 'features/auth/Login/login.styled'
 import { PATH } from 'pages/path'

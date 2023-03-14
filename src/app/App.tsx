@@ -10,7 +10,8 @@ import { authMeTC } from 'features/auth/authSlice'
 import { Pages } from 'pages/Pages'
 import { GlobalStyle, theme } from 'styles/theme'
 import 'rsuite/dist/rsuite.min.css'
-function App() {
+
+export function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -27,5 +28,3 @@ function App() {
     </ThemeProvider>
   )
 }
-
-export default App
