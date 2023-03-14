@@ -29,8 +29,8 @@ export const authMeTC = createAsyncThunk('auth/authMe', async (_, { dispatch }) 
     dispatch(setIsLoggedIn(true))
     dispatch(setUserData(res.data))
   } catch (e) {
-    // errorUtils(e as AxiosError, dispatch)
-  } finally {
+    // загрузку выключаем только при ошибке, т.к если мы авторизованы, сразу пойдет запрос за паками
+    // и чтоб небыло дерганье загрузки ( при изменении стейта )
     dispatch(setStatusLoading(false))
   }
 })
