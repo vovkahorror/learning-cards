@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Table } from 'rsuite'
 
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { Box } from 'common/components/Layout/Box'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { PacksAction } from 'features/packs/PackList/PacksAction'
 import { CardPacksType } from 'features/packs/packsAPI'
@@ -65,7 +65,9 @@ export const PackList = () => {
 
         <Column width={200} sortable>
           <HeaderCell>Last Updated</HeaderCell>
-          <Cell dataKey="updated">{rowData => new Date(rowData.updated).toLocaleDateString('uk-UA')}</Cell>
+          <Cell dataKey="updated">
+            {rowData => new Date(rowData.updated).toLocaleDateString('uk-UA')}
+          </Cell>
         </Column>
 
         <Column width={250} sortable>
