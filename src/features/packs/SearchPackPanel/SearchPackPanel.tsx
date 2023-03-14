@@ -7,7 +7,7 @@ import { Box } from 'common/components/Layout/Box'
 import { TogglePacks } from 'common/components/TogglePacks/TogglePacks'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useDebounce } from 'common/hooks/useDebounce'
-import { clearSearchParams, setSearchParams } from 'features/packs/packsSlice'
+import { addPackTC, clearSearchParams, setSearchParams } from 'features/packs/packsSlice'
 
 export const SearchPackPanel = () => {
   const dispatch = useAppDispatch()
@@ -21,6 +21,10 @@ export const SearchPackPanel = () => {
   const handlerClearFilter = () => {
     dispatch(clearSearchParams())
     setValue('')
+  }
+
+  const addNewPack = () => {
+    dispatch(addPackTC({ name: 'Gdańsk', private: false }))
   }
 
   const handlerChangeInput = (value: string) => {
@@ -57,6 +61,7 @@ export const SearchPackPanel = () => {
       </Box>
 
       <p onClick={handlerClearFilter}>filter</p>
+      <p onClick={addNewPack}>Add pack</p>
     </Box>
   )
 }

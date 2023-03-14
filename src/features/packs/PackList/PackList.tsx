@@ -38,7 +38,7 @@ export const PackList = () => {
 
         <Column width={200}>
           <HeaderCell>Last Updated</HeaderCell>
-          <Cell dataKey="updated" />
+          <Cell>{rowData => new Date(rowData.updated).toLocaleDateString('uk-UA')}</Cell>
         </Column>
 
         <Column width={200}>

@@ -127,10 +127,7 @@ const packsSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(fetchPacksTC.fulfilled, (state, action) => {
       if (action.payload) {
-        state.cardPacks = action.payload.cardPacks.map(elem => ({
-          ...elem,
-          updated: elem.updated.slice(0, 10).split('-').reverse().join('.'),
-        }))
+        state.cardPacks = action.payload.cardPacks
         state.searchParams.page = action.payload.page
         state.searchParams.pageCount = action.payload.pageCount
         state.minCardsCount = action.payload.minCardsCount
