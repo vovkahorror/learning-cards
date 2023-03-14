@@ -1,23 +1,49 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 import { Table } from 'rsuite'
 
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { PacksAction } from 'features/packs/PackList/PacksAction'
 import { CardPacksType } from 'features/packs/packsAPI'
+import { setSearchParams } from 'features/packs/packsSlice'
 import { PATH } from 'pages/path'
 
 const { Column, HeaderCell, Cell } = Table
 
+type SortType = 'asc' | 'desc' | undefined
+type SortColumnType = string | undefined
+
 export const PackList = () => {
   const navigate = useNavigate()
   const data = useAppSelector<CardPacksType[]>(state => state.packs.cardPacks)
+  const dispatch = useAppDispatch()
+  const [sortColumn, setSortColumn] = useState<SortColumnType>(undefined)
+  const [sortType, setSortType] = useState<SortType>(undefined)
+
+  useEffect(() => {
+    if (sortColumn && sortType) {
+      sortType === 'asc' && dispatch(setSearchParams({ sortPacks: `0${sortColumn}` }))
+      sortType === 'desc' && dispatch(setSearchParams({ sortPacks: `1${sortColumn}` }))
+    }
+  }, [sortColumn, sortType])
+
+  const handleSortColumn = (sortColumn: SortColumnType, sortType: SortType) => {
+    setSortColumn(sortColumn)
+    setSortType(sortType)
+  }
 
   return (
     <div>
-      <Table height={400} data={data}>
-        <Column width={200} align="center" fixed>
+      <Table
+        height={400}
+        data={data}
+        sortColumn={sortColumn}
+        sortType={sortType}
+        onSortColumn={handleSortColumn}
+      >
+        <Column width={300} align="left" fixed sortable>
           <HeaderCell>Name</HeaderCell>
           <Cell dataKey="name">
             {rowData => (
@@ -31,22 +57,24 @@ export const PackList = () => {
           </Cell>
         </Column>
 
-        <Column width={200}>
+        <Column width={300} align="left" fixed sortable>
           <HeaderCell>Cards</HeaderCell>
           <Cell dataKey="cardsCount" />
         </Column>
 
-        <Column width={200}>
+        <Column width={200} align="left" fixed sortable>
           <HeaderCell>Last Updated</HeaderCell>
-          <Cell>{rowData => new Date(rowData.updated).toLocaleDateString('uk-UA')}</Cell>
+          <Cell dataKey="updated">
+            {rowData => new Date(rowData.updated).toLocaleDateString('uk-UA')}
+          </Cell>
         </Column>
 
-        <Column width={200}>
+        <Column width={200} align="left" fixed sortable>
           <HeaderCell>Created by</HeaderCell>
           <Cell dataKey="user_name" />
         </Column>
 
-        <Column width={200}>
+        <Column width={100} align="left" fixed>
           <HeaderCell>Actions</HeaderCell>
           <Cell>{rowData => <PacksAction user_id={rowData.user_id} pack_id={rowData._id} />}</Cell>
         </Column>
