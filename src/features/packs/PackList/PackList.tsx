@@ -3,6 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Table } from 'rsuite'
 
+import { Box } from 'common/components/Layout/Box'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { PacksAction } from 'features/packs/PackList/PacksAction'
 import { CardPacksType } from 'features/packs/packsAPI'
@@ -15,8 +16,8 @@ export const PackList = () => {
   const data = useAppSelector<CardPacksType[]>(state => state.packs.cardPacks)
 
   return (
-    <div>
-      <Table height={400} data={data}>
+    <Box mt="3">
+      <Table height={500} data={data}>
         <Column width={200} align="center" fixed>
           <HeaderCell>Name</HeaderCell>
           <Cell dataKey="name">
@@ -41,16 +42,16 @@ export const PackList = () => {
           <Cell>{rowData => new Date(rowData.updated).toLocaleDateString('uk-UA')}</Cell>
         </Column>
 
-        <Column width={200}>
+        <Column width={250}>
           <HeaderCell>Created by</HeaderCell>
           <Cell dataKey="user_name" />
         </Column>
 
-        <Column width={200}>
+        <Column width={250}>
           <HeaderCell>Actions</HeaderCell>
           <Cell>{rowData => <PacksAction user_id={rowData.user_id} pack_id={rowData._id} />}</Cell>
         </Column>
       </Table>
-    </div>
+    </Box>
   )
 }
