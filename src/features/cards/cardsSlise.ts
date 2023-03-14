@@ -4,14 +4,14 @@ import { AxiosError } from 'axios'
 import { setStatusLoading } from 'app/appSlice'
 import { RootState } from 'app/store'
 import { errorUtils } from 'common/utils/error-utils'
-import { CardModelType, cardsAPI, CardType } from 'features/cards/cardsAPI'
+import { CardModelType, cardsAPI, CardType, GetCardsParamsType } from 'features/cards/cardsAPI'
 
 export const getCardsDataTC = createAsyncThunk(
   'cards/getCardsData',
-  async (cardsPack_id: string, { dispatch }) => {
+  async (params: GetCardsParamsType, { dispatch }) => {
     dispatch(setStatusLoading(true))
     try {
-      const res = await cardsAPI.getCards({ cardsPack_id })
+      const res = await cardsAPI.getCards(params)
 
       dispatch(setCardsData(res.data))
     } catch (e) {
@@ -32,7 +32,7 @@ export const updateCardTC = createAsyncThunk(
     try {
       await cardsAPI.updateCard({ ...currentCard, ...card })
 
-      currentCard && dispatch(getCardsDataTC(currentCard.cardsPack_id))
+      currentCard && dispatch(getCardsDataTC({ cardsPack_id: currentCard.cardsPack_id }))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
@@ -49,7 +49,7 @@ const cardsSLice = createSlice({
     maxGrade: 5,
     minGrade: 1,
     page: 1,
-    pageCount: 7,
+    pageCount: 10,
     packUserId: '',
   } as CardsStateType,
   reducers: {

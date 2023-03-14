@@ -22,25 +22,36 @@ export const CardList: FC<CardListPropsType> = ({ userId }) => {
     dispatch(updateCardTC({ _id, grade }))
   }
 
+  const headerStyles = {
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: '500',
+    fontSize: '14px',
+    lineHeight: '17px',
+    color: '#000000',
+    background: '#efefef',
+  }
+
   return (
-    <Table height={400} data={cards}>
-      <Column width={150} align="center" fixed>
-        <HeaderCell>Question</HeaderCell>
+    <Table height={400} data={cards} wordWrap={'break-word'}>
+      <Column flexGrow={1} align="left">
+        <HeaderCell style={headerStyles}>Question</HeaderCell>
         <Cell dataKey="question" />
       </Column>
 
-      <Column width={150}>
-        <HeaderCell>Answer</HeaderCell>
+      <Column flexGrow={1} align="left">
+        <HeaderCell style={headerStyles}>Answer</HeaderCell>
         <Cell dataKey="answer" />
       </Column>
 
       <Column width={150}>
-        <HeaderCell>Last Updated</HeaderCell>
-        <Cell dataKey="updated" />
+        <HeaderCell style={headerStyles}>Last Updated</HeaderCell>
+        <Cell dataKey="updated">
+          {rowData => <span>{new Date(rowData.updated).toLocaleDateString('uk-UA')}</span>}
+        </Cell>
       </Column>
 
       <Column width={150}>
-        <HeaderCell>Grade</HeaderCell>
+        <HeaderCell style={headerStyles}>Grade</HeaderCell>
         <Cell dataKey="grade">
           {rowData => (
             <Rate
