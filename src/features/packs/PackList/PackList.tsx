@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Table } from 'rsuite'
 
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { Box } from 'common/components/Layout/Box'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { PacksAction } from 'features/packs/PackList/PacksAction'
 import { CardPacksType } from 'features/packs/packsAPI'
@@ -35,15 +36,15 @@ export const PackList = () => {
   }
 
   return (
-    <div>
+    <Box mt="3">
       <Table
-        height={400}
+        height={500}
         data={data}
         sortColumn={sortColumn}
         sortType={sortType}
         onSortColumn={handleSortColumn}
       >
-        <Column width={300} align="left" fixed sortable>
+        <Column width={200} align="center" fixed sortable>
           <HeaderCell>Name</HeaderCell>
           <Cell dataKey="name">
             {rowData => (
@@ -57,28 +58,26 @@ export const PackList = () => {
           </Cell>
         </Column>
 
-        <Column width={300} align="left" fixed sortable>
+        <Column width={200} sortable>
           <HeaderCell>Cards</HeaderCell>
           <Cell dataKey="cardsCount" />
         </Column>
 
-        <Column width={200} align="left" fixed sortable>
+        <Column width={200} sortable>
           <HeaderCell>Last Updated</HeaderCell>
-          <Cell dataKey="updated">
-            {rowData => new Date(rowData.updated).toLocaleDateString('uk-UA')}
-          </Cell>
+          <Cell dataKey="updated">{rowData => new Date(rowData.updated).toLocaleDateString('uk-UA')}</Cell>
         </Column>
 
-        <Column width={200} align="left" fixed sortable>
+        <Column width={250} sortable>
           <HeaderCell>Created by</HeaderCell>
           <Cell dataKey="user_name" />
         </Column>
 
-        <Column width={100} align="left" fixed>
+        <Column width={250}>
           <HeaderCell>Actions</HeaderCell>
           <Cell>{rowData => <PacksAction user_id={rowData.user_id} pack_id={rowData._id} />}</Cell>
         </Column>
       </Table>
-    </div>
+    </Box>
   )
 }

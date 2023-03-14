@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Input } from 'rsuite'
 
+import { Button } from 'common/components/Button/Button'
 import { CustomRangeSlider } from 'common/components/CustomRangeSlider/CustomRangeSlider'
 import { Box } from 'common/components/Layout/Box'
 import { TogglePacks } from 'common/components/TogglePacks/TogglePacks'
@@ -41,7 +42,7 @@ export const SearchPackPanel = () => {
     >
       <Box width={'413px'}>
         <Box mb={'2'}>
-          <p>Search</p>
+          <p style={{ color: 'white' }}>Search</p>
         </Box>
         <Input value={value} onChange={handlerChangeInput} />
       </Box>
@@ -60,8 +61,8 @@ export const SearchPackPanel = () => {
         <CustomRangeSlider />
       </Box>
 
-      <p onClick={handlerClearFilter}>filter</p>
-      <p onClick={addNewPack}>Add pack</p>
+      <Button onClick={handlerClearFilter}>filter</Button>
+      <Button onClick={addNewPack}>Add pack</Button>
     </Box>
   )
 }

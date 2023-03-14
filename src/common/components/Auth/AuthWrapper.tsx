@@ -7,7 +7,7 @@ import { AuthContainer, AuthContainerCard } from 'common/components/Auth/auth.st
 export const AuthWrapper = () => {
   return (
     <AuthContainer>
-      <AuthContainerCard>
+      <AuthContainerCard maxWidth="413px">
         <Outlet />
       </AuthContainerCard>
     </AuthContainer>

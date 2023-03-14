@@ -19,7 +19,7 @@ export const ProfileMenu = () => {
 
   return (
     <Box display={'flex'} alignItems={'center'}>
-      <p style={{ color: 'black', marginRight: '10px' }}>{user.name}</p>
+      <p style={{ color: 'white', marginRight: '10px' }}>{user.name}</p>
       <ProfileAvatarImg onClick={navigateToProfile} style={{ width: '36px', height: '36px' }}>
         <img src={profileImg} alt="" />
       </ProfileAvatarImg>

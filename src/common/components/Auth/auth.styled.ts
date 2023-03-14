@@ -11,13 +11,17 @@ export const AuthContainer = styled.div`
   background: url(${background}) no-repeat center / cover;
 `
 
-export const AuthContainerCard = styled.div`
+export const AuthContainerCard = styled.div<AuthContainerCardType>`
   background-color: transparent;
   backdrop-filter: blur(20px);
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
   padding: 30px;
-  max-width: 413px;
+  max-width: ${({ maxWidth }) => maxWidth};
   border-radius: 20px;
   border: 2px solid rgba(255, 255, 255, 0.5);
   min-width: 413px;
 `
+
+type AuthContainerCardType = {
+  maxWidth: string
+}
