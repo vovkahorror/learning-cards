@@ -18,6 +18,10 @@ export const Packs = () => {
   const cardPacksTotalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
   const dispatch = useAppDispatch()
 
+  useEffect(() => {
+    dispatch(fetchPacksTC())
+  }, [min, max, page, pageCount, packName, sortPacks, use_id])
+
   const setActivePageToState = (value: number) => {
     dispatch(setSearchParams({ page: value }))
   }
@@ -25,10 +29,6 @@ export const Packs = () => {
   const setLimitToState = (value: number) => {
     dispatch(setSearchParams({ pageCount: value }))
   }
-
-  useEffect(() => {
-    dispatch(fetchPacksTC())
-  }, [min, max, page, pageCount, packName, sortPacks, use_id])
 
   return (
     <div>

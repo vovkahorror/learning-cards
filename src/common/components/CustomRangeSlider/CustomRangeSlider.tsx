@@ -10,8 +10,6 @@ import { useAppSelector } from 'common/hooks/useAppSelector'
 import { setSearchParams } from 'features/packs/packsSlice'
 
 export const CustomRangeSlider = () => {
-  const min = useAppSelector(state => state.packs.searchParams.min)
-  const max = useAppSelector(state => state.packs.searchParams.max)
   const minCardsCount = useAppSelector(state => state.packs.minCardsCount)
   const maxCardsCount = useAppSelector(state => state.packs.maxCardsCount)
   const dispatch = useAppDispatch()
@@ -23,12 +21,6 @@ export const CustomRangeSlider = () => {
   useEffect(() => {
     setValue([minCardsCount, maxCardsCount])
   }, [maxCardsCount, minCardsCount])
-
-  // min и max нужены для сброса при клике на кнопку (сброс фильтров), это те самые query параметры,
-  // которые мы отправляем на бэк чтоб изменить сортировку слайдера
-  useEffect(() => {
-    setValue([min, max])
-  }, [min, max])
 
   const handlerChangeValue = (value: [number, number]) => {
     setValue(value)

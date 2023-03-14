@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { Pagination } from 'rsuite'
 
@@ -20,16 +20,6 @@ export const CustomPagination = ({
   setActivePageToState,
   setLimitToState,
 }: CustomPaginationPropsType) => {
-  const [activePage, setActivePage] = useState(1)
-  const [total, setTotal] = useState(200)
-  const [limit, setLimit] = useState<any>(10)
-
-  useEffect(() => {
-    setActivePage(page)
-    setTotal(totalCount)
-    setLimit(pageCount)
-  }, [page, pageCount, totalCount])
-
   const handlerSetActivePage = (value: number) => setActivePageToState(value)
   const handlerSetLimit = (value: number) => setLimitToState(value)
 
@@ -45,11 +35,11 @@ export const CustomPagination = ({
         last
         ellipsis
         boundaryLinks
-        total={total}
-        limit={limit}
+        total={totalCount}
+        limit={pageCount}
         limitOptions={limitOptions}
         maxButtons={3}
-        activePage={activePage}
+        activePage={page}
         onChangePage={handlerSetActivePage}
         onChangeLimit={handlerSetLimit}
       />
