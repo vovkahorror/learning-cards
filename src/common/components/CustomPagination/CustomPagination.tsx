@@ -26,7 +26,7 @@ export const CustomPagination = ({
       <hr />
       <Pagination
         layout={layout}
-        size={'md'}
+        size={'lg'}
         prev
         next
         first

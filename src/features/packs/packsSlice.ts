@@ -130,6 +130,7 @@ const packsSlice = createSlice({
       state.searchParams.packName = ''
       state.searchParams.min = state.minCardsCount
       state.searchParams.max = state.maxCardsCount
+      state.searchParams.sortPacks = '0updated'
       state.minCardsCount = 0
       state.maxCardsCount = 0
     },
