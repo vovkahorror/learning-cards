@@ -19,6 +19,14 @@ export const Pages = () => {
   return (
     <Routes>
       <Route path={'/'} element={<LayoutWrapper />}>
+        <Route path={PATH.LOGIN} element={<Login />} />
+        <Route path={PATH.REGISTRATION} element={<Registration />} />
+        <Route path={PATH.FORGOT_PASSWORD} element={<Recovery />} />
+        <Route path={PATH.CHECK_EMAIL} element={<InfoMessage />} />
+        <Route path={PATH.SET_NEW_PASSWORD} element={<NewPassword />}>
+          <Route path=":resetPasswordToken" element={<NewPassword />} />
+        </Route>
+
         <Route element={<RequireAuth />}>
           <Route index element={<Navigate to={PATH.PACKS} />} />
           <Route path={PATH.PACKS} element={<Packs />} />
@@ -26,14 +34,6 @@ export const Pages = () => {
           <Route path={PATH.CARDS}>
             <Route path={':cardsPack_id'} element={<Cards />} />
           </Route>
-        </Route>
-
-        <Route path={PATH.LOGIN} element={<Login />} />
-        <Route path={PATH.REGISTRATION} element={<Registration />} />
-        <Route path={PATH.FORGOT_PASSWORD} element={<Recovery />} />
-        <Route path={PATH.CHECK_EMAIL} element={<InfoMessage />} />
-        <Route path={PATH.SET_NEW_PASSWORD} element={<NewPassword />}>
-          <Route path=":resetPasswordToken" element={<NewPassword />} />
         </Route>
 
         <Route path={PATH.NOT_FOUND} element={<NotFound />} />
