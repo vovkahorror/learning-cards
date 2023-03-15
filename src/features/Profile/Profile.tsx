@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { AiOutlineCamera } from 'react-icons/ai'
+import { Navigate } from 'react-router-dom'
 
 import profileImg from '../../assets/img/profile.png'
 
@@ -12,9 +13,11 @@ import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { logoutTC, setRegisterSuccess, updateUserName } from 'features/auth/authSlice'
 import { ProfileAvatar, ProfileAvatarImg, ProfileUpload } from 'features/Profile/profile.styled'
+import { PATH } from 'pages/path'
 
 export const Profile = () => {
   const user = useAppSelector(state => state.auth.user)
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
   const dispatch = useAppDispatch()
 
   const onLogout = () => {

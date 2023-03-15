@@ -19,6 +19,8 @@ export const Packs = () => {
   const cardPacksTotalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
   const dispatch = useAppDispatch()
 
+  console.log('Packs')
+
   useEffect(() => {
     dispatch(fetchPacksTC())
   }, [min, max, page, pageCount, packName, sortPacks, use_id])

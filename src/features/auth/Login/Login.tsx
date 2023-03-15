@@ -23,6 +23,8 @@ export const Login = () => {
   const dispatch = useAppDispatch()
   const isLoggedIn = useAppSelector<boolean>(state => state.auth.isLoggedIn)
 
+  console.log('Login')
+
   const {
     register,
     formState: { errors },
