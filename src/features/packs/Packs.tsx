@@ -15,7 +15,7 @@ export const Packs = () => {
   const pageCount = useAppSelector(state => state.packs.searchParams.pageCount)
   const min = useAppSelector(state => state.packs.searchParams.min)
   const max = useAppSelector(state => state.packs.searchParams.max)
-  const use_id = useAppSelector(state => state.packs.searchParams.user_id)
+  const user_id = useAppSelector(state => state.packs.searchParams.user_id)
   const cardPacksTotalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
   const dispatch = useAppDispatch()
 
@@ -25,7 +25,7 @@ export const Packs = () => {
     }
 
     dispatch(fetchPacksTC())
-  }, [min, max, page, pageCount, packName, sortPacks, use_id])
+  }, [min, max, page, pageCount, packName, sortPacks, user_id])
 
   const setPagination = (page: number, pageCount: number) => {
     dispatch(setSearchParams({ page, pageCount }))

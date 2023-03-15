@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-import { Route, Routes, Navigate, useLocation } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 
 import { LayoutWrapper } from 'common/components/LayoutWrapper/LayoutWrapper'
 import { NotFound } from 'common/components/NotFound/NotFound'
@@ -16,22 +16,9 @@ import { Profile } from 'features/Profile/Profile'
 import { PATH } from 'pages/path'
 
 export const Pages = () => {
-  const location = useLocation()
-  const [currentPath, setCurrentPath] = useState<string>(PATH.PACKS)
-
-  console.log('base ' + currentPath)
-
-  useEffect(() => {
-    if (location.pathname !== '/' && location.pathname !== '/login') {
-      setCurrentPath(location.pathname)
-    }
-  }, [location.pathname])
-
-  console.log(1)
-
   return (
     <Routes>
-      <Route path={'/'} element={<LayoutWrapper />}>
+      <Route element={<LayoutWrapper />}>
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.REGISTRATION} element={<Registration />} />
         <Route path={PATH.FORGOT_PASSWORD} element={<Recovery />} />
@@ -41,7 +28,7 @@ export const Pages = () => {
         </Route>
 
         <Route element={<RequireAuth />}>
-          <Route index element={<Navigate to={currentPath} />} />
+          <Route path={'/'} element={<Navigate to={PATH.PACKS} />} />
           <Route path={PATH.PACKS} element={<Packs />} />
           <Route path={PATH.PROFILE} element={<Profile />} />
           <Route path={PATH.CARDS}>

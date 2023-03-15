@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
 import { Button, LinkText } from 'common/components/Button/Button'
 import { Input } from 'common/components/Input/Input'
@@ -21,6 +21,7 @@ import {
 import { PATH } from 'pages/path'
 
 export const Login = () => {
+  console.log('Login')
   const dispatch = useAppDispatch()
   const isLoggedIn = useAppSelector<boolean>(state => state.auth.isLoggedIn)
 
@@ -34,7 +35,7 @@ export const Login = () => {
   }
 
   if (isLoggedIn) {
-    return <Navigate to={'/'} />
+    return <Navigate to={PATH.PACKS} />
   }
 
   return (
