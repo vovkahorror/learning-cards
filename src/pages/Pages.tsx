@@ -20,7 +20,7 @@ export const Pages = () => {
   return (
     <Routes>
       <Route element={<AuthWrapper />}>
-        <Route path={PATH.PROFILE} element={<Profile />} />
+        {/*<Route path={PATH.PROFILE} element={<Profile />} />*/}
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.REGISTRATION} element={<Registration />} />
         <Route path={PATH.FORGOT_PASSWORD} element={<Recovery />} />
@@ -32,6 +32,7 @@ export const Pages = () => {
 
       <Route element={<DashboardWrapper />}>
         <Route element={<RequireAuth />}>
+          <Route path={PATH.PROFILE} element={<Profile />} />
           <Route path={'/'} element={<Navigate to={PATH.PACKS} />} />
           <Route path={PATH.PACKS} element={<Packs />} />
           <Route path={PATH.CARDS}>
