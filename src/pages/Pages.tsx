@@ -19,15 +19,13 @@ export const Pages = () => {
   const location = useLocation()
   const [currentPath, setCurrentPath] = useState<string>(PATH.PACKS)
 
-  console.log('base ' + currentPath)
-
   useEffect(() => {
     if (location.pathname !== '/' && location.pathname !== '/login') {
       setCurrentPath(location.pathname)
     }
   }, [location.pathname])
 
-  console.log(1)
+  console.log('Pages')
 
   return (
     <Routes>
