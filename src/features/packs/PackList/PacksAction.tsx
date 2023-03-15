@@ -22,13 +22,13 @@ export const PacksAction: FC<PackListActionType> = ({ user_id, pack_id }) => {
     <>
       {user_id === myId ? (
         <>
-          <IoSkull />
-          <IoPencil onClick={() => editPack('Warszawa')} />
-          <IoTrashOutline onClick={removePack} />
+          <IoSkull style={{ cursor: 'pointer' }} />
+          <IoPencil style={{ cursor: 'pointer' }} onClick={() => editPack('Warszawa')} />
+          <IoTrashOutline style={{ cursor: 'pointer' }} onClick={removePack} />
         </>
       ) : (
         <>
-          <IoSkull />
+          <IoSkull style={{ cursor: 'pointer' }} />
         </>
       )}
     </>
