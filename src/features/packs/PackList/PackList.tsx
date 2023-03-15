@@ -32,22 +32,22 @@ export const PackList = () => {
           </Cell>
         </Column>
 
-        <Column width={200}>
+        <Column width={199}>
           <HeaderCell>Cards</HeaderCell>
           <Cell dataKey="cardsCount" />
         </Column>
 
-        <Column width={200}>
+        <Column width={199}>
           <HeaderCell>Last Updated</HeaderCell>
           <Cell>{rowData => new Date(rowData.updated).toLocaleDateString('uk-UA')}</Cell>
         </Column>
 
-        <Column width={250}>
+        <Column width={249}>
           <HeaderCell>Created by</HeaderCell>
           <Cell dataKey="user_name" />
         </Column>
 
-        <Column width={250}>
+        <Column width={249}>
           <HeaderCell>Actions</HeaderCell>
           <Cell>{rowData => <PacksAction user_id={rowData.user_id} pack_id={rowData._id} />}</Cell>
         </Column>
