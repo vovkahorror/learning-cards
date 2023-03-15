@@ -23,7 +23,7 @@ export function App() {
       <GlobalStyle />
       <Loader />
       <Snackbar />
-      <Header />
+      {/*<Header />*/}
       <Pages />
     </ThemeProvider>
   )

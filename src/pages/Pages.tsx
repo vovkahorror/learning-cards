@@ -2,8 +2,7 @@ import React from 'react'
 
 import { Route, Routes, Navigate } from 'react-router-dom'
 
-import { AuthWrapper } from 'common/components/Auth/AuthWrapper'
-import { DashboardWrapper } from 'common/components/Dashboard/Dashboard'
+import { LayoutWrapper } from 'common/components/LayoutWrapper/LayoutWrapper'
 import { NotFound } from 'common/components/NotFound/NotFound'
 import { RequireAuth } from 'common/hoc/RequireAuth'
 import { Login } from 'features/auth/Login/Login'
@@ -19,8 +18,16 @@ import { PATH } from 'pages/path'
 export const Pages = () => {
   return (
     <Routes>
-      <Route element={<AuthWrapper />}>
-        {/*<Route path={PATH.PROFILE} element={<Profile />} />*/}
+      <Route path={'/'} element={<LayoutWrapper />}>
+        <Route element={<RequireAuth />}>
+          <Route index element={<Navigate to={PATH.PACKS} />} />
+          <Route path={PATH.PACKS} element={<Packs />} />
+          <Route path={PATH.PROFILE} element={<Profile />} />
+          <Route path={PATH.CARDS}>
+            <Route path={':cardsPack_id'} element={<Cards />} />
+          </Route>
+        </Route>
+
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.REGISTRATION} element={<Registration />} />
         <Route path={PATH.FORGOT_PASSWORD} element={<Recovery />} />
@@ -28,21 +35,10 @@ export const Pages = () => {
         <Route path={PATH.SET_NEW_PASSWORD} element={<NewPassword />}>
           <Route path=":resetPasswordToken" element={<NewPassword />} />
         </Route>
-      </Route>
 
-      <Route element={<DashboardWrapper />}>
-        <Route element={<RequireAuth />}>
-          <Route path={PATH.PROFILE} element={<Profile />} />
-          <Route path={'/'} element={<Navigate to={PATH.PACKS} />} />
-          <Route path={PATH.PACKS} element={<Packs />} />
-          <Route path={PATH.CARDS}>
-            <Route path={':cardsPack_id'} element={<Cards />} />
-          </Route>
-        </Route>
+        <Route path={PATH.NOT_FOUND} element={<NotFound />} />
+        <Route path={'*'} element={<Navigate to={PATH.NOT_FOUND} />} />
       </Route>
-
-      <Route path={PATH.NOT_FOUND} element={<NotFound />} />
-      <Route path={'*'} element={<Navigate to={PATH.NOT_FOUND} />} />
     </Routes>
   )
 }

@@ -15,6 +15,7 @@ import {
   ForgotPasswordLink,
   LoginForm,
   Question,
+  RememberForgotBlock,
   SignUpBlock,
 } from 'features/auth/Login/login.styled'
 import { PATH } from 'pages/path'
@@ -22,6 +23,8 @@ import { PATH } from 'pages/path'
 export const Login = () => {
   const dispatch = useAppDispatch()
   const isLoggedIn = useAppSelector<boolean>(state => state.auth.isLoggedIn)
+
+  console.log('Login' + ' ' + isLoggedIn)
 
   const {
     register,
@@ -33,7 +36,7 @@ export const Login = () => {
   }
 
   if (isLoggedIn) {
-    return <Navigate to={PATH.PACKS} />
+    return <Navigate to={'/'} />
   }
 
   return (

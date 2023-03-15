@@ -3,12 +3,12 @@ import React, { useEffect } from 'react'
 import { CustomPagination } from 'common/components/CustomPagination/CustomPagination'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
-import { getCardsDataTC } from 'features/cards/cardsSlise'
 import { PackList } from 'features/packs/PackList/PackList'
 import { fetchPacksTC, setSearchParams } from 'features/packs/packsSlice'
 import { SearchPackPanel } from 'features/packs/SearchPackPanel/SearchPackPanel'
 
 export const Packs = () => {
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
   const packName = useAppSelector(state => state.packs.searchParams.packName)
   const sortPacks = useAppSelector(state => state.packs.searchParams.sortPacks)
   const page = useAppSelector(state => state.packs.searchParams.page)
@@ -19,7 +19,13 @@ export const Packs = () => {
   const cardPacksTotalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
   const dispatch = useAppDispatch()
 
+  console.log('Packs' + ' ' + isLoggedIn)
+
   useEffect(() => {
+    if (!isLoggedIn) {
+      return
+    }
+
     dispatch(fetchPacksTC())
   }, [min, max, page, pageCount, packName, sortPacks, use_id])
 

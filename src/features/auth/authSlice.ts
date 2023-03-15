@@ -31,6 +31,8 @@ export const authMeTC = createAsyncThunk('auth/authMe', async (_, { dispatch }) 
   } catch (e) {
     // загрузку выключаем только при ошибке, т.к если мы авторизованы, сразу пойдет запрос за паками
     // и чтоб небыло дерганье загрузки ( при изменении стейта )
+    // dispatch(setStatusLoading(false))
+  } finally {
     dispatch(setStatusLoading(false))
   }
 })
@@ -149,6 +151,7 @@ const authSlice = createSlice({
     userName: '',
     isSetNewPassword: false,
     registerSuccess: false,
+    isLoggedIn: false,
   } as InitialStateType,
   reducers: {
     setRecovery: (state, action: PayloadAction<boolean>) => {
