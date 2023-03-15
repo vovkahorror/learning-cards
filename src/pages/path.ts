@@ -4,9 +4,9 @@ export const PATH = {
   FORGOT_PASSWORD: 'forgot_password',
   CHECK_EMAIL: 'check_email',
   SET_NEW_PASSWORD: 'set-new-password',
-  PROFILE: 'profile',
-  PACKS: 'packs',
-  CARDS: 'cards',
+  PROFILE: '/profile',
+  PACKS: '/packs',
+  CARDS: '/cards',
   NOT_FOUND: '404',
   CURRENT_URL: window.location.href.split('#')[0],
 }

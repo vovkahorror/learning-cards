@@ -19,8 +19,6 @@ export const Packs = () => {
   const cardPacksTotalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
   const dispatch = useAppDispatch()
 
-  console.log('Packs' + ' ' + isLoggedIn)
-
   useEffect(() => {
     if (!isLoggedIn) {
       return
