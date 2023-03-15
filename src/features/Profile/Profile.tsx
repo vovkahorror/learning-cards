@@ -28,7 +28,7 @@ export const Profile = () => {
 
   return (
     <Box display={'flex'} justifyContent={'center'}>
-      <Card>
+      <div>
         <Box display={'flex'} justifyContent={'center'}>
           <h2>Personal Information</h2>
         </Box>
@@ -52,7 +52,7 @@ export const Profile = () => {
         <Box display={'flex'} flexDirection={'column'} gap={'24px'} mt={'4'} alignItems={'center'}>
           <Button onClick={onLogout}>Log out</Button>
         </Box>
-      </Card>
+      </div>
     </Box>
   )
 }

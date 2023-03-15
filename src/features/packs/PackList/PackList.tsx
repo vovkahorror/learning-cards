@@ -17,7 +17,7 @@ export const PackList = () => {
 
   return (
     <Box mt="3">
-      <Table height={500} data={data}>
+      <Table height={500} data={data} style={{ borderRadius: '10px' }}>
         <Column width={200} align="center" fixed>
           <HeaderCell>Name</HeaderCell>
           <Cell dataKey="name">

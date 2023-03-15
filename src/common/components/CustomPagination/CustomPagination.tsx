@@ -40,7 +40,7 @@ export const CustomPagination = ({
         activePage={page}
         onChangePage={handlerSetActivePage}
         onChangeLimit={handlerSetLimit}
-        style={{ color: 'white' }}
+        style={{ background: 'white', borderRadius: '10px' }}
       />
     </>
   )
