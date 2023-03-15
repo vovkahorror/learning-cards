@@ -9,19 +9,17 @@ type CustomPaginationPropsType = {
   page: number
   pageCount: number
   totalCount: number
-  setActivePageToState: (value: number) => void
-  setLimitToState: (value: number) => void
+  setPagination: (page: number, pageCount: number) => void
 }
 
 export const CustomPagination = ({
   page,
   pageCount,
   totalCount,
-  setActivePageToState,
-  setLimitToState,
+  setPagination,
 }: CustomPaginationPropsType) => {
-  const handlerSetActivePage = (value: number) => setActivePageToState(value)
-  const handlerSetLimit = (value: number) => setLimitToState(value)
+  const handlerSetActivePage = (value: number) => setPagination(value, pageCount)
+  const handlerSetLimit = (value: number) => setPagination(page, value)
 
   return (
     <>

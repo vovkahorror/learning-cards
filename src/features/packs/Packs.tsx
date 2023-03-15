@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { CustomPagination } from 'common/components/CustomPagination/CustomPagination'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
+import { getCardsDataTC } from 'features/cards/cardsSlise'
 import { PackList } from 'features/packs/PackList/PackList'
 import { fetchPacksTC, setSearchParams } from 'features/packs/packsSlice'
 import { SearchPackPanel } from 'features/packs/SearchPackPanel/SearchPackPanel'
@@ -22,12 +23,8 @@ export const Packs = () => {
     dispatch(fetchPacksTC())
   }, [min, max, page, pageCount, packName, sortPacks, use_id])
 
-  const setActivePageToState = (value: number) => {
-    dispatch(setSearchParams({ page: value }))
-  }
-
-  const setLimitToState = (value: number) => {
-    dispatch(setSearchParams({ pageCount: value }))
+  const setPagination = (page: number, pageCount: number) => {
+    dispatch(setSearchParams({ page, pageCount }))
   }
 
   return (
@@ -38,8 +35,7 @@ export const Packs = () => {
         page={page}
         pageCount={pageCount}
         totalCount={cardPacksTotalCount}
-        setActivePageToState={setActivePageToState}
-        setLimitToState={setLimitToState}
+        setPagination={setPagination}
       />
     </div>
   )
