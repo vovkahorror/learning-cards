@@ -3,7 +3,6 @@ import React, { useEffect } from 'react'
 import { CustomPagination } from 'common/components/CustomPagination/CustomPagination'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
-import { getCardsDataTC } from 'features/cards/cardsSlise'
 import { PackList } from 'features/packs/PackList/PackList'
 import { fetchPacksTC, setSearchParams } from 'features/packs/packsSlice'
 import { SearchPackPanel } from 'features/packs/SearchPackPanel/SearchPackPanel'
@@ -18,8 +17,6 @@ export const Packs = () => {
   const use_id = useAppSelector(state => state.packs.searchParams.user_id)
   const cardPacksTotalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
   const dispatch = useAppDispatch()
-
-  console.log('Packs')
 
   useEffect(() => {
     dispatch(fetchPacksTC())
