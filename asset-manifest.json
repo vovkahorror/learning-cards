@@ -1,20 +1,24 @@
 {
   "files": {
     "main.css": "/friday-cards/static/css/main.d8602a00.css",
-    "main.js": "/friday-cards/static/js/main.b4a36f92.js",
+    "main.js": "/friday-cards/static/js/main.4645e60e.js",
     "static/js/787.4d6bf454.chunk.js": "/friday-cards/static/js/787.4d6bf454.chunk.js",
     "static/media/background.jpg": "/friday-cards/static/media/background.ce72e18bdf146d77b3fe.jpg",
     "static/media/profile.png": "/friday-cards/static/media/profile.d56fd3f7d8f1b6f67741.png",
     "static/media/checkEmail.svg": "/friday-cards/static/media/checkEmail.cdfba66fde5a43fa07de20848a33be02.svg",
     "static/media/logo.svg": "/friday-cards/static/media/logo.f5da7f8bedc2bfe87aba97c3ef658738.svg",
+    "static/media/filter.svg": "/friday-cards/static/media/filter.67cf03d0976d52e7a85bc455f5101f2e.svg",
     "static/media/loader.svg": "/friday-cards/static/media/loader.2851bcd344a243435f5306ec5648e4af.svg",
+    "static/media/delete.svg": "/friday-cards/static/media/delete.f4b587f56b19fff40fcc1770714d91ce.svg",
+    "static/media/edit.svg": "/friday-cards/static/media/edit.17fcf6c17468041dfbe9bf819b2b6142.svg",
     "index.html": "/friday-cards/index.html",
+    "static/media/arrowLeft.svg": "/friday-cards/static/media/arrowLeft.14576ed7e56070f27863b4a90905464c.svg",
     "main.d8602a00.css.map": "/friday-cards/static/css/main.d8602a00.css.map",
-    "main.b4a36f92.js.map": "/friday-cards/static/js/main.b4a36f92.js.map",
+    "main.4645e60e.js.map": "/friday-cards/static/js/main.4645e60e.js.map",
     "787.4d6bf454.chunk.js.map": "/friday-cards/static/js/787.4d6bf454.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d8602a00.css",
-    "static/js/main.b4a36f92.js"
+    "static/js/main.4645e60e.js"
   ]
 }
