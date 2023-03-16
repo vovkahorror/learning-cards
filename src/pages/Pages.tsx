@@ -16,6 +16,8 @@ import { Profile } from 'features/Profile/Profile'
 import { PATH } from 'pages/path'
 
 export const Pages = () => {
+  console.log('pages')
+
   return (
     <Routes>
       <Route element={<LayoutWrapper />}>
