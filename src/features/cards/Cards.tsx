@@ -36,6 +36,7 @@ export const Cards = () => {
 
   const setPagination = (page: number, pageCount: number) => {
     if (cardsPack_id) {
+      console.log(2)
       dispatch(getCardsDataTC({ cardsPack_id, page, pageCount }))
     }
   }
@@ -43,10 +44,11 @@ export const Cards = () => {
   const goToPackList = () => navigate(-1)
 
   useEffect(() => {
+    console.log(1)
     if (cardsPack_id) {
       dispatch(getCardsDataTC({ cardsPack_id, cardAnswer: searchParams, page, pageCount }))
     }
-  }, [cardsPack_id, searchParams, page, pageCount])
+  }, [cardsPack_id, searchParams, page])
 
   return (
     <div>
