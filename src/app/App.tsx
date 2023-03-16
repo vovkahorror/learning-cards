@@ -15,8 +15,6 @@ export function App() {
   const dispatch = useAppDispatch()
   const isInitialized = useAppSelector(state => state.app.isInitialized)
 
-  console.log('App')
-
   useEffect(() => {
     dispatch(authMeTC())
   }, [])

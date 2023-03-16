@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 
+import { useSearchParams } from 'react-router-dom'
+
 import { CustomPagination } from 'common/components/CustomPagination/CustomPagination'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
@@ -15,18 +17,21 @@ export const Packs = () => {
   const pageCount = useAppSelector(state => state.packs.searchParams.pageCount)
   const min = useAppSelector(state => state.packs.searchParams.min)
   const max = useAppSelector(state => state.packs.searchParams.max)
+  const id = useAppSelector(state => state.auth.user._id)
   const user_id = useAppSelector(state => state.packs.searchParams.user_id)
   const cardPacksTotalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
   const dispatch = useAppDispatch()
-
-  console.log('packs')
+  let [params, setParams] = useSearchParams()
 
   useEffect(() => {
     if (!isLoggedIn) {
       return
     }
 
-    dispatch(fetchPacksTC())
+    // для загрузки колоды моя или все ( при перезагрузке страницы )
+    const user_id = params.get('demon') === 'my' ? id : ''
+
+    dispatch(fetchPacksTC({ user_id }))
   }, [min, max, page, pageCount, packName, sortPacks, user_id])
 
   const setPagination = (page: number, pageCount: number) => {

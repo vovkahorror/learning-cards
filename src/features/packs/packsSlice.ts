@@ -33,10 +33,10 @@ type InitialStateType = {
 
 export const fetchPacksTC = createAsyncThunk(
   'packs/fetchPacks',
-  async (_, { dispatch, getState }) => {
+  async (arg: { user_id: string } | undefined, { dispatch, getState }) => {
     dispatch(setStatusLoading(true))
     const { packs } = getState() as RootState
-    const params = packs.searchParams
+    const params = { ...packs.searchParams, ...arg }
 
     try {
       const res = await packsAPI.getPacks(params)
