@@ -25,6 +25,7 @@ export const PackList = () => {
 
   useEffect(() => {
     if (sortColumn && sortType) {
+      // с сервара приходят и серверу отправляются 0 и 1, а либа даёт asc и desc
       sortType === 'asc' && dispatch(setSearchParams({ sortPacks: `0${sortColumn}` }))
       sortType === 'desc' && dispatch(setSearchParams({ sortPacks: `1${sortColumn}` }))
     }

@@ -9,7 +9,7 @@ import { useAppSelector } from 'common/hooks/useAppSelector'
 import { ProfileAvatarImg } from 'features/Profile/profile.styled'
 import { PATH } from 'pages/path'
 
-export const ProfileMenu = () => {
+export const ProfileHeader = () => {
   const user = useAppSelector(state => state.auth.user)
   const navigate = useNavigate()
 
@@ -18,7 +18,7 @@ export const ProfileMenu = () => {
   }
 
   return (
-    <Box display={'flex'} alignItems={'center'}>
+    <Box display={'flex'} alignItems={'center'} style={{ position: 'relative' }}>
       <p style={{ color: 'white', marginRight: '10px' }}>{user.name}</p>
       <ProfileAvatarImg onClick={navigateToProfile} style={{ width: '36px', height: '36px' }}>
         <img src={profileImg} alt="" />

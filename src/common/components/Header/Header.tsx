@@ -8,7 +8,7 @@ import { HeaderContainer } from 'common/components/Header/header.styled'
 import { Container } from 'common/components/Layout/Container'
 import { Row } from 'common/components/Layout/Row'
 import { useAppSelector } from 'common/hooks/useAppSelector'
-import { ProfileMenu } from 'features/Profile/ProfileMenu'
+import { ProfileHeader } from 'features/Profile/ProfileHeader'
 import { PATH } from 'pages/path'
 
 export const Header = () => {
@@ -20,7 +20,7 @@ export const Header = () => {
       <Container>
         <Row justifyContent={'space-between'} alignItems={'center'}>
           <Logo />
-          {isLoggedIn && <ProfileMenu />}
+          {isLoggedIn && <ProfileHeader />}
           {!isLoggedIn && <Button onClick={() => navigate(PATH.LOGIN)}>Sign in</Button>}
         </Row>
       </Container>

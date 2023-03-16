@@ -11,9 +11,9 @@ type FieldPropsType = {
 
 export const Field = ({ onEditMode, children }: FieldPropsType) => {
   return (
-    <Box onDoubleClick={onEditMode} display={'flex'} justifyContent={'center'} gap={'10px'}>
+    <Box display={'flex'} justifyContent={'center'} gap={'10px'}>
       {children}
-      <AiOutlineEdit size={'1.25rem'} />
+      <AiOutlineEdit style={{ cursor: 'pointer' }} onClick={onEditMode} size={'1.25rem'} />
     </Box>
   )
 }
