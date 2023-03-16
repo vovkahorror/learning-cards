@@ -1,21 +1,35 @@
 import { MouseEvent } from 'react'
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { ReactComponent as LoaderIcon } from 'assets/img/loader.svg'
 import { theme } from 'styles/theme'
 
-export const Loader = () => {
+type LoaderPropsType = {
+  loading: 'isInitialized' | 'main'
+}
+
+export const Loader = ({ loading }: LoaderPropsType) => {
   const onClickHandler = (e: MouseEvent<HTMLDivElement>) => e.stopPropagation()
 
   return (
-    <LoaderWrapper onClick={onClickHandler}>
+    <LoaderWrapper onClick={onClickHandler} loading={loading}>
       <LoaderIcon fill={theme.colors.primary} />
     </LoaderWrapper>
   )
 }
 
-const LoaderWrapper = styled.div`
+const bg = {
+  ['main']: css`
+    backdrop-filter: blur(20px);
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 2px, rgba(0, 0, 0, 0.1) -1px -1px 2px;
+  `,
+  ['isInitialized']: css`
+    background-color: #fff;
+  `,
+}
+
+const LoaderWrapper = styled.div<{ loading: 'isInitialized' | 'main' }>`
   position: fixed;
   display: flex;
   justify-content: center;
@@ -28,5 +42,5 @@ const LoaderWrapper = styled.div`
 
   font-weight: 600;
   font-size: 70px;
-  background-color: #fff;
+  ${p => bg[p.loading]}
 `

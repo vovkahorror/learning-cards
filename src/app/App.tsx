@@ -21,13 +21,13 @@ export function App() {
   }, [])
 
   if (!isInitialized) {
-    return <Loader />
+    return <Loader loading={'isInitialized'} />
   }
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      {statusLoading && <Loader />}
+      {statusLoading && <Loader loading={'main'} />}
       <Snackbar />
       <Pages />
     </ThemeProvider>
