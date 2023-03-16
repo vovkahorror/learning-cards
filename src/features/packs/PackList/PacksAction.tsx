@@ -7,7 +7,7 @@ import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { deletePackTC, editPackTC } from 'features/packs/packsSlice'
 
-const Icon = styled.span`
+const Icon = styled.span<IconType>`
   margin-right: 5px;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -19,6 +19,11 @@ const Icon = styled.span`
   &:hover {
     color: darkred;
   }
+`
+
+const IconDisable = styled(Icon)`
+  pointer-events: ${({ cardsCount }) => (cardsCount ? 'all' : 'none')};
+  opacity: ${({ cardsCount }) => (cardsCount ? 'none' : '0.4')};
 `
 
 export const PacksAction: FC<PackListActionType> = ({ user_id, pack_id, cardsCount }) => {
@@ -37,9 +42,9 @@ export const PacksAction: FC<PackListActionType> = ({ user_id, pack_id, cardsCou
     <>
       {user_id === myId ? (
         <>
-          <Icon style={!cardsCount ? { pointerEvents: 'none', opacity: '0.4' } : {}}>
+          <IconDisable cardsCount={cardsCount}>
             <BsRocketTakeoffFill />
-          </Icon>
+          </IconDisable>
           <Icon>
             <BsPencilFill onClick={() => editPack('Warszawa')} />
           </Icon>
@@ -49,9 +54,9 @@ export const PacksAction: FC<PackListActionType> = ({ user_id, pack_id, cardsCou
         </>
       ) : (
         <>
-          <Icon style={!cardsCount ? { pointerEvents: 'none', opacity: '0.4' } : {}}>
+          <IconDisable cardsCount={cardsCount}>
             <BsRocketTakeoffFill />
-          </Icon>
+          </IconDisable>
         </>
       )}
     </>
@@ -62,4 +67,8 @@ type PackListActionType = {
   user_id: string
   pack_id: string
   cardsCount: number
+}
+
+type IconType = {
+  cardsCount?: number
 }
