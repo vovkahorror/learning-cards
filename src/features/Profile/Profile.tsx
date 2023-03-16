@@ -2,6 +2,7 @@ import React from 'react'
 
 import { AiOutlineCamera } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import profileImg from '../../assets/img/profile.png'
 

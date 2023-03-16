@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
 
-import { setInfoSnackbar, setStatusLoading } from 'app/appSlice'
+import { setInfoSnackbar, setIsInitialized, setStatusLoading } from 'app/appSlice'
 import { errorUtils } from 'common/utils/error-utils'
 import {
   authAPI,
@@ -22,16 +22,15 @@ type InitialStateType = {
 }
 
 export const authMeTC = createAsyncThunk('auth/authMe', async (_, { dispatch }) => {
-  dispatch(setStatusLoading(true))
   try {
     const res = await authAPI.me()
 
     dispatch(setIsLoggedIn(true))
     dispatch(setUserData(res.data))
   } catch (e) {
-    // загрузку выключаем только при ошибке, т.к если мы авторизованы, сразу пойдет запрос за паками
-    // и чтоб небыло дерганье загрузки ( при изменении стейта )
-    dispatch(setStatusLoading(false))
+    // dispatch(setStatusLoading(false))
+  } finally {
+    dispatch(setIsInitialized(true))
   }
 })
 
@@ -148,6 +147,7 @@ const authSlice = createSlice({
     userName: '',
     isSetNewPassword: false,
     registerSuccess: false,
+    isLoggedIn: false,
   } as InitialStateType,
   reducers: {
     setRecovery: (state, action: PayloadAction<boolean>) => {

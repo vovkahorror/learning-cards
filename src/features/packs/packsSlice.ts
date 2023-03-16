@@ -33,10 +33,10 @@ type InitialStateType = {
 
 export const fetchPacksTC = createAsyncThunk(
   'packs/fetchPacks',
-  async (_, { dispatch, getState }) => {
+  async (arg: { user_id: string } | undefined, { dispatch, getState }) => {
     dispatch(setStatusLoading(true))
     const { packs } = getState() as RootState
-    const params = packs.searchParams
+    const params = { ...packs.searchParams, ...arg }
 
     try {
       const res = await packsAPI.getPacks(params)
@@ -110,7 +110,7 @@ const packsSlice = createSlice({
     cardPacks: [],
     searchParams: {
       packName: '',
-      user_id: null,
+      user_id: '',
       min: 0,
       max: 0,
       sortPacks: '0updated',
@@ -131,6 +131,8 @@ const packsSlice = createSlice({
       state.searchParams.min = state.minCardsCount
       state.searchParams.max = state.maxCardsCount
       state.searchParams.sortPacks = '0updated'
+      state.searchParams.page = 1
+      state.searchParams.pageCount = 10
       state.minCardsCount = 0
       state.maxCardsCount = 0
     },

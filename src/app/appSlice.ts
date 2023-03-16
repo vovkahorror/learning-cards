@@ -8,6 +8,7 @@ type InitialStateType = {
     text: string | null
     variant?: VariantsSnackbarType
   }
+  isInitialized: boolean
 }
 
 export type SetInfoType = {
@@ -20,6 +21,7 @@ const appSlice = createSlice({
   initialState: {
     statusLoading: false,
     infoSnackbar: { text: null, variant: undefined },
+    isInitialized: false,
   } as InitialStateType,
   reducers: {
     setStatusLoading: (state, action: PayloadAction<boolean>) => {
@@ -28,8 +30,11 @@ const appSlice = createSlice({
     setInfoSnackbar: (state, action: PayloadAction<SetInfoType>) => {
       state.infoSnackbar = action.payload
     },
+    setIsInitialized: (state, action: PayloadAction<boolean>) => {
+      state.isInitialized = action.payload
+    },
   },
 })
 
-export const { setStatusLoading, setInfoSnackbar } = appSlice.actions
+export const { setStatusLoading, setInfoSnackbar, setIsInitialized } = appSlice.actions
 export const appReducer = appSlice.reducer
