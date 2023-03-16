@@ -78,7 +78,15 @@ export const PackList = () => {
 
         <Column width={249}>
           <HeaderCell>Actions</HeaderCell>
-          <Cell>{rowData => <PacksAction user_id={rowData.user_id} pack_id={rowData._id} />}</Cell>
+          <Cell>
+            {rowData => (
+              <PacksAction
+                user_id={rowData.user_id}
+                pack_id={rowData._id}
+                cardsCount={rowData.cardsCount}
+              />
+            )}
+          </Cell>
         </Column>
       </Table>
     </Box>

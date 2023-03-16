@@ -1,23 +1,24 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import { Rate, Table } from 'rsuite'
 
+import deleteIcon from '../../../assets/img/delete.svg'
+import editIcon from '../../../assets/img/edit.svg'
+
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
 import { CardType } from 'features/cards/cardsAPI'
 import { updateCardTC } from 'features/cards/cardsSlise'
 
 type CardListPropsType = {
-  userId: string
+  cards: CardType[]
+  isMyPack: boolean
 }
 
 const { Column, HeaderCell, Cell } = Table
 
-export const CardList: FC<CardListPropsType> = ({ userId }) => {
+export const CardList = ({ cards, isMyPack }: CardListPropsType) => {
   const dispatch = useAppDispatch()
-
-  const cards = useAppSelector<CardType[]>(state => state.cards.cards)
 
   const gradeHandler = (_id: string) => (grade: number) => {
     dispatch(updateCardTC({ _id, grade }))
@@ -62,11 +63,25 @@ export const CardList: FC<CardListPropsType> = ({ userId }) => {
                 style={{ color: '#FFC700' }}
                 allowHalf
                 onChange={gradeHandler(rowData._id)}
-                readOnly={rowData.user_id !== userId}
+                readOnly={!isMyPack}
               />
             )}
           </Cell>
         </Column>
+
+        {isMyPack && (
+          <Column width={80}>
+            <HeaderCell style={headerStyles}>{}</HeaderCell>
+            <Cell style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+              {rowData => (
+                <Box display={'flex'} gap={'12px'}>
+                  <img src={editIcon} alt="" style={{ cursor: 'pointer' }} />
+                  <img src={deleteIcon} alt="" style={{ cursor: 'pointer' }} />
+                </Box>
+              )}
+            </Cell>
+          </Column>
+        )}
       </Table>
     </Box>
   )

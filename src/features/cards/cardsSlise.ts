@@ -4,7 +4,13 @@ import { AxiosError } from 'axios'
 import { setStatusLoading } from 'app/appSlice'
 import { RootState } from 'app/store'
 import { errorUtils } from 'common/utils/error-utils'
-import { CardModelType, cardsAPI, CardType, GetCardsParamsType } from 'features/cards/cardsAPI'
+import {
+  CardModelType,
+  cardsAPI,
+  CardType,
+  GetCardsParamsType,
+  NewCardType,
+} from 'features/cards/cardsAPI'
 
 export const getCardsDataTC = createAsyncThunk(
   'cards/getCardsData',
@@ -14,6 +20,22 @@ export const getCardsDataTC = createAsyncThunk(
       const res = await cardsAPI.getCards(params)
 
       dispatch(setCardsData(res.data))
+    } catch (e) {
+      errorUtils(e as AxiosError, dispatch)
+    } finally {
+      dispatch(setStatusLoading(false))
+    }
+  }
+)
+
+export const addCardTC = createAsyncThunk(
+  'cards/addCardTC',
+  async (card: NewCardType, { dispatch }) => {
+    dispatch(setStatusLoading(true))
+    try {
+      await cardsAPI.addCard(card)
+
+      dispatch(getCardsDataTC({ cardsPack_id: card.cardsPack_id }))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
@@ -45,6 +67,7 @@ const cardsSLice = createSlice({
   name: 'cards',
   initialState: {
     cards: [],
+    packName: '',
     cardsTotalCount: 0,
     maxGrade: 5,
     minGrade: 1,
@@ -54,12 +77,14 @@ const cardsSLice = createSlice({
   } as CardsStateType,
   reducers: {
     setCardsData(state, action: PayloadAction<CardsStateType>) {
-      const { cards, cardsTotalCount, maxGrade, minGrade, page, pageCount, packUserId } = {
-        ...state,
-        ...action.payload,
-      }
+      const { cards, packName, cardsTotalCount, maxGrade, minGrade, page, pageCount, packUserId } =
+        {
+          ...state,
+          ...action.payload,
+        }
 
       state.cards = cards
+      state.packName = packName
       state.cardsTotalCount = cardsTotalCount
       state.maxGrade = maxGrade
       state.minGrade = minGrade
@@ -76,6 +101,7 @@ export const { setCardsData } = cardsSLice.actions
 
 export type CardsStateType = {
   cards: CardType[]
+  packName: string
   cardsTotalCount: number
   maxGrade: number
   minGrade: number

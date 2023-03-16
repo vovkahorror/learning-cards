@@ -1,12 +1,27 @@
 import React, { FC } from 'react'
 
-import { IoTrashOutline, IoPencil, IoSkull } from 'react-icons/io5'
+import { BsFillTrash3Fill, BsPencilFill, BsRocketTakeoffFill } from 'react-icons/bs'
+import styled from 'styled-components'
 
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { deletePackTC, editPackTC } from 'features/packs/packsSlice'
 
-export const PacksAction: FC<PackListActionType> = ({ user_id, pack_id }) => {
+const Icon = styled.span`
+  margin-right: 5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover {
+    color: darkred;
+  }
+`
+
+export const PacksAction: FC<PackListActionType> = ({ user_id, pack_id, cardsCount }) => {
   const dispatch = useAppDispatch()
   const myId = useAppSelector(state => state.auth.user._id)
 
@@ -22,13 +37,21 @@ export const PacksAction: FC<PackListActionType> = ({ user_id, pack_id }) => {
     <>
       {user_id === myId ? (
         <>
-          <IoSkull style={{ cursor: 'pointer' }} />
-          <IoPencil style={{ cursor: 'pointer' }} onClick={() => editPack('Warszawa')} />
-          <IoTrashOutline style={{ cursor: 'pointer' }} onClick={removePack} />
+          <Icon style={!cardsCount ? { pointerEvents: 'none', opacity: '0.4' } : {}}>
+            <BsRocketTakeoffFill />
+          </Icon>
+          <Icon>
+            <BsPencilFill onClick={() => editPack('Warszawa')} />
+          </Icon>
+          <Icon>
+            <BsFillTrash3Fill onClick={removePack} />
+          </Icon>
         </>
       ) : (
         <>
-          <IoSkull style={{ cursor: 'pointer' }} />
+          <Icon style={!cardsCount ? { pointerEvents: 'none', opacity: '0.4' } : {}}>
+            <BsRocketTakeoffFill />
+          </Icon>
         </>
       )}
     </>
@@ -38,4 +61,5 @@ export const PacksAction: FC<PackListActionType> = ({ user_id, pack_id }) => {
 type PackListActionType = {
   user_id: string
   pack_id: string
+  cardsCount: number
 }

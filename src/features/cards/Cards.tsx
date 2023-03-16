@@ -6,20 +6,31 @@ import { CustomPagination } from 'common/components/CustomPagination/CustomPagin
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { CardList } from 'features/cards/CardList/CardList'
-import { getCardsDataTC } from 'features/cards/cardsSlise'
+import { EmptyCardList } from 'features/cards/CardList/EmptyCardList'
+import { CardType } from 'features/cards/cardsAPI'
+import { addCardTC, getCardsDataTC } from 'features/cards/cardsSlise'
 import { SearchCardPanel } from 'features/cards/SearchCardPanel/SearchCardPanel'
 
 export const Cards = () => {
   const [searchParams, setSearchParams] = useState('')
+  const dispatch = useAppDispatch()
+  const { cardsPack_id } = useParams()
 
   const userId = useAppSelector<string>(state => state.auth.user._id)
-  const packName = useAppSelector(state => state.packs.searchParams.packName)
+  const packUserId = useAppSelector<string>(state => state.cards.packUserId)
+  const cards = useAppSelector<CardType[]>(state => state.cards.cards)
   const page = useAppSelector(state => state.cards.page)
   const pageCount = useAppSelector(state => state.cards.pageCount)
   const cardsTotalCount = useAppSelector(state => state.cards.cardsTotalCount)
 
-  const dispatch = useAppDispatch()
-  const { cardsPack_id } = useParams()
+  const isNotEmptyPack = !!cards.length
+  const isMyPack = userId === packUserId
+
+  const addNewCard = () => {
+    if (cardsPack_id) {
+      dispatch(addCardTC({ cardsPack_id, question: 'NEW QUESTION', answer: 'NEW ANSWER' }))
+    }
+  }
 
   const setPagination = (page: number, pageCount: number) => {
     if (cardsPack_id) {
@@ -35,14 +46,25 @@ export const Cards = () => {
 
   return (
     <div>
-      <SearchCardPanel setSearchParams={setSearchParams} />
-      <CardList userId={userId} />
-      <CustomPagination
-        page={page}
-        pageCount={pageCount}
-        totalCount={cardsTotalCount}
-        setPagination={setPagination}
+      <SearchCardPanel
+        isNotEmptyPack={isNotEmptyPack}
+        isMyPack={isMyPack}
+        setSearchParams={setSearchParams}
+        addNewCard={addNewCard}
       />
+      {isNotEmptyPack ? (
+        <CardList cards={cards} isMyPack={isMyPack} />
+      ) : (
+        <EmptyCardList isMyPack={isMyPack} addNewCard={addNewCard} />
+      )}
+      {isNotEmptyPack && (
+        <CustomPagination
+          page={page}
+          pageCount={pageCount}
+          totalCount={cardsTotalCount}
+          setPagination={setPagination}
+        />
+      )}
     </div>
   )
 }
