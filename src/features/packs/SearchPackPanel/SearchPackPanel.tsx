@@ -8,6 +8,7 @@ import { Box } from 'common/components/Layout/Box'
 import { TogglePacks } from 'common/components/TogglePacks/TogglePacks'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useDebounce } from 'common/hooks/useDebounce'
+import { ClearFilter } from 'features/cards/SearchCardPanel/SearchCardPanel.styled'
 import { addPackTC, clearSearchParams, setSearchParams } from 'features/packs/packsSlice'
 
 export const SearchPackPanel = () => {
@@ -61,7 +62,7 @@ export const SearchPackPanel = () => {
         <CustomRangeSlider />
       </Box>
 
-      <Button onClick={handlerClearFilter}>filter</Button>
+      <ClearFilter onClick={handlerClearFilter} />
       <Button onClick={addNewPack}>Add pack</Button>
     </Box>
   )

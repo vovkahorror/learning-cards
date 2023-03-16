@@ -1,24 +1,12 @@
-import { MouseEvent, useEffect } from 'react'
+import { MouseEvent } from 'react'
 
 import styled from 'styled-components'
 
 import { ReactComponent as LoaderIcon } from 'assets/img/loader.svg'
-import { useAppSelector } from 'common/hooks/useAppSelector'
 import { theme } from 'styles/theme'
 
 export const Loader = () => {
-  const statusLoading = useAppSelector(state => state.app.statusLoading)
-
-  useEffect(() => {
-    statusLoading && (document.body.style.overflow = 'hidden')
-    !statusLoading && (document.body.style.overflow = 'unset')
-  }, [statusLoading])
-
   const onClickHandler = (e: MouseEvent<HTMLDivElement>) => e.stopPropagation()
-
-  if (!statusLoading) {
-    return null
-  }
 
   return (
     <LoaderWrapper onClick={onClickHandler}>

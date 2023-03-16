@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
+import { BackToPacks } from 'common/components/BackToPacksList/BackToPacksList'
 import { CustomPagination } from 'common/components/CustomPagination/CustomPagination'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
@@ -15,6 +16,7 @@ export const Cards = () => {
   const [searchParams, setSearchParams] = useState('')
   const dispatch = useAppDispatch()
   const { cardsPack_id } = useParams()
+  const navigate = useNavigate()
 
   const userId = useAppSelector<string>(state => state.auth.user._id)
   const packUserId = useAppSelector<string>(state => state.cards.packUserId)
@@ -34,18 +36,23 @@ export const Cards = () => {
 
   const setPagination = (page: number, pageCount: number) => {
     if (cardsPack_id) {
+      console.log(2)
       dispatch(getCardsDataTC({ cardsPack_id, page, pageCount }))
     }
   }
 
+  const goToPackList = () => navigate(-1)
+
   useEffect(() => {
+    console.log(1)
     if (cardsPack_id) {
       dispatch(getCardsDataTC({ cardsPack_id, cardAnswer: searchParams, page, pageCount }))
     }
-  }, [cardsPack_id, searchParams, page, pageCount])
+  }, [cardsPack_id, searchParams, page])
 
   return (
     <div>
+      <BackToPacks onClick={goToPackList} />
       <SearchCardPanel
         isNotEmptyPack={isNotEmptyPack}
         isMyPack={isMyPack}
