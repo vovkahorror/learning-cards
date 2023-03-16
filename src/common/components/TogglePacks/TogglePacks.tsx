@@ -14,11 +14,11 @@ export const TogglePacks = () => {
   const value = params.get('demon') || 'all'
 
   const handlerMyCards = () => {
-    dispatch(setSearchParams({ user_id }))
+    dispatch(setSearchParams({ user_id, page: 1 }))
     setParams({ demon: 'my' })
   }
   const handlerAllCards = () => {
-    dispatch(setSearchParams({ user_id: null }))
+    dispatch(setSearchParams({ user_id: null, page: 1 }))
     setParams({ demon: 'all' })
   }
 
