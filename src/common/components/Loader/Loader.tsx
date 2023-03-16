@@ -16,10 +16,6 @@ export const Loader = () => {
 
   const onClickHandler = (e: MouseEvent<HTMLDivElement>) => e.stopPropagation()
 
-  if (!statusLoading) {
-    return null
-  }
-
   return (
     <LoaderWrapper onClick={onClickHandler}>
       <LoaderIcon fill={theme.colors.primary} />

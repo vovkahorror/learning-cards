@@ -14,19 +14,20 @@ import 'rsuite/dist/rsuite.min.css'
 export function App() {
   const dispatch = useAppDispatch()
   const isInitialized = useAppSelector(state => state.app.isInitialized)
+  const statusLoading = useAppSelector(state => state.app.statusLoading)
 
   useEffect(() => {
     dispatch(authMeTC())
   }, [])
 
   if (!isInitialized) {
-    return <h1 style={{ paddingTop: '200px' }}>loading</h1>
+    return <Loader />
   }
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Loader />
+      {statusLoading && <Loader />}
       <Snackbar />
       <Pages />
     </ThemeProvider>
