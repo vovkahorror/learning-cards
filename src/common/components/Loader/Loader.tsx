@@ -7,12 +7,14 @@ import { useAppSelector } from 'common/hooks/useAppSelector'
 import { theme } from 'styles/theme'
 
 export const Loader = () => {
-  const statusLoading = useAppSelector(state => state.app.statusLoading)
-
-  useEffect(() => {
-    statusLoading && (document.body.style.overflow = 'hidden')
-    !statusLoading && (document.body.style.overflow = 'unset')
-  }, [statusLoading])
+  // const statusLoading = useAppSelector(state => state.app.statusLoading)
+  //
+  // console.log(statusLoading)
+  //
+  // useEffect(() => {
+  //   statusLoading && (document.body.style.overflow = 'hidden')
+  //   !statusLoading && (document.body.style.overflow = 'unset')
+  // }, [statusLoading])
 
   const onClickHandler = (e: MouseEvent<HTMLDivElement>) => e.stopPropagation()
 
