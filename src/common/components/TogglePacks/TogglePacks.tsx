@@ -5,27 +5,22 @@ import { Radio, RadioGroup } from 'rsuite'
 
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
-import { setSearchParams } from 'features/packs/packsSlice'
+import { clearSearchParams, setSearchParams } from 'features/packs/packsSlice'
 
 export const TogglePacks = () => {
   const user_id = useAppSelector(state => state.auth.user._id)
   const [valueToggle, setValueToggle] = useState<'all' | 'my'>('all')
-  const [params, setParams] = useSearchParams()
   const dispatch = useAppDispatch()
 
   const updateValue = useCallback((value: string) => {
     console.log(value)
   }, [])
 
-  console.log(params.get('demon'))
-
   const handlerMyCards = () => {
-    dispatch(setSearchParams({ user_id }))
-    setParams({ demon: 'my' })
+    dispatch(setSearchParams({ user_id, page: 1 }))
   }
   const handlerAllCards = () => {
-    dispatch(setSearchParams({ user_id: null }))
-    setParams({ demon: 'all' })
+    dispatch(setSearchParams({ user_id: null, page: 1 }))
   }
 
   return (
