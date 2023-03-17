@@ -9,7 +9,7 @@ import { useAppSelector } from 'common/hooks/useAppSelector'
 import { CardList } from 'features/cards/CardList/CardList'
 import { EmptyCardList } from 'features/cards/CardList/EmptyCardList'
 import { CardType } from 'features/cards/cardsAPI'
-import { addCardTC, getCardsDataTC } from 'features/cards/cardsSlise'
+import { addCardTC, getCardsDataTC, setTotalCount } from 'features/cards/cardsSlice'
 import { SearchCardPanel } from 'features/cards/SearchCardPanel/SearchCardPanel'
 
 export const Cards = () => {
@@ -24,6 +24,14 @@ export const Cards = () => {
   const page = useAppSelector(state => state.cards.page)
   const pageCount = useAppSelector(state => state.cards.pageCount)
   const cardsTotalCount = useAppSelector(state => state.cards.cardsTotalCount)
+
+  const [empty, setEmpty] = useState(0)
+
+  useEffect(() => {
+    if (cardsTotalCount !== 0) {
+      setEmpty(cardsTotalCount)
+    }
+  }, [cardsTotalCount])
 
   const isNotEmptyPack = !!cards.length
   const isMyPack = userId === packUserId
@@ -40,7 +48,10 @@ export const Cards = () => {
     }
   }
 
-  const goToPackList = () => navigate(-1)
+  const goToPackList = () => {
+    navigate(-1)
+    dispatch(setTotalCount(0))
+  }
 
   useEffect(() => {
     if (cardsPack_id) {
@@ -52,12 +63,12 @@ export const Cards = () => {
     <div>
       <BackToPacks onClick={goToPackList} />
       <SearchCardPanel
-        isNotEmptyPack={isNotEmptyPack}
+        isNotEmptyPack={!!empty}
         isMyPack={isMyPack}
         setSearchParams={setSearchParams}
         addNewCard={addNewCard}
       />
-      {isNotEmptyPack ? (
+      {empty !== 0 ? (
         <CardList cards={cards} isMyPack={isMyPack} />
       ) : (
         <EmptyCardList isMyPack={isMyPack} addNewCard={addNewCard} />
