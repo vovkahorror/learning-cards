@@ -20,7 +20,7 @@ export const Profile = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const onLogout = () => {
+  const handlerLogout = () => {
     dispatch(logoutTC())
     dispatch(setRegisterSuccess(false))
   }
@@ -29,11 +29,11 @@ export const Profile = () => {
     dispatch(updateUserName({ name: newName }))
   }
 
-  const goToPackList = () => navigate(PATH.PACKS)
+  const handlerNavigateToPackList = () => navigate(PATH.PACKS)
 
   return (
     <>
-      <BackToPacks onClick={goToPackList} />
+      <BackToPacks onClick={handlerNavigateToPackList} />
       <Box display={'flex'} justifyContent={'center'}>
         <div>
           <Box display={'flex'} justifyContent={'center'}>
@@ -63,7 +63,7 @@ export const Profile = () => {
             mt={'4'}
             alignItems={'center'}
           >
-            <Button onClick={onLogout}>Log out</Button>
+            <Button onClick={handlerLogout}>Log out</Button>
           </Box>
         </div>
       </Box>

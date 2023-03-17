@@ -1,5 +1,5 @@
 import { instance } from 'common/instance/instance'
-import { CardsStateType } from 'features/cards/cardsSlise'
+import { CardsStateType } from 'features/cards/cardsSlice'
 
 export const cardsAPI = {
   getCards: (params: GetCardsParamsType) => {

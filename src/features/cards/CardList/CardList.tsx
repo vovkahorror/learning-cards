@@ -7,7 +7,7 @@ import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { EmptyCardListWrapper } from 'features/cards/CardList/EmptyCardList'
 import { CardType } from 'features/cards/cardsAPI'
-import { deleteCardTC, updateCardTC } from 'features/cards/cardsSlise'
+import { deleteCardTC, updateCardTC } from 'features/cards/cardsSlice'
 import { Icon } from 'features/packs/PackList/PacksAction'
 
 type CardListPropsType = {

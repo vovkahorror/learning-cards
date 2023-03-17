@@ -25,7 +25,7 @@ export const SearchPackPanel = () => {
     setValue('')
   }
 
-  const addNewPack = () => {
+  const handlerAddNewPack = () => {
     dispatch(addPackTC({ name: 'Gdańsk', private: false }))
   }
 
@@ -63,7 +63,7 @@ export const SearchPackPanel = () => {
       </Box>
 
       <ClearFilter onClick={handlerClearFilter} />
-      <Button onClick={addNewPack}>Add pack</Button>
+      <Button onClick={handlerAddNewPack}>Add pack</Button>
     </Box>
   )
 }

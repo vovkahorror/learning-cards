@@ -29,7 +29,7 @@ export const Packs = () => {
     }
 
     // для загрузки колоды моя или все ( при перезагрузке страницы )
-    const user_id = params.get('demon') === 'my' ? id : ''
+    const user_id = params.get('section') === 'my' ? id : ''
 
     dispatch(fetchPacksTC({ user_id }))
   }, [min, max, page, pageCount, packName, sortPacks, user_id])

@@ -61,7 +61,7 @@ export const loginTC = createAsyncThunk(
       dispatch(setUserData(res.data))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
-    } finally {
+      // выключаем крутилку только при ошибке ( чтоб небыло дерганья при логинизации)
       dispatch(setStatusLoading(false))
     }
   }

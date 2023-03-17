@@ -11,15 +11,15 @@ export const TogglePacks = () => {
   const user_id = useAppSelector(state => state.auth.user._id)
   const dispatch = useAppDispatch()
   let [params, setParams] = useSearchParams()
-  const value = params.get('demon') || 'all'
+  const value = params.get('section') || 'all'
 
   const handlerMyCards = () => {
     dispatch(setSearchParams({ user_id, page: 1 }))
-    setParams({ demon: 'my' })
+    setParams({ section: 'my' })
   }
   const handlerAllCards = () => {
     dispatch(setSearchParams({ user_id: null, page: 1 }))
-    setParams({ demon: 'all' })
+    setParams({ section: 'all' })
   }
 
   return (
