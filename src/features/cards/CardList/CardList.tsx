@@ -1,14 +1,14 @@
 import React from 'react'
 
+import { BsFillTrash3Fill, BsPencilFill } from 'react-icons/bs'
 import { Rate, Table } from 'rsuite'
-
-import deleteIcon from '../../../assets/img/delete.svg'
-import editIcon from '../../../assets/img/edit.svg'
 
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { EmptyCardListWrapper } from 'features/cards/CardList/EmptyCardList'
 import { CardType } from 'features/cards/cardsAPI'
-import { updateCardTC } from 'features/cards/cardsSlise'
+import { deleteCardTC, updateCardTC } from 'features/cards/cardsSlise'
+import { Icon } from 'features/packs/PackList/PacksAction'
 
 type CardListPropsType = {
   cards: CardType[]
@@ -20,8 +20,20 @@ const { Column, HeaderCell, Cell } = Table
 export const CardList = ({ cards, isMyPack }: CardListPropsType) => {
   const dispatch = useAppDispatch()
 
+  const renderEmpty = () => (
+    <EmptyCardListWrapper>No cards matching your request</EmptyCardListWrapper>
+  )
+
   const gradeHandler = (_id: string) => (grade: number) => {
     dispatch(updateCardTC({ _id, grade }))
+  }
+
+  const updateCard = (_id: string) => {
+    dispatch(updateCardTC({ _id, question: 'UPDATED QUESTION', answer: 'UPDATED ANSWER' }))
+  }
+
+  const deleteCard = (_id: string) => {
+    dispatch(deleteCardTC(_id))
   }
 
   const headerStyles = {
@@ -34,7 +46,7 @@ export const CardList = ({ cards, isMyPack }: CardListPropsType) => {
 
   return (
     <Box mt="3">
-      <Table height={400} data={cards} wordWrap={'break-word'} autoHeight>
+      <Table height={400} data={cards} wordWrap={'break-word'} renderEmpty={renderEmpty} autoHeight>
         <Column flexGrow={1} align="left">
           <HeaderCell style={headerStyles}>Question</HeaderCell>
           <Cell dataKey="question" />
@@ -74,9 +86,13 @@ export const CardList = ({ cards, isMyPack }: CardListPropsType) => {
             <HeaderCell style={headerStyles}>{}</HeaderCell>
             <Cell style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
               {rowData => (
-                <Box display={'flex'} gap={'12px'}>
-                  <img src={editIcon} alt="" style={{ cursor: 'pointer' }} />
-                  <img src={deleteIcon} alt="" style={{ cursor: 'pointer' }} />
+                <Box display={'flex'}>
+                  <Icon>
+                    <BsPencilFill onClick={() => updateCard(rowData._id)} />
+                  </Icon>
+                  <Icon>
+                    <BsFillTrash3Fill onClick={() => deleteCard(rowData._id)} />
+                  </Icon>
                 </Box>
               )}
             </Cell>

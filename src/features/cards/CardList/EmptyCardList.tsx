@@ -7,10 +7,15 @@ import { Box } from 'common/components/Layout/Box'
 
 type EmptyCardListPropsType = {
   isMyPack: boolean
+
   addNewCard: () => void
 }
 
-export const EmptyCardList = ({ isMyPack, addNewCard }: EmptyCardListPropsType) => {
+export const EmptyCardList = ({
+  isMyPack,
+
+  addNewCard,
+}: EmptyCardListPropsType) => {
   return (
     <EmptyCardListWrapper>
       <p>This pack is empty. {isMyPack && <span>Click add new card to fill this pack</span>}</p>
@@ -19,7 +24,7 @@ export const EmptyCardList = ({ isMyPack, addNewCard }: EmptyCardListPropsType) 
   )
 }
 
-const EmptyCardListWrapper = styled(Box)`
+export const EmptyCardListWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
   justify-content: center;

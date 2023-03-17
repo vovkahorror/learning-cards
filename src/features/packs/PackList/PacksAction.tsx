@@ -7,7 +7,7 @@ import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { deletePackTC, editPackTC } from 'features/packs/packsSlice'
 
-const Icon = styled.span<IconType>`
+export const Icon = styled.span<IconType>`
   margin-right: 5px;
   transition: all 0.3s ease;
   cursor: pointer;

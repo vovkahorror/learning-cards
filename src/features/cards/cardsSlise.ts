@@ -30,12 +30,37 @@ export const getCardsDataTC = createAsyncThunk(
 
 export const addCardTC = createAsyncThunk(
   'cards/addCardTC',
-  async (card: NewCardType, { dispatch }) => {
+  async (card: NewCardType, { dispatch, getState }) => {
+    const state = getState() as RootState
+    const page = state.cards.page
+    const pageCount = state.cards.pageCount
+
     dispatch(setStatusLoading(true))
     try {
       await cardsAPI.addCard(card)
 
-      dispatch(getCardsDataTC({ cardsPack_id: card.cardsPack_id }))
+      dispatch(getCardsDataTC({ cardsPack_id: card.cardsPack_id, page, pageCount }))
+    } catch (e) {
+      errorUtils(e as AxiosError, dispatch)
+    } finally {
+      dispatch(setStatusLoading(false))
+    }
+  }
+)
+
+export const deleteCardTC = createAsyncThunk(
+  'cards/deleteCardTC',
+  async (cardId: string, { dispatch, getState }) => {
+    const state = getState() as RootState
+    const cardsPack_id = state.cards.cards.find(card => card._id === cardId)?.cardsPack_id as string
+    const page = state.cards.page
+    const pageCount = state.cards.pageCount
+
+    dispatch(setStatusLoading(true))
+    try {
+      await cardsAPI.deleteCard(cardId)
+
+      dispatch(getCardsDataTC({ cardsPack_id, page, pageCount }))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {

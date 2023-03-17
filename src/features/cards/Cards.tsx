@@ -46,7 +46,7 @@ export const Cards = () => {
     if (cardsPack_id) {
       dispatch(getCardsDataTC({ cardsPack_id, cardAnswer: searchParams, page, pageCount }))
     }
-  }, [cardsPack_id, searchParams, page])
+  }, [cardsPack_id, searchParams])
 
   return (
     <div>
