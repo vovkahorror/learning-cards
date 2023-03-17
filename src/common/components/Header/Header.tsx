@@ -21,7 +21,14 @@ export const Header = () => {
         <Row justifyContent={'space-between'} alignItems={'center'}>
           <Logo />
           {isLoggedIn && <ProfileHeader />}
-          {!isLoggedIn && <Button onClick={() => navigate(PATH.LOGIN)}>Sign in</Button>}
+          {!isLoggedIn && (
+            <Button
+              style={{ border: '1px solid rgba(255, 255, 255, 0.5)' }}
+              onClick={() => navigate(PATH.LOGIN)}
+            >
+              Sign in
+            </Button>
+          )}
         </Row>
       </Container>
     </HeaderContainer>
