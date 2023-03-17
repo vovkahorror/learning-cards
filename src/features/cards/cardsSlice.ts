@@ -117,12 +117,15 @@ const cardsSLice = createSlice({
       state.pageCount = pageCount
       state.packUserId = packUserId
     },
+    setTotalCount: (state, action: PayloadAction<number>) => {
+      state.cardsTotalCount = action.payload
+    },
   },
 })
 
 export const cardsReducer = cardsSLice.reducer
 
-export const { setCardsData } = cardsSLice.actions
+export const { setCardsData, setTotalCount } = cardsSLice.actions
 
 export type CardsStateType = {
   cards: CardType[]
