@@ -1,10 +1,7 @@
-import React from 'react'
-
 import { useSearchParams } from 'react-router-dom'
 import { Radio, RadioGroup } from 'rsuite'
 
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { authSelectors } from 'features/auth'
 import { setSearchParams } from 'features/packs/packsSlice'
 

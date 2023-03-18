@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
 import { CustomPagination } from 'common/components/CustomPagination/CustomPagination'
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { authSelectors } from 'features/auth'
 import { packsSelectors } from 'features/packs'
 import { PackList } from 'features/packs/PackList/PackList'
