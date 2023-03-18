@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import CustomProvider from 'rsuite/esm/CustomProvider/CustomProvider'
 import { ThemeProvider } from 'styled-components'
 
-import { Loader } from 'common/components/Loader/Loader'
-import { Snackbar } from 'common/components/Snackbar/Snackbar'
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import { Loader, Snackbar } from 'common/components'
+import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { authMeTC } from 'features/auth/authSlice'
 import { Pages } from 'pages/Pages'
 import { GlobalStyle, theme } from 'styles/theme'

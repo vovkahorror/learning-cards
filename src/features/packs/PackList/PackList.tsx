@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Table } from 'rsuite'
 
-import { Box } from 'common/components/Layout/Box'
+import { Box } from 'common/components'
 import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { packsSelectors } from 'features/packs'
 import { PacksAction } from 'features/packs/PackList/PacksAction'

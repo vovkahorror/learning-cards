@@ -6,19 +6,16 @@ import Toggle from 'rsuite/esm/Toggle/Toggle'
 
 import { setAppTheme } from 'app/appSlice'
 import { ReactComponent as Logo } from 'assets/img/logo.svg'
-import { Button } from 'common/components/Button/Button'
+import { Button, Box, Row, Container } from 'common/components'
 import { HeaderContainer } from 'common/components/Header/header.styled'
-import { Box } from 'common/components/Layout/Box'
-import { Container } from 'common/components/Layout/Container'
-import { Row } from 'common/components/Layout/Row'
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import { useAppDispatch, useAppSelector } from 'common/hooks'
+import { authSelectors } from 'features/auth'
 import { ProfileHeader } from 'features/Profile/ProfileHeader'
 import { PATH } from 'pages/path'
 
 export const Header = () => {
   const dispatch = useAppDispatch()
-  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+  const isLoggedIn = useAppSelector(authSelectors.isLoggedIn)
   const appTheme = useAppSelector(state => state.app.appTheme)
   const navigate = useNavigate()
 

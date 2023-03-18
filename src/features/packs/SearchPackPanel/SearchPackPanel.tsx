@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { Input } from 'rsuite'
 
-import { Button } from 'common/components/Button/Button'
-import { Box } from 'common/components/Layout/Box'
+import { Button, Box } from 'common/components'
 import { useAppDispatch, useDebounce } from 'common/hooks'
 import { ClearFilter } from 'features/cards/SearchCardPanel/SearchCardPanel.styled'
 import { addPackTC, clearSearchParams, setSearchParams } from 'features/packs/packsSlice'

@@ -3,9 +3,7 @@ import { Navigate } from 'react-router-dom'
 
 import { Error, ForgotDescription, QuestionText } from './recovery.styled'
 
-import { Button, LinkText } from 'common/components/Button/Button'
-import { Input } from 'common/components/Input/Input'
-import { Box } from 'common/components/Layout/Box'
+import { Button, LinkText, Input, Box } from 'common/components'
 import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { validateEmail } from 'common/validate/validateEmail'
 import { authSelectors } from 'features/auth'

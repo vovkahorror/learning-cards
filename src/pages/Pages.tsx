@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Route, Routes, Navigate } from 'react-router-dom'
 
 import { LayoutWrapper } from 'common/components/LayoutWrapper/LayoutWrapper'

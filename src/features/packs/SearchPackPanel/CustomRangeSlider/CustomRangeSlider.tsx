@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { RangeSlider } from 'rsuite'
 
-import { Box } from 'common/components/Layout/Box'
+import { Box } from 'common/components'
 import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { packsSelectors } from 'features/packs/index'
 import { setSearchParams } from 'features/packs/packsSlice'

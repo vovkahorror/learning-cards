@@ -3,9 +3,7 @@ import { Navigate, useParams } from 'react-router-dom'
 
 import { NewPasswordDescription } from './newPassword.styled'
 
-import { Button } from 'common/components/Button/Button'
-import { Input } from 'common/components/Input/Input'
-import { Box } from 'common/components/Layout/Box'
+import { Button, Box, Input } from 'common/components'
 import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { validatePassword } from 'common/validate/validatePassword'
 import { authSelectors } from 'features/auth'

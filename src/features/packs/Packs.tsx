@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { useSearchParams } from 'react-router-dom'
 
-import { CustomPagination } from 'common/components/CustomPagination/CustomPagination'
+import { CustomPagination } from 'common/components'
 import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { authSelectors } from 'features/auth'
 import { packsSelectors } from 'features/packs'

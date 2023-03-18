@@ -3,10 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import profileImg from '../../assets/img/profile.png'
 
-import { BackToPacks } from 'common/components/BackToPacksList/BackToPacksList'
-import { Button } from 'common/components/Button/Button'
-import { EditableSpan } from 'common/components/EditableSpan/EditableSpan'
-import { Box } from 'common/components/Layout/Box'
+import { Button, Box, EditableSpan, BackToPacks } from 'common/components'
 import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { authSelectors } from 'features/auth'
 import { logoutTC, setRegisterSuccess, updateUserName } from 'features/auth/authSlice'
