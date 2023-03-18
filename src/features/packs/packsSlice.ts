@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
 
 import { setStatusLoading } from 'app/appSlice'
-import { RootState } from 'app/store'
+import { RootStateType } from 'app/store'
 import { errorUtils } from 'common/utils/error-utils'
 import {
   CardPacksType,
@@ -35,7 +35,7 @@ export const fetchPacksTC = createAsyncThunk(
   'packs/fetchPacks',
   async (arg: { user_id: string } | undefined, { dispatch, getState }) => {
     dispatch(setStatusLoading(true))
-    const { packs } = getState() as RootState
+    const { packs } = getState() as RootStateType
     const params = { ...packs.searchParams, ...arg }
 
     try {

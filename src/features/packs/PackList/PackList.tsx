@@ -6,6 +6,7 @@ import { Table } from 'rsuite'
 import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
+import { packsSelectors } from 'features/packs'
 import { PacksAction } from 'features/packs/PackList/PacksAction'
 import { CardPacksType } from 'features/packs/packsAPI'
 import { setSearchParams } from 'features/packs/packsSlice'
@@ -18,7 +19,7 @@ type SortColumnType = string | undefined
 
 export const PackList = () => {
   const navigate = useNavigate()
-  const data = useAppSelector<CardPacksType[]>(state => state.packs.cardPacks)
+  const data = useAppSelector<CardPacksType[]>(packsSelectors.cardPacks)
   const dispatch = useAppDispatch()
   const [sortColumn, setSortColumn] = useState<SortColumnType>(undefined)
   const [sortType, setSortType] = useState<SortType>(undefined)

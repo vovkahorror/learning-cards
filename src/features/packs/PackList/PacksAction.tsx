@@ -5,6 +5,7 @@ import styled from 'styled-components'
 
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
+import { authSelectors } from 'features/auth'
 import { deletePackTC, editPackTC } from 'features/packs/packsSlice'
 
 export const Icon = styled.span<IconType>`
@@ -28,7 +29,7 @@ const IconDisable = styled(Icon)`
 
 export const PacksAction: FC<PackListActionType> = ({ user_id, pack_id, cardsCount }) => {
   const dispatch = useAppDispatch()
-  const myId = useAppSelector(state => state.auth.user._id)
+  const myId = useAppSelector(authSelectors.id)
 
   const removePack = () => {
     dispatch(deletePackTC(pack_id))

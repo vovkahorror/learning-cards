@@ -7,11 +7,12 @@ import { Box } from '../Layout/Box'
 import { Count } from 'common/components/CustomRangeSlider/Count'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
+import { packsSelectors } from 'features/packs'
 import { setSearchParams } from 'features/packs/packsSlice'
 
 export const CustomRangeSlider = () => {
-  const minCardsCount = useAppSelector(state => state.packs.minCardsCount)
-  const maxCardsCount = useAppSelector(state => state.packs.maxCardsCount)
+  const minCardsCount = useAppSelector(packsSelectors.minCardsCount)
+  const maxCardsCount = useAppSelector(packsSelectors.maxCardsCount)
   const dispatch = useAppDispatch()
 
   const [value, setValue] = useState<[number, number]>([0, 0])

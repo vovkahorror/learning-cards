@@ -5,22 +5,25 @@ import { useSearchParams } from 'react-router-dom'
 import { CustomPagination } from 'common/components/CustomPagination/CustomPagination'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
+import { authSelectors } from 'features/auth'
+import { packsSelectors } from 'features/packs'
 import { PackList } from 'features/packs/PackList/PackList'
 import { fetchPacksTC, setSearchParams } from 'features/packs/packsSlice'
 import { SearchPackPanel } from 'features/packs/SearchPackPanel/SearchPackPanel'
 
 export const Packs = () => {
-  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-  const packName = useAppSelector(state => state.packs.searchParams.packName)
-  const sortPacks = useAppSelector(state => state.packs.searchParams.sortPacks)
-  const page = useAppSelector(state => state.packs.searchParams.page)
-  const pageCount = useAppSelector(state => state.packs.searchParams.pageCount)
-  const min = useAppSelector(state => state.packs.searchParams.min)
-  const max = useAppSelector(state => state.packs.searchParams.max)
-  const id = useAppSelector(state => state.auth.user._id)
-  const user_id = useAppSelector(state => state.packs.searchParams.user_id)
-  const cardPacksTotalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
+  const packName = useAppSelector(packsSelectors.packName)
+  const sortPacks = useAppSelector(packsSelectors.sortPacks)
+  const page = useAppSelector(packsSelectors.page)
+  const pageCount = useAppSelector(packsSelectors.pageCount)
+  const min = useAppSelector(packsSelectors.min)
+  const max = useAppSelector(packsSelectors.max)
+  const user_id = useAppSelector(packsSelectors.user_id)
+  const cardPacksTotalCount = useAppSelector(packsSelectors.cardPacksTotalCount)
+  const id = useAppSelector(authSelectors.id)
+  const isLoggedIn = useAppSelector(authSelectors.isLoggedIn)
   const dispatch = useAppDispatch()
+
   let [params, setParams] = useSearchParams()
 
   useEffect(() => {
