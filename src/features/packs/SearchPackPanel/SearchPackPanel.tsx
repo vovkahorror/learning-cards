@@ -5,11 +5,11 @@ import { Input } from 'rsuite'
 import { Button } from 'common/components/Button/Button'
 import { CustomRangeSlider } from 'common/components/CustomRangeSlider/CustomRangeSlider'
 import { Box } from 'common/components/Layout/Box'
-import { TogglePacks } from 'common/components/TogglePacks/TogglePacks'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useDebounce } from 'common/hooks/useDebounce'
 import { ClearFilter } from 'features/cards/SearchCardPanel/SearchCardPanel.styled'
 import { addPackTC, clearSearchParams, setSearchParams } from 'features/packs/packsSlice'
+import { TogglePacks } from 'features/packs/SearchPackPanel/TogglePacks/TogglePacks'
 
 export const SearchPackPanel = () => {
   const dispatch = useAppDispatch()
