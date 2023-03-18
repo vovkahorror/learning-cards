@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
 
@@ -8,8 +6,7 @@ import { FormDataType } from '../authAPI'
 import { Button, LinkText } from 'common/components/Button/Button'
 import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { validatePassword } from 'common/validate/validatePassword'
 import { authSelectors } from 'features/auth'
 import { RegisterTC } from 'features/auth/authSlice'
@@ -17,7 +14,7 @@ import { Error, LoginForm, Question, SignUpBlock } from 'features/auth/Login/log
 import { PATH } from 'pages/path'
 
 export const Registration = () => {
-  const registerSuccess = useAppSelector<boolean>(authSelectors.registerSuccess)
+  const registerSuccess = useAppSelector(authSelectors.registerSuccess)
   const dispatch = useAppDispatch()
 
   const {

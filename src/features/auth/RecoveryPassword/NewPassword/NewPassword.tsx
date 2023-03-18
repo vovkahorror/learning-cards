@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { useForm } from 'react-hook-form'
 import { Navigate, useParams } from 'react-router-dom'
 
@@ -8,8 +6,7 @@ import { NewPasswordDescription } from './newPassword.styled'
 import { Button } from 'common/components/Button/Button'
 import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { validatePassword } from 'common/validate/validatePassword'
 import { authSelectors } from 'features/auth'
 import { RequestNewPasswordType } from 'features/auth/authAPI'

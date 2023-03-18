@@ -62,24 +62,24 @@ export const PackList = () => {
           </Cell>
         </Column>
 
-        <Column width={199} sortable>
+        <Column width={200} sortable>
           <HeaderCell>Cards</HeaderCell>
           <Cell dataKey="cardsCount" />
         </Column>
 
-        <Column width={199} sortable>
+        <Column width={200} sortable>
           <HeaderCell>Last Updated</HeaderCell>
           <Cell dataKey="updated">
             {rowData => new Date(rowData.updated).toLocaleDateString('uk-UA')}
           </Cell>
         </Column>
 
-        <Column width={249} sortable>
+        <Column width={240} sortable>
           <HeaderCell>Created by</HeaderCell>
           <Cell dataKey="user_name" />
         </Column>
 
-        <Column width={249}>
+        <Column width={240}>
           <HeaderCell>Actions</HeaderCell>
           <Cell>
             {rowData => (
