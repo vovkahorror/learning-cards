@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export type VariantsSnackbarType = 'info' | 'success' | 'error' | 'warning'
 
+type AppThemeType = 'light' | 'dark'
+
 type InitialStateType = {
   statusLoading: boolean
   infoSnackbar: {
@@ -9,6 +11,7 @@ type InitialStateType = {
     variant?: VariantsSnackbarType
   }
   isInitialized: boolean
+  appTheme: AppThemeType
 }
 
 export type SetInfoType = {
@@ -22,6 +25,7 @@ const appSlice = createSlice({
     statusLoading: false,
     infoSnackbar: { text: null, variant: undefined },
     isInitialized: false,
+    appTheme: 'light',
   } as InitialStateType,
   reducers: {
     setStatusLoading: (state, action: PayloadAction<boolean>) => {
@@ -33,8 +37,11 @@ const appSlice = createSlice({
     setIsInitialized: (state, action: PayloadAction<boolean>) => {
       state.isInitialized = action.payload
     },
+    setAppTheme: (state, action: PayloadAction<AppThemeType>) => {
+      state.appTheme = action.payload
+    },
   },
 })
 
-export const { setStatusLoading, setInfoSnackbar, setIsInitialized } = appSlice.actions
+export const { setStatusLoading, setInfoSnackbar, setIsInitialized, setAppTheme } = appSlice.actions
 export const appReducer = appSlice.reducer

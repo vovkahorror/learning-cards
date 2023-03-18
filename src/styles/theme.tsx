@@ -43,8 +43,8 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
     body {
-        background-color: ${theme.colors.bgPrimary};
-        color: ${theme.colors.dark};
+        background-color: var(--rs-body);
+        color: var(--rs-text-primary);
         margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
         'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

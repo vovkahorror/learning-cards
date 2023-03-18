@@ -7,7 +7,7 @@ export const Count = styled(Box)`
   align-items: center;
   width: 36px;
   height: 36px;
-  border-radius: 2px;
-  background-color: rgb(22, 41, 56);
-  color: #fff;
+  border-radius: 5px;
+  background-color: var(--rs-bg-card);
+  color: var(--rs-text-primary);
 `

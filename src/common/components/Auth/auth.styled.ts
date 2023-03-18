@@ -18,7 +18,7 @@ export const AuthContainerCard = styled.div<AuthContainerCardType>`
   padding: 30px;
   max-width: ${({ maxWidth }) => maxWidth};
   border-radius: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--rs-border-primary);
   min-width: 413px;
 `
 

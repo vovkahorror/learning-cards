@@ -9,6 +9,7 @@ export const InputSelector = styled.input`
   padding: 4px 30px 4px 0px;
   color: ${props => props.theme.colors.dark};
   font-size: 14px;
+  font-weight: 500;
   line-height: 1.5714285714285714;
   list-style: none;
   position: relative;
@@ -24,14 +25,10 @@ export const InputSelector = styled.input`
   z-index: 1;
 
   &:-webkit-autofill,
-  &:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 50px white inset;
-    -webkit-text-fill-color: #333;
-  }
-
-  &:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 50px white inset;
-    -webkit-text-fill-color: #333;
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
   }
 
   &:focus,
@@ -42,12 +39,12 @@ export const InputSelector = styled.input`
 
   &:focus + label,
   &:not(:placeholder-shown) + label {
-    top: -4px;
+    top: -7px;
   }
 `
 export const Label = styled.label`
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 500;
   color: ${props => props.theme.colors.dark};
   position: absolute;
   left: 0;
