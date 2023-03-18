@@ -9,7 +9,6 @@ import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { validateEmail } from 'common/validate/validateEmail'
-import { authSelectors } from 'features/auth'
 import { loginTC } from 'features/auth/authSlice'
 import {
   Error,
@@ -21,8 +20,8 @@ import {
 import { PATH } from 'pages/path'
 
 export const Login = () => {
-  const isLoggedIn = useAppSelector(authSelectors.isLoggedIn)
   const dispatch = useAppDispatch()
+  const isLoggedIn = useAppSelector<boolean>(state => state.auth.isLoggedIn)
 
   const {
     register,

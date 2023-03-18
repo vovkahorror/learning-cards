@@ -11,15 +11,13 @@ import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { validatePassword } from 'common/validate/validatePassword'
-import { authSelectors } from 'features/auth'
 import { RegisterTC } from 'features/auth/authSlice'
 import { Error, LoginForm, Question, SignUpBlock } from 'features/auth/Login/login.styled'
 import { PATH } from 'pages/path'
 
 export const Registration = () => {
-  const registerSuccess = useAppSelector(authSelectors.registerSuccess)
   const dispatch = useAppDispatch()
-
+  const registerSuccess = useAppSelector<boolean>(state => state.auth.registerSuccess)
   const {
     register,
     formState: { errors },

@@ -1,6 +1,7 @@
-import { memo, useState } from 'react'
+import React, { memo, useState } from 'react'
 
-import { EditForm, Field } from 'common/components'
+import { EditForm } from 'common/components/EditableSpan/EditForm'
+import { Field } from 'common/components/EditableSpan/Field'
 
 type EditableSpanPropsType = {
   value: string

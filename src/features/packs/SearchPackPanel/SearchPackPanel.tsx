@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Input } from 'rsuite'
 
-import { Button, Box } from 'common/components'
-import { useAppDispatch, useDebounce } from 'common/hooks'
+import { Button } from 'common/components/Button/Button'
+import { CustomRangeSlider } from 'common/components/CustomRangeSlider/CustomRangeSlider'
+import { Box } from 'common/components/Layout/Box'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { useDebounce } from 'common/hooks/useDebounce'
 import { ClearFilter } from 'features/cards/SearchCardPanel/SearchCardPanel.styled'
 import { addPackTC, clearSearchParams, setSearchParams } from 'features/packs/packsSlice'
-import { CustomRangeSlider } from 'features/packs/SearchPackPanel/CustomRangeSlider/CustomRangeSlider'
 import { TogglePacks } from 'features/packs/SearchPackPanel/TogglePacks/TogglePacks'
 
 export const SearchPackPanel = () => {
   const dispatch = useAppDispatch()
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState<string>('')
   const debounceValue = useDebounce(value, 1000)
 
   useEffect(() => {
