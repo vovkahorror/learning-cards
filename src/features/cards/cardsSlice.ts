@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
 
 import { setStatusLoading } from 'app/appSlice'
-import { RootState } from 'app/store'
+import { RootStateType } from 'app/store'
 import { errorUtils } from 'common/utils/error-utils'
 import {
   CardModelType,
@@ -31,7 +31,7 @@ export const getCardsDataTC = createAsyncThunk(
 export const addCardTC = createAsyncThunk(
   'cards/addCardTC',
   async (card: NewCardType, { dispatch, getState }) => {
-    const state = getState() as RootState
+    const state = getState() as RootStateType
     const page = state.cards.page
     const pageCount = state.cards.pageCount
 
@@ -51,7 +51,7 @@ export const addCardTC = createAsyncThunk(
 export const deleteCardTC = createAsyncThunk(
   'cards/deleteCardTC',
   async (cardId: string, { dispatch, getState }) => {
-    const state = getState() as RootState
+    const state = getState() as RootStateType
     const cardsPack_id = state.cards.cards.find(card => card._id === cardId)?.cardsPack_id as string
     const page = state.cards.page
     const pageCount = state.cards.pageCount
@@ -72,7 +72,7 @@ export const deleteCardTC = createAsyncThunk(
 export const updateCardTC = createAsyncThunk(
   'cards/updateCardTC',
   async (card: CardModelType, { dispatch, getState }) => {
-    const state = getState() as RootState
+    const state = getState() as RootStateType
     const currentCard = state.cards.cards.find(c => c._id === card._id)
 
     dispatch(setStatusLoading(true))

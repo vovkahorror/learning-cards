@@ -58,6 +58,7 @@ export const Cards = () => {
       dispatch(getCardsDataTC({ cardsPack_id, cardAnswer: searchParams, page, pageCount }))
     }
   }, [cardsPack_id, searchParams])
+  console.log('1')
 
   return (
     <div>

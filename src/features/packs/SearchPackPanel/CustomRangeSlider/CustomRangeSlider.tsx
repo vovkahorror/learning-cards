@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { RangeSlider } from 'rsuite'
 
-import { Box } from '../Layout/Box'
-
-import { Count } from 'common/components/CustomRangeSlider/Count'
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import { Box } from 'common/components/Layout/Box'
+import { useAppSelector, useAppDispatch } from 'common/hooks'
+import { packsSelectors } from 'features/packs/index'
 import { setSearchParams } from 'features/packs/packsSlice'
+import { Count } from 'features/packs/SearchPackPanel/CustomRangeSlider/Count'
 
 export const CustomRangeSlider = () => {
-  const minCardsCount = useAppSelector(state => state.packs.minCardsCount)
-  const maxCardsCount = useAppSelector(state => state.packs.maxCardsCount)
+  const minCardsCount = useAppSelector(packsSelectors.minCardsCount)
+  const maxCardsCount = useAppSelector(packsSelectors.maxCardsCount)
   const dispatch = useAppDispatch()
 
   const [value, setValue] = useState<[number, number]>([0, 0])

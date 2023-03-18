@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
 
@@ -8,9 +6,9 @@ import { Error, ForgotDescription, QuestionText } from './recovery.styled'
 import { Button, LinkText } from 'common/components/Button/Button'
 import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { validateEmail } from 'common/validate/validateEmail'
+import { authSelectors } from 'features/auth'
 import { recoveryPasswordTC } from 'features/auth/authSlice'
 import { PATH } from 'pages/path'
 
@@ -19,8 +17,9 @@ type FormData = {
 }
 
 export const Recovery = () => {
+  const isSetRecovery = useAppSelector(authSelectors.isSetRecovery)
   const dispatch = useAppDispatch()
-  const isSetRecovery = useAppSelector<boolean>(state => state.auth.isSetRecovery)
+
   const {
     register,
     handleSubmit,
