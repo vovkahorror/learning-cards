@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 import { Table } from 'rsuite'
 
 import { Box } from 'common/components/Layout/Box'
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { packsSelectors } from 'features/packs'
 import { PacksAction } from 'features/packs/PackList/PacksAction'
 import { CardPacksType } from 'features/packs/packsAPI'
@@ -18,9 +17,10 @@ type SortType = 'asc' | 'desc' | undefined
 type SortColumnType = string | undefined
 
 export const PackList = () => {
-  const navigate = useNavigate()
   const data = useAppSelector<CardPacksType[]>(packsSelectors.cardPacks)
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
+
   const [sortColumn, setSortColumn] = useState<SortColumnType>(undefined)
   const [sortType, setSortType] = useState<SortType>(undefined)
 
