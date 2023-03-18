@@ -2,7 +2,7 @@ import React from 'react'
 
 import { AiOutlineEdit } from 'react-icons/ai'
 
-import { Box } from 'common/components/Layout/Box'
+import { Box } from 'common/components'
 
 type FieldPropsType = {
   onEditMode: () => void

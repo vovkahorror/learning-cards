@@ -7,7 +7,7 @@ type BackToPacksPropsType = {
   onClick: () => void
 }
 
-export const BackToPacks = ({ onClick }: BackToPacksPropsType) => {
+export const BackToPacksList = ({ onClick }: BackToPacksPropsType) => {
   return (
     <BackToPacksWrapper onClick={onClick}>
       <ArrowLeft fill={'#fff'} />

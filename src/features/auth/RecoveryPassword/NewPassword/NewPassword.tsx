@@ -11,6 +11,7 @@ import { Box } from 'common/components/Layout/Box'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { validatePassword } from 'common/validate/validatePassword'
+import { authSelectors } from 'features/auth'
 import { RequestNewPasswordType } from 'features/auth/authAPI'
 import { setNewPasswordTC } from 'features/auth/authSlice'
 import { Error } from 'features/auth/RecoveryPassword/Recovery/recovery.styled'
@@ -21,8 +22,8 @@ export type FormData = {
 }
 
 export const NewPassword = () => {
+  const isSetNewPassword = useAppSelector(authSelectors.isSetNewPassword)
   const dispatch = useAppDispatch()
-  const isSetNewPassword = useAppSelector<boolean>(state => state.auth.isSetNewPassword)
   const { resetPasswordToken } = useParams()
 
   const {

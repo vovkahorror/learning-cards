@@ -1,10 +1,9 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 import { BsFillTrash3Fill, BsPencilFill, BsRocketTakeoffFill } from 'react-icons/bs'
 import styled from 'styled-components'
 
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { deletePackTC, editPackTC } from 'features/packs/packsSlice'
 
 export const Icon = styled.span<IconType>`

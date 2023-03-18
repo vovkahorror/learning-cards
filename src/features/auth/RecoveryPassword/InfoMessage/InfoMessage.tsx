@@ -12,7 +12,8 @@ import {
 import { PATH } from 'pages/path'
 
 export const InfoMessage = () => {
-  const userEmail = useAppSelector<string>(state => state.auth.userEmail)
+  const userEmail = useAppSelector(state => state.auth.userEmail)
+
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 

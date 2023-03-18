@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { BackToPacks } from 'common/components/BackToPacksList/BackToPacksList'
+import { BackToPacksList } from 'common/components/BackToPacksList/BackToPacksList'
 import { CustomPagination } from 'common/components/CustomPagination/CustomPagination'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
@@ -61,7 +61,7 @@ export const Cards = () => {
 
   return (
     <div>
-      <BackToPacks onClick={goToPackList} />
+      <BackToPacksList onClick={goToPackList} />
       <SearchCardPanel
         isNotEmptyPack={!!empty}
         isMyPack={isMyPack}

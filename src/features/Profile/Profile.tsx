@@ -1,22 +1,17 @@
-import React from 'react'
-
 import { AiOutlineCamera } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 
-import profileImg from '../../assets/img/profile.png'
-
-import { BackToPacks } from 'common/components/BackToPacksList/BackToPacksList'
-import { Button } from 'common/components/Button/Button'
-import { EditableSpan } from 'common/components/EditableSpan/EditableSpan'
-import { Box } from 'common/components/Layout/Box'
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import profileImg from 'assets/img/profile.png'
+import { BackToPacksList, Box, Button, EditableSpan } from 'common/components'
+import { useAppDispatch, useAppSelector } from 'common/hooks'
+import { authSelectors } from 'features/auth'
 import { logoutTC, setRegisterSuccess, updateUserName } from 'features/auth/authSlice'
 import { ProfileAvatar, ProfileAvatarImg, ProfileUpload } from 'features/Profile/profile.styled'
 import { PATH } from 'pages/path'
 
 export const Profile = () => {
-  const user = useAppSelector(state => state.auth.user)
+  const name = useAppSelector(authSelectors.name)
+  const email = useAppSelector(authSelectors.email)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -33,7 +28,7 @@ export const Profile = () => {
 
   return (
     <>
-      <BackToPacks onClick={handlerNavigateToPackList} />
+      <BackToPacksList onClick={handlerNavigateToPackList} />
       <Box display={'flex'} justifyContent={'center'}>
         <div>
           <Box display={'flex'} justifyContent={'center'}>
@@ -52,8 +47,8 @@ export const Profile = () => {
           </Box>
 
           <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={'15px'}>
-            <EditableSpan label={'Nickname'} value={user.name} onChange={setNewName} />
-            <p>{user.email}</p>
+            <EditableSpan label={'Nickname'} value={name} onChange={setNewName} />
+            <p>{email}</p>
           </Box>
 
           <Box

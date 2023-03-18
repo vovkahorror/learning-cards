@@ -1,22 +1,22 @@
-import React from 'react'
-
 import { useSearchParams } from 'react-router-dom'
 import { Radio, RadioGroup } from 'rsuite'
 
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import { useAppDispatch, useAppSelector } from 'common/hooks'
+import { authSelectors } from 'features/auth'
 import { setSearchParams } from 'features/packs/packsSlice'
 
 export const TogglePacks = () => {
-  const user_id = useAppSelector(state => state.auth.user._id)
+  const my_id = useAppSelector(authSelectors.id)
   const dispatch = useAppDispatch()
+
   let [params, setParams] = useSearchParams()
   const value = params.get('section') || 'all'
 
   const handlerMyCards = () => {
-    dispatch(setSearchParams({ user_id, page: 1 }))
+    dispatch(setSearchParams({ user_id: my_id, page: 1 }))
     setParams({ section: 'my' })
   }
+
   const handlerAllCards = () => {
     dispatch(setSearchParams({ user_id: null, page: 1 }))
     setParams({ section: 'all' })

@@ -1,14 +1,12 @@
-import React from 'react'
-
 import { useNavigate } from 'react-router-dom'
 import { Dropdown, IconButton } from 'rsuite'
 
 import { ReactComponent as LogOutIcon } from 'assets/img/logOutLogo.svg'
 import profileImg from 'assets/img/profile.png'
 import { ReactComponent as ProfileIcon } from 'assets/img/profileLogo.svg'
-import { Box } from 'common/components/Layout/Box'
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import { Box } from 'common/components'
+import { useAppDispatch, useAppSelector } from 'common/hooks'
+import { authSelectors } from 'features/auth'
 import { logoutTC } from 'features/auth/authSlice'
 import { PATH } from 'pages/path'
 
@@ -26,7 +24,7 @@ const renderIconButton = (props: any, ref: any) => {
 }
 
 export const ProfileHeader = () => {
-  const user = useAppSelector(state => state.auth.user)
+  const name = useAppSelector(authSelectors.name)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -35,7 +33,7 @@ export const ProfileHeader = () => {
 
   return (
     <Box display={'flex'} alignItems={'center'} style={{ position: 'relative' }}>
-      <p style={{ color: 'white', marginRight: '10px' }}>{user.name}</p>
+      <p style={{ color: 'white', marginRight: '10px' }}>{name}</p>
       <Dropdown placement="bottomEnd" renderToggle={renderIconButton}>
         <Dropdown.Item
           onClick={handlerNavigateToProfile}

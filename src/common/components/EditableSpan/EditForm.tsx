@@ -1,8 +1,6 @@
-import React, { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
-import { Button } from 'common/components/Button/Button'
-import { Input } from 'common/components/Input/Input'
-import { Box } from 'common/components/Layout/Box'
+import { Button, Input, Box } from 'common/components'
 
 type EditFormPropsType = {
   label: string
