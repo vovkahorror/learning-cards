@@ -46,7 +46,14 @@ export const CardList = ({ cards, isMyPack }: CardListPropsType) => {
 
   return (
     <Box mt="3">
-      <Table height={400} data={cards} wordWrap={'break-word'} renderEmpty={renderEmpty} autoHeight>
+      <Table
+        width={1080}
+        height={400}
+        data={cards}
+        wordWrap={'break-word'}
+        renderEmpty={renderEmpty}
+        autoHeight
+      >
         <Column flexGrow={1} align="left">
           <HeaderCell style={headerStyles}>Question</HeaderCell>
           <Cell dataKey="question" />

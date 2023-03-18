@@ -11,7 +11,7 @@ export const LayoutWrapper = () => {
       <Header />
       <AuthContainer>
         <Container>
-          <AuthContainerCard maxWidth="420px">
+          <AuthContainerCard maxWidth="fit-content">
             <Outlet />
           </AuthContainerCard>
         </Container>

@@ -40,6 +40,7 @@ export const PackList = () => {
     <Box mt="3">
       <Table
         height={500}
+        width={1080}
         data={data}
         sortColumn={sortColumn}
         sortType={sortType}
