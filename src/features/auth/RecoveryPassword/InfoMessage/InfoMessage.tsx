@@ -2,8 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Button } from 'common/components/Button/Button'
 import { Box } from 'common/components/Layout/Box'
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { authSelectors } from 'features/auth'
 import { setRecovery } from 'features/auth/authSlice'
 import {

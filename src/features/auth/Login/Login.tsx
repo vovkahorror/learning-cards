@@ -1,13 +1,10 @@
-import React from 'react'
-
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
 
 import { Button, LinkText } from 'common/components/Button/Button'
 import { Input } from 'common/components/Input/Input'
 import { Box } from 'common/components/Layout/Box'
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import { useAppSelector } from 'common/hooks/useAppSelector'
+import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { validateEmail } from 'common/validate/validateEmail'
 import { authSelectors } from 'features/auth'
 import { loginTC } from 'features/auth/authSlice'
