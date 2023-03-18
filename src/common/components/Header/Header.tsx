@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { BiMoon, BiSun } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 import Toggle from 'rsuite/esm/Toggle/Toggle'
