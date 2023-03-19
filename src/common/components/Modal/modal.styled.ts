@@ -11,10 +11,7 @@ export const ModalWrapper = styled.div<ModalWrapperType>`
 `
 
 export const Overlay = styled.div`
-  display: flex;
-  position: fixed;
-  top: 0;
-  right: 0;
+  position: absolute;
   width: 100%;
   height: 100%;
   background: black;
@@ -27,9 +24,9 @@ export const Rectangle = styled.div`
   padding: 24px;
   min-width: 395px;
   min-height: 311px;
+  border-radius: 10px;
   background: white;
   z-index: 3;
-  border-radius: 10px;
 `
 
 type ModalWrapperType = {
