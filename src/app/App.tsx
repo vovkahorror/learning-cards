@@ -29,8 +29,8 @@ export function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         {statusLoading && <Loader loading={'main'} />}
-        <Snackbar />
         <Pages />
+        <Snackbar />
       </ThemeProvider>
     </CustomProvider>
   )
