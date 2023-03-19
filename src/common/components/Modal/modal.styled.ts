@@ -27,8 +27,9 @@ export const Rectangle = styled.div`
   padding: 24px;
   min-width: 395px;
   min-height: 311px;
-  background: blueviolet;
+  background: white;
   z-index: 3;
+  border-radius: 10px;
 `
 
 type ModalWrapperType = {
