@@ -50,7 +50,7 @@ type BoxPropsType = {
     | 'left'
     | 'right'
     | 'space-between'
-    | 'space-arround'
+    | 'space-around'
 } & MarginType &
   PaddingType
 

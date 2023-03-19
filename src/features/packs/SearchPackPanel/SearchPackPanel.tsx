@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react'
 
 import { Input } from 'rsuite'
 
+import { setModal } from 'app/appSlice'
 import { Button, Box } from 'common/components'
 import { useAppDispatch, useDebounce } from 'common/hooks'
 import { ClearFilter } from 'features/cards/SearchCardPanel/SearchCardPanel.styled'
-import { addPackTC, clearSearchParams, setSearchParams } from 'features/packs/packsSlice'
+import { clearSearchParams, setSearchParams } from 'features/packs/packsSlice'
 import { CustomRangeSlider } from 'features/packs/SearchPackPanel/CustomRangeSlider/CustomRangeSlider'
 import { TogglePacks } from 'features/packs/SearchPackPanel/TogglePacks/TogglePacks'
 
@@ -24,8 +25,8 @@ export const SearchPackPanel = () => {
     setValue('')
   }
 
-  const handlerAddNewPack = () => {
-    dispatch(addPackTC({ name: 'Gdańsk', private: false }))
+  const modalToggle = () => {
+    dispatch(setModal(true))
   }
 
   const handlerChangeInput = (value: string) => {
@@ -62,7 +63,7 @@ export const SearchPackPanel = () => {
       </Box>
 
       <ClearFilter onClick={handlerClearFilter} />
-      <Button onClick={handlerAddNewPack}>Add pack</Button>
+      <Button onClick={modalToggle}>Add pack</Button>
     </Box>
   )
 }

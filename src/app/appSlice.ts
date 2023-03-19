@@ -12,6 +12,7 @@ type InitialStateType = {
   }
   isInitialized: boolean
   appTheme: AppThemeType
+  isModal: boolean
 }
 
 export type SetInfoType = {
@@ -26,6 +27,7 @@ const appSlice = createSlice({
     infoSnackbar: { text: null, variant: undefined },
     isInitialized: false,
     appTheme: 'light',
+    isModal: false,
   } as InitialStateType,
   reducers: {
     setStatusLoading: (state, action: PayloadAction<boolean>) => {
@@ -40,8 +42,12 @@ const appSlice = createSlice({
     setAppTheme: (state, action: PayloadAction<AppThemeType>) => {
       state.appTheme = action.payload
     },
+    setModal: (state, action: PayloadAction<boolean>) => {
+      state.isModal = action.payload
+    },
   },
 })
 
-export const { setStatusLoading, setInfoSnackbar, setIsInitialized, setAppTheme } = appSlice.actions
+export const { setStatusLoading, setInfoSnackbar, setIsInitialized, setAppTheme, setModal } =
+  appSlice.actions
 export const appReducer = appSlice.reducer
