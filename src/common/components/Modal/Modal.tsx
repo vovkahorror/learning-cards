@@ -28,8 +28,8 @@ export const Modal = ({ setShow, children }: PropsType) => {
   }
 
   return (
-    <FocusLock>
-      <Overlay onClick={handlerClickOutside}>
+    <Overlay onClick={handlerClickOutside}>
+      <FocusLock>
         <ModalContainer onClick={handlerClickModalContainer}>
           <div>Im a modal dialog</div>
           {children}
@@ -37,7 +37,7 @@ export const Modal = ({ setShow, children }: PropsType) => {
             Close
           </button>
         </ModalContainer>
-      </Overlay>
-    </FocusLock>
+      </FocusLock>
+    </Overlay>
   )
 }
