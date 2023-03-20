@@ -4,6 +4,7 @@ import thunk from 'redux-thunk'
 import { appReducer } from 'app/appSlice'
 import { authReducer } from 'features/auth/authSlice'
 import { cardsReducer } from 'features/cards/cardsSlice'
+import { modalReducer } from 'features/Modal/modalSlice'
 import { packsReducer } from 'features/packs/packsSlice'
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
     app: appReducer,
     packs: packsReducer,
     cards: cardsReducer,
+    modal: modalReducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunk),
 })
