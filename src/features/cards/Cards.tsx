@@ -10,10 +10,13 @@ import { CardList } from 'features/cards/CardList/CardList'
 import { EmptyCardList } from 'features/cards/CardList/EmptyCardList'
 import { addCardTC, getCardsDataTC, setTotalCount } from 'features/cards/cardsSlice'
 import { SearchCardPanel } from 'features/cards/SearchCardPanel/SearchCardPanel'
+import { packsSelectors } from 'features/packs'
 import { deletePackTC } from 'features/packs/packsSlice'
 
 export const Cards = () => {
+  const cardPacksTotalCount = useAppSelector(packsSelectors.cardPacksTotalCount)
   const [searchParams, setSearchParams] = useState('')
+  const [currentPacksCount, setCurrentPacksCount] = useState(cardPacksTotalCount)
   const dispatch = useAppDispatch()
   const { cardsPack_id } = useParams()
   const navigate = useNavigate()
@@ -35,6 +38,12 @@ export const Cards = () => {
       setEmpty(cardsTotalCount)
     }
   }, [cardsTotalCount])
+
+  useEffect(() => {
+    if (cardPacksTotalCount !== currentPacksCount) {
+      goToPackList()
+    }
+  }, [cardPacksTotalCount])
 
   useEffect(() => {
     if (cardsPack_id) {
@@ -62,7 +71,6 @@ export const Cards = () => {
   const deletePack = () => {
     if (cardsPack_id) {
       dispatch(deletePackTC(cardsPack_id))
-      goToPackList()
     }
   }
 
