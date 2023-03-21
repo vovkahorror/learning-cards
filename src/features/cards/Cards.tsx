@@ -8,9 +8,9 @@ import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { CardList } from 'features/cards/CardList/CardList'
 import { EmptyCardList } from 'features/cards/CardList/EmptyCardList'
-import { CardType } from 'features/cards/cardsAPI'
 import { addCardTC, getCardsDataTC, setTotalCount } from 'features/cards/cardsSlice'
 import { SearchCardPanel } from 'features/cards/SearchCardPanel/SearchCardPanel'
+import { deletePackTC } from 'features/packs/packsSlice'
 
 export const Cards = () => {
   const [searchParams, setSearchParams] = useState('')
@@ -18,14 +18,17 @@ export const Cards = () => {
   const { cardsPack_id } = useParams()
   const navigate = useNavigate()
 
-  const userId = useAppSelector<string>(state => state.auth.user._id)
-  const packUserId = useAppSelector<string>(state => state.cards.packUserId)
-  const cards = useAppSelector<CardType[]>(state => state.cards.cards)
+  const userId = useAppSelector(state => state.auth.user._id)
+  const packUserId = useAppSelector(state => state.cards.packUserId)
+  const cards = useAppSelector(state => state.cards.cards)
   const page = useAppSelector(state => state.cards.page)
   const pageCount = useAppSelector(state => state.cards.pageCount)
   const cardsTotalCount = useAppSelector(state => state.cards.cardsTotalCount)
 
   const [empty, setEmpty] = useState(0)
+
+  const isNotEmptyPack = !!cards.length
+  const isMyPack = userId === packUserId
 
   useEffect(() => {
     if (cardsTotalCount !== 0) {
@@ -33,8 +36,11 @@ export const Cards = () => {
     }
   }, [cardsTotalCount])
 
-  const isNotEmptyPack = !!cards.length
-  const isMyPack = userId === packUserId
+  useEffect(() => {
+    if (cardsPack_id) {
+      dispatch(getCardsDataTC({ cardsPack_id, cardAnswer: searchParams, page, pageCount }))
+    }
+  }, [cardsPack_id, searchParams])
 
   const addNewCard = () => {
     if (cardsPack_id) {
@@ -53,12 +59,12 @@ export const Cards = () => {
     dispatch(setTotalCount(0))
   }
 
-  useEffect(() => {
+  const deletePack = () => {
     if (cardsPack_id) {
-      dispatch(getCardsDataTC({ cardsPack_id, cardAnswer: searchParams, page, pageCount }))
+      dispatch(deletePackTC(cardsPack_id))
+      goToPackList()
     }
-  }, [cardsPack_id, searchParams])
-  console.log('1')
+  }
 
   return (
     <div>
@@ -68,11 +74,12 @@ export const Cards = () => {
         isMyPack={isMyPack}
         setSearchParams={setSearchParams}
         addNewCard={addNewCard}
+        deletePack={deletePack}
       />
-      {empty !== 0 ? (
-        <CardList cards={cards} isMyPack={isMyPack} />
-      ) : (
+      {empty === 0 ? (
         <EmptyCardList isMyPack={isMyPack} addNewCard={addNewCard} />
+      ) : (
+        <CardList cards={cards} isMyPack={isMyPack} />
       )}
       {isNotEmptyPack && (
         <CustomPagination

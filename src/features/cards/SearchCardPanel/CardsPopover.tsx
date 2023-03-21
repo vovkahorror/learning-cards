@@ -4,23 +4,29 @@ import { BsFillTrash3Fill, BsPencilFill, BsRocketTakeoffFill } from 'react-icons
 import { List, Popover } from 'rsuite'
 import styled from 'styled-components'
 
-export const CardsPopover = forwardRef(({ ...props }, ref: ForwardedRef<HTMLDivElement> | null) => {
-  return (
-    <Popover ref={ref} arrow {...props}>
-      <List>
-        <StyledListItem>
-          <BsPencilFill /> <span>Edit</span>
-        </StyledListItem>
-        <StyledListItem>
-          <BsFillTrash3Fill /> <span>Delete</span>
-        </StyledListItem>
-        <StyledListItem>
-          <BsRocketTakeoffFill /> <span>Learn</span>
-        </StyledListItem>
-      </List>
-    </Popover>
-  )
-})
+type CardsPopoverPropsType = {
+  deletePack: () => void
+}
+
+export const CardsPopover = forwardRef(
+  ({ deletePack, ...props }: CardsPopoverPropsType, ref: ForwardedRef<HTMLDivElement> | null) => {
+    return (
+      <Popover ref={ref} arrow {...props}>
+        <List>
+          <StyledListItem>
+            <BsPencilFill /> <span>Edit</span>
+          </StyledListItem>
+          <StyledListItem onClick={deletePack}>
+            <BsFillTrash3Fill /> <span>Delete</span>
+          </StyledListItem>
+          <StyledListItem>
+            <BsRocketTakeoffFill /> <span>Learn</span>
+          </StyledListItem>
+        </List>
+      </Popover>
+    )
+  }
+)
 
 const StyledListItem = styled(List.Item)`
   display: flex;

@@ -14,6 +14,7 @@ type SearchCardPanelPropsType = {
   isMyPack: boolean
   setSearchParams: (searchParams: string) => void
   addNewCard: () => void
+  deletePack: () => void
 }
 
 export const SearchCardPanel = ({
@@ -21,6 +22,7 @@ export const SearchCardPanel = ({
   isMyPack,
   setSearchParams,
   addNewCard,
+  deletePack,
 }: SearchCardPanelPropsType) => {
   const packName = useAppSelector(state => state.cards.packName)
   const [value, setValue] = useState<string>('')
@@ -42,7 +44,11 @@ export const SearchCardPanel = ({
             {packName}
           </span>
           {isMyPack && (
-            <Whisper trigger="click" placement={'bottom'} speaker={<CardsPopover />}>
+            <Whisper
+              trigger="click"
+              placement={'bottom'}
+              speaker={<CardsPopover deletePack={deletePack} />}
+            >
               <Box display={'flex'} alignItems={'center'}>
                 <IoEllipsisVerticalCircle size={22} color={'white'} cursor={'pointer'} />
               </Box>
