@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit'
-import thunk from 'redux-thunk'
 
 import { appReducer } from 'app/appSlice'
 import { authReducer } from 'features/auth/authSlice'
@@ -13,7 +12,6 @@ export const store = configureStore({
     packs: packsReducer,
     cards: cardsReducer,
   },
-  middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunk),
 })
 
 export type RootStateType = ReturnType<typeof store.getState>
