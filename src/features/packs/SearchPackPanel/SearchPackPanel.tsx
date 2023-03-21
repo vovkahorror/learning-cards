@@ -62,11 +62,9 @@ export const SearchPackPanel = () => {
         <Button onClick={handlerOpenModal}>Add pack</Button>
       </Box>
 
-      {showModal && (
-        <PortalModal title={'Add new pack'} show={showModal} setShow={setShowModal}>
-          <p>dsfsd</p>
-        </PortalModal>
-      )}
+      <PortalModal title={'Add new pack'} show={showModal} setShow={setShowModal}>
+        <p>dsfsd</p>
+      </PortalModal>
     </>
   )
 }

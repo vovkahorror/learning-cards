@@ -14,15 +14,14 @@ type PropsType = {
 export const PortalModal = ({ show, setShow, title, children }: PropsType) => {
   const handlerCloseModal = () => setShow(false)
 
-  return (
-    <>
-      {show &&
-        createPortal(
-          <Modal setShow={handlerCloseModal} title={title}>
-            {children}
-          </Modal>,
-          document.body
-        )}
-    </>
+  if (!show) {
+    return null
+  }
+
+  return createPortal(
+    <Modal setShow={handlerCloseModal} title={title}>
+      {children}
+    </Modal>,
+    document.body
   )
 }
