@@ -39,3 +39,25 @@ export const ModalContainer = styled.div`
   border-radius: 5px;
   padding: 20px;
 `
+
+export const PortalTitle = styled.p`
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: black;
+`
+
+export const Line = styled.hr`
+  margin: 20px 0 30px;
+  width: 100%;
+`
+
+export const CloseButton = styled.button`
+  padding: 5px 5px 3px 5px;
+  border-radius: 20px;
+  background-color: unset;
+
+  :hover {
+    background-color: rgba(190, 190, 190, 0.35);
+  }
+`

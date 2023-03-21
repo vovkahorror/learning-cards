@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Input } from 'rsuite'
 
 import { Button, Box } from 'common/components'
+import { PortalModal } from 'common/components/PortalModal/PortalModal'
 import { useAppDispatch, useDebounce } from 'common/hooks'
 import { ClearFilter } from 'features/cards/SearchCardPanel/SearchCardPanel.styled'
 import { clearSearchParams, setSearchParams } from 'features/packs/packsSlice'
@@ -14,6 +15,7 @@ export const SearchPackPanel = () => {
 
   const [value, setValue] = useState<string>('')
   const debounceValue = useDebounce(value, 1000)
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     dispatch(setSearchParams({ packName: debounceValue }))
@@ -23,47 +25,48 @@ export const SearchPackPanel = () => {
     dispatch(clearSearchParams())
     setValue('')
   }
-
-  const modalToggle = () => {
-    // dispatch(setModal(true))
-    // dispatch(setTitle('Add New Pack'))
-  }
-
-  const handlerChangeInput = (value: string) => {
-    setValue(value)
-  }
+  const handlerOpenModal = () => setShowModal(true)
+  const handlerChangeInput = (value: string) => setValue(value)
 
   return (
-    <Box
-      width={'100%'}
-      display={'flex'}
-      justifyContent={'space-between'}
-      gap={'20px'}
-      alignItems={'end'}
-    >
-      <Box width={'413px'}>
-        <Box mb={'2'}>
-          <p style={{ color: 'white' }}>Search</p>
+    <>
+      <Box
+        width={'100%'}
+        display={'flex'}
+        justifyContent={'space-between'}
+        gap={'20px'}
+        alignItems={'end'}
+      >
+        <Box width={'413px'}>
+          <Box mb={'2'}>
+            <p style={{ color: 'white' }}>Search</p>
+          </Box>
+          <Input value={value} onChange={handlerChangeInput} />
         </Box>
-        <Input value={value} onChange={handlerChangeInput} />
+
+        <Box>
+          <Box mb={'2'}>
+            <p>Show packs cards</p>
+          </Box>
+          <TogglePacks />
+        </Box>
+
+        <Box>
+          <Box mb={'2'}>
+            <p>Number of cards</p>
+          </Box>
+          <CustomRangeSlider />
+        </Box>
+
+        <ClearFilter onClick={handlerClearFilter} />
+        <Button onClick={handlerOpenModal}>Add pack</Button>
       </Box>
 
-      <Box>
-        <Box mb={'2'}>
-          <p>Show packs cards</p>
-        </Box>
-        <TogglePacks />
-      </Box>
-
-      <Box>
-        <Box mb={'2'}>
-          <p>Number of cards</p>
-        </Box>
-        <CustomRangeSlider />
-      </Box>
-
-      <ClearFilter onClick={handlerClearFilter} />
-      <Button onClick={modalToggle}>Add pack</Button>
-    </Box>
+      {showModal && (
+        <PortalModal title={'Add new pack'} show={showModal} setShow={setShowModal}>
+          <p>dsfsd</p>
+        </PortalModal>
+      )}
+    </>
   )
 }

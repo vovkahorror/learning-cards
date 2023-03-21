@@ -7,15 +7,22 @@ import { Modal } from 'common/components/Modal/Modal'
 type PropsType = {
   show: boolean
   setShow: (show: boolean) => void
+  title: string
   children: ReactNode
 }
 
-export const PortalModal = ({ show, setShow, children }: PropsType) => {
+export const PortalModal = ({ show, setShow, title, children }: PropsType) => {
   const handlerCloseModal = () => setShow(false)
 
   return (
     <>
-      {show && createPortal(<Modal setShow={handlerCloseModal}>{children}</Modal>, document.body)}
+      {show &&
+        createPortal(
+          <Modal setShow={handlerCloseModal} title={title}>
+            {children}
+          </Modal>,
+          document.body
+        )}
     </>
   )
 }

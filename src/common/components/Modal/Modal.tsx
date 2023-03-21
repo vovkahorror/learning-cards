@@ -1,15 +1,19 @@
 import { MouseEvent, ReactNode, useEffect } from 'react'
 
 import FocusLock from 'react-focus-lock'
+import { AiOutlineClose } from 'react-icons/ai'
 
-import { ModalContainer, Overlay } from './styled'
+import { ModalContainer, Overlay, PortalTitle, Line, CloseButton } from './styled'
+
+import { Box } from 'common/components'
 
 type PropsType = {
   setShow: () => void
+  title: string
   children: ReactNode
 }
 
-export const Modal = ({ setShow, children }: PropsType) => {
+export const Modal = ({ setShow, title, children }: PropsType) => {
   useEffect(() => {
     document.body.style.overflow = 'hidden'
     document.addEventListener('keydown', handlerKeyPress)
@@ -31,11 +35,15 @@ export const Modal = ({ setShow, children }: PropsType) => {
     <Overlay onClick={handlerClickOutside}>
       <FocusLock>
         <ModalContainer onClick={handlerClickModalContainer}>
-          <div>Im a modal dialog</div>
+          <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
+            <PortalTitle>{title}</PortalTitle>
+            <CloseButton onClick={handlerCloseModal}>
+              <AiOutlineClose size={'18px'} />
+            </CloseButton>
+          </Box>
+          <Line />
+
           {children}
-          <button tabIndex={1} onClick={handlerCloseModal}>
-            Close
-          </button>
         </ModalContainer>
       </FocusLock>
     </Overlay>
