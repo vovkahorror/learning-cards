@@ -14,15 +14,19 @@ const variants = {
     background-color: ${theme.btn.primary.bg};
     color: ${theme.btn.primary.color};
     box-shadow: ${theme.btn.primary.boxShadow};
+
     &:hover {
       background: ${theme.btn.primary.bgHover};
     }
+
     transition: all 0.3s ease;
   `,
   ['secondary']: theme.colors.secondary,
   ['success']: theme.colors.success,
   ['danger']: theme.colors.danger,
-  ['warning']: theme.colors.warning,
+  ['warning']: css`
+    background-color: ${theme.colors.danger};
+  `,
 }
 
 const sizes = {
