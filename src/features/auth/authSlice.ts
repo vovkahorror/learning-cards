@@ -11,15 +11,17 @@ import {
 } from 'features/auth/authAPI'
 import { emailMassage } from 'features/auth/RecoveryPassword/InfoMessage/emailMassage'
 
-type InitialStateType = {
-  isSetRecovery: boolean
-  userEmail: string
-  userName: string
-  isSetNewPassword: boolean
-  user: UserType
-  isLoggedIn: boolean
-  registerSuccess: boolean
-}
+// type InitialStateType = {
+//   isSetRecovery: boolean
+//   userEmail: string
+//   userName: string
+//   isSetNewPassword: boolean
+//   user: UserType
+//   isLoggedIn: boolean
+//   registerSuccess: boolean
+// }
+
+export type AuthInitialStateType = ReturnType<typeof authSlice.getInitialState>
 
 export const authMeTC = createAsyncThunk('auth/authMe', async (_, { dispatch }) => {
   try {
@@ -138,17 +140,16 @@ export const updateUserName = createAsyncThunk(
   }
 )
 
-const authSlice = createSlice({
+export const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: {},
+    user: {} as UserType,
     isSetRecovery: false,
     userEmail: '',
-    userName: '',
     isSetNewPassword: false,
     registerSuccess: false,
     isLoggedIn: false,
-  } as InitialStateType,
+  },
   reducers: {
     setRecovery: (state, action: PayloadAction<boolean>) => {
       state.isSetRecovery = action.payload
