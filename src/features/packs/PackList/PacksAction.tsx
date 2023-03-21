@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { authSelectors } from 'features/auth'
-import { deletePackTC, editPackTC } from 'features/packs/packsSlice'
+import { deletePackTC, editPackTC, fetchPacksTC } from 'features/packs/packsSlice'
 
 export const Icon = styled.span<IconType>`
   margin-right: 5px;
@@ -30,8 +30,9 @@ export const PacksAction: FC<PackListActionType> = ({ user_id, pack_id, cardsCou
   const dispatch = useAppDispatch()
   const myId = useAppSelector(authSelectors.id)
 
-  const removePack = () => {
-    dispatch(deletePackTC(pack_id))
+  const removePack = async () => {
+    await dispatch(deletePackTC(pack_id))
+    dispatch(fetchPacksTC())
   }
 
   const editPack = (name: string) => {
