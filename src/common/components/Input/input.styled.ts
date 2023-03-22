@@ -6,7 +6,7 @@ export const InputContainer = styled.div`
 export const InputSelector = styled.input`
   box-sizing: border-box;
   margin: 0;
-  padding: 4px 30px 4px 0px;
+  padding: 4px 30px 4px 0;
   color: ${props => props.theme.colors.dark};
   font-size: 14px;
   font-weight: 500;
@@ -106,6 +106,7 @@ export const Checkbox = styled.label`
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
+  color: ${props => props.theme.colors.fontMain};
 
   input {
     width: 0;
