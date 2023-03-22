@@ -1,6 +1,7 @@
 import { FC } from 'react'
 
 import { BsFillTrash3Fill, BsPencilFill, BsRocketTakeoffFill } from 'react-icons/bs'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { useAppSelector, useAppDispatch } from 'common/hooks'
@@ -27,15 +28,19 @@ const IconDisable = styled(Icon)`
 `
 
 export const PacksAction: FC<PackListActionType> = ({ user_id, pack_id, cardsCount }) => {
-  const dispatch = useAppDispatch()
   const myId = useAppSelector(authSelectors.id)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const removePack = () => {
     dispatch(deletePackTC(pack_id))
   }
-
   const editPack = (name: string) => {
     dispatch(editPackTC({ name, _id: pack_id }))
+  }
+
+  const handlerNavigateToLearn = () => {
+    navigate(`/learn/${pack_id}`)
   }
 
   return (
@@ -54,7 +59,7 @@ export const PacksAction: FC<PackListActionType> = ({ user_id, pack_id, cardsCou
         </>
       ) : (
         <>
-          <IconDisable cardsCount={cardsCount}>
+          <IconDisable cardsCount={cardsCount} onClick={handlerNavigateToLearn}>
             <BsRocketTakeoffFill />
           </IconDisable>
         </>
