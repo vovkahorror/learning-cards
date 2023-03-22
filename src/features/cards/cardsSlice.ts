@@ -10,14 +10,27 @@ import {
   CardType,
   GetCardsParamsType,
   NewCardType,
+  Sort,
 } from 'features/cards/cardsAPI'
 
 export const getCardsDataTC = createAsyncThunk(
   'cards/getCardsData',
-  async (params: GetCardsParamsType, { dispatch }) => {
+  async (params: GetCardsParamsType, { dispatch, getState }) => {
     dispatch(setStatusLoading(true))
+
+    const state = getState() as RootStateType
+    const page = params.page || state.cards.page
+    const pageCount = params.pageCount || state.cards.pageCount
+    const sortType = state.cards.sort.sortType
+    const sortColumn = state.cards.sort.sortColumn
+    let sortCards = '0created'
+
+    if (sortColumn && sortType) {
+      sortCards = `${sortType === 'asc' ? Sort.down : Sort.up}${sortColumn}`
+    }
+
     try {
-      const res = await cardsAPI.getCards(params)
+      const res = await cardsAPI.getCards({ ...params, page, pageCount, sortCards })
 
       dispatch(setCardsData(res.data))
     } catch (e) {
@@ -30,16 +43,13 @@ export const getCardsDataTC = createAsyncThunk(
 
 export const addCardTC = createAsyncThunk(
   'cards/addCardTC',
-  async (card: NewCardType, { dispatch, getState }) => {
-    const state = getState() as RootStateType
-    const page = state.cards.page
-    const pageCount = state.cards.pageCount
-
+  async (card: NewCardType, { dispatch }) => {
     dispatch(setStatusLoading(true))
+
     try {
       await cardsAPI.addCard(card)
 
-      dispatch(getCardsDataTC({ cardsPack_id: card.cardsPack_id, page, pageCount }))
+      dispatch(getCardsDataTC({ cardsPack_id: card.cardsPack_id }))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
@@ -51,16 +61,15 @@ export const addCardTC = createAsyncThunk(
 export const deleteCardTC = createAsyncThunk(
   'cards/deleteCardTC',
   async (cardId: string, { dispatch, getState }) => {
+    dispatch(setStatusLoading(true))
+
     const state = getState() as RootStateType
     const cardsPack_id = state.cards.cards.find(card => card._id === cardId)?.cardsPack_id as string
-    const page = state.cards.page
-    const pageCount = state.cards.pageCount
 
-    dispatch(setStatusLoading(true))
     try {
       await cardsAPI.deleteCard(cardId)
 
-      dispatch(getCardsDataTC({ cardsPack_id, page, pageCount }))
+      dispatch(getCardsDataTC({ cardsPack_id }))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
@@ -72,10 +81,11 @@ export const deleteCardTC = createAsyncThunk(
 export const updateCardTC = createAsyncThunk(
   'cards/updateCardTC',
   async (card: CardModelType, { dispatch, getState }) => {
+    dispatch(setStatusLoading(true))
+
     const state = getState() as RootStateType
     const currentCard = state.cards.cards.find(c => c._id === card._id)
 
-    dispatch(setStatusLoading(true))
     try {
       await cardsAPI.updateCard({ ...currentCard, ...card })
 
@@ -99,6 +109,10 @@ const cardsSLice = createSlice({
     page: 1,
     pageCount: 10,
     packUserId: '',
+    sort: {
+      sortColumn: undefined,
+      sortType: undefined,
+    },
   } as CardsStateType,
   reducers: {
     setCardsData(state, action: PayloadAction<CardsStateType>) {
@@ -120,12 +134,15 @@ const cardsSLice = createSlice({
     setTotalCount: (state, action: PayloadAction<number>) => {
       state.cardsTotalCount = action.payload
     },
+    setSort: (state, action: PayloadAction<TotalSortType>) => {
+      state.sort = { ...action.payload }
+    },
   },
 })
 
 export const cardsReducer = cardsSLice.reducer
 
-export const { setCardsData, setTotalCount } = cardsSLice.actions
+export const { setCardsData, setTotalCount, setSort } = cardsSLice.actions
 
 export type CardsStateType = {
   cards: CardType[]
@@ -136,4 +153,12 @@ export type CardsStateType = {
   page: number
   pageCount: number
   packUserId: string
+  sort: TotalSortType
 }
+
+export type TotalSortType = {
+  sortColumn: SortColumnType
+  sortType: SortType
+}
+export type SortColumnType = string | undefined
+export type SortType = 'asc' | 'desc' | undefined

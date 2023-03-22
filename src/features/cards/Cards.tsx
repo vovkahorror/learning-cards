@@ -47,7 +47,7 @@ export const Cards = () => {
 
   useEffect(() => {
     if (cardsPack_id) {
-      dispatch(getCardsDataTC({ cardsPack_id, cardAnswer: searchParams, page, pageCount }))
+      dispatch(getCardsDataTC({ cardsPack_id, cardAnswer: searchParams }))
     }
   }, [cardsPack_id, searchParams])
 
@@ -87,7 +87,7 @@ export const Cards = () => {
       {empty === 0 ? (
         <EmptyCardList isMyPack={isMyPack} addNewCard={addNewCard} />
       ) : (
-        <CardList cards={cards} isMyPack={isMyPack} />
+        <CardList cardsPack_id={cardsPack_id} cards={cards} isMyPack={isMyPack} />
       )}
       {isNotEmptyPack && (
         <CustomPagination

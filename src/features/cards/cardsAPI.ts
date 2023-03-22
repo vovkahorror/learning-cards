@@ -62,3 +62,8 @@ export type CardModelType = {
   created?: string
   updated?: string
 }
+
+export enum Sort {
+  up = 0,
+  down = 1,
+}
