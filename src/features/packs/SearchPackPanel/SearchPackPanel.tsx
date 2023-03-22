@@ -22,6 +22,7 @@ export const SearchPackPanel = () => {
   }, [debounceValue])
 
   const handlerClearFilter = () => {
+    console.log(1)
     dispatch(clearSearchParams())
     setValue('')
   }
