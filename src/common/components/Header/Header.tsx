@@ -30,8 +30,12 @@ export const Header = () => {
             <Toggle
               onChange={handleSetTheme}
               size="lg"
-              checkedChildren={<BiSun className={'rs-icon'} size={'1.2rem'} />}
-              unCheckedChildren={<BiMoon className={'rs-icon'} size={'1.2rem'} />}
+              checkedChildren={
+                <BiSun style={{ paddingBottom: '2px' }} className={'rs-icon'} size={'1.2rem'} />
+              }
+              unCheckedChildren={
+                <BiMoon style={{ paddingBottom: '2px' }} className={'rs-icon'} size={'1.2rem'} />
+              }
             />
 
             {isLoggedIn && <ProfileHeader />}
