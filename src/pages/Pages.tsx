@@ -9,6 +9,7 @@ import { NewPassword } from 'features/auth/RecoveryPassword/NewPassword/NewPassw
 import { Recovery } from 'features/auth/RecoveryPassword/Recovery/Recovery'
 import { Registration } from 'features/auth/Registration/Registration'
 import { Cards } from 'features/cards/Cards'
+import { Learn } from 'features/learn/Learn'
 import { Packs } from 'features/packs/Packs'
 import { Profile } from 'features/Profile/Profile'
 import { PATH } from 'pages/path'
@@ -32,6 +33,7 @@ export const Pages = () => {
           <Route path={PATH.CARDS}>
             <Route path={':cardsPack_id'} element={<Cards />} />
           </Route>
+          <Route path={PATH.LEARN} element={<Learn />} />
         </Route>
 
         <Route path={PATH.NOT_FOUND} element={<NotFound />} />
