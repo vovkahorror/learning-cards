@@ -11,19 +11,21 @@ type CardsPopoverPropsType = {
 export const CardsPopover = forwardRef(
   ({ deletePack, ...props }: CardsPopoverPropsType, ref: ForwardedRef<HTMLDivElement> | null) => {
     return (
-      <Popover ref={ref} arrow {...props}>
-        <List>
-          <StyledListItem>
-            <BsPencilFill /> <span>Edit</span>
-          </StyledListItem>
-          <StyledListItem onClick={deletePack}>
-            <BsFillTrash3Fill /> <span>Delete</span>
-          </StyledListItem>
-          <StyledListItem>
-            <BsRocketTakeoffFill /> <span>Learn</span>
-          </StyledListItem>
-        </List>
-      </Popover>
+      <>
+        <Popover ref={ref} arrow {...props}>
+          <List>
+            <StyledListItem>
+              <BsPencilFill /> <span>Edit</span>
+            </StyledListItem>
+            <StyledListItem onClick={deletePack}>
+              <BsFillTrash3Fill /> <span>Delete</span>
+            </StyledListItem>
+            <StyledListItem>
+              <BsRocketTakeoffFill /> <span>Learn</span>
+            </StyledListItem>
+          </List>
+        </Popover>
+      </>
     )
   }
 )

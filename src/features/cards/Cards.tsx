@@ -10,10 +10,13 @@ import { CardList } from 'features/cards/CardList/CardList'
 import { EmptyCardList } from 'features/cards/CardList/EmptyCardList'
 import { addCardTC, getCardsDataTC, setTotalCount } from 'features/cards/cardsSlice'
 import { SearchCardPanel } from 'features/cards/SearchCardPanel/SearchCardPanel'
+import { packsSelectors } from 'features/packs'
 import { deletePackTC } from 'features/packs/packsSlice'
 
 export const Cards = () => {
+  const cardPacksTotalCount = useAppSelector(packsSelectors.cardPacksTotalCount)
   const [searchParams, setSearchParams] = useState('')
+  const [currentPacksCount, setCurrentPacksCount] = useState(cardPacksTotalCount)
   const dispatch = useAppDispatch()
   const { cardsPack_id } = useParams()
   const navigate = useNavigate()
@@ -37,14 +40,20 @@ export const Cards = () => {
   }, [cardsTotalCount])
 
   useEffect(() => {
+    if (cardPacksTotalCount !== currentPacksCount) {
+      goToPackList()
+    }
+  }, [cardPacksTotalCount])
+
+  useEffect(() => {
     if (cardsPack_id) {
-      dispatch(getCardsDataTC({ cardsPack_id, cardAnswer: searchParams, page, pageCount }))
+      dispatch(getCardsDataTC({ cardsPack_id, cardAnswer: searchParams }))
     }
   }, [cardsPack_id, searchParams])
 
-  const addNewCard = () => {
+  const addNewCard = (format: string | null, question: string, answer: string) => {
     if (cardsPack_id) {
-      dispatch(addCardTC({ cardsPack_id, question: 'NEW QUESTION', answer: 'NEW ANSWER' }))
+      dispatch(addCardTC({ cardsPack_id, question, answer }))
     }
   }
 
@@ -62,8 +71,11 @@ export const Cards = () => {
   const deletePack = () => {
     if (cardsPack_id) {
       dispatch(deletePackTC(cardsPack_id))
-      goToPackList()
     }
+  }
+
+  const navigateToLearn = () => {
+    navigate(`/learn/${cardsPack_id}`)
   }
 
   return (
@@ -75,11 +87,12 @@ export const Cards = () => {
         setSearchParams={setSearchParams}
         addNewCard={addNewCard}
         deletePack={deletePack}
+        navigateToLearn={navigateToLearn}
       />
       {empty === 0 ? (
         <EmptyCardList isMyPack={isMyPack} addNewCard={addNewCard} />
       ) : (
-        <CardList cards={cards} isMyPack={isMyPack} />
+        <CardList cardsPack_id={cardsPack_id} cards={cards} isMyPack={isMyPack} />
       )}
       {isNotEmptyPack && (
         <CustomPagination

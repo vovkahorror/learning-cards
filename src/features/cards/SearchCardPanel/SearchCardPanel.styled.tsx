@@ -1,3 +1,5 @@
+import { FC } from 'react'
+
 import { ReactComponent as FilterIcon } from 'assets/img/filter.svg'
 import { styled } from 'styles/theme'
 
@@ -14,9 +16,9 @@ const ClearFiltgerContainer = styled.button`
   cursor: pointer;
 `
 
-export const ClearFilter: React.FC<ClearFilterType> = () => {
+export const ClearFilter: FC<ClearFilterType> = ({ onClick }) => {
   return (
-    <ClearFiltgerContainer>
+    <ClearFiltgerContainer onClick={onClick}>
       <FilterIcon />
     </ClearFiltgerContainer>
   )

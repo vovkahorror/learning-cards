@@ -14,6 +14,9 @@ export const cardsAPI = {
   updateCard: (card: CardModelType) => {
     return instance.put('cards/card', { card })
   },
+  updateGrade: (param: UpdateGradeParamsType) => {
+    return instance.put<UpdateCardType>('cards/grade', param)
+  },
 }
 
 export type GetCardsParamsType = {
@@ -61,4 +64,31 @@ export type CardModelType = {
   user_id?: string
   created?: string
   updated?: string
+}
+
+export enum Sort {
+  up = 0,
+  down = 1,
+}
+
+export type UpdateGradeParamsType = {
+  grade: number
+  card_id: string
+}
+
+type UpdateCardType = {
+  token: string
+  tokenDeathTime: number
+  updatedGrade: {
+    card_id: string
+    cardsPack_id: string
+    created: string
+    grade: number
+    more_id: string
+    shots: number
+    updated: string
+    user_id: string
+    __v: number
+    _id: string
+  }
 }

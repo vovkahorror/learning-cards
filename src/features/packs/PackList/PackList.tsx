@@ -87,6 +87,7 @@ export const PackList = () => {
                 user_id={rowData.user_id}
                 pack_id={rowData._id}
                 cardsCount={rowData.cardsCount}
+                name={rowData.name}
               />
             )}
           </Cell>
