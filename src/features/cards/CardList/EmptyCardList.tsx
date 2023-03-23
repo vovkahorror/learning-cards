@@ -1,26 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import styled from 'styled-components'
 
 import { Button } from 'common/components/Button/Button'
 import { Box } from 'common/components/Layout/Box'
+import { PortalModal } from 'common/components/PortalModal/PortalModal'
+import { CardModal } from 'features/cards/CardList/CardModal'
 
-type EmptyCardListPropsType = {
-  isMyPack: boolean
+export const EmptyCardList = ({ isMyPack, addNewCard }: EmptyCardListPropsType) => {
+  const [showModal, setShowModal] = useState(false)
 
-  addNewCard: () => void
-}
+  const handlerOpenModal = () => setShowModal(true)
 
-export const EmptyCardList = ({
-  isMyPack,
-
-  addNewCard,
-}: EmptyCardListPropsType) => {
   return (
-    <EmptyCardListWrapper>
-      <p>This pack is empty. {isMyPack && <span>Click add new card to fill this pack</span>}</p>
-      {isMyPack && <Button onClick={addNewCard}>Add new card</Button>}
-    </EmptyCardListWrapper>
+    <>
+      <EmptyCardListWrapper>
+        <p>This pack is empty. {isMyPack && <span>Click add new card to fill this pack</span>}</p>
+        {isMyPack && <Button onClick={handlerOpenModal}>Add new card</Button>}
+      </EmptyCardListWrapper>
+
+      <PortalModal title={'Add new card'} show={showModal} setShow={setShowModal}>
+        <CardModal setShowModal={setShowModal} addEditCard={addNewCard} />
+      </PortalModal>
+    </>
   )
 }
 
@@ -32,3 +34,8 @@ export const EmptyCardListWrapper = styled(Box)`
   gap: 32px;
   height: 50vh;
 `
+
+type EmptyCardListPropsType = {
+  isMyPack: boolean
+  addNewCard: (format: string | null, question: string, answer: string) => void
+}

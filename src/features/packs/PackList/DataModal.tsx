@@ -4,11 +4,11 @@ import styled from 'styled-components'
 
 import { Box, Button, Input } from 'common/components'
 
-const CopyButton = styled(Button)`
+export const CopyButton = styled(Button)`
   width: 130px;
 `
 
-const CancelButton = styled(CopyButton)`
+export const CancelButton = styled(CopyButton)`
   background: none;
   border: 2px ${props => props.theme.colors.fontMain} solid;
   color: ${props => props.theme.colors.fontMain};
@@ -18,7 +18,7 @@ const CancelButton = styled(CopyButton)`
   }
 `
 
-const DeleteButton = styled(CopyButton)`
+export const DeleteButton = styled(CopyButton)`
   background: ${props => props.theme.colors.danger};
 
   &:hover {

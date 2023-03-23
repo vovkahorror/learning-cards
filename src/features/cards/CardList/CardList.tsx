@@ -1,23 +1,16 @@
 import React, { useEffect } from 'react'
 
-import { BsFillTrash3Fill, BsPencilFill } from 'react-icons/bs'
 import { Rate, Table } from 'rsuite'
 import styled from 'styled-components'
 
 import { Box } from 'common/components/Layout/Box'
 import { useAppSelector } from 'common/hooks'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { CardActions } from 'features/cards/CardList/CardActions'
 import { EmptyCardListWrapper } from 'features/cards/CardList/EmptyCardList'
 import { CardType } from 'features/cards/cardsAPI'
-import {
-  deleteCardTC,
-  getCardsDataTC,
-  setSort,
-  SortColumnType,
-  SortType,
-  updateCardTC,
-} from 'features/cards/cardsSlice'
-import { Icon } from 'features/packs/PackList/PacksAction'
+import { getCardsDataTC, setSort, SortColumnType, SortType } from 'features/cards/cardsSlice'
+import { updateGradeTC } from 'features/learn/learnSlice'
 
 type CardListPropsType = {
   cardsPack_id?: string
@@ -32,8 +25,6 @@ export const CardList = ({ cardsPack_id, cards, isMyPack }: CardListPropsType) =
 
   const sortColumn = useAppSelector(state => state.cards.sort.sortColumn)
   const sortType = useAppSelector(state => state.cards.sort.sortType)
-  // const [sortColumn, setSortColumn] = useState<SortColumnType>(undefined)
-  // const [sortType, setSortType] = useState<SortType>(undefined)
 
   useEffect(() => {
     if (cardsPack_id && sortColumn && sortType) {
@@ -52,21 +43,11 @@ export const CardList = ({ cardsPack_id, cards, isMyPack }: CardListPropsType) =
   )
 
   const gradeHandler = (_id: string) => (grade: number) => {
-    dispatch(updateCardTC({ _id, grade }))
-  }
-
-  const updateCard = (_id: string) => {
-    dispatch(updateCardTC({ _id, question: 'UPDATED QUESTION', answer: 'UPDATED ANSWER' }))
-  }
-
-  const deleteCard = (_id: string) => {
-    dispatch(deleteCardTC(_id))
+    dispatch(updateGradeTC({ card_id: _id, grade }))
   }
 
   const handleSortColumn = (sortColumn: SortColumnType, sortType: SortType) => {
     dispatch(setSort({ sortColumn, sortType }))
-    // setSortColumn(sortColumn)
-    // setSortType(sortType)
   }
 
   return (
@@ -115,7 +96,6 @@ export const CardList = ({ cardsPack_id, cards, isMyPack }: CardListPropsType) =
                 style={{ color: '#FFC700' }}
                 allowHalf
                 onChange={gradeHandler(rowData._id)}
-                readOnly={!isMyPack}
               />
             )}
           </Cell>
@@ -126,14 +106,11 @@ export const CardList = ({ cardsPack_id, cards, isMyPack }: CardListPropsType) =
             <StyledHeader>{}</StyledHeader>
             <Cell style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
               {rowData => (
-                <Box display={'flex'}>
-                  <Icon>
-                    <BsPencilFill onClick={() => updateCard(rowData._id)} />
-                  </Icon>
-                  <Icon>
-                    <BsFillTrash3Fill onClick={() => deleteCard(rowData._id)} />
-                  </Icon>
-                </Box>
+                <CardActions
+                  _id={rowData._id}
+                  question={rowData.question}
+                  answer={rowData.answer}
+                />
               )}
             </Cell>
           </Column>

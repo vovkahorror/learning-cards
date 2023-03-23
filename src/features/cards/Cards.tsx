@@ -51,9 +51,9 @@ export const Cards = () => {
     }
   }, [cardsPack_id, searchParams])
 
-  const addNewCard = () => {
+  const addNewCard = (format: string | null, question: string, answer: string) => {
     if (cardsPack_id) {
-      dispatch(addCardTC({ cardsPack_id, question: 'NEW QUESTION', answer: 'NEW ANSWER' }))
+      dispatch(addCardTC({ cardsPack_id, question, answer }))
     }
   }
 
@@ -74,6 +74,10 @@ export const Cards = () => {
     }
   }
 
+  const navigateToLearn = () => {
+    navigate(`/learn/${cardsPack_id}`)
+  }
+
   return (
     <div>
       <BackToPacks onClick={goToPackList} />
@@ -83,6 +87,7 @@ export const Cards = () => {
         setSearchParams={setSearchParams}
         addNewCard={addNewCard}
         deletePack={deletePack}
+        navigateToLearn={navigateToLearn}
       />
       {empty === 0 ? (
         <EmptyCardList isMyPack={isMyPack} addNewCard={addNewCard} />
