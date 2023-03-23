@@ -5,7 +5,7 @@ import { Button, LinkText, Input, Box } from 'common/components'
 import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { validateEmail } from 'common/validate/validateEmail'
 import { authSelectors } from 'features/auth'
-import { loginTC } from 'features/auth/authSlice'
+import { loginTC, setRegisterSuccess } from 'features/auth/authSlice'
 import {
   Error,
   ForgotPasswordLink,
@@ -18,6 +18,7 @@ import { PATH } from 'pages/path'
 export const Login = () => {
   const dispatch = useAppDispatch()
   const isLoggedIn = useAppSelector(authSelectors.isLoggedIn)
+  const registerSuccess = useAppSelector(authSelectors.registerSuccess)
 
   const {
     register,
@@ -30,6 +31,10 @@ export const Login = () => {
 
   if (isLoggedIn) {
     return <Navigate to={PATH.PACKS} />
+  }
+
+  const registrationFailed = () => {
+    if (registerSuccess) dispatch(setRegisterSuccess(false))
   }
 
   return (
@@ -74,7 +79,9 @@ export const Login = () => {
 
       <SignUpBlock>
         <Question>Already have an account?</Question>
-        <LinkText to={PATH.REGISTRATION}>Sign Up</LinkText>
+        <LinkText onClick={registrationFailed} to={PATH.REGISTRATION}>
+          Sign Up
+        </LinkText>
       </SignUpBlock>
     </>
   )
