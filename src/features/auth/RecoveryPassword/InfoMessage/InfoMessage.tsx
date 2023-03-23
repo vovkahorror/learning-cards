@@ -11,7 +11,7 @@ import {
 import { PATH } from 'pages/path'
 
 export const InfoMessage = () => {
-  const userEmail = useAppSelector<string>(authSelectors.email)
+  const userEmail = useAppSelector<string>(authSelectors.userEmailFromMessage)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 

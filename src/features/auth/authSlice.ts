@@ -11,30 +11,22 @@ import {
 } from 'features/auth/authAPI'
 import { emailMassage } from 'features/auth/RecoveryPassword/InfoMessage/emailMassage'
 
-// type InitialStateType = {
-//   isSetRecovery: boolean
-//   userEmail: string
-//   userName: string
-//   isSetNewPassword: boolean
-//   user: UserType
-//   isLoggedIn: boolean
-//   registerSuccess: boolean
-// }
-
 export type AuthInitialStateType = ReturnType<typeof authSlice.getInitialState>
 
-export const authMeTC = createAsyncThunk('auth/authMe', async (_, { dispatch }) => {
-  try {
-    const res = await authAPI.me()
+export const authMeTC = createAsyncThunk(
+  'auth/authMe',
+  async (_, { dispatch, rejectWithValue }) => {
+    try {
+      const res = await authAPI.me()
 
-    dispatch(setIsLoggedIn(true))
-    dispatch(setUserData(res.data))
-  } catch (e) {
-    // dispatch(setStatusLoading(false))
-  } finally {
-    dispatch(setIsInitialized(true))
+      return res.data
+    } catch (e) {
+      return rejectWithValue(null)
+    } finally {
+      dispatch(setIsInitialized(true))
+    }
   }
-})
+)
 
 export const RegisterTC = createAsyncThunk(
   'auth/register',
@@ -54,38 +46,46 @@ export const RegisterTC = createAsyncThunk(
 
 export const loginTC = createAsyncThunk(
   'auth/login',
-  async (arg: { email: string; password: string; rememberMe: boolean }, { dispatch }) => {
+  async (
+    arg: { email: string; password: string; rememberMe: boolean },
+    { dispatch, rejectWithValue }
+  ) => {
     dispatch(setStatusLoading(true))
     try {
       const res = await authAPI.login(arg.email, arg.password, arg.rememberMe)
 
-      dispatch(setIsLoggedIn(true))
-      dispatch(setUserData(res.data))
+      return res.data
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
       // выключаем крутилку только при ошибке ( чтоб небыло дерганья при логинизации)
+      dispatch(setStatusLoading(false))
+
+      return rejectWithValue(null)
+    }
+  }
+)
+
+export const logoutTC = createAsyncThunk(
+  'auth/logout',
+  async (_, { dispatch, rejectWithValue }) => {
+    dispatch(setStatusLoading(true))
+    try {
+      await authAPI.logout()
+
+      return {} as UserType
+    } catch (e) {
+      errorUtils(e as AxiosError, dispatch)
+
+      return rejectWithValue(null)
+    } finally {
       dispatch(setStatusLoading(false))
     }
   }
 )
 
-export const logoutTC = createAsyncThunk('auth/logout', async (_, { dispatch }) => {
-  dispatch(setStatusLoading(true))
-  try {
-    await authAPI.logout()
-
-    dispatch(setUserData({} as UserType))
-    dispatch(setIsLoggedIn(false))
-  } catch (e) {
-    errorUtils(e as AxiosError, dispatch)
-  } finally {
-    dispatch(setStatusLoading(false))
-  }
-})
-
 export const recoveryPasswordTC = createAsyncThunk(
   'auth/recoveryPassword',
-  async (email: string, { dispatch }) => {
+  async (email: string, { dispatch, rejectWithValue }) => {
     const payload: RequestRecoveryType = {
       email,
       from: 'test-front-admin <ai73a@yandex.by>',
@@ -96,11 +96,13 @@ export const recoveryPasswordTC = createAsyncThunk(
     try {
       const res = await authAPI.recoveryPassword(payload)
 
-      dispatch(setUserEmail(email))
-      dispatch(setRecovery(true))
       dispatch(setInfoSnackbar({ text: res.data.info, variant: 'success' }))
+
+      return email
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
+
+      return rejectWithValue(null)
     } finally {
       dispatch(setStatusLoading(false))
     }
@@ -109,31 +111,36 @@ export const recoveryPasswordTC = createAsyncThunk(
 
 export const setNewPasswordTC = createAsyncThunk(
   'auth/setNewPassword',
-  async (data: RequestNewPasswordType, { dispatch }) => {
+  async (arg: RequestNewPasswordType, { dispatch, rejectWithValue }) => {
     dispatch(setStatusLoading(true))
     try {
-      const res = await authAPI.setNewPassword(data)
+      const res = await authAPI.setNewPassword(arg)
 
-      dispatch(setNewPassword(true))
       dispatch(setInfoSnackbar({ text: res.data.info, variant: 'success' }))
+
+      return true
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
+
+      return rejectWithValue(null)
     } finally {
       dispatch(setStatusLoading(false))
     }
   }
 )
 
-export const updateUserName = createAsyncThunk(
+export const updateUserNameTC = createAsyncThunk(
   'auth/updateUserName',
-  async (arg: { name: string }, { dispatch }) => {
+  async (arg: { name: string }, { dispatch, rejectWithValue }) => {
     dispatch(setStatusLoading(true))
     try {
       const res = await authAPI.updateName(arg.name)
 
-      dispatch(setUserData(res.data.updatedUser))
+      return res.data.updatedUser
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
+
+      return rejectWithValue(null)
     } finally {
       dispatch(setStatusLoading(false))
     }
@@ -154,30 +161,36 @@ export const authSlice = createSlice({
     setRecovery: (state, action: PayloadAction<boolean>) => {
       state.isSetRecovery = action.payload
     },
-    setUserEmail: (state, action: PayloadAction<string>) => {
-      state.userEmail = action.payload
-    },
-    setNewPassword: (state, action: PayloadAction<boolean>) => {
-      state.isSetNewPassword = action.payload
-    },
-    setUserData(state, action: PayloadAction<UserType>) {
-      state.user = action.payload
-    },
-    setIsLoggedIn: (state, action: PayloadAction<boolean>) => {
-      state.isLoggedIn = action.payload
-    },
     setRegisterSuccess(state, action: PayloadAction<boolean>) {
       state.registerSuccess = action.payload
     },
   },
+  extraReducers: builder => {
+    builder
+      .addCase(setNewPasswordTC.fulfilled, (state, action) => {
+        state.isSetNewPassword = action.payload
+      })
+      .addCase(recoveryPasswordTC.fulfilled, (state, action) => {
+        state.userEmail = action.payload
+        state.isSetRecovery = true
+      })
+      .addCase(loginTC.fulfilled, (state, action) => {
+        state.user = action.payload
+        state.isLoggedIn = true
+      })
+      .addCase(logoutTC.fulfilled, (state, action) => {
+        state.user = action.payload
+        state.isLoggedIn = false
+      })
+      .addCase(authMeTC.fulfilled, (state, action) => {
+        state.user = action.payload
+        state.isLoggedIn = true
+      })
+      .addCase(updateUserNameTC.fulfilled, (state, action) => {
+        state.user = action.payload
+      })
+  },
 })
 
-export const {
-  setRecovery,
-  setUserEmail,
-  setNewPassword,
-  setRegisterSuccess,
-  setUserData,
-  setIsLoggedIn,
-} = authSlice.actions
+export const { setRecovery, setRegisterSuccess } = authSlice.actions
 export const authReducer = authSlice.reducer

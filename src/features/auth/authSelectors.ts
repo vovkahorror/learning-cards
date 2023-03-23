@@ -7,3 +7,4 @@ export const isLoggedIn = (state: RootStateType) => state.auth.isLoggedIn
 export const isSetNewPassword = (state: RootStateType) => state.auth.isSetNewPassword
 export const isSetRecovery = (state: RootStateType) => state.auth.isSetRecovery
 export const registerSuccess = (state: RootStateType) => state.auth.registerSuccess
+export const userEmailFromMessage = (state: RootStateType) => state.auth.userEmail
