@@ -27,11 +27,15 @@ export const WhisperCards = ({
   }
 
   const deletePack = () => {
-    dispatch(deletePackTC(cardsPack_id as string))
+    if (cardsPack_id) {
+      dispatch(deletePackTC(cardsPack_id))
+    }
   }
 
   const editPack = (name: string, isPrivate: boolean) => {
-    dispatch(editPackTC({ name, private: isPrivate, _id: cardsPack_id as string }))
+    if (cardsPack_id) {
+      dispatch(editPackTC({ name, private: isPrivate, _id: cardsPack_id }))
+    }
   }
 
   const triggerRef = useRef<any>(null)

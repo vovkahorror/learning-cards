@@ -5,11 +5,9 @@ import { Input } from 'rsuite'
 import { Button } from 'common/components/Button/Button'
 import { Box } from 'common/components/Layout/Box'
 import { PortalModal } from 'common/components/PortalModal/PortalModal'
-import { useAppDispatch } from 'common/hooks'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { useDebounce } from 'common/hooks/useDebounce'
 import { CardModal } from 'features/cards/CardList/CardModal'
-import { getCardsDataTC } from 'features/cards/cardsSlice'
 import { WhisperCards } from 'features/cards/SearchCardPanel/WhisperCards/WhisperCards'
 
 export const SearchCardPanel = ({
@@ -20,12 +18,9 @@ export const SearchCardPanel = ({
   addNewCard,
   navigateToLearn,
 }: SearchCardPanelPropsType) => {
-  const dispatch = useAppDispatch()
-
   const packName = useAppSelector(
     state => state.packs.cardPacks.find(pack => pack._id === cardsPack_id)?.name
   )
-  const currentPackName = useAppSelector(state => state.cards.packName)
   const isPrivatePack = useAppSelector(
     state => state.packs.cardPacks.find(pack => pack._id === cardsPack_id)?.private
   )
@@ -36,12 +31,6 @@ export const SearchCardPanel = ({
   useEffect(() => {
     setSearchParams(debounceValue)
   }, [debounceValue])
-
-  useEffect(() => {
-    if (packName !== currentPackName && cardsPack_id) {
-      dispatch(getCardsDataTC({ cardsPack_id }))
-    }
-  }, [packName, isPrivatePack])
 
   const handlerChangeInput = (value: string) => {
     setValue(value)
