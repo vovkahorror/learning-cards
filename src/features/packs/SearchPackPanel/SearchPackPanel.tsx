@@ -15,7 +15,7 @@ export const SearchPackPanel = () => {
   const dispatch = useAppDispatch()
 
   const [value, setValue] = useState<string>('')
-  const debounceValue = useDebounce(value, 1000)
+  const debounceValue = useDebounce(value, 700)
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {

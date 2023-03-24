@@ -1,7 +1,3 @@
-import React from 'react'
-
-import { Pagination } from 'rsuite'
-
 import { PaginationContainer } from 'common/components/CustomPagination/pagination.styled'
 
 const limitOptions = [2, 4, 6, 8, 10]
