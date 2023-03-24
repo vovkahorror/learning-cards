@@ -32,9 +32,10 @@ export const DataModal = ({
   addEditPack,
   deletePack,
   nameOfPack,
+  isPrivatePack,
 }: DataModalType) => {
   const [name, setName] = useState(nameOfPack || '')
-  const [checkbox, setCheckbox] = useState(false)
+  const [checkbox, setCheckbox] = useState(isPrivatePack || false)
 
   function inputHandler(e: ChangeEvent<HTMLInputElement>) {
     setName(e.currentTarget.value)
@@ -93,4 +94,5 @@ type DataModalType = {
   deletePack?: () => void
   nameOfPack?: string
   title?: string
+  isPrivatePack?: boolean
 }

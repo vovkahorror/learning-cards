@@ -7,7 +7,7 @@ import { ReactComponent as ProfileIcon } from 'assets/img/profileLogo.svg'
 import { Box } from 'common/components'
 import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { authSelectors } from 'features/auth'
-import { logoutTC } from 'features/auth/authSlice'
+import { logoutTC, setRegisterSuccess } from 'features/auth/authSlice'
 import { PATH } from 'pages/path'
 
 const renderIconButton = (props: any, ref: any) => {
@@ -29,7 +29,10 @@ export const ProfileHeader = () => {
   const navigate = useNavigate()
 
   const handlerNavigateToProfile = () => navigate(PATH.PROFILE)
-  const handlerLogOut = () => dispatch(logoutTC())
+  const handlerLogOut = () => {
+    dispatch(logoutTC())
+    dispatch(setRegisterSuccess(false))
+  }
 
   return (
     <Box display={'flex'} alignItems={'center'} style={{ position: 'relative' }}>
