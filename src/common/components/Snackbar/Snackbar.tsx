@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react'
 
 import { CloseIcon, InfoText, SnackbarWrapper } from './snackbar.styled'
 
+import { appSelectors } from 'app'
 import { setInfoSnackbar, VariantsSnackbarType } from 'app/appSlice'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 
 export const Snackbar = () => {
   const dispatch = useAppDispatch()
-  const infoText = useAppSelector<string | null>(state => state.app.infoSnackbar.text)
+  const infoText = useAppSelector<string | null>(appSelectors.infoSnackbarText)
   const infoVariant = useAppSelector<VariantsSnackbarType | undefined>(
-    state => state.app.infoSnackbar.variant
+    appSelectors.infoSnackbarVariant
   )
   const [open, setOpen] = useState(false)
 

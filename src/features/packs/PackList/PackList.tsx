@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Table } from 'rsuite'
 
+import { appSelectors } from 'app'
 import { Box } from 'common/components'
 import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { packsSelectors } from 'features/packs'
@@ -18,6 +19,7 @@ type SortColumnType = string | undefined
 
 export const PackList = () => {
   const data = useAppSelector<CardPacksType[]>(packsSelectors.cardPacks)
+  const statusLoading = useAppSelector(appSelectors.statusLoading)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -40,6 +42,7 @@ export const PackList = () => {
   return (
     <Box mt="3">
       <Table
+        loading={statusLoading === 'local'}
         height={500}
         width={1080}
         data={data}
@@ -48,7 +51,7 @@ export const PackList = () => {
         onSortColumn={handleSortColumn}
         style={{ borderRadius: '10px' }}
       >
-        <Column width={200} align="center" fixed sortable>
+        <Column width={200} align="center" fixed sortable={statusLoading !== 'local'}>
           <HeaderCell>Name</HeaderCell>
           <Cell dataKey="name">
             {rowData => (
@@ -62,19 +65,19 @@ export const PackList = () => {
           </Cell>
         </Column>
 
-        <Column width={200} sortable>
+        <Column width={200} sortable={statusLoading !== 'local'}>
           <HeaderCell>Cards</HeaderCell>
           <Cell dataKey="cardsCount" />
         </Column>
 
-        <Column width={200} sortable>
+        <Column width={200} sortable={statusLoading !== 'local'}>
           <HeaderCell>Last Updated</HeaderCell>
           <Cell dataKey="updated">
             {rowData => new Date(rowData.updated).toLocaleDateString('uk-UA')}
           </Cell>
         </Column>
 
-        <Column width={240} sortable>
+        <Column width={240} sortable={statusLoading !== 'local'}>
           <HeaderCell>Created by</HeaderCell>
           <Cell dataKey="user_name" />
         </Column>

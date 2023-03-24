@@ -2,6 +2,7 @@ import { BiMoon, BiSun } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 import Toggle from 'rsuite/esm/Toggle/Toggle'
 
+import { appSelectors } from 'app'
 import { setAppTheme } from 'app/appSlice'
 import { ReactComponent as Logo } from 'assets/img/logo.svg'
 import { Button, Box, Row, Container } from 'common/components'
@@ -14,7 +15,7 @@ import { PATH } from 'pages/path'
 export const Header = () => {
   const dispatch = useAppDispatch()
   const isLoggedIn = useAppSelector(authSelectors.isLoggedIn)
-  const appTheme = useAppSelector(state => state.app.appTheme)
+  const appTheme = useAppSelector(appSelectors.appTheme)
   const navigate = useNavigate()
 
   const handleSetTheme = () => {

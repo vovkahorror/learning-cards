@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 
 import { Input } from 'rsuite'
 
+import { appSelectors } from 'app'
 import { Button, Box } from 'common/components'
 import { PortalModal } from 'common/components/PortalModal/PortalModal'
-import { useAppDispatch, useDebounce } from 'common/hooks'
+import { useAppDispatch, useAppSelector, useDebounce } from 'common/hooks'
 import { ClearFilter } from 'features/cards/SearchCardPanel/SearchCardPanel.styled'
 import { DataModal } from 'features/packs/PackList/DataModal'
 import { addPackTC, clearSearchParams, setSearchParams } from 'features/packs/packsSlice'
@@ -12,6 +13,7 @@ import { CustomRangeSlider } from 'features/packs/SearchPackPanel/CustomRangeSli
 import { TogglePacks } from 'features/packs/SearchPackPanel/TogglePacks/TogglePacks'
 
 export const SearchPackPanel = () => {
+  const statusLoading = useAppSelector(appSelectors.statusLoading)
   const dispatch = useAppDispatch()
 
   const [value, setValue] = useState<string>('')
@@ -23,7 +25,6 @@ export const SearchPackPanel = () => {
   }, [debounceValue])
 
   const handlerClearFilter = () => {
-    console.log(1)
     dispatch(clearSearchParams())
     setValue('')
   }
@@ -48,7 +49,7 @@ export const SearchPackPanel = () => {
           <Box mb={'2'}>
             <p style={{ color: 'white' }}>Search</p>
           </Box>
-          <Input value={value} onChange={handlerChangeInput} />
+          <Input disabled={statusLoading === 'local'} value={value} onChange={handlerChangeInput} />
         </Box>
 
         <Box>
@@ -65,8 +66,10 @@ export const SearchPackPanel = () => {
           <CustomRangeSlider />
         </Box>
 
-        <ClearFilter onClick={handlerClearFilter} />
-        <Button onClick={handlerOpenModal}>Add pack</Button>
+        <ClearFilter disabled={statusLoading === 'local'} onClick={handlerClearFilter} />
+        <Button disabled={statusLoading === 'local'} onClick={handlerOpenModal}>
+          Add pack
+        </Button>
       </Box>
 
       <PortalModal title={'Add new pack'} show={showModal} setShow={setShowModal}>

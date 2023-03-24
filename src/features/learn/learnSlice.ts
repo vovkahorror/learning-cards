@@ -9,7 +9,7 @@ import { CardsStateType, getCardsDataTC } from 'features/cards/cardsSlice'
 export const getCardsPackForLearnTC = createAsyncThunk(
   'learn/getCardsPackForLearn',
   async (pack_id: string, { dispatch }) => {
-    dispatch(setStatusLoading(true))
+    dispatch(setStatusLoading('global'))
     try {
       const res = await cardsAPI.getCards({ cardsPack_id: pack_id, pageCount: 100 })
 
@@ -17,7 +17,7 @@ export const getCardsPackForLearnTC = createAsyncThunk(
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
-      dispatch(setStatusLoading(false))
+      dispatch(setStatusLoading('idle'))
     }
   }
 )
@@ -25,7 +25,7 @@ export const getCardsPackForLearnTC = createAsyncThunk(
 export const updateGradeTC = createAsyncThunk(
   'learn/updateGrade',
   async (arg: UpdateGradeParamsType, { dispatch }) => {
-    dispatch(setStatusLoading(true))
+    dispatch(setStatusLoading('global'))
     try {
       const res = await cardsAPI.updateGrade(arg)
 
@@ -34,7 +34,7 @@ export const updateGradeTC = createAsyncThunk(
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
-      dispatch(setStatusLoading(false))
+      dispatch(setStatusLoading('idle'))
     }
   }
 )

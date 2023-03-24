@@ -37,7 +37,7 @@ export const authMeTC = createAsyncThunk('auth/authMe', async (_, { dispatch }) 
 export const RegisterTC = createAsyncThunk(
   'auth/register',
   async (arg: { email: string; password: string }, { dispatch }) => {
-    dispatch(setStatusLoading(true))
+    dispatch(setStatusLoading('global'))
     try {
       await authAPI.register(arg.email, arg.password)
       dispatch(setRegisterSuccess(true))
@@ -45,7 +45,7 @@ export const RegisterTC = createAsyncThunk(
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
-      dispatch(setStatusLoading(false))
+      dispatch(setStatusLoading('idle'))
     }
   }
 )
@@ -53,7 +53,7 @@ export const RegisterTC = createAsyncThunk(
 export const loginTC = createAsyncThunk(
   'auth/login',
   async (arg: { email: string; password: string; rememberMe: boolean }, { dispatch }) => {
-    dispatch(setStatusLoading(true))
+    dispatch(setStatusLoading('global'))
     try {
       const res = await authAPI.login(arg.email, arg.password, arg.rememberMe)
 
@@ -62,13 +62,13 @@ export const loginTC = createAsyncThunk(
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
       // выключаем крутилку только при ошибке ( чтоб небыло дерганья при логинизации)
-      dispatch(setStatusLoading(false))
+      dispatch(setStatusLoading('idle'))
     }
   }
 )
 
 export const logoutTC = createAsyncThunk('auth/logout', async (_, { dispatch }) => {
-  dispatch(setStatusLoading(true))
+  dispatch(setStatusLoading('global'))
   try {
     await authAPI.logout()
 
@@ -77,7 +77,7 @@ export const logoutTC = createAsyncThunk('auth/logout', async (_, { dispatch }) 
   } catch (e) {
     errorUtils(e as AxiosError, dispatch)
   } finally {
-    dispatch(setStatusLoading(false))
+    dispatch(setStatusLoading('idle'))
   }
 })
 
@@ -90,7 +90,7 @@ export const recoveryPasswordTC = createAsyncThunk(
       message: emailMassage,
     }
 
-    dispatch(setStatusLoading(true))
+    dispatch(setStatusLoading('global'))
     try {
       const res = await authAPI.recoveryPassword(payload)
 
@@ -100,7 +100,7 @@ export const recoveryPasswordTC = createAsyncThunk(
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
-      dispatch(setStatusLoading(false))
+      dispatch(setStatusLoading('idle'))
     }
   }
 )
@@ -108,7 +108,7 @@ export const recoveryPasswordTC = createAsyncThunk(
 export const setNewPasswordTC = createAsyncThunk(
   'auth/setNewPassword',
   async (data: RequestNewPasswordType, { dispatch }) => {
-    dispatch(setStatusLoading(true))
+    dispatch(setStatusLoading('global'))
     try {
       const res = await authAPI.setNewPassword(data)
 
@@ -117,7 +117,7 @@ export const setNewPasswordTC = createAsyncThunk(
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
-      dispatch(setStatusLoading(false))
+      dispatch(setStatusLoading('idle'))
     }
   }
 )
@@ -125,7 +125,7 @@ export const setNewPasswordTC = createAsyncThunk(
 export const updateUserName = createAsyncThunk(
   'auth/updateUserName',
   async (arg: { name: string }, { dispatch }) => {
-    dispatch(setStatusLoading(true))
+    dispatch(setStatusLoading('global'))
     try {
       const res = await authAPI.updateName(arg.name)
 
@@ -133,7 +133,7 @@ export const updateUserName = createAsyncThunk(
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
-      dispatch(setStatusLoading(false))
+      dispatch(setStatusLoading('idle'))
     }
   }
 )

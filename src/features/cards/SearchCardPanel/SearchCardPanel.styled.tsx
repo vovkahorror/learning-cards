@@ -4,6 +4,7 @@ import { ReactComponent as FilterIcon } from 'assets/img/filter.svg'
 import { styled } from 'styles/theme'
 
 type ClearFilterType = {
+  disabled: boolean
   onClick: () => void
 }
 const ClearFiltgerContainer = styled.button`
@@ -16,9 +17,9 @@ const ClearFiltgerContainer = styled.button`
   cursor: pointer;
 `
 
-export const ClearFilter: FC<ClearFilterType> = ({ onClick }) => {
+export const ClearFilter: FC<ClearFilterType> = ({ onClick, disabled }) => {
   return (
-    <ClearFiltgerContainer onClick={onClick}>
+    <ClearFiltgerContainer disabled={disabled} onClick={onClick}>
       <FilterIcon />
     </ClearFiltgerContainer>
   )

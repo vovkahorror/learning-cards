@@ -1,4 +1,6 @@
+import { appSelectors } from 'app'
 import { PaginationContainer } from 'common/components/CustomPagination/pagination.styled'
+import { useAppSelector } from 'common/hooks'
 
 const limitOptions = [2, 4, 6, 8, 10]
 const layout: any[] = ['pager', '-', 'limit', 'total']
@@ -16,6 +18,8 @@ export const CustomPagination = ({
   totalCount,
   setPagination,
 }: CustomPaginationPropsType) => {
+  const statusLoading = useAppSelector(appSelectors.statusLoading)
+
   const handlerSetActivePage = (value: number) => setPagination(value, pageCount)
   const handlerSetLimit = (value: number) => setPagination(page, value)
 
@@ -23,6 +27,7 @@ export const CustomPagination = ({
     <>
       <hr />
       <PaginationContainer
+        disabled={statusLoading === 'local'}
         layout={layout}
         size={'lg'}
         prev

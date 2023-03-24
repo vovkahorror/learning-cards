@@ -34,7 +34,7 @@ type InitialStateType = {
 export const fetchPacksTC = createAsyncThunk(
   'packs/fetchPacks',
   async (arg: { user_id: string } | undefined, { dispatch, getState }) => {
-    dispatch(setStatusLoading(true))
+    dispatch(setStatusLoading('local'))
     const { packs } = getState() as RootStateType
     const params = { ...packs.searchParams, ...arg }
 
@@ -45,7 +45,7 @@ export const fetchPacksTC = createAsyncThunk(
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
-      dispatch(setStatusLoading(false))
+      dispatch(setStatusLoading('idle'))
     }
   }
 )
@@ -53,7 +53,7 @@ export const fetchPacksTC = createAsyncThunk(
 export const addPackTC = createAsyncThunk(
   'packs/addPack',
   async (cardsPack: NewPackType, { dispatch }) => {
-    dispatch(setStatusLoading(true))
+    dispatch(setStatusLoading('local'))
     try {
       await packsAPI.addPack(cardsPack)
 
@@ -63,7 +63,7 @@ export const addPackTC = createAsyncThunk(
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
-      dispatch(setStatusLoading(false))
+      dispatch(setStatusLoading('idle'))
     }
   }
 )
@@ -71,7 +71,7 @@ export const addPackTC = createAsyncThunk(
 export const editPackTC = createAsyncThunk(
   'packs/editPack',
   async (cardsPack: EditPackType, { dispatch }) => {
-    dispatch(setStatusLoading(true))
+    dispatch(setStatusLoading('local'))
     try {
       await packsAPI.editPack(cardsPack)
 
@@ -81,7 +81,7 @@ export const editPackTC = createAsyncThunk(
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
-      dispatch(setStatusLoading(false))
+      dispatch(setStatusLoading('idle'))
     }
   }
 )
@@ -89,7 +89,7 @@ export const editPackTC = createAsyncThunk(
 export const deletePackTC = createAsyncThunk(
   'packs/deletePack',
   async (id: string, { dispatch }) => {
-    dispatch(setStatusLoading(true))
+    dispatch(setStatusLoading('local'))
     try {
       await packsAPI.deletePack(id)
 
@@ -99,7 +99,7 @@ export const deletePackTC = createAsyncThunk(
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
-      dispatch(setStatusLoading(false))
+      dispatch(setStatusLoading('idle'))
     }
   }
 )
