@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { RangeSlider } from 'rsuite'
 
 import { Box } from 'common/components'
-import { useAppSelector, useAppDispatch } from 'common/hooks'
+import { useAppSelector, useAppDispatch, useDebounce } from 'common/hooks'
 import { packsSelectors } from 'features/packs/index'
 import { setSearchParams } from 'features/packs/packsSlice'
 import { Count } from 'features/packs/SearchPackPanel/CustomRangeSlider/Count'
@@ -14,6 +14,8 @@ export const CustomRangeSlider = () => {
   const dispatch = useAppDispatch()
 
   const [value, setValue] = useState<[number, number]>([0, 0])
+  const [valueForDebounce, setValueForDebounce] = useState<[number, number] | undefined>(undefined)
+  const debounceValue = useDebounce(valueForDebounce, 1000)
 
   // minCardsCount и maxCardsCount в initial state равны нулю, после получения ответа с сервера их
   // сетаем в setValue для значений по умолчанию (нужны для отображения при первой загрузке)
@@ -21,12 +23,14 @@ export const CustomRangeSlider = () => {
     setValue([minCardsCount, maxCardsCount])
   }, [maxCardsCount, minCardsCount])
 
+  useEffect(() => {
+    if (!debounceValue) return
+    dispatch(setSearchParams({ min: value[0], max: value[1] }))
+  }, [debounceValue])
+
   const handlerChangeValue = (value: [number, number]) => {
     setValue(value)
-  }
-
-  const handlerChangeCommitted = (value: [number, number]) => {
-    dispatch(setSearchParams({ min: value[0], max: value[1] }))
+    setValueForDebounce(value)
   }
 
   return (
@@ -41,7 +45,6 @@ export const CustomRangeSlider = () => {
           max={maxCardsCount}
           progress
           value={value}
-          onChangeCommitted={handlerChangeCommitted}
           onChange={handlerChangeValue}
         />
       </Box>
