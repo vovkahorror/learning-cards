@@ -31,10 +31,10 @@ export const Header = () => {
               onChange={handleSetTheme}
               size="lg"
               checkedChildren={
-                <BiSun style={{ marginTop: '5px' }} className={'rs-icon'} size={'1.2rem'} />
+                <BiSun style={{ marginTop: '6px' }} className={'rs-icon'} size={'1.2rem'} />
               }
               unCheckedChildren={
-                <BiMoon style={{ marginTop: '5px' }} className={'rs-icon'} size={'1.2rem'} />
+                <BiMoon style={{ marginTop: '6px' }} className={'rs-icon'} size={'1.2rem'} />
               }
             />
 
