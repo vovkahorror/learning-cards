@@ -5,22 +5,27 @@ import { List, Popover } from 'rsuite'
 import styled from 'styled-components'
 
 type CardsPopoverPropsType = {
-  deletePack: () => void
+  navigateToLearn: () => void
+  handlerOpenModal: (title: string) => void
+  close: () => void
 }
 
 export const CardsPopover = forwardRef(
-  ({ deletePack, ...props }: CardsPopoverPropsType, ref: ForwardedRef<HTMLDivElement> | null) => {
+  (
+    { navigateToLearn, handlerOpenModal, close, ...props }: CardsPopoverPropsType,
+    ref: ForwardedRef<HTMLDivElement> | null
+  ) => {
     return (
       <>
         <Popover ref={ref} arrow {...props}>
-          <List>
-            <StyledListItem>
+          <List onClick={close}>
+            <StyledListItem onClick={() => handlerOpenModal('Edit pack')}>
               <BsPencilFill /> <span>Edit</span>
             </StyledListItem>
-            <StyledListItem onClick={deletePack}>
+            <StyledListItem onClick={() => handlerOpenModal('Delete pack')}>
               <BsFillTrash3Fill /> <span>Delete</span>
             </StyledListItem>
-            <StyledListItem>
+            <StyledListItem onClick={() => navigateToLearn()}>
               <BsRocketTakeoffFill /> <span>Learn</span>
             </StyledListItem>
           </List>

@@ -11,7 +11,6 @@ import { EmptyCardList } from 'features/cards/CardList/EmptyCardList'
 import { addCardTC, getCardsDataTC, setTotalCount } from 'features/cards/cardsSlice'
 import { SearchCardPanel } from 'features/cards/SearchCardPanel/SearchCardPanel'
 import { packsSelectors } from 'features/packs'
-import { deletePackTC } from 'features/packs/packsSlice'
 
 export const Cards = () => {
   const cardPacksTotalCount = useAppSelector(packsSelectors.cardPacksTotalCount)
@@ -68,12 +67,6 @@ export const Cards = () => {
     dispatch(setTotalCount(0))
   }
 
-  const deletePack = () => {
-    if (cardsPack_id) {
-      dispatch(deletePackTC(cardsPack_id))
-    }
-  }
-
   const navigateToLearn = () => {
     navigate(`/learn/${cardsPack_id}`)
   }
@@ -84,9 +77,9 @@ export const Cards = () => {
       <SearchCardPanel
         isNotEmptyPack={!!empty}
         isMyPack={isMyPack}
+        cardsPack_id={cardsPack_id}
         setSearchParams={setSearchParams}
         addNewCard={addNewCard}
-        deletePack={deletePack}
         navigateToLearn={navigateToLearn}
       />
       {empty === 0 ? (

@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from 'react'
 
-import { IoEllipsisVerticalCircle } from 'react-icons/io5'
-import { Input, Whisper } from 'rsuite'
+import { Input } from 'rsuite'
 
 import { Button } from 'common/components/Button/Button'
 import { Box } from 'common/components/Layout/Box'
 import { PortalModal } from 'common/components/PortalModal/PortalModal'
+import { useAppDispatch } from 'common/hooks'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { useDebounce } from 'common/hooks/useDebounce'
 import { CardModal } from 'features/cards/CardList/CardModal'
-import { CardsPopover } from 'features/cards/SearchCardPanel/CardsPopover'
-
-type SearchCardPanelPropsType = {
-  isNotEmptyPack: boolean
-  isMyPack: boolean
-  setSearchParams: (searchParams: string) => void
-  addNewCard: (format: string | null, question: string, answer: string) => void
-  deletePack: () => void
-  navigateToLearn: () => void
-}
+import { getCardsDataTC } from 'features/cards/cardsSlice'
+import { WhisperCards } from 'features/cards/SearchCardPanel/WhisperCards/WhisperCards'
 
 export const SearchCardPanel = ({
   isNotEmptyPack,
   isMyPack,
+  cardsPack_id,
   setSearchParams,
   addNewCard,
-  deletePack,
   navigateToLearn,
 }: SearchCardPanelPropsType) => {
-  const packName = useAppSelector(state => state.cards.packName)
+  const dispatch = useAppDispatch()
+
+  const packName = useAppSelector(
+    state => state.packs.cardPacks.find(pack => pack._id === cardsPack_id)?.name
+  )
+  const currentPackName = useAppSelector(state => state.cards.packName)
+  const isPrivatePack = useAppSelector(
+    state => state.packs.cardPacks.find(pack => pack._id === cardsPack_id)?.private
+  )
   const [value, setValue] = useState<string>('')
   const debounceValue = useDebounce(value, 1000)
   const [showModal, setShowModal] = useState(false)
@@ -36,6 +36,12 @@ export const SearchCardPanel = ({
   useEffect(() => {
     setSearchParams(debounceValue)
   }, [debounceValue])
+
+  useEffect(() => {
+    if (packName !== currentPackName && cardsPack_id) {
+      dispatch(getCardsDataTC({ cardsPack_id }))
+    }
+  }, [packName, isPrivatePack])
 
   const handlerChangeInput = (value: string) => {
     setValue(value)
@@ -51,15 +57,12 @@ export const SearchCardPanel = ({
             {packName}
           </span>
           {isMyPack && (
-            <Whisper
-              trigger="click"
-              placement={'bottom'}
-              speaker={<CardsPopover deletePack={deletePack} />}
-            >
-              <Box display={'flex'} alignItems={'center'}>
-                <IoEllipsisVerticalCircle size={22} color={'white'} cursor={'pointer'} />
-              </Box>
-            </Whisper>
+            <WhisperCards
+              cardsPack_id={cardsPack_id}
+              packName={packName}
+              isPrivatePack={isPrivatePack}
+              navigateToLearn={navigateToLearn}
+            />
           )}
         </Box>
 
@@ -88,4 +91,13 @@ export const SearchCardPanel = ({
       </PortalModal>
     </Box>
   )
+}
+
+type SearchCardPanelPropsType = {
+  isNotEmptyPack: boolean
+  isMyPack: boolean
+  cardsPack_id?: string
+  setSearchParams: (searchParams: string) => void
+  addNewCard: (format: string | null, question: string, answer: string) => void
+  navigateToLearn: () => void
 }

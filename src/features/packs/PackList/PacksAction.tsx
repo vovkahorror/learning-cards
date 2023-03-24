@@ -4,6 +4,8 @@ import { BsFillTrash3Fill, BsPencilFill, BsRocketTakeoffFill } from 'react-icons
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { packsSelectors } from '..'
+
 import { PortalModal } from 'common/components/PortalModal/PortalModal'
 import { useAppSelector, useAppDispatch } from 'common/hooks'
 import { authSelectors } from 'features/auth'
@@ -31,6 +33,10 @@ const IconDisable = styled(Icon)`
 
 export const PacksAction: FC<PackListActionType> = ({ user_id, pack_id, cardsCount, name }) => {
   const myId = useAppSelector(authSelectors.id)
+  const isPrivatePack = useAppSelector(packsSelectors.cardPacks).find(
+    pack => pack._id === pack_id
+  )?.private
+
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -62,6 +68,7 @@ export const PacksAction: FC<PackListActionType> = ({ user_id, pack_id, cardsCou
           addEditPack={editPack}
           deletePack={deletePack}
           title={title}
+          isPrivatePack={isPrivatePack}
         />
       </PortalModal>
       {user_id === myId ? (
