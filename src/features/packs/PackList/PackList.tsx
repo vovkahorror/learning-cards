@@ -20,6 +20,7 @@ type SortColumnType = string | undefined
 export const PackList = () => {
   const data = useAppSelector<CardPacksType[]>(packsSelectors.cardPacks)
   const statusLoading = useAppSelector(appSelectors.statusLoading)
+  const sortPacks = useAppSelector(packsSelectors.sortPacks)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
@@ -33,6 +34,14 @@ export const PackList = () => {
       sortType === 'desc' && dispatch(setSearchParams({ sortPacks: `1${sortColumn}` }))
     }
   }, [sortColumn, sortType])
+
+  useEffect(() => {
+    // для сброса стрелочек в таблице при нажатии на кнопку clear
+    if (!sortPacks) {
+      setSortColumn(undefined)
+      setSortType(undefined)
+    }
+  }, [sortPacks])
 
   const handleSortColumn = (sortColumn: SortColumnType, sortType: SortType) => {
     setSortColumn(sortColumn)
@@ -51,7 +60,7 @@ export const PackList = () => {
         onSortColumn={handleSortColumn}
         style={{ borderRadius: '10px' }}
       >
-        <Column width={200} align="center" fixed sortable={statusLoading !== 'local'}>
+        <Column width={200} align="left" fixed sortable={statusLoading !== 'local'}>
           <HeaderCell>Name</HeaderCell>
           <Cell dataKey="name">
             {rowData => (
