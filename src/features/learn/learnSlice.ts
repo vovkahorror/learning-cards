@@ -30,7 +30,7 @@ export const updateGradeTC = createAsyncThunk(
       const res = await cardsAPI.updateGrade(arg)
 
       dispatch(setUpdateCardsPack(res.data.updatedGrade.card_id))
-      dispatch(getCardsDataTC({ cardsPack_id: res.data.updatedGrade.cardsPack_id }))
+      // dispatch(getCardsDataTC({ cardsPack_id: res.data.updatedGrade.cardsPack_id }))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
