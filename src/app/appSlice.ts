@@ -1,9 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export type VariantsSnackbarType = 'info' | 'success' | 'error' | 'warning'
-
 type AppThemeType = 'light' | 'dark'
-
 type StatusLoadingType = 'idle' | 'global' | 'local'
 
 type InitialStateType = {

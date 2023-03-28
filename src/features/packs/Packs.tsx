@@ -26,14 +26,12 @@ export const Packs = () => {
   let [params, setParams] = useSearchParams()
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      return
+    if (isLoggedIn) {
+      // для загрузки колоды моя или все (при перезагрузке страницы)
+      const user_id = params.get('section') === 'my' ? id : ''
+
+      dispatch(fetchPacksTC({ user_id }))
     }
-
-    // для загрузки колоды моя или все (при перезагрузке страницы)
-    const user_id = params.get('section') === 'my' ? id : ''
-
-    dispatch(fetchPacksTC({ user_id }))
   }, [min, max, page, pageCount, packName, sortPacks, user_id])
 
   const setPagination = (page: number, pageCount: number) => {

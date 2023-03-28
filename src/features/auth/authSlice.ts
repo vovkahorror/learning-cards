@@ -28,7 +28,7 @@ export const authMeTC = createAsyncThunk('auth/authMe', async (_, { dispatch }) 
     dispatch(setIsLoggedIn(true))
     dispatch(setUserData(res.data))
   } catch (e) {
-    // dispatch(setStatusLoading(false))
+    // errorUtils(e as AxiosError, dispatch)
   } finally {
     dispatch(setIsInitialized(true))
   }
@@ -62,6 +62,8 @@ export const loginTC = createAsyncThunk(
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
       // выключаем крутилку только при ошибке ( чтоб небыло дерганья при логинизации)
+      // dispatch(setStatusLoading('idle'))
+    } finally {
       dispatch(setStatusLoading('idle'))
     }
   }
