@@ -23,13 +23,7 @@ export type SearchParamsType = {
   block?: boolean
 }
 
-type InitialStateType = {
-  cardPacks: CardPacksType[]
-  searchParams: PacksParamsType
-  cardPacksTotalCount: number
-  minCardsCount: number
-  maxCardsCount: number
-}
+export type PacksInitialStateType = ReturnType<typeof packsSlice.getInitialState>
 
 export const fetchPacksTC = createAsyncThunk(
   'packs/fetchPacks',
@@ -107,7 +101,7 @@ export const deletePackTC = createAsyncThunk(
 const packsSlice = createSlice({
   name: 'packs',
   initialState: {
-    cardPacks: [],
+    cardPacks: [] as CardPacksType[],
     searchParams: {
       packName: '',
       user_id: '',
@@ -117,11 +111,11 @@ const packsSlice = createSlice({
       page: 1,
       pageCount: 10,
       block: false,
-    },
+    } as PacksParamsType,
     cardPacksTotalCount: 0,
     minCardsCount: 0,
     maxCardsCount: 0,
-  } as InitialStateType,
+  },
   reducers: {
     setSearchParams: (state, action: PayloadAction<SearchParamsType>) => {
       state.searchParams = { ...state.searchParams, ...action.payload }

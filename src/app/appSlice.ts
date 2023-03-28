@@ -4,15 +4,7 @@ export type VariantsSnackbarType = 'info' | 'success' | 'error' | 'warning'
 type AppThemeType = 'light' | 'dark'
 type StatusLoadingType = 'idle' | 'global' | 'local'
 
-type InitialStateType = {
-  statusLoading: StatusLoadingType
-  infoSnackbar: {
-    text: string | null
-    variant?: VariantsSnackbarType
-  }
-  isInitialized: boolean
-  appTheme: AppThemeType
-}
+export type AppInitialStateType = ReturnType<typeof appSlice.getInitialState>
 
 export type SetInfoType = {
   text: string | null
@@ -22,11 +14,11 @@ export type SetInfoType = {
 const appSlice = createSlice({
   name: 'app',
   initialState: {
-    statusLoading: 'idle',
-    infoSnackbar: { text: null, variant: undefined },
+    statusLoading: 'idle' as StatusLoadingType,
+    infoSnackbar: { text: null, variant: undefined } as SetInfoType,
     isInitialized: false,
-    appTheme: 'light',
-  } as InitialStateType,
+    appTheme: 'light' as AppThemeType,
+  },
   reducers: {
     setStatusLoading: (state, action: PayloadAction<StatusLoadingType>) => {
       state.statusLoading = action.payload

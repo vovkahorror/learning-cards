@@ -4,7 +4,9 @@ import { AxiosError } from 'axios'
 import { setStatusLoading } from 'app/appSlice'
 import { errorUtils } from 'common/utils/error-utils'
 import { cardsAPI, CardType, UpdateGradeParamsType } from 'features/cards/cardsAPI'
-import { CardsStateType, getCardsDataTC } from 'features/cards/cardsSlice'
+import { CardsStateType } from 'features/cards/cardsSlice'
+
+export type LearnInitialState = ReturnType<typeof learnSlice.getInitialState>
 
 export const getCardsPackForLearnTC = createAsyncThunk(
   'learn/getCardsPackForLearn',
