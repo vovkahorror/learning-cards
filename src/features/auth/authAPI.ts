@@ -1,28 +1,17 @@
-import { AxiosResponse } from 'axios'
-
 import { instance, instanceRecovery } from 'common/instance/instance'
 
 export const authAPI = {
   register(email: string, password: string) {
     return instance.post('auth/register', { email, password })
   },
-
   recoveryPassword(data: RequestRecoveryType) {
-    return instanceRecovery.post<RequestRecoveryType, AxiosResponse<{ info: string }>>(
-      'auth/forgot',
-      data
-    )
+    return instanceRecovery.post<{ info: string }>('auth/forgot', data)
   },
-
   me() {
-    return instance.post<{}, AxiosResponse<UserType>>('auth/me')
+    return instance.post<UserType>('auth/me')
   },
-
   setNewPassword(data: RequestNewPasswordType) {
-    return instanceRecovery.post<RequestNewPasswordType, AxiosResponse<{ info: string }>>(
-      'auth/set-new-password',
-      data
-    )
+    return instanceRecovery.post<{ info: string }>('auth/set-new-password', data)
   },
   login(email: string, password: string, rememberMe: boolean) {
     return instance.post<UserType>('auth/login', { email, password, rememberMe })
@@ -31,7 +20,10 @@ export const authAPI = {
     return instance.delete<{ info: string }>('auth/me')
   },
   updateName(name: string) {
-    return instance.put<{ name: string }, AxiosResponse<UpdateUserType>>('auth/me', { name })
+    return instance.put<UpdateUserType>('auth/me', { name })
+  },
+  updateAvatar(avatar: string) {
+    return instance.put<UpdateUserType>('auth/me', { avatar })
   },
 }
 
