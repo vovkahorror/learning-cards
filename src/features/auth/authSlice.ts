@@ -116,12 +116,28 @@ export const setNewPasswordTC = createAsyncThunk(
   }
 )
 
-export const updateUserName = createAsyncThunk(
+export const updateUserNameTC = createAsyncThunk(
   'auth/updateUserName',
   async (arg: { name: string }, { dispatch }) => {
     dispatch(setStatusLoading('global'))
     try {
       const res = await authAPI.updateName(arg.name)
+
+      dispatch(setUserData(res.data.updatedUser))
+    } catch (e) {
+      errorUtils(e as AxiosError, dispatch)
+    } finally {
+      dispatch(setStatusLoading('idle'))
+    }
+  }
+)
+
+export const updateUserAvatarTC = createAsyncThunk(
+  'auth/updateUserName',
+  async (avatar: string, { dispatch }) => {
+    dispatch(setStatusLoading('global'))
+    try {
+      const res = await authAPI.updateAvatar(avatar)
 
       dispatch(setUserData(res.data.updatedUser))
     } catch (e) {
