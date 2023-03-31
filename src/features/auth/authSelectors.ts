@@ -8,3 +8,4 @@ export const isSetNewPassword = (state: RootStateType) => state.auth.isSetNewPas
 export const isSetRecovery = (state: RootStateType) => state.auth.isSetRecovery
 export const registerSuccess = (state: RootStateType) => state.auth.registerSuccess
 export const userEmailForEmail = (state: RootStateType) => state.auth.userEmail
+export const userAvatar = (state: RootStateType) => state.auth.user.avatar
