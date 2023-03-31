@@ -8,14 +8,21 @@ import { Box } from 'common/components'
 import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { authSelectors } from 'features/auth'
 import { logoutTC, setRegisterSuccess } from 'features/auth/authSlice'
+import {
+  DropdownItem,
+  ProfileHeaderAvatarImg,
+  ProfileHeaderName,
+} from 'features/Profile/profile.styled'
 import { PATH } from 'pages/path'
 
 const renderIconButton = (props: any, ref: any) => {
+  const userAvatar = useAppSelector(authSelectors.userAvatar)
+
   return (
     <IconButton
       {...props}
       ref={ref}
-      icon={<img src={profileImg} alt="" style={{ width: '36px', height: '36px' }} />}
+      icon={<ProfileHeaderAvatarImg src={userAvatar || profileImg} alt="" />}
       circle
       style={{ width: '36px', height: '36px' }}
       appearance="primary"
@@ -36,22 +43,14 @@ export const ProfileHeader = () => {
 
   return (
     <Box display={'flex'} alignItems={'center'} style={{ position: 'relative' }}>
-      <p style={{ color: 'white', marginRight: '10px' }}>{name}</p>
+      <ProfileHeaderName>{name}</ProfileHeaderName>
       <Dropdown placement="bottomEnd" renderToggle={renderIconButton}>
-        <Dropdown.Item
-          onClick={handlerNavigateToProfile}
-          icon={<ProfileIcon />}
-          style={{ display: 'flex', alignItems: 'center', columnGap: '10px' }}
-        >
+        <DropdownItem onClick={handlerNavigateToProfile} icon={<ProfileIcon />}>
           Profile
-        </Dropdown.Item>
-        <Dropdown.Item
-          onClick={handlerLogOut}
-          icon={<LogOutIcon />}
-          style={{ display: 'flex', alignItems: 'center', columnGap: '10px' }}
-        >
+        </DropdownItem>
+        <DropdownItem onClick={handlerLogOut} icon={<LogOutIcon />}>
           Logout
-        </Dropdown.Item>
+        </DropdownItem>
       </Dropdown>
     </Box>
   )

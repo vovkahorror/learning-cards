@@ -1,4 +1,3 @@
-import { AiOutlineCamera } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 
 import profileImg from '../../assets/img/profile.png'
@@ -6,13 +5,15 @@ import profileImg from '../../assets/img/profile.png'
 import { Button, Box, EditableSpan, BackToPacks } from 'common/components'
 import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { authSelectors } from 'features/auth'
-import { logoutTC, setRegisterSuccess, updateUserName } from 'features/auth/authSlice'
-import { ProfileAvatar, ProfileAvatarImg, ProfileUpload } from 'features/Profile/profile.styled'
+import { logoutTC, setRegisterSuccess, updateUserNameTC } from 'features/auth/authSlice'
+import { ProfileAvatar, ProfileAvatarImg } from 'features/Profile/profile.styled'
+import { UploadAvatar } from 'features/Profile/UploadAvatar'
 import { PATH } from 'pages/path'
 
 export const Profile = () => {
   const name = useAppSelector(authSelectors.name)
   const email = useAppSelector(authSelectors.name)
+  const userAvatar = useAppSelector(authSelectors.userAvatar)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -20,11 +21,9 @@ export const Profile = () => {
     dispatch(logoutTC())
     dispatch(setRegisterSuccess(false))
   }
-
-  const setNewName = (newName: string) => {
-    dispatch(updateUserName({ name: newName }))
+  const handlerUpdateName = (newName: string) => {
+    dispatch(updateUserNameTC({ name: newName }))
   }
-
   const handlerNavigateToPackList = () => navigate(PATH.PACKS)
 
   return (
@@ -38,17 +37,13 @@ export const Profile = () => {
 
           <Box my={'4'}>
             <ProfileAvatar>
-              <ProfileAvatarImg>
-                <img src={profileImg} alt="" />
-              </ProfileAvatarImg>
-              <ProfileUpload>
-                <AiOutlineCamera />
-              </ProfileUpload>
+              <ProfileAvatarImg src={userAvatar || profileImg} alt="" />
+              <UploadAvatar />
             </ProfileAvatar>
           </Box>
 
           <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={'15px'}>
-            <EditableSpan label={'Nickname'} value={name} onChange={setNewName} />
+            <EditableSpan label={'Nickname'} value={name} onChange={handlerUpdateName} />
             <p>{email}</p>
           </Box>
 
