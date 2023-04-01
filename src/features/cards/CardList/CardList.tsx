@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { Rate, Table } from 'rsuite'
 import styled from 'styled-components'
 
+import { appSelectors } from 'app'
 import { Box } from 'common/components/Layout/Box'
 import { useAppSelector } from 'common/hooks'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
@@ -23,6 +24,7 @@ const { Column, HeaderCell, Cell } = Table
 export const CardList = ({ cardsPack_id, cards, isMyPack }: CardListPropsType) => {
   const dispatch = useAppDispatch()
 
+  const statusLoading = useAppSelector(appSelectors.statusLoading)
   const sortColumn = useAppSelector(state => state.cards.sort.sortColumn)
   const sortType = useAppSelector(state => state.cards.sort.sortType)
 
@@ -61,7 +63,9 @@ export const CardList = ({ cardsPack_id, cards, isMyPack }: CardListPropsType) =
         sortColumn={sortColumn}
         sortType={sortType}
         onSortColumn={handleSortColumn}
+        loading={statusLoading === 'local'}
         autoHeight
+        style={{ borderRadius: '10px' }}
       >
         <Column flexGrow={1} align="left" fixed sortable>
           <StyledHeader>Question</StyledHeader>

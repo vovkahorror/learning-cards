@@ -25,9 +25,12 @@ export const Cards = () => {
   const cards = useAppSelector(state => state.cards.cards)
   const page = useAppSelector(state => state.cards.page)
   const pageCount = useAppSelector(state => state.cards.pageCount)
+  const packCardsCount = useAppSelector(
+    state => state.packs.cardPacks.find(pack => pack._id === cardsPack_id)?.cardsCount
+  )
   const cardsTotalCount = useAppSelector(state => state.cards.cardsTotalCount)
 
-  const [empty, setEmpty] = useState(0)
+  const [empty, setEmpty] = useState(packCardsCount)
 
   const isNotEmptyPack = !!cards.length
   const isMyPack = userId === packUserId

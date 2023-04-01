@@ -16,7 +16,7 @@ import {
 export const getCardsDataTC = createAsyncThunk(
   'cards/getCardsData',
   async (params: GetCardsParamsType, { dispatch, getState }) => {
-    dispatch(setStatusLoading('global'))
+    dispatch(setStatusLoading('local'))
 
     const state = getState() as RootStateType
     const page = params.page || state.cards.page
@@ -44,7 +44,7 @@ export const getCardsDataTC = createAsyncThunk(
 export const addCardTC = createAsyncThunk(
   'cards/addCardTC',
   async (card: NewCardType, { dispatch }) => {
-    dispatch(setStatusLoading('global'))
+    dispatch(setStatusLoading('local'))
 
     try {
       await cardsAPI.addCard(card)
@@ -61,7 +61,7 @@ export const addCardTC = createAsyncThunk(
 export const deleteCardTC = createAsyncThunk(
   'cards/deleteCardTC',
   async (cardId: string, { dispatch, getState }) => {
-    dispatch(setStatusLoading('global'))
+    dispatch(setStatusLoading('local'))
 
     const state = getState() as RootStateType
     const cardsPack_id = state.cards.cards.find(card => card._id === cardId)?.cardsPack_id as string
@@ -81,7 +81,7 @@ export const deleteCardTC = createAsyncThunk(
 export const updateCardTC = createAsyncThunk(
   'cards/updateCardTC',
   async (card: CardModelType, { dispatch, getState }) => {
-    dispatch(setStatusLoading('global'))
+    dispatch(setStatusLoading('local'))
 
     const state = getState() as RootStateType
     const currentCard = state.cards.cards.find(c => c._id === card._id)
