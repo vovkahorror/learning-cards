@@ -2,9 +2,10 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
 
 import { setStatusLoading } from 'app/appSlice'
+import { RootStateType } from 'app/store'
 import { errorUtils } from 'common/utils/error-utils'
 import { cardsAPI, CardType, UpdateGradeParamsType } from 'features/cards/cardsAPI'
-import { CardsStateType } from 'features/cards/cardsSlice'
+import { CardsStateType, setCardsData } from 'features/cards/cardsSlice'
 
 export type LearnInitialState = ReturnType<typeof learnSlice.getInitialState>
 
@@ -26,13 +27,20 @@ export const getCardsPackForLearnTC = createAsyncThunk(
 
 export const updateGradeTC = createAsyncThunk(
   'learn/updateGrade',
-  async (arg: UpdateGradeParamsType, { dispatch }) => {
+  async (arg: UpdateGradeParamsType, { dispatch, getState }) => {
     dispatch(setStatusLoading('global'))
+
+    const state = getState() as RootStateType
+
     try {
       const res = await cardsAPI.updateGrade(arg)
 
+      const cards = state.cards.cards.map(card =>
+        card._id === arg.card_id ? { ...card, grade: res.data.updatedGrade.grade } : card
+      )
+
       dispatch(setUpdateCardsPack(res.data.updatedGrade.card_id))
-      // dispatch(getCardsDataTC({ cardsPack_id: res.data.updatedGrade.cardsPack_id }))
+      dispatch(setCardsData({ ...state.cards, cards }))
     } catch (e) {
       errorUtils(e as AxiosError, dispatch)
     } finally {
