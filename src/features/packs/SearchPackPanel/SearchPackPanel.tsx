@@ -7,7 +7,7 @@ import { Button, Box } from 'common/components'
 import { PortalModal } from 'common/components/PortalModal/PortalModal'
 import { useAppDispatch, useAppSelector, useDebounce } from 'common/hooks'
 import { ClearFilter } from 'features/cards/SearchCardPanel/SearchCardPanel.styled'
-import { DataModal } from 'features/packs/PackList/DataModal'
+import { AddEditPackModal } from 'features/packs/PackList/Modals/AddEditPackModal'
 import { addPackTC, clearSearchParams, setSearchParams } from 'features/packs/packsSlice'
 import { CustomRangeSlider } from 'features/packs/SearchPackPanel/CustomRangeSlider/CustomRangeSlider'
 import { TogglePacks } from 'features/packs/SearchPackPanel/TogglePacks/TogglePacks'
@@ -29,7 +29,7 @@ export const SearchPackPanel = () => {
     setValue('')
   }
 
-  const addNewPack = (name: string, isPrivate: boolean) => {
+  const handlerAddNewPack = (name: string, isPrivate: boolean) => {
     dispatch(addPackTC({ name, private: isPrivate }))
   }
 
@@ -73,7 +73,7 @@ export const SearchPackPanel = () => {
       </Box>
 
       <PortalModal title={'Add new pack'} show={showModal} setShow={setShowModal}>
-        <DataModal setShowModal={setShowModal} addEditPack={addNewPack} />
+        <AddEditPackModal setShowModal={setShowModal} addEditPack={handlerAddNewPack} />
       </PortalModal>
     </>
   )

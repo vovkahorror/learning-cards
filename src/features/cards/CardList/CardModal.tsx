@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { SelectPicker } from 'rsuite'
 
 import { Box, Input } from 'common/components'
-import { CancelButton, CopyButton, DeleteButton } from 'features/packs/PackList/DataModal'
+import { CancelButton, SaveButton, DeleteButton } from 'features/packs/PackList/styled'
 
 export const CardModal = ({
   title,
@@ -76,7 +76,7 @@ export const CardModal = ({
         {title === 'Delete card' ? (
           <DeleteButton onClick={action}>Delete</DeleteButton>
         ) : (
-          <CopyButton onClick={action}>Save</CopyButton>
+          <SaveButton onClick={action}>Save</SaveButton>
         )}
       </Box>
     </Box>

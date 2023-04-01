@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { ReactComponent as CheckEmailIcon } from 'assets/image/checkEmail.svg'
+import { ReactComponent as CheckEmailIcon } from 'assets/img/checkEmail.svg'
 
 export const EmailIcon = styled(CheckEmailIcon)`
   display: block;

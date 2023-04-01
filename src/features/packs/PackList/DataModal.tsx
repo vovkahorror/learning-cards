@@ -1,30 +1,7 @@
 import React, { ChangeEvent, useState } from 'react'
 
-import styled from 'styled-components'
-
-import { Box, Button, Input } from 'common/components'
-
-export const CopyButton = styled(Button)`
-  width: 130px;
-`
-
-export const CancelButton = styled(CopyButton)`
-  background: none;
-  border: 2px ${props => props.theme.colors.fontMain} solid;
-  color: ${props => props.theme.colors.fontMain};
-
-  &:hover {
-    color: white;
-  }
-`
-
-export const DeleteButton = styled(CopyButton)`
-  background: ${props => props.theme.colors.danger};
-
-  &:hover {
-    background: red;
-  }
-`
+import { Box, Input } from 'common/components'
+import { CancelButton, SaveButton, DeleteButton } from 'features/packs/PackList/styled'
 
 export const DataModal = ({
   setShowModal,
@@ -33,7 +10,7 @@ export const DataModal = ({
   deletePack,
   nameOfPack,
   isPrivatePack,
-}: DataModalType) => {
+}: PropsType) => {
   const [name, setName] = useState(nameOfPack || '')
   const [checkbox, setCheckbox] = useState(isPrivatePack || false)
 
@@ -81,14 +58,14 @@ export const DataModal = ({
         {title === 'Delete pack' ? (
           <DeleteButton onClick={action}>Delete</DeleteButton>
         ) : (
-          <CopyButton onClick={action}>Save</CopyButton>
+          <SaveButton onClick={action}>Save</SaveButton>
         )}
       </Box>
     </>
   )
 }
 
-type DataModalType = {
+type PropsType = {
   setShowModal: (value: boolean) => void
   addEditPack?: (name: string, isPrivate: boolean) => void
   deletePack?: () => void
