@@ -7,7 +7,7 @@ import { PortalModal } from 'common/components/PortalModal/PortalModal'
 import { useAppDispatch } from 'common/hooks'
 import { CardModal, TitleType } from 'features/cards/CardList/CardModal'
 import { deleteCardTC, updateCardTC } from 'features/cards/cardsSlice'
-import { Icon } from 'features/packs/PackList/PacksAction'
+import { Icon } from 'features/packs/PackList/styled'
 
 export const CardActions = ({ _id, question, answer }: CardActionsPropsType) => {
   const dispatch = useAppDispatch()
