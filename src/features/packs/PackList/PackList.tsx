@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import { Table } from 'rsuite'
 
 import { appSelectors } from 'app'
+import packCover from 'assets/img/packCover.png'
 import { Box } from 'common/components'
 import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { packsSelectors } from 'features/packs'
 import { PacksAction } from 'features/packs/PackList/PacksAction'
+import { CoverPackImg } from 'features/packs/PackList/styled'
 import { CardPacksType } from 'features/packs/packsAPI'
 import { setSearchParams } from 'features/packs/packsSlice'
 import { PATH } from 'pages/path'
@@ -34,7 +36,6 @@ export const PackList = () => {
       sortType === 'desc' && dispatch(setSearchParams({ sortPacks: `1${sortColumn}` }))
     }
   }, [sortColumn, sortType])
-
   useEffect(() => {
     // для сброса стрелочек в таблице при нажатии на кнопку clear
     if (!sortPacks) {
@@ -43,9 +44,12 @@ export const PackList = () => {
     }
   }, [sortPacks])
 
-  const handleSortColumn = (sortColumn: SortColumnType, sortType: SortType) => {
+  const handlerSortColumn = (sortColumn: SortColumnType, sortType: SortType) => {
     setSortColumn(sortColumn)
     setSortType(sortType)
+  }
+  const handlerNavigateToCards = (id: string) => {
+    navigate(`${PATH.CARDS}/${id}`)
   }
 
   return (
@@ -53,28 +57,36 @@ export const PackList = () => {
       <Table
         loading={statusLoading === 'local'}
         height={500}
-        width={1080}
+        width={1200}
+        wordWrap="break-word"
         data={data}
         sortColumn={sortColumn}
         sortType={sortType}
-        onSortColumn={handleSortColumn}
+        onSortColumn={handlerSortColumn}
         style={{ borderRadius: '10px' }}
       >
-        <Column width={200} align="left" fixed sortable={statusLoading !== 'local'}>
+        <Column width={340} align="left" fixed sortable={statusLoading !== 'local'}>
           <HeaderCell>Name</HeaderCell>
           <Cell dataKey="name">
             {rowData => (
-              <span
-                onClick={() => navigate(`${PATH.CARDS}/${rowData._id}`)}
-                style={{ cursor: 'pointer' }}
-              >
-                {rowData.name}
-              </span>
+              <Box display={'flex'} alignItems={'center'} gap={'10px'}>
+                <CoverPackImg
+                  onClick={() => handlerNavigateToCards(rowData._id)}
+                  src={rowData.deckCover || packCover}
+                  alt="#"
+                />
+                <span
+                  onClick={() => handlerNavigateToCards(rowData._id)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {rowData.name}
+                </span>
+              </Box>
             )}
           </Cell>
         </Column>
 
-        <Column width={200} sortable={statusLoading !== 'local'}>
+        <Column width={180} sortable={statusLoading !== 'local'}>
           <HeaderCell>Cards</HeaderCell>
           <Cell dataKey="cardsCount" />
         </Column>
@@ -91,7 +103,7 @@ export const PackList = () => {
           <Cell dataKey="user_name" />
         </Column>
 
-        <Column width={240}>
+        <Column width={140}>
           <HeaderCell>Actions</HeaderCell>
           <Cell>
             {rowData => (
@@ -100,9 +112,15 @@ export const PackList = () => {
                 pack_id={rowData._id}
                 cardsCount={rowData.cardsCount}
                 name={rowData.name}
+                isPrivate={rowData.private}
               />
             )}
           </Cell>
+        </Column>
+
+        <Column width={100}>
+          <HeaderCell>Private</HeaderCell>
+          <Cell>{rowData => rowData.private && <p>private</p>}</Cell>
         </Column>
       </Table>
     </Box>

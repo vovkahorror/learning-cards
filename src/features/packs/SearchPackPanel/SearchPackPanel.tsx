@@ -29,8 +29,8 @@ export const SearchPackPanel = () => {
     setValue('')
   }
 
-  const handlerAddNewPack = (name: string, isPrivate: boolean) => {
-    dispatch(addPackTC({ name, private: isPrivate }))
+  const handlerAddNewPack = (name: string, isPrivate: boolean, deckCover?: string | null) => {
+    dispatch(addPackTC({ name, private: isPrivate, deckCover }))
   }
 
   const handlerOpenModal = () => setShowModal(true)

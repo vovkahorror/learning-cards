@@ -3,65 +3,61 @@ import { useState } from 'react'
 import { BsFillTrash3Fill, BsPencilFill, BsRocketTakeoffFill } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 
-import { packsSelectors } from '..'
-
-import { Icon, IconDisable } from './styled'
+import { Icon, LearnIcon } from './styled'
 
 import { PortalModal } from 'common/components/PortalModal/PortalModal'
-import { useAppSelector, useAppDispatch } from 'common/hooks'
+import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { authSelectors } from 'features/auth'
-import { DataModal } from 'features/packs/PackList/DataModal'
-import { deletePackTC, editPackTC } from 'features/packs/packsSlice'
+import { AddEditPackModal } from 'features/packs/PackList/Modals/AddEditPackModal'
+import { DeletePackModal } from 'features/packs/PackList/Modals/DeletePackModal'
+import { editPackTC } from 'features/packs/packsSlice'
 
-type PackListActionType = {
+type PropsType = {
   user_id: string
   pack_id: string
   cardsCount: number
   name: string
+  isPrivate: boolean
 }
 
-export const PacksAction = ({ user_id, pack_id, cardsCount, name }: PackListActionType) => {
+export const PacksAction = ({ user_id, pack_id, cardsCount, name, isPrivate }: PropsType) => {
   const myId = useAppSelector(authSelectors.id)
-  const isPrivatePack = useAppSelector(packsSelectors.cardPacks).find(
-    pack => pack._id === pack_id
-  )?.private
-
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const [showModal, setShowModal] = useState(false)
-  const [title, setTitle] = useState('')
+  const [typeModal, setTypeModal] = useState('delete')
 
   const handlerOpenModal = (title: string) => {
     setShowModal(true)
-    setTitle(title)
-  }
-  const handlerDeletePack = () => {
-    dispatch(deletePackTC(pack_id))
-  }
-  const handlerEditPack = (name: string, isPrivate: boolean) => {
-    dispatch(editPackTC({ name, private: isPrivate, _id: pack_id }))
+    setTypeModal(title)
   }
   const handlerNavigateToLearn = () => {
     navigate(`/learn/${pack_id}`)
   }
+  const handlerEditPack = (name: string, isPrivate: boolean, deckCover?: string | null) => {
+    dispatch(editPackTC({ name, private: isPrivate, _id: pack_id, deckCover }))
+  }
 
   return (
     <>
-      <PortalModal title={title} show={showModal} setShow={setShowModal}>
-        <DataModal
-          setShowModal={setShowModal}
-          nameOfPack={name}
-          addEditPack={handlerEditPack}
-          deletePack={handlerDeletePack}
-          title={title}
-          isPrivatePack={isPrivatePack}
-        />
+      <PortalModal title={typeModal} show={showModal} setShow={setShowModal}>
+        {typeModal === 'Delete pack' && (
+          <DeletePackModal pack_id={pack_id} nameOfPack={name} setShowModal={setShowModal} />
+        )}
+        {typeModal === 'Edit pack' && (
+          <AddEditPackModal
+            nameOfPack={name}
+            setShowModal={setShowModal}
+            isPrivate={isPrivate}
+            addEditPack={handlerEditPack}
+          />
+        )}
       </PortalModal>
 
-      <IconDisable cardsCount={cardsCount} onClick={handlerNavigateToLearn}>
+      <LearnIcon cardsCount={cardsCount} onClick={handlerNavigateToLearn}>
         <BsRocketTakeoffFill />
-      </IconDisable>
+      </LearnIcon>
 
       {user_id === myId && (
         <>
