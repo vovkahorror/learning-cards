@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Table } from 'rsuite'
 
+import 'features/packs/PackList/table.css'
+
 import { appSelectors } from 'app'
 import packCover from 'assets/img/packCover.png'
 import { Box } from 'common/components'
@@ -63,7 +65,6 @@ export const PackList = () => {
         sortColumn={sortColumn}
         sortType={sortType}
         onSortColumn={handlerSortColumn}
-        style={{ borderRadius: '10px' }}
       >
         <Column width={340} align="left" fixed sortable={statusLoading !== 'local'}>
           <HeaderCell>Name</HeaderCell>

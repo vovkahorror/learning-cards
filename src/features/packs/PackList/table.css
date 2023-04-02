@@ -1,0 +1,8 @@
+.rs-table-cell-content {
+    display: flex;
+    align-items: center;
+}
+
+.rs-table {
+    border-radius: 10px;
+}

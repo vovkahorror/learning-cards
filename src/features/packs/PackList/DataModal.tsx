@@ -3,14 +3,17 @@ import React, { ChangeEvent, useState } from 'react'
 import { Box, Input } from 'common/components'
 import { CancelButton, SaveButton, DeleteButton } from 'features/packs/PackList/styled'
 
-export const DataModal = ({
-  setShowModal,
-  title,
-  addEditPack,
-  deletePack,
-  nameOfPack,
-  isPrivatePack,
-}: PropsType) => {
+type PropsType = {
+  setShowModal: (value: boolean) => void
+  addEditPack?: (name: string, isPrivate: boolean) => void
+  deletePack?: () => void
+  nameOfPack?: string
+  title?: string
+  isPrivatePack?: boolean
+}
+
+export const DataModal = (props: PropsType) => {
+  const { setShowModal, title, addEditPack, deletePack, nameOfPack, isPrivatePack } = props
   const [name, setName] = useState(nameOfPack || '')
   const [checkbox, setCheckbox] = useState(isPrivatePack || false)
 
@@ -63,13 +66,4 @@ export const DataModal = ({
       </Box>
     </>
   )
-}
-
-type PropsType = {
-  setShowModal: (value: boolean) => void
-  addEditPack?: (name: string, isPrivate: boolean) => void
-  deletePack?: () => void
-  nameOfPack?: string
-  title?: string
-  isPrivatePack?: boolean
 }
