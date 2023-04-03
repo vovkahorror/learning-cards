@@ -53,9 +53,14 @@ export const Cards = () => {
     }
   }, [cardsPack_id, searchParams])
 
-  const addNewCard = (format: string | null, question: string, answer: string) => {
+  const addNewCard = (
+    format: string | null,
+    question: string,
+    questionImg: string,
+    answer: string
+  ) => {
     if (cardsPack_id) {
-      dispatch(addCardTC({ cardsPack_id, question, answer }))
+      dispatch(addCardTC({ cardsPack_id, question, questionImg, answer }))
     }
   }
 

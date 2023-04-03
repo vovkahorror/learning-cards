@@ -87,6 +87,6 @@ type SearchCardPanelPropsType = {
   isMyPack: boolean
   cardsPack_id?: string
   setSearchParams: (searchParams: string) => void
-  addNewCard: (format: string | null, question: string, answer: string) => void
+  addNewCard: (format: string | null, question: string, questionImg: string, answer: string) => void
   navigateToLearn: () => void
 }

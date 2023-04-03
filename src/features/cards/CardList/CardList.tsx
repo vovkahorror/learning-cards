@@ -69,7 +69,7 @@ export const CardList = ({ cardsPack_id, cards, isMyPack }: CardListPropsType) =
       >
         <Column flexGrow={1} align="left" fixed sortable>
           <StyledHeader>Question</StyledHeader>
-          <Cell dataKey="question">
+          <StyledCell dataKey="question">
             {rowData =>
               rowData.questionImg && rowData.questionImg !== 'data:none' ? (
                 <img src={rowData.questionImg} alt="question image" />
@@ -77,29 +77,29 @@ export const CardList = ({ cardsPack_id, cards, isMyPack }: CardListPropsType) =
                 <span>{rowData.question}</span>
               )
             }
-          </Cell>
+          </StyledCell>
         </Column>
 
         <Column flexGrow={1} align="left" sortable>
           <StyledHeader>Answer</StyledHeader>
-          <Cell dataKey="answer" />
+          <StyledCell dataKey="answer" />
         </Column>
 
         <Column width={180} sortable>
           <StyledHeader>Last Updated</StyledHeader>
-          <Cell dataKey="updated">
+          <StyledCell dataKey="updated">
             {rowData => (
               <Box display={'flex'} alignItems={'center'} gap={'10px'}>
                 <span>{new Date(rowData.updated).toLocaleDateString('uk-UA')}</span>
                 <sup>{new Date(rowData.updated).toLocaleTimeString('uk-UA')}</sup>
               </Box>
             )}
-          </Cell>
+          </StyledCell>
         </Column>
 
         <Column width={150} sortable>
           <StyledHeader>Grade</StyledHeader>
-          <Cell dataKey="grade">
+          <StyledCell dataKey="grade">
             {rowData => (
               <Rate
                 value={rowData.grade}
@@ -110,13 +110,13 @@ export const CardList = ({ cardsPack_id, cards, isMyPack }: CardListPropsType) =
                 onChange={gradeHandler(rowData._id)}
               />
             )}
-          </Cell>
+          </StyledCell>
         </Column>
 
         {isMyPack && (
           <Column width={80}>
             <StyledHeader>{}</StyledHeader>
-            <Cell style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+            <StyledCell style={{ justifyContent: 'flex-end' }}>
               {rowData => (
                 <CardActions
                   _id={rowData._id}
@@ -125,7 +125,7 @@ export const CardList = ({ cardsPack_id, cards, isMyPack }: CardListPropsType) =
                   answer={rowData.answer}
                 />
               )}
-            </Cell>
+            </StyledCell>
           </Column>
         )}
       </Table>
@@ -139,4 +139,12 @@ const StyledHeader = styled(HeaderCell)`
   line-height: 17px;
   color: #000000;
   background: #efefef;
+`
+
+const StyledCell = styled(Cell)`
+  & * {
+    display: flex;
+    align-items: center;
+    max-height: 300px;
+  }
 `

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useRef, useState } from 'react'
 
-import { SelectPicker } from 'rsuite'
+import { SelectPicker, Tooltip, Whisper } from 'rsuite'
 
 import { Box, Button, Input } from 'common/components'
 import { convertFileToBase64 } from 'common/utils/convert-file-to-base64'
@@ -21,10 +21,15 @@ export const CardModal = ({
   ]
 
   const inputRef = useRef<HTMLInputElement>(null)
-  const [selectValue, setSelectValue] = useState<string | null>(selectData[0].value)
   const [questionValue, setQuestionValue] = useState<string>(question || '')
   const [questionImage, setQuestionImage] = useState<string>(questionImg || '')
   const [answerValue, setAnswerValue] = useState<string>(answer || '')
+
+  const isCorrectQuestionImage = questionImage && questionImage !== 'data:none'
+
+  const [selectValue, setSelectValue] = useState<string | null>(
+    isCorrectQuestionImage ? selectData[1].value : selectData[0].value
+  )
 
   const action = () => {
     if (title === 'Delete card') {
@@ -79,12 +84,16 @@ export const CardModal = ({
               />
             ) : (
               <Box display={'flex'} flexDirection={'column'} gap={'10px'} width={'100%'}>
-                {questionImage && questionImage !== 'data:none' && (
-                  <img src={questionImage} alt="question image" />
-                )}
-                <Button fullWidth onClick={handlerSelectedFile}>
-                  Upload {questionImage ? 'another' : 'the'} question image
-                </Button>
+                {isCorrectQuestionImage && <img src={questionImage} alt="question image" />}
+                <Whisper
+                  trigger="hover"
+                  placement="bottomEnd"
+                  speaker={<Tooltip arrow={false}>1 Mb max</Tooltip>}
+                >
+                  <Button fullWidth onClick={handlerSelectedFile}>
+                    Upload {isCorrectQuestionImage ? 'another' : 'the'} question image
+                  </Button>
+                </Whisper>
                 <input
                   style={{ display: 'none' }}
                   ref={inputRef}
