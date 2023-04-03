@@ -64,6 +64,7 @@ export type CardModelType = {
   user_id?: string
   created?: string
   updated?: string
+  questionImg?: string
 }
 
 export enum Sort {

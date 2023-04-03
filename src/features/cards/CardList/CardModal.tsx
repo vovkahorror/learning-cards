@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useRef, useState } from 'react'
 
 import { SelectPicker } from 'rsuite'
 
-import { Box, Input } from 'common/components'
+import { Box, Button, Input } from 'common/components'
+import { convertFileToBase64 } from 'common/utils/convert-file-to-base64'
 import { CancelButton, SaveButton, DeleteButton } from 'features/packs/PackList/styled'
 
 export const CardModal = ({
   title,
   question,
+  questionImg,
   answer,
   setShowModal,
   addEditCard,
@@ -18,17 +20,33 @@ export const CardModal = ({
     { label: 'Image', value: 'Image' },
   ]
 
+  const inputRef = useRef<HTMLInputElement>(null)
   const [selectValue, setSelectValue] = useState<string | null>(selectData[0].value)
   const [questionValue, setQuestionValue] = useState<string>(question || '')
+  const [questionImage, setQuestionImage] = useState<string>(questionImg || '')
   const [answerValue, setAnswerValue] = useState<string>(answer || '')
 
   const action = () => {
     if (title === 'Delete card') {
       deleteCard?.()
     } else {
-      addEditCard?.(selectValue, questionValue, answerValue)
+      addEditCard?.(selectValue, questionValue, questionImage, answerValue)
     }
     setShowModal(false)
+  }
+
+  const handlerSelectedFile = () => {
+    inputRef && inputRef.current?.click()
+  }
+
+  const handlerUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length) {
+      const file = e.target.files[0]
+
+      convertFileToBase64(file, (file64: string) => {
+        setQuestionImage(file64)
+      })
+    }
   }
 
   return (
@@ -52,12 +70,30 @@ export const CardModal = ({
           </Box>
 
           <Box>
-            <Input
-              type={'text'}
-              value={questionValue}
-              label={'Question'}
-              onChange={e => setQuestionValue(e.currentTarget.value)}
-            />
+            {selectValue === 'Text' ? (
+              <Input
+                type={'text'}
+                value={questionValue}
+                label={'Question'}
+                onChange={e => setQuestionValue(e.currentTarget.value)}
+              />
+            ) : (
+              <Box display={'flex'} flexDirection={'column'} gap={'10px'} width={'100%'}>
+                {questionImage && questionImage !== 'data:none' && (
+                  <img src={questionImage} alt="question image" />
+                )}
+                <Button fullWidth onClick={handlerSelectedFile}>
+                  Upload {questionImage ? 'another' : 'the'} question image
+                </Button>
+                <input
+                  style={{ display: 'none' }}
+                  ref={inputRef}
+                  type="file"
+                  accept={'.png, .jpg, .jpeg, .gif'}
+                  onChange={handlerUpload}
+                />
+              </Box>
+            )}
           </Box>
 
           <Box>
@@ -86,9 +122,15 @@ export const CardModal = ({
 type CardModalPropsType = {
   title?: TitleType
   question?: string
+  questionImg?: string
   answer?: string
   setShowModal: (value: boolean) => void
-  addEditCard?: (format: string | null, question: string, answer: string) => void
+  addEditCard?: (
+    format: string | null,
+    question: string,
+    questionImg: string,
+    answer: string
+  ) => void
   deleteCard?: () => void
 }
 

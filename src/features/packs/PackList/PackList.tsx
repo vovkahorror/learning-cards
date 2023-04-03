@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
+import { SiGnuprivacyguard } from 'react-icons/si'
 import { useNavigate } from 'react-router-dom'
 import { Table } from 'rsuite'
 
@@ -120,7 +121,7 @@ export const PackList = () => {
 
         <Column width={100}>
           <HeaderCell>Private</HeaderCell>
-          <Cell>{rowData => rowData.private && <p>private</p>}</Cell>
+          <Cell>{rowData => rowData.private && <SiGnuprivacyguard color={'darkred'} />}</Cell>
         </Column>
       </Table>
     </Box>

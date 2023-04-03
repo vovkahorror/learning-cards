@@ -9,7 +9,7 @@ import { CardModal, TitleType } from 'features/cards/CardList/CardModal'
 import { deleteCardTC, updateCardTC } from 'features/cards/cardsSlice'
 import { Icon } from 'features/packs/PackList/styled'
 
-export const CardActions = ({ _id, question, answer }: CardActionsPropsType) => {
+export const CardActions = ({ _id, question, questionImg, answer }: CardActionsPropsType) => {
   const dispatch = useAppDispatch()
 
   const [showModal, setShowModal] = useState(false)
@@ -20,8 +20,16 @@ export const CardActions = ({ _id, question, answer }: CardActionsPropsType) => 
     setShowModal(true)
   }
 
-  const updateCard = (format: string | null, question: string, answer: string) => {
-    dispatch(updateCardTC({ _id, question, answer }))
+  const updateCard = (
+    format: string | null,
+    question: string,
+    questionImg: string,
+    answer: string
+  ) => {
+    if (format === 'Text') {
+      questionImg = 'data:none'
+    }
+    dispatch(updateCardTC({ _id, question, questionImg, answer }))
   }
 
   const deleteCard = () => {
@@ -34,6 +42,7 @@ export const CardActions = ({ _id, question, answer }: CardActionsPropsType) => 
         <CardModal
           title={title}
           question={question}
+          questionImg={questionImg}
           answer={answer}
           setShowModal={setShowModal}
           addEditCard={updateCard}
@@ -55,5 +64,6 @@ export const CardActions = ({ _id, question, answer }: CardActionsPropsType) => 
 type CardActionsPropsType = {
   _id: string
   question: string
+  questionImg: string
   answer: string
 }

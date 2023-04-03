@@ -29,6 +29,14 @@ export const Overlay = styled.div`
     animation-name: ${fadeIn};
     animation-fill-mode: backwards;
   }
+
+  & * {
+    max-height: 95%;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+  }
 `
 
 export const ModalContainer = styled.div`

@@ -69,7 +69,15 @@ export const CardList = ({ cardsPack_id, cards, isMyPack }: CardListPropsType) =
       >
         <Column flexGrow={1} align="left" fixed sortable>
           <StyledHeader>Question</StyledHeader>
-          <Cell dataKey="question" />
+          <Cell dataKey="question">
+            {rowData =>
+              rowData.questionImg && rowData.questionImg !== 'data:none' ? (
+                <img src={rowData.questionImg} alt="question image" />
+              ) : (
+                <span>{rowData.question}</span>
+              )
+            }
+          </Cell>
         </Column>
 
         <Column flexGrow={1} align="left" sortable>
@@ -113,6 +121,7 @@ export const CardList = ({ cardsPack_id, cards, isMyPack }: CardListPropsType) =
                 <CardActions
                   _id={rowData._id}
                   question={rowData.question}
+                  questionImg={rowData.questionImg}
                   answer={rowData.answer}
                 />
               )}
