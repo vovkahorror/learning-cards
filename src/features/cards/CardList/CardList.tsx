@@ -34,12 +34,6 @@ export const CardList = ({ cardsPack_id, cards, isMyPack }: CardListPropsType) =
     }
   }, [sortColumn, sortType])
 
-  useEffect(() => {
-    return () => {
-      dispatch(setSort({ sortColumn: undefined, sortType: undefined }))
-    }
-  }, [])
-
   const renderEmpty = () => (
     <EmptyCardListWrapper>No cards matching your request</EmptyCardListWrapper>
   )

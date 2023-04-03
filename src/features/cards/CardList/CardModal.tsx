@@ -121,7 +121,12 @@ export const CardModal = ({
         {title === 'Delete card' ? (
           <DeleteButton onClick={action}>Delete</DeleteButton>
         ) : (
-          <SaveButton onClick={action}>Save</SaveButton>
+          <SaveButton
+            disabled={!((questionValue || isCorrectQuestionImage) && answerValue)}
+            onClick={action}
+          >
+            Save
+          </SaveButton>
         )}
       </Box>
     </Box>

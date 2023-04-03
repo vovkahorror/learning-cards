@@ -18,6 +18,8 @@ export const QuestionAnswer = () => {
   const [isChecked, setIsChecked] = useState(false)
   const [valueGrade, setValueGrade] = useState<ValueType>('')
 
+  const isCorrectQuestionImage = card?.questionImg && card?.questionImg !== 'data:none'
+
   useEffect(() => {
     setCard(getRandomCard(cards))
   }, [])
@@ -37,7 +39,12 @@ export const QuestionAnswer = () => {
   return (
     <>
       <TextTitle>
-        Question: <TextSpan>{card?.question}</TextSpan>
+        Question:{' '}
+        {isCorrectQuestionImage ? (
+          <img src={card?.questionImg} alt="question image" style={{ maxWidth: '100%' }} />
+        ) : (
+          <TextSpan>{card?.question}</TextSpan>
+        )}
       </TextTitle>
       <DescribeShot>Количество попыток ответов на вопрос: {card?.shots}</DescribeShot>
       {isChecked ? (

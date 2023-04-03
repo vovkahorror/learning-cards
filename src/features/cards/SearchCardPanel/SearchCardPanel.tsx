@@ -24,6 +24,9 @@ export const SearchCardPanel = ({
   const isPrivatePack = useAppSelector(
     state => state.packs.cardPacks.find(pack => pack._id === cardsPack_id)?.private
   )
+  const packCover = useAppSelector(
+    state => state.packs.cardPacks.find(pack => pack._id === cardsPack_id)?.deckCover
+  )
   const [value, setValue] = useState<string>('')
   const debounceValue = useDebounce(value, 1000)
   const [showModal, setShowModal] = useState(false)
@@ -42,6 +45,13 @@ export const SearchCardPanel = ({
     <Box width={'100%'} display={'flex'} flexDirection={'column'}>
       <Box display={'flex'} justifyContent={'space-between'} mb={'2'}>
         <Box display={'flex'} alignItems={'center'} gap={'9px'}>
+          {packCover && (
+            <img
+              src={packCover}
+              alt="pack cover"
+              style={{ width: '25px', height: '25px', borderRadius: '50%' }}
+            />
+          )}
           <span style={{ fontWeight: '600', fontSize: '22px', lineHeight: '27px', color: 'white' }}>
             {packName}
           </span>

@@ -9,6 +9,7 @@ export const TitleCardPack = styled.p`
   color: #000;
   text-align: center;
   margin-bottom: 30px;
+  word-break: break-word;
 `
 export const TextTitle = styled.p`
   font-weight: 600;

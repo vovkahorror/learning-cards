@@ -8,7 +8,7 @@ import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { CardList } from 'features/cards/CardList/CardList'
 import { EmptyCardList } from 'features/cards/CardList/EmptyCardList'
-import { addCardTC, getCardsDataTC, setTotalCount } from 'features/cards/cardsSlice'
+import { addCardTC, getCardsDataTC, setCardsData, setTotalCount } from 'features/cards/cardsSlice'
 import { SearchCardPanel } from 'features/cards/SearchCardPanel/SearchCardPanel'
 import { packsSelectors } from 'features/packs'
 
@@ -53,6 +53,28 @@ export const Cards = () => {
     }
   }, [cardsPack_id, searchParams])
 
+  useEffect(() => {
+    return () => {
+      dispatch(
+        setCardsData({
+          cards: [],
+          packName: '',
+          cardsTotalCount: 0,
+          maxGrade: 5,
+          minGrade: 1,
+          page: 1,
+          pageCount: 10,
+          packUserId: '',
+          sort: {
+            sortColumn: undefined,
+            sortType: undefined,
+          },
+        })
+      )
+      dispatch(setTotalCount(0))
+    }
+  }, [])
+
   const addNewCard = (
     format: string | null,
     question: string,
@@ -70,14 +92,9 @@ export const Cards = () => {
     }
   }
 
-  const goToPackList = () => {
-    navigate(-1)
-    dispatch(setTotalCount(0))
-  }
+  const goToPackList = () => navigate(-1)
 
-  const navigateToLearn = () => {
-    navigate(`/learn/${cardsPack_id}`)
-  }
+  const navigateToLearn = () => navigate(`/learn/${cardsPack_id}`)
 
   return (
     <div>
