@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/friday-cards/static/css/main.98b61cda.css",
-    "main.js": "/friday-cards/static/js/main.9a9195e3.js",
-    "static/js/787.4d6bf454.chunk.js": "/friday-cards/static/js/787.4d6bf454.chunk.js",
-    "static/media/background.jpg": "/friday-cards/static/media/background.ce72e18bdf146d77b3fe.jpg",
-    "static/media/profile.png": "/friday-cards/static/media/profile.d56fd3f7d8f1b6f67741.png",
-    "static/media/checkEmail.svg": "/friday-cards/static/media/checkEmail.cdfba66fde5a43fa07de20848a33be02.svg",
-    "static/media/logo.svg": "/friday-cards/static/media/logo.7a58f761a4a6d31f35dfca65f24a14c2.svg",
-    "static/media/filter.svg": "/friday-cards/static/media/filter.e9f1ed77cbe1087ef041c5fd22e0201f.svg",
-    "static/media/loader.svg": "/friday-cards/static/media/loader.2851bcd344a243435f5306ec5648e4af.svg",
-    "index.html": "/friday-cards/index.html",
-    "static/media/logOutLogo.svg": "/friday-cards/static/media/logOutLogo.e89278b29a177369ecc503c57ba4cbb2.svg",
-    "static/media/profileLogo.svg": "/friday-cards/static/media/profileLogo.1f2ea6b175067edc18b09c6c47e770bb.svg",
-    "static/media/arrowLeft.svg": "/friday-cards/static/media/arrowLeft.14576ed7e56070f27863b4a90905464c.svg",
-    "main.98b61cda.css.map": "/friday-cards/static/css/main.98b61cda.css.map",
-    "main.9a9195e3.js.map": "/friday-cards/static/js/main.9a9195e3.js.map",
-    "787.4d6bf454.chunk.js.map": "/friday-cards/static/js/787.4d6bf454.chunk.js.map"
+    "main.css": "/learning-cards/static/css/main.d8602a00.css",
+    "main.js": "/learning-cards/static/js/main.9f6538b0.js",
+    "static/js/787.5a03379c.chunk.js": "/learning-cards/static/js/787.5a03379c.chunk.js",
+    "static/media/background.jpg": "/learning-cards/static/media/background.ce72e18bdf146d77b3fe.jpg",
+    "static/media/profile.png": "/learning-cards/static/media/profile.d56fd3f7d8f1b6f67741.png",
+    "static/media/checkEmail.svg": "/learning-cards/static/media/checkEmail.cdfba66fde5a43fa07de20848a33be02.svg",
+    "static/media/logo.svg": "/learning-cards/static/media/logo.7a58f761a4a6d31f35dfca65f24a14c2.svg",
+    "static/media/filter.svg": "/learning-cards/static/media/filter.e9f1ed77cbe1087ef041c5fd22e0201f.svg",
+    "static/media/loader.svg": "/learning-cards/static/media/loader.2851bcd344a243435f5306ec5648e4af.svg",
+    "index.html": "/learning-cards/index.html",
+    "static/media/logOutLogo.svg": "/learning-cards/static/media/logOutLogo.e89278b29a177369ecc503c57ba4cbb2.svg",
+    "static/media/profileLogo.svg": "/learning-cards/static/media/profileLogo.1f2ea6b175067edc18b09c6c47e770bb.svg",
+    "static/media/arrowLeft.svg": "/learning-cards/static/media/arrowLeft.14576ed7e56070f27863b4a90905464c.svg",
+    "main.d8602a00.css.map": "/learning-cards/static/css/main.d8602a00.css.map",
+    "main.9f6538b0.js.map": "/learning-cards/static/js/main.9f6538b0.js.map",
+    "787.5a03379c.chunk.js.map": "/learning-cards/static/js/787.5a03379c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.98b61cda.css",
-    "static/js/main.9a9195e3.js"
+    "static/css/main.d8602a00.css",
+    "static/js/main.9f6538b0.js"
   ]
 }
