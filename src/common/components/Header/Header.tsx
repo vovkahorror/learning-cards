@@ -4,9 +4,8 @@ import Toggle from 'rsuite/esm/Toggle/Toggle'
 
 import { appSelectors } from 'app'
 import { setAppTheme } from 'app/appSlice'
-import { ReactComponent as Logo } from 'assets/img/logo.svg'
 import { Button, Box, Row, Container } from 'common/components'
-import { HeaderContainer } from 'common/components/Header/header.styled'
+import { HeaderContainer, Logo } from 'common/components/Header/header.styled'
 import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { authSelectors } from 'features/auth'
 import { ProfileHeader } from 'features/Profile/ProfileHeader'
@@ -26,7 +25,7 @@ export const Header = () => {
     <HeaderContainer>
       <Container>
         <Row alignItems={'center'}>
-          <Logo />
+          <Logo>Learning Cards</Logo>
           <Box display={'flex'} alignItems={'center'} gap={'20px'} ml={'auto'}>
             <Toggle
               onChange={handleSetTheme}
